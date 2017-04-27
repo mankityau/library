@@ -69,104 +69,59 @@ class CookieQueue {
 
   // add cookie to queue
   void Push(const Cookie &cookie) {
-    std::lock_guard<cpen333::process::mutex> lock(pmutex_);
+
     // wait until room to push a cookie
     psem_.wait();
 
-    // int loc = 0;
-    // {
+    int loc = 0;
+    {
       // look at index, protect memory from multiple simultaneous pushes
-      // std::lock_guard<cpen333::process::mutex> lock(pmutex_);
-      // loc = info_->pidx;
-
-      data_[info_->pidx] = cookie;  // add cookie to queue
-
+      std::lock_guard<cpen333::process::mutex> lock(pmutex_);
+      loc = info_->pidx;
       // increment producer index for next cookie, wrap around if at end
-      if ( (++info_->pidx) == info_->size) {
+      if ((++info_->pidx) == info_->size) {
         info_->pidx = 0;
       }
       // lock will unlock here as guard runs out of scope
+    }
 
-      csem_.notify();
-    // }
+    // ADVANCED: since copying of memory can be expensive (especially with large data types), it is often best
+    // not to perform under a lock, if we can get away with it.  Convince yourself that this is safe in this
+    // instance (the semaphores prevent overwriting the same cookie).  This lets us copy data in parallel.
+    data_[loc] = cookie;  // add cookie to queue
 
-//    // ADVANCED: since copying of memory can be expensive (especially with large data types), it is often best
-//    // not to perform under a lock, if we can get away with it.  Convince yourself that this is safe in this
-//    // instance (the semaphores prevent overwriting the same cookie).  This lets us copy data in parallel.
-//    data_[loc] = cookie;  // add cookie to queue
-//
-//    // let consumer know a cookie is available
-//    csem_.notify();
+    // let consumer know a cookie is available
+    csem_.notify();
 
   }
 
   Cookie Pop() {
 
     // wait until cookie available
-    std::cout << "wait" << std::endl;
     csem_.wait();
-    std::cout << "wait successful." << std::endl;
 
-    // int loc = 0;  // will store location of cookie to take
-    // {
+    int loc = 0;  // will store location of cookie to take
+    {
       // look at index, protect memory from multiple simultaneous pops
-      std::cout << "lock" << std::endl;
       std::lock_guard<cpen333::process::mutex> lock(cmutex_);
-      std::cout << "lock successful" << std::endl;
-      // loc = info_->cidx;
-      Cookie cookie = data_[info_->cidx];  // take cookie out
+      loc = info_->cidx;
+
       // increment consumer index for next cookie, wrap around if at end
       if ( (++info_->cidx) == info_->size) {
         info_->cidx = 0;
       }
       // lock will unlock here as guard runs out of scope
-      std::cout << "prod" << std::endl;
-      psem_.notify();
-      std::cout << "prod successfull" << std::endl;
-    // }
+    }
 
     // ADVANCED: since copying of memory can be expensive (especially with large data types), it is often best
     // not to perform under a lock, if we can get away with it.  Convince yourself that this is safe in this
     // instance (the semaphores prevent overwriting the same cookie).  This lets us copy data in parallel.
-    // Cookie cookie = data_[loc];  // take cookie out
+    Cookie cookie = data_[loc];  // take cookie out
 
     // let producer know that we are done with the slot
-    // psem_.notify();
+    psem_.notify();
 
     return cookie;
-
-  }
-
-  bool TryPop(Cookie &cookie) {
-
-    // wait until cookie available
-    if (!csem_.try_wait()) {
-      return false;
-    }
-
-    // int loc = 0;  // will store location of cookie to take
-    // {
-    // look at index, protect memory from multiple simultaneous pops
-    std::lock_guard<cpen333::process::mutex> lock(cmutex_);
-    // loc = info_->cidx;
-    cookie = data_[info_->cidx];  // take cookie out
-    // increment consumer index for next cookie, wrap around if at end
-    if ( (++info_->cidx) == info_->size) {
-      info_->cidx = 0;
-    }
-    // lock will unlock here as guard runs out of scope
-    psem_.notify();
-    // }
-
-    // ADVANCED: since copying of memory can be expensive (especially with large data types), it is often best
-    // not to perform under a lock, if we can get away with it.  Convince yourself that this is safe in this
-    // instance (the semaphores prevent overwriting the same cookie).  This lets us copy data in parallel.
-    // Cookie cookie = data_[loc];  // take cookie out
-
-    // let producer know that we are done with the slot
-    // psem_.notify();
-
-    return true;
 
   }
 
@@ -187,12 +142,6 @@ class CookieQueue {
     cmutex_.unlink();
     psem_.unlink();
     csem_.unlink();
-  }
-
-  void sem_info() {
-    int v1 = psem_.value();
-    int v2 = csem_.value();
-    std::cout << v1 << " " << v2 << std::endl;
   }
 
   static void Unlink(const std::string& name) {

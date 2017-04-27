@@ -29,11 +29,8 @@ int main(int argc, char* argv[]) {
 
   CookieQueue queue(COOKIE_QUEUE_NAME, 256);
 
-  //while(true) { // keep eating cookies forever
-  for (int i=0; i<10000; ++i) {
-    Cookie cookie;
-
-    if (queue.TryPop(cookie)) {
+  while(true) { // keep eating cookies forever
+    Cookie cookie = queue.Pop();
       if (cookie.type == CookieType::POISON) {
         std::cout << "Monster " << monster_id << " died from a POISON Cookie" << std::endl;
         break;
@@ -41,13 +38,10 @@ int main(int argc, char* argv[]) {
         std::cout << "Monster " << monster_id << " ate a " << get_cookie_name(cookie.type)
                   << " cookie made by baker " << cookie.baker_id << std::endl;
       }
-    }
+
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
   }
 
-//  std::cout << "Press ENTER to Quit Monster" << std::endl;
-//  std::cin.get();
-
-  std::cout << "Cookie Monster Finished" << std::endl;
+  std::cout << "Cookie Monster " << monster_id << " Finished" << std::endl;
   return 0;
 }

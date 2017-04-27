@@ -28,12 +28,10 @@ class semaphore : public named_resource {
   semaphore(const std::string& name, size_t value = 1) :
       named_resource{name+std::string(SEMAPHORE_NAME_SUFFIX)}, handle_{nullptr} {
     // create named semaphore
-    std::cout << "creating semaphore " << this->name();
     handle_ = sem_open(name_ptr(), O_CREAT | O_RDWR, S_IRWXU | S_IRWXG, value);
     if (handle_ == nullptr) {
       cpen333::perror(std::string("Cannot create semaphore ")+this->name());
     }
-    std::cout << "  value: " << this->value() << std::endl;
   }
 
   ~semaphore() {
@@ -73,6 +71,7 @@ class semaphore : public named_resource {
   }
 
   void notify() {
+    // std::cout << "notifying sem " << name() << std::endl;
     int success = sem_post(handle_);
     if (success != 0) {
       cpen333::perror(std::string("Failed to post semaphore ")+name());

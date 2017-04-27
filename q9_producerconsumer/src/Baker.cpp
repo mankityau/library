@@ -27,12 +27,10 @@ int main(int argc, char* argv[]) {
   CookieQueue queue(COOKIE_QUEUE_NAME, 256);
 
   // add cookies to queue in loop
-  for (int i=0; i<1000; ++i) {
+  for (int i=0; i<500; ++i) {
     std::this_thread::sleep_for(std::chrono::milliseconds(10));  // take time to make cookie
     queue.Push({type, baker_id, i});
   }
-
-  // queue.Push({CookieType::POISON, baker_id, 0});
 
   std::cout << "Baker " << baker_id << " finished." << std::endl;
 
