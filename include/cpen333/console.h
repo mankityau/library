@@ -1,0 +1,707 @@
+#ifndef CPEN333_CONSOLE_H
+#define CPEN333_CONSOLE_H
+
+// #define NO_AIX  // use standard ANSI codes if AIX codes do not work
+
+#include <iostream>
+
+#include "cpen333/os.h"
+#include "cpen333/util.h"
+
+#ifdef WINDOWS
+#include <windows.h>
+#else
+#include <cstdio>   // for safe printf
+#endif
+
+namespace cpen333 {
+
+enum color {
+  BLACK, DARK_RED, DARK_GREEN, DARK_YELLOW, DARK_BLUE, DARK_MAGENTA, DARK_CYAN, LIGHT_GREY,
+  DARK_GREY, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE, DEFAULT
+};
+
+namespace detail {
+
+struct ANSI_CODES {
+  static constexpr const char *FOREGROUND_COLOR_BLACK = "\u001B[30m";
+  static constexpr const char *FOREGROUND_COLOR_DARK_RED = "\u001B[31m";
+  static constexpr const char *FOREGROUND_COLOR_DARK_GREEN = "\u001B[32m";
+  static constexpr const char *FOREGROUND_COLOR_DARK_YELLOW = "\u001B[33m";
+  static constexpr const char *FOREGROUND_COLOR_DARK_BLUE = "\u001B[34m";
+  static constexpr const char *FOREGROUND_COLOR_DARK_MAGENTA = "\u001B[35m";
+  static constexpr const char *FOREGROUND_COLOR_DARK_CYAN = "\u001B[36m";
+  static constexpr const char *FOREGROUND_COLOR_LIGHT_GREY = "\u001B[37m";
+  static constexpr const char *FOREGROUND_COLOR_DEFAULT = "\u001B[39m";
+
+  static constexpr const char *BACKGROUND_COLOR_BLACK = "\u001B[40m";
+  static constexpr const char *BACKGROUND_COLOR_DARK_RED = "\u001B[41m";
+  static constexpr const char *BACKGROUND_COLOR_DARK_GREEN = "\u001B[42m";
+  static constexpr const char *BACKGROUND_COLOR_DARK_YELLOW = "\u001B[43m";
+  static constexpr const char *BACKGROUND_COLOR_DARK_BLUE = "\u001B[44m";
+  static constexpr const char *BACKGROUND_COLOR_DARK_MAGENTA = "\u001B[45m";
+  static constexpr const char *BACKGROUND_COLOR_DARK_CYAN = "\u001B[46m";
+  static constexpr const char *BACKGROUND_COLOR_LIGHT_GREY = "\u001B[47m";
+  static constexpr const char *BACKGROUND_COLOR_DEFAULT = "\u001B[49m";
+
+#ifdef NO_AIX
+  // standard ANSI versions (uses "bold")
+  static constexpr const char *FOREGROUND_COLOR_DARK_GREY = "\u001B[30;1m";
+  static constexpr const char *FOREGROUND_COLOR_RED = "\u001B[31;1m";
+  static constexpr const char *FOREGROUND_COLOR_GREEN = "\u001B[32;1m";
+  static constexpr const char *FOREGROUND_COLOR_YELLOW = "\u001B[33;1m";
+  static constexpr const char *FOREGROUND_COLOR_BLUE = "\u001B[34;1m";
+  static constexpr const char *FOREGROUND_COLOR_MAGENTA = "\u001B[35;1m";
+  static constexpr const char *FOREGROUND_COLOR_CYAN = "\u001B[36;1m";
+  static constexpr const char *FOREGROUND_COLOR_WHITE = "\u001B[37;1m";
+
+  static constexpr const char *BACKGROUND_COLOR_DARK_GREY = "\u001B[40;1m";
+  static constexpr const char *BACKGROUND_COLOR_RED = "\u001B[41;1m";
+  static constexpr const char *BACKGROUND_COLOR_GREEN = "\u001B[42;1m";
+  static constexpr const char *BACKGROUND_COLOR_YELLOW = "\u001B[43;1m";
+  static constexpr const char *BACKGROUND_COLOR_BLUE = "\u001B[44;1m";
+  static constexpr const char *BACKGROUND_COLOR_MAGENTA = "\u001B[45;1m";
+  static constexpr const char *BACKGROUND_COLOR_CYAN = "\u001B[46;1m";
+  static constexpr const char *BACKGROUND_COLOR_WHITE = "\u001B[47;1m";
+#else
+  // AIX versions
+  static constexpr const char *FOREGROUND_COLOR_DARK_GREY = "\u001B[90m";
+  static constexpr const char *FOREGROUND_COLOR_RED = "\u001B[91m";
+  static constexpr const char *FOREGROUND_COLOR_GREEN = "\u001B[92m";
+  static constexpr const char *FOREGROUND_COLOR_YELLOW = "\u001B[93m";
+  static constexpr const char *FOREGROUND_COLOR_BLUE = "\u001B[94m";
+  static constexpr const char *FOREGROUND_COLOR_MAGENTA = "\u001B[95m";
+  static constexpr const char *FOREGROUND_COLOR_CYAN = "\u001B[96m";
+  static constexpr const char *FOREGROUND_COLOR_WHITE = "\u001B[97m";
+
+  static constexpr const char *BACKGROUND_COLOR_DARK_GREY = "\u001B[100m";
+  static constexpr const char *BACKGROUND_COLOR_RED = "\u001B[101m";
+  static constexpr const char *BACKGROUND_COLOR_GREEN = "\u001B[102m";
+  static constexpr const char *BACKGROUND_COLOR_YELLOW = "\u001B[103m";
+  static constexpr const char *BACKGROUND_COLOR_BLUE = "\u001B[104m";
+  static constexpr const char *BACKGROUND_COLOR_MAGENTA = "\u001B[105m";
+  static constexpr const char *BACKGROUND_COLOR_CYAN = "\u001B[106m";
+  static constexpr const char *BACKGROUND_COLOR_WHITE = "\u001B[107m";
+#endif
+
+  static constexpr const char *COLOR_RESET = "\u001B[0m";
+  static constexpr const char *COLOR_REVERSE = "\u001B[7m";
+  static constexpr const char *COLOR_UNREVERSE = "\u001B[27m";
+
+  static constexpr const char *ERASE_DISPLAY_TO_END = "\u001B[0J";
+  static constexpr const char *ERASE_DISPLAY_TO_BEGINNING = "\u001B[1J";
+  static constexpr const char *ERASE_DISPLAY = "\u001B[2J";
+
+  static constexpr const char *ERASE_LINE_TO_END = "\u001B[0K";
+  static constexpr const char *ERASE_LINE_TO_BEGINNING = "\u001B[1K";
+  static constexpr const char *ERASE_LINE = "\u001B[2K";
+
+  static constexpr const char *HIDE_CURSOR = "\u001B[?25l";
+  static constexpr const char *SHOW_CURSOR = "\u001B[?25h";
+
+  // NOTE: these are format strings taking positions
+  static constexpr const char *CURSOR_HORIZONTAL_ABSOLUTE = "\u001B[%iG";
+  static constexpr const char *CURSOR_POSITION = "\u001B[%i;%iH";
+
+};
+
+#ifdef WINDOWS
+class console_handler {
+  static constexpr const int FOREGROUND_MASK = 0x0F;
+  static constexpr const int BACKGROUND_MASK = 0xF0;
+  int default_attributes_;
+ public:
+
+  console_handler() {
+    // get current color
+    default_attributes_ = get_text_attributes();
+  }
+  
+  void set_foreground_color(const color &color) {
+    // clear foreground color
+    int cflags = 0;
+    switch (color) {
+      case BLACK: {
+        break;
+      }
+      case DARK_RED: {
+        cflags |= FOREGROUND_RED;
+        break;
+      }
+      case DARK_GREEN: {
+        cflags |= FOREGROUND_GREEN;
+        break;
+      }
+      case DARK_YELLOW: {
+        cflags |= (FOREGROUND_RED | FOREGROUND_GREEN);
+        break;
+      }
+      case DARK_BLUE: {
+        cflags |= FOREGROUND_BLUE;
+        break;
+      }
+      case DARK_MAGENTA: {
+        cflags |= (FOREGROUND_RED | FOREGROUND_BLUE);
+        break;
+      }
+      case DARK_CYAN: {
+        cflags |= (FOREGROUND_GREEN | FOREGROUND_BLUE);
+        break;
+      }
+      case LIGHT_GREY: {
+        cflags |= (FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+        break;
+      }
+      case DARK_GREY: {
+        cflags |= FOREGROUND_INTENSITY;
+        break;
+      }
+      case RED: {
+        cflags |= (FOREGROUND_RED | FOREGROUND_INTENSITY);
+        break;
+      }
+      case GREEN: {
+        cflags |= FOREGROUND_GREEN | FOREGROUND_INTENSITY;
+        break;
+      }
+      case YELLOW: {
+        cflags |= (FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+        break;
+      }
+      case BLUE: {
+        cflags |= FOREGROUND_BLUE | FOREGROUND_INTENSITY;
+        break;
+      }
+      case MAGENTA: {
+        cflags |= (FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+        break;
+      }
+      case CYAN: {
+        cflags |= (FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+        break;
+      }
+      case WHITE: {
+        cflags |= (FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+        break;
+      }
+      case DEFAULT: {
+        cflags = FOREGROUND_MASK & default_attributes_;
+        break;
+      }
+    }
+
+    // flush everything
+    std::cout.flush();
+    fflush(stdout);
+    // get current color
+    int current = (get_text_attributes() & ~FOREGROUND_MASK);
+    set_text_attributes(cflags | current);
+  }
+
+  void set_background_color(const color &color) {
+    // clear foreground color
+    int cflags = 0;
+    switch (color) {
+      case BLACK: {
+        break;
+      }
+      case DARK_RED: {
+        cflags |= BACKGROUND_RED;
+        break;
+      }
+      case DARK_GREEN: {
+        cflags |= BACKGROUND_GREEN;
+        break;
+      }
+      case DARK_YELLOW: {
+        cflags |= (BACKGROUND_RED | BACKGROUND_GREEN);
+        break;
+      }
+      case DARK_BLUE: {
+        cflags |= BACKGROUND_BLUE;
+        break;
+      }
+      case DARK_MAGENTA: {
+        cflags |= (BACKGROUND_RED | BACKGROUND_BLUE);
+        break;
+      }
+      case DARK_CYAN: {
+        cflags |= (BACKGROUND_GREEN | BACKGROUND_BLUE);
+        break;
+      }
+      case LIGHT_GREY: {
+        cflags |= (BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE);
+        break;
+      }
+      case DARK_GREY: {
+        cflags |= BACKGROUND_INTENSITY;
+        break;
+      }
+      case RED: {
+        cflags |= (BACKGROUND_RED | BACKGROUND_INTENSITY);
+        break;
+      }
+      case GREEN: {
+        cflags |= BACKGROUND_GREEN | BACKGROUND_INTENSITY;
+        break;
+      }
+      case YELLOW: {
+        cflags |= (BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_INTENSITY);
+        break;
+      }
+      case BLUE: {
+        cflags |= BACKGROUND_BLUE | BACKGROUND_INTENSITY;
+        break;
+      }
+      case MAGENTA: {
+        cflags |= (BACKGROUND_RED | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
+        break;
+      }
+      case CYAN: {
+        cflags |= (BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
+        break;
+      }
+      case WHITE: {
+        cflags |= (BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
+        break;
+      }
+      case DEFAULT: {
+        cflags = BACKGROUND_MASK & default_attributes_;
+        break;
+      }
+    }
+
+    // flush everything
+    std::cout.flush();
+    fflush(stdout);
+    // get current color
+    int current = (get_text_attributes() & ~BACKGROUND_MASK);
+    set_text_attributes(cflags | current);
+  }
+
+  void reset_colors() {
+    static const int COLOR_MASK = BACKGROUND_MASK | FOREGROUND_MASK | COMMON_LVB_REVERSE_VIDEO;
+    int current = get_text_attributes() & ~COLOR_MASK;
+    set_text_attributes(current | (default_attributes_ & COLOR_MASK));
+  }
+
+  void set_colors_reverse(bool set) {
+    int current = get_text_attributes();
+    if (set) {
+      current |= COMMON_LVB_REVERSE_VIDEO;
+    } else {
+      current &= ~COMMON_LVB_REVERSE_VIDEO;
+    }
+    set_text_attributes(current); // flip reverse bit
+  }
+
+  void set_cursor_position(int r, int c) {
+    COORD coord = {(short)c, (short)r};
+    HANDLE hstdout = get_stdout_handle();
+    SetConsoleCursorPosition(hstdout, coord);
+  }
+
+  void clear_display() {
+    // Adapted from:  http://www.cplusplus.com/articles/4z18T05o/#Windows
+    HANDLE hstdout = get_stdout_handle();
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    // get screen info
+    if (!GetConsoleScreenBufferInfo( hstdout, &csbi )) return;
+
+    DWORD cellcount = csbi.dwSize.X *csbi.dwSize.Y;
+    COORD home = { (short)0, (short)0 };
+    DWORD count;
+
+    // Fill the entire buffer with spaces and attributes
+    if (!FillConsoleOutputCharacter( hstdout, (TCHAR)' ', cellcount, home, &count)) return;
+    if (!FillConsoleOutputAttribute( hstdout, csbi.wAttributes, cellcount, home, &count)) return;
+  }
+
+  void clear_line() {
+    HANDLE hstdout = get_stdout_handle();
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    // get screen info
+    if (!GetConsoleScreenBufferInfo( hstdout, &csbi )) return;
+
+    DWORD cellcount = csbi.dwSize.X;
+    COORD home = { (short)0, (short)csbi.dwCursorPosition.Y };
+    DWORD count;
+
+    // Fill the entire buffer with spaces and attributes
+    if (!FillConsoleOutputCharacter( hstdout, (TCHAR)' ', cellcount, home, &count)) return;
+    if (!FillConsoleOutputAttribute( hstdout, csbi.wAttributes, cellcount, home, &count)) return;
+  }
+
+  void clear_line_right() {
+    HANDLE hstdout = get_stdout_handle();
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    // get screen info
+    if (!GetConsoleScreenBufferInfo( hstdout, &csbi )) return;
+
+    DWORD cellcount = csbi.dwSize.X-csbi.dwCursorPosition.X;
+    COORD home = { (short)csbi.dwCursorPosition.X, (short)csbi.dwCursorPosition.Y };
+    DWORD count;
+
+    // Fill the entire buffer with spaces and attributes
+    if (!FillConsoleOutputCharacter( hstdout, (TCHAR)' ', cellcount, home, &count)) return;
+    if (!FillConsoleOutputAttribute( hstdout, csbi.wAttributes, cellcount, home, &count)) return;
+  }
+
+  void clear_line_left() {
+    HANDLE hstdout = get_stdout_handle();
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    // get screen info
+    if (!GetConsoleScreenBufferInfo( hstdout, &csbi )) return;
+
+    DWORD cellcount = csbi.dwCursorPosition.X+1;
+    COORD home = { (short)0, (short)csbi.dwCursorPosition.Y };
+    DWORD count;
+
+    // Fill the entire buffer with spaces and attributes
+    if (!FillConsoleOutputCharacter( hstdout, (TCHAR)' ', cellcount, home, &count)) return;
+    if (!FillConsoleOutputAttribute( hstdout, csbi.wAttributes, cellcount, home, &count)) return;
+  }
+  
+  void set_cursor_visible(bool visible) {
+    CONSOLE_CURSOR_INFO cci = {1, visible};
+    SetConsoleCursorInfo(get_stdout_handle(), &cci);
+  }
+
+  void reset() {
+    set_text_attributes(default_attributes_);
+    set_cursor_visible(true);
+  }
+
+ private:
+
+  static HANDLE get_stdout_handle() {
+    return GetStdHandle(STD_OUTPUT_HANDLE);
+  }
+
+  static int get_text_attributes() {
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    HANDLE hstdout = get_stdout_handle();
+    GetConsoleScreenBufferInfo(hstdout, &csbi);
+    return csbi.wAttributes;
+  }
+
+  static void set_text_attributes(int flags) {
+    HANDLE hstdout = get_stdout_handle();
+    SetConsoleTextAttribute(hstdout, flags);
+  }
+};
+#else
+class console_handler {
+
+ public:
+  void set_foreground_color(const color& color) {
+
+    // flush everything
+    std::cout.flush();
+    // get current color
+    switch (color) {
+      case BLACK: {
+        std::cout << ANSI_CODES::FOREGROUND_COLOR_BLACK;
+        break;
+      }
+      case DARK_RED: {
+        std::cout << ANSI_CODES::FOREGROUND_COLOR_DARK_RED;
+        break;
+      }
+      case DARK_GREEN: {
+        std::cout << ANSI_CODES::FOREGROUND_COLOR_DARK_GREEN;
+        break;
+      }
+      case DARK_YELLOW: {
+         std::cout << ANSI_CODES::FOREGROUND_COLOR_DARK_YELLOW;
+        break;
+      }
+      case DARK_BLUE: {
+         std::cout << ANSI_CODES::FOREGROUND_COLOR_DARK_BLUE;
+        break;
+      }
+      case DARK_MAGENTA: {
+         std::cout << ANSI_CODES::FOREGROUND_COLOR_DARK_MAGENTA;
+         break;
+      }
+      case DARK_CYAN: {
+        std::cout << ANSI_CODES::FOREGROUND_COLOR_DARK_CYAN;
+        break;
+      }
+      case LIGHT_GREY: {
+        std::cout << ANSI_CODES::FOREGROUND_COLOR_LIGHT_GREY;
+        break;
+      }
+      case DARK_GREY: {
+        std::cout << ANSI_CODES::FOREGROUND_COLOR_DARK_GREY;
+        break;
+      }
+      case RED: {
+        std::cout << ANSI_CODES::FOREGROUND_COLOR_RED;
+        break;
+      }
+      case GREEN: {
+        std::cout << ANSI_CODES::FOREGROUND_COLOR_GREEN;
+        break;
+      }
+      case YELLOW: {
+        std::cout << ANSI_CODES::FOREGROUND_COLOR_YELLOW;
+        break;
+      }
+      case BLUE: {
+        std::cout << ANSI_CODES::FOREGROUND_COLOR_BLUE;
+        break;
+      }
+      case MAGENTA: {
+        std::cout << ANSI_CODES::FOREGROUND_COLOR_MAGENTA;
+        break;
+      }
+      case CYAN: {
+        std::cout << ANSI_CODES::FOREGROUND_COLOR_CYAN;
+        break;
+      }
+      case WHITE: {
+        std::cout << ANSI_CODES::FOREGROUND_COLOR_WHITE;
+        break;
+      }
+      case DEFAULT: {
+        std::cout << ANSI_CODES::FOREGROUND_COLOR_DEFAULT;
+        break;
+      }
+    }
+    std::cout.flush();
+  }
+  
+  void set_background_color(const color& color) {
+
+    // flush everything
+    std::cout.flush();
+
+    // get current color
+    switch (color) {
+      case BLACK: {
+        std::cout << ANSI_CODES::BACKGROUND_COLOR_BLACK;
+        break;
+      }
+      case DARK_RED: {
+        std::cout << ANSI_CODES::BACKGROUND_COLOR_DARK_RED;
+        break;
+      }
+      case DARK_GREEN: {
+        std::cout << ANSI_CODES::BACKGROUND_COLOR_DARK_GREEN;
+        break;
+      }
+      case DARK_YELLOW: {
+         std::cout << ANSI_CODES::BACKGROUND_COLOR_DARK_YELLOW;
+        break;
+      }
+      case DARK_BLUE: {
+         std::cout << ANSI_CODES::BACKGROUND_COLOR_DARK_BLUE;
+        break;
+      }
+      case DARK_MAGENTA: {
+         std::cout << ANSI_CODES::BACKGROUND_COLOR_DARK_MAGENTA;
+         break;
+      }
+      case DARK_CYAN: {
+        std::cout << ANSI_CODES::BACKGROUND_COLOR_DARK_CYAN;
+        break;
+      }
+      case LIGHT_GREY: {
+        std::cout << ANSI_CODES::BACKGROUND_COLOR_LIGHT_GREY;
+        break;
+      }
+      case DARK_GREY: {
+        std::cout << ANSI_CODES::BACKGROUND_COLOR_DARK_GREY;
+        break;
+      }
+      case RED: {
+        std::cout << ANSI_CODES::BACKGROUND_COLOR_RED;
+        break;
+      }
+      case GREEN: {
+        std::cout << ANSI_CODES::BACKGROUND_COLOR_GREEN;
+        break;
+      }
+      case YELLOW: {
+        std::cout << ANSI_CODES::BACKGROUND_COLOR_YELLOW;
+        break;
+      }
+      case BLUE: {
+        std::cout << ANSI_CODES::BACKGROUND_COLOR_BLUE;
+        break;
+      }
+      case MAGENTA: {
+        std::cout << ANSI_CODES::BACKGROUND_COLOR_MAGENTA;
+        break;
+      }
+      case CYAN: {
+        std::cout << ANSI_CODES::BACKGROUND_COLOR_CYAN;
+        break;
+      }
+      case WHITE: {
+        std::cout << ANSI_CODES::BACKGROUND_COLOR_WHITE;
+        break;
+      }
+      case DEFAULT: {
+        std::cout << ANSI_CODES::BACKGROUND_COLOR_DEFAULT;
+        break;
+      }
+    }
+    std::cout.flush();
+  }
+
+  void set_colors_reverse(bool set) {
+    std::cout.flush();
+    if (set) {
+      std::cout << ANSI_CODES::COLOR_REVERSE;
+    } else {
+      std::cout << ANSI_CODES::COLOR_UNREVERSE;
+    }
+    std::cout.flush();
+  }
+
+  void reset_colors() {
+    std::cout.flush();
+    std::cout << ANSI_CODES::COLOR_RESET;
+    std::cout.flush();
+  }
+
+  void set_cursor_position(int r, int c) {
+    if (r <= 0) {
+      r = 0;
+    }
+    if (c <= 0) {
+      c = 0;
+    }
+    // ANSI is 1-based indexing
+    ++r;
+    ++c;
+    std::cout.flush();
+    std::cout << cpen333::string_format(ANSI_CODES::CURSOR_POSITION, r, c);
+    std::cout.flush();
+  }
+
+  void clear_display() {
+    std::cout.flush();
+    std::cout << ANSI_CODES::ERASE_DISPLAY;
+    std::cout.flush();
+  }
+
+  void clear_line() {
+    std::cout.flush();
+    std::cout << ANSI_CODES::ERASE_LINE;
+    std::cout.flush();
+  }
+
+  void clear_line_right() {
+    std::cout.flush();
+    std::cout << ANSI_CODES::ERASE_LINE_TO_END;
+    std::cout.flush();
+  }
+
+  void clear_line_left() {
+    std::cout.flush();
+    std::cout << ANSI_CODES::ERASE_LINE_TO_BEGINNING;
+    std::cout.flush();
+  }
+  
+  void set_cursor_visible(bool set) {
+    std::cout.flush();
+    if (set) {
+      std::cout << ANSI_CODES::SHOW_CURSOR;
+    } else {
+      std::cout << ANSI_CODES::HIDE_CURSOR;
+    }
+    std::cout.flush();
+  }
+
+  void reset() {
+    std::cout.flush();
+    std::cout << ANSI_CODES::COLOR_RESET;
+    std::cout.flush();
+    set_cursor_visible(true);
+
+  }
+};
+#endif
+
+} // detail
+
+// template <typename Dummy = void>
+class console {
+ public:
+  console() : handler_{}, foreground_{color::DEFAULT}, background_{color::DEFAULT}, reversed_{false} {}
+
+  virtual ~console() {}
+
+  void set_foreground_color(const color &color) {
+    handler_.set_foreground_color(color);
+    foreground_ = color;
+  }
+
+  void set_background_color(const color &color) {
+    handler_.set_background_color(color);
+    background_ = color;
+  }
+
+  void set_colors_reverse(bool set) {
+    handler_.set_colors_reverse(set);
+    reversed_ = set;
+  }
+
+  void reset_colors() {
+    handler_.reset_colors();
+    foreground_ = DEFAULT;
+    background_ = DEFAULT;
+    reversed_ = false;
+  }
+
+  void set_cursor_position(int r, int c) {
+    handler_.set_cursor_position(r,c);
+  }
+
+  void clear_display() {
+    handler_.clear_display();
+  }
+
+  void clear_line() {
+    handler_.clear_line();
+  }
+
+  void clear_line_right() {
+    handler_.clear_line_right();
+  }
+
+  void clear_line_left() {
+    handler_.clear_line_left();
+  }
+  
+  void set_cursor_visible(bool visible) {
+    handler_.set_cursor_visible(visible);
+  }
+
+  void reset() {
+    handler_.reset();
+  }
+
+  /**
+   * Clears display and resets all console attributes
+   */
+  void clear() {
+    handler_.reset();
+    handler_.clear_display();
+    handler_.set_cursor_position(0, 0);
+  }
+
+ private:
+  detail::console_handler handler_;
+  color foreground_;
+  color background_;
+  bool reversed_;
+};
+
+} // cpen333
+
+
+#endif //CPEN333_CONSOLE_H
