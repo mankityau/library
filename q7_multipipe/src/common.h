@@ -1,6 +1,0 @@
-#ifndef Q7_MULTIPIPE_COMMON_H
-#define Q7_MULTIPIPE_COMMON_H
-
-#define Q7_MULTIPIPE_PREFIX "q7_pipe_"
-
-#endif //Q7_MULTIPIPE_COMMON_H

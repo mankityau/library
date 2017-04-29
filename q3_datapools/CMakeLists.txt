@@ -1,48 +1,36 @@
 cmake_minimum_required(VERSION 3.1.3)
-project(q3_datapools)
+
+# Name project based on current directory
+get_filename_component(PROJECT ${CMAKE_CURRENT_SOURCE_DIR} NAME)
+project(PROJECT)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin/${PROJECT})
 
 set(CMAKE_CXX_STANDARD 11)
+find_package( Threads REQUIRED )  # Multithreading package required
 
-# Multithreading
-find_package( Threads REQUIRED )
-
-# library directories
-include_directories("../include")
+# directories to search for header files
+include_directories(../include)
 
 #==============  Datapool Child ===============================
-add_executable(q3child1 src/q3child1.cpp)
-target_link_libraries(q3child1 Threads::Threads)
+add_executable(${PROJECT}_child src/process/child.cpp)
+target_link_libraries(${PROJECT}_child Threads::Threads)    # link with threads library
 # shared_memory requires linking with the rt library
 if(UNIX)
-    target_link_libraries(q3child1 rt)
+    target_link_libraries(${PROJECT}_child rt)
 endif()
+set_target_properties(${PROJECT}_child PROPERTIES OUTPUT_NAME "child")
 
 #==============  Datapool Parent  ======================================
-add_executable(q3parent1 src/q3parent1.cpp)
-target_link_libraries(q3parent1 Threads::Threads)
+add_executable(${PROJECT}_parent src/process/parent.cpp)
+target_link_libraries(${PROJECT}_parent Threads::Threads)    # link with threads library
 # shared_memory requires linking with the rt library
 if(UNIX)
-    target_link_libraries(q3parent1 rt)
+    target_link_libraries(${PROJECT}_parent rt)
 endif()
-add_dependencies(q3parent1 q3child1)
-
-#==============  Datapool Child ===============================
-add_executable(q3child2 src/q3child2.cpp)
-target_link_libraries(q3child2 Threads::Threads)
-# shared_memory requires linking with the rt library
-if(UNIX)
-    target_link_libraries(q3child2 rt)
-endif()
-
-#==============  Datapool Parent  ======================================
-add_executable(q3parent2 src/q3parent2.cpp)
-target_link_libraries(q3parent2 Threads::Threads)
-# shared_memory requires linking with the rt library
-if(UNIX)
-    target_link_libraries(q3parent2 rt)
-endif()
-add_dependencies(q3parent2 q3child2)
+set_target_properties(${PROJECT}_parent PROPERTIES OUTPUT_NAME "parent")
+add_dependencies(${PROJECT}_parent ${PROJECT}_child)   # parent depends on child
 
 #==============  Datapool thread  ======================================
-add_executable(q3thread src/q3thread.cpp)
-target_link_libraries(q3thread Threads::Threads)
+add_executable(${PROJECT}_threads src/thread/main.cpp)
+target_link_libraries(${PROJECT}_threads Threads::Threads)    # link with threads library
+set_target_properties(${PROJECT}_parent PROPERTIES OUTPUT_NAME "threads")
