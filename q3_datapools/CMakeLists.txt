@@ -12,29 +12,31 @@ find_package( Threads REQUIRED )  # Multithreading package required
 include_directories(../include)
 
 #==============  Datapool Child ===============================
-add_executable(${PROJECT}_child src/process/child.cpp)
-target_link_libraries(${PROJECT}_child Threads::Threads)    # link with threads library
+add_executable(${PROJECT}_process_child src/process/child.cpp)
+target_link_libraries(${PROJECT}_process_child Threads::Threads)    # link with threads library
 # shared_memory requires linking with the rt library
 if(UNIX AND NOT APPLE)
-    target_link_libraries(${PROJECT}_child rt)
+    target_link_libraries(${PROJECT}_process_child rt)
 endif()
-set_target_properties(${PROJECT}_child PROPERTIES OUTPUT_NAME "child")
+set_target_properties(${PROJECT}_process_child PROPERTIES
+        OUTPUT_NAME "child"
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/process")
 
 #==============  Datapool Parent  ======================================
-add_executable(${PROJECT}_parent src/process/parent.cpp)
-target_link_libraries(${PROJECT}_parent Threads::Threads)    # link with threads library
+add_executable(${PROJECT}_process_parent src/process/parent.cpp)
+target_link_libraries(${PROJECT}_process_parent Threads::Threads)    # link with threads library
 # shared_memory requires linking with the rt library
 if(UNIX AND NOT APPLE)
-    target_link_libraries(${PROJECT}_parent rt)
+    target_link_libraries(${PROJECT}_process_parent rt)
 endif()
-set_target_properties(${PROJECT}_parent PROPERTIES
+set_target_properties(${PROJECT}_process_parent PROPERTIES
         OUTPUT_NAME "parent"
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/process")
-add_dependencies(${PROJECT}_parent ${PROJECT}_child)   # parent depends on child
+add_dependencies(${PROJECT}_process_parent ${PROJECT}_process_child) # parent depends on child
 
 #==============  Datapool thread  ======================================
-add_executable(${PROJECT}_threads src/thread/main.cpp)
-target_link_libraries(${PROJECT}_threads Threads::Threads)    # link with threads library
-set_target_properties(${PROJECT}_parent PROPERTIES
+add_executable(${PROJECT}_thread_datapool src/thread/datapool.cpp)
+target_link_libraries(${PROJECT}_thread_datapool Threads::Threads)    # link with threads library
+set_target_properties(${PROJECT}_thread_datapool PROPERTIES
         OUTPUT_NAME "datapool"
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/thread")

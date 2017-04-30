@@ -4,7 +4,7 @@ project(labs)
 # customize binary directory
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-# Warnings as errors
+# Highest warning level
 if(MSVC)
     # Force to always compile with W4
     if(CMAKE_CXX_FLAGS MATCHES "/W[0-4]")
@@ -24,7 +24,7 @@ add_subdirectory("q2_processes")
 
 # Inter-Process Communication
 add_subdirectory("q3_datapools")
-add_subdirectory("q4_pipelines")
+add_subdirectory("q4_pipes")
 add_subdirectory("q5_message_queues")
 
 # Synchronization

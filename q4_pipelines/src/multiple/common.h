@@ -1,7 +1,0 @@
-#ifndef PIPELINES_MULTIPLE_COMMON_H
-#define PIPELINES_MULTIPLE_COMMON_H
-
-// common pipe name prefix
-#define PIPELINES_MULTIPLE_PREFIX "pipe_"
-
-#endif //PIPELINES_MULTIPLE_COMMON_H

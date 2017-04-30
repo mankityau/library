@@ -31,9 +31,9 @@ struct DataPoolData {
 void ThreadFunction(const std::string &name, DataPoolData& data) {
 
   // print out the data in the datapool that was stored there by the parent
-  std::cout << "Child " << name << " Read value for Movie = " << data.movie << std::endl;
-  std::cout << "Child " << name << " Read value for length = " << data.length << std::endl;
-  std::cout << "Child " << name << " Read values for rating = " << data.rating << std::endl << std::endl;
+  std::cout << "Child " << name << " read value for Movie = " << data.movie << std::endl;
+  std::cout << "Child " << name << " read value for length = " << data.length << std::endl;
+  std::cout << "Child " << name << " read values for rating = " << data.rating << std::endl << std::endl;
 
   std::cout << "Press Enter to quit child " << name << std::endl;
   std::cin.get();  // pause so you can view output before child dies

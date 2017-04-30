@@ -44,6 +44,11 @@ class semaphore : public named_resource {
     }
   }
 
+  /**
+   * Tries to return the value of the semaphore.  This really should never be
+   * used, except for possibly debugging.
+   * @return
+   */
   size_t value() {
     int val = 0;
 #ifdef __APPLE__

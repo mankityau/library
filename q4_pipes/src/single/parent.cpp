@@ -1,4 +1,5 @@
 #include <iostream>
+#include <thread>
 
 #include "common.h"  // include common information (pipe name, data type)
 #include "cpen333/process/pipe.h"
@@ -30,39 +31,45 @@
 
 int main() {
 
-  std::cout << "Parent Process Creating the Pipeline....." << std::endl;
-  cpen333::process::pipe pipe(PIPE_NAME, 1024);                 // create a shared pipe of size 1024 bytes
+  std::cout << "Parent process creating the pipe....." << std::endl;
+
+  // create a shared pipe of size 1024 bytes, in "write" mode
+  cpen333::process::pipe pipe(PIPE_NAME, cpen333::process::pipe::WRITE, 1024);
 
   // Rather than unlink at the end of this process, we will use RAII principles and create a special
   // object that will unlink the name from the named resource for us.
   cpen333::process::unlinker<decltype(pipe)> unlinker(pipe);    // unlink pipe when runs out of scope
 
-  std::cout << "Parent process creating child to read from pipeline....." << std::endl;
+  std::cout << "Parent process creating child to read from pipe....." << std::endl;
   cpen333::process::subprocess p1({"./child"}, true, true);
 
   // write i to pipe
   int i = 20;
-  std::cout << "Press ENTER to write the integer " << i << " to the pipeline.....";
+  std::cout << "Press ENTER to write the integer " << i << " to the pipe.....";
   std::cin.get();   // get line
   pipe.write(i);
+  std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
   // write array to pipe
   int array[10] = {1,2,3,4,5,6,7,8,9,0};
-  std::cout << "Press ENTER to write the integer array 1 2 3 4 5 6 7 8 9 0 to the pipeline....." << std::endl;
+  std::cout << "Press ENTER to write the integer array 1 2 3 4 5 6 7 8 9 0 to the pipe....." << std::endl;
   std::cin.get();
   pipe.write(&array[0], sizeof(array)); // write the array of integers' to the pipe
+  std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
   // write string to pipe
   std::string name = "Snuffaluffagus";
-  std::cout << "Press ENTER to write the string \"" << name << "\" to the pipeline....." << std::endl;
+  std::cout << "Press ENTER to write the string \"" << name << "\" to the pipe....." << std::endl;
   std::cin.get();
   pipe.write(name.c_str(), name.size()+1);  // write the terminating 0 as well
+  std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
   // write struct
   example ex = {10, 2.3456f};
-  std::cout << "Press ENTER to write the structure [" << ex.x << ", " << ex.y << "] to the pipeline....." << std::endl;
+  std::cout << "Press ENTER to write the structure [" << ex.x << ", " << ex.y << "] to the pipe....." << std::endl;
   std::cin.get();
   pipe.write(ex); // uses template-based function to deduce the type/size of data to write
+  std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
   // wait for process to terminate
   p1.join();

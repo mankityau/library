@@ -3,13 +3,14 @@
 
 int main() {
 
-  std::cout << "Child process opening pipeline....." << std::endl;
-  cpen333::process::pipe pipe(PIPE_NAME, 1024);   // create or connect to pipe
+  std::cout << "Child process opening pipe....." << std::endl;
+  cpen333::process::pipe pipe(PIPE_NAME,
+    cpen333::process::pipe::READ, 1024);   // create or connect to pipe
 
   // read an integer from the pipe
   int x;
   pipe.read(&x); // read in to address of x, uses template to deduce type and size
-  std::cout << "Child process read integer = " << x << " from Pipeline....." << std::endl;
+  std::cout << "Child process read integer = " << x << " from pipe....." << std::endl;
 
   // read an array from the pipe
   int array[10];
@@ -27,12 +28,12 @@ int main() {
   while ((c = pipe.read()) != 0) {
     name.push_back(c);
   }
-  std::cout << "Child Process read string = \"" << name << "\" from Pipeline....." << std::endl;
+  std::cout << "Child Process read string = \"" << name << "\" from pipe....." << std::endl;
 
   // read struct
   example ex;
   pipe.read(&ex) ;
-  std::cout << "Child Process read struct ex = [" << ex.x  << ", " << ex.y << "] from Pipeline....." << std::endl;
+  std::cout << "Child Process read struct ex = [" << ex.x  << ", " << ex.y << "] from pipe....." << std::endl;
 
   std::cout << "Press ENTER to exit" << std::endl;
   std::cin.get();

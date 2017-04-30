@@ -18,56 +18,58 @@
 // non-atomic boolean for termination
 volatile bool done = false;
 
-void thread_consumer(int id) {
-  // connect to shared pipe
-  std::string pipe_name = std::string(PIPELINES_MULTIPLE_PREFIX) + std::to_string(id);
-  cpen333::process::pipe pipe(pipe_name);
-  cpen333::process::unlinker<decltype(pipe)> unlinker(pipe);  // clean-up by unlinking name when thread is finished
-
+void thread_consumer(int id, cpen333::process::pipe& pipe) {
   // processes should eventually see when done flag is set
   while (!done) {
     int data;
     pipe.read(&data);
     std::cout << "Parent thread " << id << ": Read " << data << " from pipe " << id << std::endl;
   }
-
 }
 
 int main() {
 
   const int NUM_PIPES = 3;
 
-  std::cout << "Parent Process Creating the Pipelines...." << std::endl;
+  std::cout << "Parent process creating the pipes...." << std::endl;
   std::cout << "Type 'Q' to exit main thread" << std::endl;
+  std::this_thread::sleep_for(std::chrono::seconds(2));
+
   cpen333::process::pipe* pipes[NUM_PIPES];
   cpen333::process::subprocess* processes[NUM_PIPES];
   std::thread* threads[NUM_PIPES];
 
-  // creates child processes and threads for servicing pipe
+  // create pipes, threads, and processes
+  // NOTE: we want the read pipe to exist before the child subprocess start,
+  //       otherwise the child may see a closed pipe on its first write attempt
   for (int i=0; i<NUM_PIPES; ++i) {
-    processes[i] = new cpen333::process::subprocess({"./child", std::to_string(i)}, true, true);
-    threads[i] = new std::thread(thread_consumer, i);
+    std::string pipe_name = std::string(PIPES_MULTIPLE_PREFIX) + std::to_string(i+1);
+    pipes[i] = new cpen333::process::pipe(pipe_name, cpen333::process::pipe::READ);
+    threads[i] = new std::thread(&thread_consumer, i+1, std::ref(*pipes[i]));
+    processes[i] = new cpen333::process::subprocess({"./child", std::to_string(i+1)}, true, true);
   }
 
-  // main loop, polling pipes
-  while(true) { // poll forever
-    // keyboard input
+  // main loop
+  while(true) {
     char c = std::cin.get();
     std::cout << "Parent read " << c << " from keyboard." << std::endl;
-    if (c == 'Q') {
-      break;  // quit
+    if (c == 'Q' || c == 'q') {
+      std::cout << "Shutting down...." << std::endl;
+      break;
     }
+    std::cout << "Type 'Q' to exit main thread" << std::endl;
   }
 
   // signal complete
   done = true;
 
   for (int i=0; i<NUM_PIPES; ++i) {
-    delete processes[i];
-    pipes[i]->unlink();    // unlink pipe and delete
-
-    threads[i]->join();    // wait for thread and delete
+    threads[i]->join();    // wait for thread and delete, will close pipe
     delete threads[i];
+    pipes[i]->unlink();    // wait for pipe (must be after thread since thread is using it)
+    delete pipes[i];
+    processes[i]->join();  // wait for process to finish
+    delete processes[i];
   }
 
   std::cout << "Done." << std::endl;

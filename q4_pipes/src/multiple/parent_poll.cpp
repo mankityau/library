@@ -1,4 +1,5 @@
 #include <iostream>
+#include <thread>
 #include <string>
 
 #include "common.h"
@@ -17,16 +18,18 @@ int main() {
 
   const int NUM_PIPES = 3;
 
-  std::cout << "Parent process creating the pipelines...." << std::endl;
+  std::cout << "Parent process creating the pipes...." << std::endl;
   std::cout << "Type 'Q' to exit main thread" << std::endl;
+  std::this_thread::sleep_for(std::chrono::seconds(2));
+
   cpen333::process::pipe* pipes[NUM_PIPES];
   cpen333::process::subprocess* processes[NUM_PIPES];
 
-  // create pipes, unlinkers, and processes
+  // create pipes and processes
   for (int i=0; i<NUM_PIPES; ++i) {
-    std::string pipe_name = std::string(PIPELINES_MULTIPLE_PREFIX) + std::to_string(i);
-    pipes[i] = new cpen333::process::pipe(pipe_name);
-    processes[i] = new cpen333::process::subprocess({"./child", std::to_string(i)}, true, true);
+    std::string pipe_name = std::string(PIPES_MULTIPLE_PREFIX) + std::to_string(i+1);
+    pipes[i] = new cpen333::process::pipe(pipe_name, cpen333::process::pipe::READ);
+    processes[i] = new cpen333::process::subprocess({"./child", std::to_string(i+1)}, true, true);
   }
 
   // main loop, polling pipes
@@ -45,17 +48,27 @@ int main() {
     if (cpen333::test_stdin() != 0) {
       char c = std::cin.get();
       std::cout << "Parent read " << c << " from keyboard." << std::endl;
-      if (c == 'Q') {
+      if (c == 'Q' || c == 'q') {
+        std::cout << "Shutting down...." << std::endl;
         break;
       }
+      std::cout << "Type 'Q' to exit main thread" << std::endl;
     }
   }
 
-  // clean up
+  // close all pipes
   for (int i=0; i<NUM_PIPES; ++i) {
-    delete processes[i];
-    pipes[i]->unlink();    // unlink pipe and delete
+    std::cout << "Closing pipe " << (i+1) << std::endl;
+    pipes[i]->close();
+    pipes[i]->unlink();
+
     delete pipes[i];
+  }
+
+  // clean up processes
+  for (int i=0; i<NUM_PIPES; ++i) {
+    processes[i]->join();
+    delete processes[i];
   }
 
   return 0;

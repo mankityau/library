@@ -35,7 +35,7 @@ int main(int argc, char* argv[]) {
 
   cpen333::process::subprocess p3(
       {"./child3", "fred", "1.2", "child 3"},  // pass arguments to child 3's argv[]
-      true,
+      false,
       true
   );
 

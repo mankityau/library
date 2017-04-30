@@ -78,7 +78,7 @@ int main() {
 
   // spawn child process
   // start it running, and detached
-  cpen333::process::subprocess p1({"./child", "Subprocess 1"}, true, true);
+  cpen333::process::subprocess p1({"./child", "Subprocess"}, true, true);
   p1.join();        // wait for the child process to Terminate
 
 
