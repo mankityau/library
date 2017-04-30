@@ -4,9 +4,21 @@
 #include <string>
 #include "cpen333/os.h"
 
+#ifndef WINDOWS
+#include "cpen333/process/impl/sha1.h"
+#endif
+
 // limit maximum resource name length to this
-// Windows limit is 260, POSIX limit is 251, 248 is smallest divisible by 4 and 8 bytes (32/64-bit word size)
+// Windows limit is 260, POSIX limit is 251, though OSX limit seems to be 30 :S
+//     POSIX names must also begin with a / for portability if used between
+//     multiple processes, otherwise behaviour is implementation defined
+// Due to the 30 character limit on POSIX, we will take a sha1 hash and base64-encode
+//      which will generate 28 characters.  Add a / prefix and terminating zero = 30.
+#ifdef WINDOWS
 #define MAX_RESOURCE_NAME 248
+#else
+#define MAX_RESOURCE_NAME 30
+#endif
 
 namespace cpen333 {
 namespace process {
@@ -18,12 +30,9 @@ class named_resource {
  public:
   named_resource(const std::string &name, bool raw = false) {
     if (raw) {
-      for (size_t i=0; i<MAX_RESOURCE_NAME-1 && i <name.size(); ++i) {
-        name_[i] = name[i];
-      }
-      for (size_t i=name.size(); i<MAX_RESOURCE_NAME; ++i) {
-        name_[i] = 0;
-      }
+      size_t len = (MAX_RESOURCE_NAME-1) > name.length() ? name.length() : (MAX_RESOURCE_NAME-1);
+      name.copy(&name_[0], len, 0);
+      name_[len] = 0;  // terminating zero
     } else {
       make_resource_name(name, name_);
     }
@@ -39,24 +48,29 @@ class named_resource {
     // clean-up
   }
 
-  std::string name() const {
-    return name_;
-  }
-
-  virtual bool unlink() = 0;  // abstract, force unlink
+  virtual bool unlink() = 0;  // abstract, force unlink to be defined
 
   static bool unlink(const std::string& name) {
     return false;
   }
 
  protected:
+
+  /**
+   *  Internal-use system name
+   */
+  std::string name() const {
+    return name_;
+  }
+
   const char* name_ptr() const {
     return &name_[0];
   }
 
+#ifdef WINDOWS
+
   /**
   * Create a valid resource name for the platform
-  * @param prefix text to prepend, unmodified
   * @param name original resource name
   * @param out platform-safe resource name
   */
@@ -65,27 +79,17 @@ class named_resource {
     size_t sidx = 0;
     size_t tidx = 0;
 
-#ifdef WINDOWS
     // start with Global\ or Local\, otherwise cannot contain backslash
-  if (name.compare(0, 7, "Global\\") == 0) {
-    for (;sidx<7; ++sidx, ++tidx) {
-      out[tidx] = name[sidx];
+    if (name.compare(0, 7, "Global\\") == 0) {
+      for (;sidx<7; ++sidx, ++tidx) {
+        out[tidx] = name[sidx];
+      }
+    } else if (name.compare(0, 6, "Local\\") == 0) {
+      for (;sidx<6; ++sidx, ++tidx) {
+        out[tidx] = name[sidx];
+      }
     }
-  } else if (name.compare(0, 6, "Local\\") == 0) {
-    for (;sidx<6; ++sidx, ++tidx) {
-      out[tidx] = name[sidx];
-    }
-  }
-#else
-    // start with /
-    if (name.size() == 0 || name[0] != '/') {
-      out[tidx] = '/';
-      ++tidx;
-    } else if (name[0] == '/') {
-      out[tidx] = name[0];
-      ++tidx; ++sidx;
-    }
-#endif
+
     // append rest of name
     for (; sidx < name.size() && tidx < MAX_RESOURCE_NAME - 1; ++sidx, ++tidx) {
       if (name[sidx] < 31 || name[sidx] == '/' || name[sidx] == '\\' || name[sidx] == ' ') {
@@ -100,6 +104,33 @@ class named_resource {
       out[tidx] = 0;
     }
   }
+
+#else
+
+  /**
+  * Create a valid resource name for the platform, on Linux/OSX this is
+  * a leading / with sha1 base64-encoded hash of the string name, with
+  * any +=/ replaced with underscores
+  * @param name original resource name
+  * @param out platform-safe resource name
+  */
+  static void make_resource_name(const std::string &name, char out[]) {
+    sha1 hash = sha1(name.c_str()).finalize();
+
+    // leading slash for pathname
+    out[0] = '/';
+    hash.print_base64(&out[1], true); // print starting at offset 1, with terminating zero
+    // replace '/', '+', and '=' with _ for safer path name
+    for (int i=1; i<MAX_RESOURCE_NAME; ++i) {
+      if (out[i] == '/' || out[i] == '+' || out[i] == '=') {
+        out[i] = '_';
+      }
+    }
+  }
+
+#endif
+
+
 
 };
 

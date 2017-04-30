@@ -5,7 +5,7 @@
 #define MAX_SEMAPHORE_SIZE LONG_MAX
 
 // suffix appended to semaphore names for uniqueness
-#define SEMAPHORE_NAME_SUFFIX "se"
+#define SEMAPHORE_NAME_SUFFIX "_sem"
 
 #include <string>
 #include <chrono>
@@ -28,16 +28,19 @@ class semaphore : public named_resource {
   semaphore(const std::string& name, size_t value = 1) :
       named_resource{name+std::string(SEMAPHORE_NAME_SUFFIX)}, handle_{nullptr} {
     // create named semaphore
-    handle_ = sem_open(name_ptr(), O_CREAT | O_RDWR, S_IRWXU | S_IRWXG, value);
-    if (handle_ == nullptr) {
-      cpen333::perror(std::string("Cannot create semaphore ")+this->name());
+    errno = 0;
+    // has O_CREAT | O_RDWR, but latter not documented for OSX
+    handle_ = sem_open(name_ptr(), O_CREAT, S_IRWXU | S_IRWXG, value);
+    if (handle_ == SEM_FAILED) {
+      cpen333::perror(std::string("Cannot create semaphore ")+ name
+                          + ", system name: " + this->name());
     }
   }
 
   ~semaphore() {
     // release the semaphore
     if (sem_close(handle_) != 0) {
-        cpen333::perror(std::string("Cannot destroy semaphore ")+name());
+        cpen333::perror(std::string("Cannot destroy semaphore with id ")+name());
     }
   }
 
@@ -109,7 +112,7 @@ class semaphore : public named_resource {
   bool unlink() {
     int status = sem_unlink(name_ptr());
     if (status != 0) {
-      cpen333::perror(std::string("Failed to unlink semaphore ")+name());
+      cpen333::perror(std::string("Failed to unlink semaphore with id ")+name());
     }
     return (status == 0);
   }
@@ -119,7 +122,7 @@ class semaphore : public named_resource {
     named_resource::make_resource_name(name+std::string(SEMAPHORE_NAME_SUFFIX), nm);
     int status = sem_unlink(&nm[0]);
     if (status != 0) {
-      cpen333::perror(std::string("Failed to unlink semaphore ")+std::string(nm));
+      cpen333::perror(std::string("Failed to unlink semaphore with id ")+std::string(nm));
     }
     return (status == 0);
   }

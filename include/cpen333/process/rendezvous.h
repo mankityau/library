@@ -1,7 +1,7 @@
 #ifndef CPEN333_PROCESS_RENDEZVOUS_H
 #define CPEN333_PROCESS_RENDEZVOUS_H
 
-#define RENDEZVOUS_NAME_SUFFIX "rv"
+#define RENDEZVOUS_NAME_SUFFIX "_rdv"
 #define RENDEZVOUS_INITIALIZED 0x38973823
 
 #include "cpen333/process/impl/named_resource.h"

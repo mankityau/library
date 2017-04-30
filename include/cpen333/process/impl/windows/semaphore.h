@@ -5,7 +5,7 @@
 #define MAX_SEMAPHORE_SIZE LONG_MAX
 
 // suffix appended to semaphore names for uniqueness
-#define SEMAPHORE_NAME_SUFFIX "se"
+#define SEMAPHORE_NAME_SUFFIX "_sem"
 
 #include <string>
 #include <chrono>

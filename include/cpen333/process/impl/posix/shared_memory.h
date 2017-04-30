@@ -2,7 +2,7 @@
 #define CPEN333_PROCESS_POSIX_SHARED_MEMORY_H
 
 // suffix to append to shared memory names for uniqueness
-#define SHARED_MEMORY_NAME_SUFFIX "sm"
+#define SHARED_MEMORY_NAME_SUFFIX "_shm"
 
 #include <string>
 #include <cstring>  // for memcpy
@@ -40,7 +40,7 @@ class shared_memory : public named_resource {
     }
 
     if (fid_ < 0) {
-      cpen333::perror(std::string("Cannot create shared memory ") + this->name());
+      cpen333::perror(std::string("Cannot create shared memory with id ") + this->name());
       return;
     }
 
@@ -49,7 +49,7 @@ class shared_memory : public named_resource {
     if (initialize) {
       int resize = ftruncate(fid_, size_);
       if (resize < 0) {
-        cpen333::perror(std::string("Cannot allocate shared memory ") + this->name());
+        cpen333::perror(std::string("Cannot allocate shared memory with id ") + this->name());
         return;
       }
     }
@@ -58,7 +58,7 @@ class shared_memory : public named_resource {
     data_ = mmap(nullptr, size_, flags, MAP_SHARED, fid_, 0);
     if (data_ == (void*) -1) {
       data_ = nullptr;
-      cpen333::perror(std::string("Cannot map shared memory ") + this->name());
+      cpen333::perror(std::string("Cannot map shared memory with id ") + this->name());
       return;
     }
   }
@@ -67,14 +67,14 @@ class shared_memory : public named_resource {
     // unmap
     if (data_ != nullptr) {
       if (munmap(data_, size_) != 0) {
-        cpen333::perror(std::string("Cannot unmap shared memory ") + name());
+        cpen333::perror(std::string("Cannot unmap shared memory with id ") + name());
       }
     }
 
     // close
     if (fid_ != -1) {
       if (close(fid_) != 0) {
-        cpen333::perror(std::string("Cannot close shared memory ") + name());
+        cpen333::perror(std::string("Cannot close shared memory with id ") + name());
       }
     }
   }
@@ -84,7 +84,7 @@ class shared_memory : public named_resource {
     errno = 0;
     int status = shm_unlink(name_ptr());
     if (status != 0) {
-      cpen333::perror(std::string("Failed to unlink shared memory ") + name());
+      cpen333::perror(std::string("Failed to unlink shared memory with id ") + name());
     }
     return status == 0;
   }
@@ -94,7 +94,7 @@ class shared_memory : public named_resource {
     named_resource::make_resource_name(name+std::string(SHARED_MEMORY_NAME_SUFFIX), nm);
     int status = shm_unlink(&nm[0]);
     if (status != 0) {
-      cpen333::perror(std::string("Failed to unlink shared memory ") + std::string(nm));
+      cpen333::perror(std::string("Failed to unlink shared memory with id ") + std::string(nm));
     }
     return status == 0;
   }

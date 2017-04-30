@@ -1,7 +1,7 @@
 #ifndef CPEN333_PROCESS_MESSAGE_QUEUE_H
 #define CPEN333_PROCESS_MESSAGE_QUEUE_H
 
-#define MESSAGE_QUEUE_SUFFIX "mq"
+#define MESSAGE_QUEUE_SUFFIX "_mq"
 
 #include <string>
 #include <chrono>

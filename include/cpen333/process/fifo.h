@@ -1,9 +1,9 @@
 #ifndef CPEN333_PROCESS_FIFO_H
 #define CPEN333_PROCESS_FIFO_H
 
-#define FIFO_SUFFIX "ff"
-#define FIFO_PRODUCER_SUFFIX "fp"
-#define FIFO_CONSUMER_SUFFIX "fc"
+#define FIFO_SUFFIX "_ff"
+#define FIFO_PRODUCER_SUFFIX "_ffp"
+#define FIFO_CONSUMER_SUFFIX "_ffc"
 #define FIFO_INITIALIZED 0x88372612
 
 #include <string>
