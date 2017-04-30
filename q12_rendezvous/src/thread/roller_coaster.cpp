@@ -1,5 +1,6 @@
 #include <iostream> // for io
 #include <thread>
+#include <vector>
 #include "cpen333/thread/rendezvous.h"
 
 //
@@ -34,7 +35,7 @@ int main() {
 
   int wait_time=500;
   for (const auto& name : names) {
-    people.push_back(std::thread(&person, std::ref{rendezvous}, name, wait_time));
+    people.push_back(std::thread(&person, std::ref(rendezvous), name, wait_time));
     wait_time += 500;
   }
 

@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.1.3)
 # Name project based on current directory
 get_filename_component(PROJECT ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 project(PROJECT)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin/${PROJECT})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/${PROJECT})
 
 set(CMAKE_CXX_STANDARD 11)
 find_package( Threads REQUIRED )  # Multithreading package required
@@ -15,7 +15,7 @@ include_directories(../include)
 add_executable(${PROJECT}_process_car src/process/car.cpp)
 target_link_libraries(${PROJECT}_process_car Threads::Threads)
 if(UNIX)
-    target_link_libraries(${PROJECT}_car rt)
+    target_link_libraries(${PROJECT}_process_car rt)
 endif()
 set_target_properties(${PROJECT}_process_car PROPERTIES
         OUTPUT_NAME "car"

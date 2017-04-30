@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.1.3)
 # Name project based on current directory
 get_filename_component(PROJECT ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 project(PROJECT)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin/${PROJECT})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/${PROJECT})
 
 set(CMAKE_CXX_STANDARD 11)
 find_package( Threads REQUIRED )  # Multithreading package required
@@ -63,12 +63,12 @@ add_dependencies(${PROJECT}_process_parent ${PROJECT}_process_child_safe ${PROJE
 
 #==============  Thread ===============================
 
-add_executable(${PROJECT}_thread src/thread/main.cpp)
+add_executable(${PROJECT}_thread_thread src/thread/main.cpp)
 
 # add required libraries
-target_link_libraries(${PROJECT}_thread Threads::Threads)
+target_link_libraries(${PROJECT}_thread_thread Threads::Threads)
 
 # set output directory and executable name
-set_target_properties( ${PROJECT}_thread PROPERTIES
+set_target_properties( ${PROJECT}_thread_thread PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/thread"
         OUTPUT_NAME "thread")

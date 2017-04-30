@@ -82,7 +82,6 @@ int main() {
   readers.clear();
   writers.clear();
 
-
   std::cout << std::endl << "Done." << std::endl;
   return 0;
 }

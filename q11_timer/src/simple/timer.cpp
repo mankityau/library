@@ -53,14 +53,24 @@ int main() {
     std::getline(fin, line);
 
     // substitute "\n" for end-of-line characters
-    for (int i=0; i<line.size()-1; ++i) {
+    // and strip away \r characters
+    std::string add;
+    int i;
+    for (i=0; i<line.size()-1; ++i) {
       if (line[i]== '\\' && line[i+1] == 'n') {
-        line[i++] = ' ';  // place a space
-        line[i] = '\n';
+        add.push_back('\n');
+        ++i; // advance another character
+      } else if (line[i] != '\r') {
+        add.push_back(line[i]);
       }
     }
-    lines.push_back(line);
+    if (i < line.size() && line[i] != '\r') {
+      add.push_back(line[i]);
+    }
+
+    lines.push_back(add);
   }
+  fin.close();  // make sure to close file
 
   // timer set for every half-second, call singer as a callback
   TimedPrinter printer(lines);

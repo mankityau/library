@@ -18,7 +18,7 @@ struct MessageType {
   MessageType() : code{MessageCode::NOTE}, msg{}, sender{} {}
 
   // convenience constructor to use string
-  MessageType(MessageCode code, std::string& msg, std::string& sender) : code(code) , msg{}, sender{} {
+  MessageType(MessageCode code, const std::string& msg, const std::string& sender) : code(code) , msg{}, sender{} {
     // copy strings to msg/sender
     int i = 0;
     for (; i<sizeof(this->msg)-1 && i < msg.length(); ++i) {

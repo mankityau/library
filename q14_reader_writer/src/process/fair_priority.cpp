@@ -67,7 +67,8 @@ int main() {
   std::cout << "Battle of the Readers vs Writers, fair priority" << std::endl;
 
   // start separate threads with readers and writers
-  cpen333::process::shared_mutex_fair::unlink("fair_priority");
+
+
   cpen333::process::shared_mutex_fair fmutex("fair_priority");  // gives preference to sharers (in our case, readers)
   cpen333::process::unlinker<decltype(fmutex)> unlinker(fmutex);  // unlink when done
 

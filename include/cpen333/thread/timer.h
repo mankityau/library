@@ -13,7 +13,7 @@ namespace thread {
 
 namespace detail {
 struct noop_function_t {
-  operator () () const {}
+  void operator () () const {}
 };
 constexpr const noop_function_t noop_function;  // constant instance
 

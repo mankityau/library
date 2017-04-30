@@ -21,7 +21,7 @@ class ProductionLine : public cpen333::thread::thread_object {
 
  private:
   // main method
-  void run() {
+  int main() {
     // make 20 cars
     for (int i=0; i<20; ++i) {
       std::cout << "Production Line: Waiting for next chassis" << std::endl;
@@ -31,6 +31,7 @@ class ProductionLine : public cpen333::thread::thread_object {
       robot_finished_.wait();       // wait until robot is done
       std::this_thread::sleep_for(std::chrono::milliseconds(2500));
     }
+    return 0;
   }
   
 };
@@ -48,7 +49,7 @@ class Robot : public cpen333::thread::thread_object {
 
  private:
   // main method
-  void run() {
+  int main() {
     // make 20 cars
     for (int i=0; i<20; ++i) {
       std::cout << "Robot: Waiting for Next Chassis" << std::endl;
@@ -58,6 +59,7 @@ class Robot : public cpen333::thread::thread_object {
       std::cout << "Robot: Finished Assembly" << std::endl;
       robot_finished_.notify_one();  // robot has finished assembling car
     }
+    return 0;
   }
 
 };

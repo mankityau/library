@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD 11)
 
 # customize output directory to be within a "bin/<project>" folder, relative to the BASE CMakeLists.txt file
 #   (i.e. if this project is added to another top-level one, the bin folder will be relative to the top level)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin/${PROJECT})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/${PROJECT})
 
 # directories to search for header files
 include_directories(../include)
