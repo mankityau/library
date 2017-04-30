@@ -30,7 +30,7 @@
 template<typename MutexType>
 void read_thread(const std::string& mutex_name, size_t n) {
   MutexType mutex(mutex_name);                // load named mutex
-  for (int i=0; i<n; ++i) {
+  for (size_t i=0; i<n; ++i) {
     {
       // lock in "shared" mode
       std::shared_lock<MutexType> lock(mutex);
@@ -46,7 +46,7 @@ void read_thread(const std::string& mutex_name, size_t n) {
 template<typename MutexType>
 void write_thread(const std::string& mutex_name, size_t n) {
   MutexType mutex(mutex_name);              // load named mutex
-  for (int i=0; i<n; ++i) {
+  for (size_t i=0; i<n; ++i) {
     {
       // lock in "exclusive" mode
       std::lock_guard<MutexType> lock(mutex);

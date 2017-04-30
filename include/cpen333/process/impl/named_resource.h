@@ -18,7 +18,7 @@ class named_resource {
  public:
   named_resource(const std::string &name, bool raw = false) {
     if (raw) {
-      for (int i=0; i<MAX_RESOURCE_NAME-1 && i <name.size(); ++i) {
+      for (size_t i=0; i<MAX_RESOURCE_NAME-1 && i <name.size(); ++i) {
         name_[i] = name[i];
       }
       for (int i=name.size(); i<MAX_RESOURCE_NAME; ++i) {

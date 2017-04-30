@@ -184,7 +184,7 @@ class subprocess {
   static std::string create_windows_command(const std::vector<std::string>& exec) {
     std::string commandline; // build this
     append_argument(exec[0], commandline);
-    for (int i = 1; i < exec.size(); ++i) {
+    for (size_t i = 1; i < exec.size(); ++i) {
       commandline.append(" ");
       append_argument(exec[i], commandline);
     }

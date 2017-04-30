@@ -27,13 +27,13 @@ class condition_variable : public condition_base {
   std::cv_status wait_for( std::unique_lock<cpen333::process::mutex>& lock,
                            const std::chrono::duration<Rep, Period>& rel_time) {
     return condition_base::wait_for(lock, rel_time);
-  };
+  }
 
   template<class Clock, class Duration >
   bool wait_until( std::unique_lock<cpen333::process::mutex>& lock,
                    const std::chrono::time_point<Clock, Duration>& timeout_time ) {
     return condition_base::wait(lock, timeout_time);
-  };
+  }
 
   template<typename Predicate>
   void wait(std::unique_lock<cpen333::process::mutex>& lock, Predicate pred) {
@@ -47,7 +47,7 @@ class condition_variable : public condition_base {
                  const std::chrono::duration<Rep, Period>& rel_time,
                  Predicate pred) {
     return wait_until(lock, std::chrono::steady_clock::now()+rel_time, pred);
-  };
+  }
 
   template< class Clock, class Duration, class Predicate >
   bool wait_until( std::unique_lock<cpen333::process::mutex>& lock,
@@ -59,7 +59,7 @@ class condition_variable : public condition_base {
       }
     }
     return true;
-  };
+  }
 
   bool unlink() {
     return condition_base::unlink();

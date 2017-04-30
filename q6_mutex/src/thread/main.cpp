@@ -10,14 +10,14 @@ std::mutex mutex;   // mut(ual)ex(lusion)
 void unsafe_increment(size_t n) {
   // a is not protected by a mutex, so may be accessed simultaneously
   // leading to race conditions
-  for (int i=0; i<n; ++i) {
+  for (size_t i=0; i<n; ++i) {
     a = a+1;
   }
 }
 
 // safe thread function
 void safe_increment(size_t n) {
-  for (int i=0; i<n; ++i) {
+  for (size_t i=0; i<n; ++i) {
     // Note: should *probably* use a lock_guard here to be safe.  Though, we
     // are pretty sure incrementing a will not lead to an exception.
     mutex.lock();    // protect access
@@ -28,7 +28,7 @@ void safe_increment(size_t n) {
 
 // safe thread function
 void guarded_increment(size_t n) {
-  for (int i=0; i<n; ++i) {
+  for (size_t i=0; i<n; ++i) {
     // The guard *does* add a little bit of overhead, as you will see from the timings,
     // but it is much safer to get into the habit of using it
     std::lock_guard<std::mutex> lock(mutex);  // lock (with auto-unlock when out of scope)

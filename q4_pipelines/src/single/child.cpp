@@ -16,7 +16,7 @@ int main() {
   pipe.read(&array[0], sizeof(array)) ;
 
   std::cout << "Child process read array = ";
-  for(int i = 0; i < sizeof(array)/sizeof(array[0]); ++i) {
+  for(size_t i = 0; i < sizeof(array)/sizeof(array[0]); ++i) {
     std::cout << " " << array[i];
   }
   std::cout << std::endl;

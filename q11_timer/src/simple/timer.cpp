@@ -55,7 +55,7 @@ int main() {
     // substitute "\n" for end-of-line characters
     // and strip away \r characters
     std::string add;
-    int i;
+    size_t i;
     for (i=0; i<line.size()-1; ++i) {
       if (line[i]== '\\' && line[i+1] == 'n') {
         add.push_back('\n');

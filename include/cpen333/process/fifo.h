@@ -87,7 +87,7 @@ class fifo : named_resource {
   template <typename Rep, typename Period>
   bool try_push_for(const ValueType& val, std::chrono::duration<Rep, Period>& rel_time) {
     return try_push_until(val, std::chrono::steady_clock::now()+rel_time);
-  };
+  }
 
   template<typename Clock, typename Duration>
   bool try_push_until(const ValueType& val, const std::chrono::time_point<Clock,Duration>& timeout) {
@@ -98,7 +98,7 @@ class fifo : named_resource {
     push_item(val);
     csem_.notify();  // let consumer know a item is available
     return true;
-  };
+  }
 
   /**
    * Populates memory pointed to by "out" with next item in fifo
@@ -129,7 +129,7 @@ class fifo : named_resource {
   template <typename Rep, typename Period>
   bool try_pop_for(ValueType* val, std::chrono::duration<Rep, Period>& rel_time) {
     return try_pop_until(val, std::chrono::steady_clock::now()+rel_time);
-  };
+  }
 
   template<typename Clock, typename Duration>
   bool try_pop_until(ValueType* val, const std::chrono::time_point<Clock,Duration>& timeout) {
@@ -140,7 +140,7 @@ class fifo : named_resource {
     pop_item(val);
     psem_.notify();  // let consumer know a item is available
     return true;
-  };
+  }
 
   /**
    * Populates memory pointed to by "out" with next item in fifo, blocking if no items
@@ -169,7 +169,7 @@ class fifo : named_resource {
   template <typename Rep, typename Period>
   bool try_peek_for(ValueType* val, std::chrono::duration<Rep, Period>& rel_time) {
     return try_peek_until(val, std::chrono::steady_clock::now()+rel_time);
-  };
+  }
 
   template<typename Clock, typename Duration>
   bool try_peek_until(ValueType* val, const std::chrono::time_point<Clock,Duration>& timeout) {
@@ -179,7 +179,7 @@ class fifo : named_resource {
     }
     peek_item(val);
     return true;
-  };
+  }
 
   /**
    * Number of items in the fifo
@@ -293,7 +293,7 @@ class fifo : named_resource {
     size_t pidx;      // producer index
     size_t cidx;      // consumer index
     size_t size;      // size (in counts of ValueType)
-    int initialized;  // magic initialized marker
+    size_t initialized;  // magic initialized marker
   };
 
   cpen333::process::shared_memory memory_;   // actual memory

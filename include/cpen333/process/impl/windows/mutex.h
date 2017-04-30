@@ -65,7 +65,7 @@ class mutex : public named_resource {
     }
     // if we were actually signaled, return true
     return (result == WAIT_OBJECT_0);
-  };
+  }
 
   template< class Clock, class Duration >
   bool try_lock_until( const std::chrono::time_point<Clock,Duration>& timeout_time ) {
@@ -76,7 +76,7 @@ class mutex : public named_resource {
       ms = std::chrono::milliseconds(0);
     }
     return try_lock_for(ms);
-  };
+  }
 
   bool unlock() {
     bool success = ReleaseMutex(handle_) ;  // FALSE on failure, TRUE on success

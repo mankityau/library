@@ -87,13 +87,13 @@ class semaphore : public named_resource {
     }
 
     return (result == WAIT_OBJECT_0);
-  };
+  }
 
   template< class Clock, class Duration >
   bool wait_until( const std::chrono::time_point<Clock,Duration>& timeout_time ) {
     auto duration = timeout_time - std::chrono::steady_clock::now();
     return wait_for(duration);
-  };
+  }
 
   void notify() {
     bool success = ReleaseSemaphore(handle_, 1, NULL) ;  // FALSE on failure, TRUE on success

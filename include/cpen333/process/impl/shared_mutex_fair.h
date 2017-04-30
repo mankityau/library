@@ -25,7 +25,7 @@ class shared_mutex_fair : named_resource {
     char next_batch;    // index within shared of next batch to push, 1-this_batch
     char exclusive;     // # exclusive access, 0 or 1
     size_t etotal;      // waiting and exclusive acces
-    int initialized;
+    size_t initialized;
   };
 
   cpen333::process::mutex mutex_;               // mutex for state access
@@ -62,12 +62,12 @@ class shared_mutex_fair : named_resource {
     std::unique_lock<cpen333::process::mutex> lock(mutex_);
     if (state_->etotal == 0) {
       // let him pass
-      ++(state_->shared[state_->this_batch]);
+      ++(state_->shared[(size_t)(state_->this_batch)]);
     } else {
       // wait until I am told to go by end of exclusive lock
-      int batch = 1-state_->this_batch;  // next batch
+      size_t batch = 1-state_->this_batch;  // next batch
       ++(state_->shared[batch]);
-      econd_.wait(lock, [&](){ return state_->this_batch == batch; });
+      econd_.wait(lock, [&](){ return (size_t)(state_->this_batch) == batch; });
     }
   }
 
@@ -85,7 +85,7 @@ class shared_mutex_fair : named_resource {
 
   void unlock_shared() {
     std::unique_lock<cpen333::process::mutex> lock(mutex_);
-    if (--(state_->shared[state_->this_batch]) == 0) {
+    if (--(state_->shared[(size_t)(state_->this_batch)]) == 0) {
       econd_.notify_all();     // tell others to check their conditions
     }
   }
@@ -95,7 +95,7 @@ class shared_mutex_fair : named_resource {
     // one more waiting
     ++(state_->etotal);
     // wait until there are no readers or writers
-    econd_.wait(lock, [&](){ return state_->shared[state_->this_batch]+state_->exclusive == 0; });
+    econd_.wait(lock, [&](){ return state_->shared[(size_t)(state_->this_batch)]+state_->exclusive == 0; });
     state_->exclusive = 1;  // exclusive lock on
   }
 
@@ -106,7 +106,7 @@ class shared_mutex_fair : named_resource {
     }
 
     // check if we can go immediately
-    if (state_->shared[state_->this_batch]+state_->exclusive > 0) {
+    if (state_->shared[(size_t)(state_->this_batch)]+state_->exclusive > 0) {
       return false;
     }
 
@@ -135,7 +135,7 @@ class shared_mutex_fair : named_resource {
   template<class Rep, class Period>
   bool try_lock_for(const std::chrono::duration<Rep, Period> &timeout_duration) {
     return try_lock_until(std::chrono::steady_clock::now() + timeout_duration);
-  };
+  }
 
   /**
    * tries to lock the mutex, returns if the mutex has been unavailable until specified time point has been reached
@@ -156,7 +156,7 @@ class shared_mutex_fair : named_resource {
     ++(state_->etotal);
     // wait until there are no readers or writers
     if (!econd_.wait_until(lock, timeout_time,
-                           [&](){ return state_->shared[state_->this_batch]+state_->exclusive == 0; })) {
+                           [&](){ return state_->shared[(size_t)(state_->this_batch)]+state_->exclusive == 0; })) {
       // timed out, undo wait
       --(state_->etotal);
       return false;
@@ -164,7 +164,7 @@ class shared_mutex_fair : named_resource {
 
     state_->exclusive = 1;  // exclusive lock on
     return true;
-  };
+  }
 
   /**
    * tries to lock the mutex, returns if the mutex has been unavailable for the specified timeout duration
@@ -176,7 +176,7 @@ class shared_mutex_fair : named_resource {
   template<class Rep, class Period>
   bool try_lock_shared_for(const std::chrono::duration<Rep, Period> &timeout_duration) {
     return try_lock_shared_until(std::chrono::steady_clock::now() + timeout_duration);
-  };
+  }
 
   /**
    * tries to lock the mutex, returns if the mutex has been unavailable until specified time point has been reached
@@ -194,10 +194,10 @@ class shared_mutex_fair : named_resource {
 
     if (state_->etotal == 0) {
       // let him pass
-      ++(state_->shared[state_->this_batch]);
+      ++(state_->shared[(size_t)(state_->this_batch)]);
     } else {
       // wait until I am told to go by end of exclusive lock
-      int batch = 1-state_->this_batch;  // next batch
+      size_t batch = 1-state_->this_batch;  // next batch
       ++(state_->shared[batch]);
       if (!econd_.wait_until(lock, timeout_time,
                              [&](){ return state_->this_batch == batch; })) {

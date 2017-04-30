@@ -14,6 +14,9 @@ std::string get_cookie_name(CookieType type) {
     case GINGER_SNAP: {
       return "GINGER SNAP";
     }
+    case POISON:
+    default: {
+    }
   }
   return "UNKNOWN";
 }

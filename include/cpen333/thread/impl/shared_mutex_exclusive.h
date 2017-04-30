@@ -140,7 +140,7 @@ class shared_mutex_exclusive {
   template<class Rep, class Period>
   bool try_lock_for(const std::chrono::duration<Rep, Period> &timeout_duration) {
     return try_lock_until(std::chrono::steady_clock::now() + timeout_duration);
-  };
+  }
 
   /**
    * tries to lock the mutex, returns if the mutex has been unavailable until specified time point has been reached
@@ -174,7 +174,7 @@ class shared_mutex_exclusive {
       }
     }
     return true;
-  };
+  }
 
   /**
    * tries to lock the mutex, returns if the mutex has been unavailable for the specified timeout duration
@@ -186,7 +186,7 @@ class shared_mutex_exclusive {
   template<class Rep, class Period>
   bool try_lock_shared_for(const std::chrono::duration<Rep, Period> &timeout_duration) {
     return try_lock_shared_until(std::chrono::steady_clock::now() + timeout_duration);
-  };
+  }
 
   /**
    * tries to lock the mutex, returns if the mutex has been unavailable until specified time point has been reached
@@ -219,7 +219,7 @@ class shared_mutex_exclusive {
       ++shared_count_;
     }
     return true;
-  };
+  }
 };
 
 } // impl

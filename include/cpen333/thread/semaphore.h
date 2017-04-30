@@ -82,7 +82,7 @@ class basic_semaphore {
     }
 
     return finished;
-  };
+  }
 
   /**
    * Attempt to acquire a resource until a specified time
@@ -99,7 +99,7 @@ class basic_semaphore {
       --count_;
     }
     return finished;
-  };
+  }
 
   native_handle_type native_handle() {
     return cv_.native_handle();

@@ -39,7 +39,7 @@ class Fork {
    * @return true if picked up successfully, false if currently being used
    */
   bool try_acquire() {
-    mutex_.try_lock();
+    return mutex_.try_lock();
   }
 };
 

@@ -36,13 +36,13 @@ class event : private condition_base {
   std::cv_status wait_for(const std::chrono::duration<Rep, Period>& rel_time) {
     std::unique_lock<decltype(mutex_)> lock(mutex_);
     return condition_base::wait_for(lock, rel_time);
-  };
+  }
 
   template< class Clock, class Duration >
   std::cv_status wait_until( const std::chrono::time_point<Clock, Duration>& timeout_time ) {
     std::unique_lock<decltype(mutex_)> lock(mutex_);
     return condition_base::wait_until(lock, timeout_time);
-  };
+  }
 
   void notify_one() {
     condition_base::notify_one();

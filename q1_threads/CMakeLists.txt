@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.1.3)
 
 # Name project based on current directory
 get_filename_component(PROJECT ${CMAKE_CURRENT_SOURCE_DIR} NAME)
-project(PROJECT)            # create new project with name PROJECT
+project(${PROJECT})            # create new project with name PROJECT
 
 set(CMAKE_CXX_STANDARD 11)  # use C++11 standard
 

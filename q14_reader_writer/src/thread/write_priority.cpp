@@ -25,7 +25,7 @@
 // template function is compiled for every type of MutexType
 template<typename MutexType>
 void read_thread(MutexType& mutex, size_t n) {
-  for (int i=0; i<n; ++i) {
+  for (size_t i=0; i<n; ++i) {
     {
       // lock in "shared" mode
       std::shared_lock<MutexType> lock(mutex);
@@ -40,7 +40,7 @@ void read_thread(MutexType& mutex, size_t n) {
 // template function is compiled for every type of MutexType
 template<typename MutexType>
 void write_thread(MutexType& mutex, size_t n) {
-  for (int i=0; i<n; ++i) {
+  for (size_t i=0; i<n; ++i) {
     {
       // lock in "exclusive" mode
       std::lock_guard<MutexType> lock(mutex);

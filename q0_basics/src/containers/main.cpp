@@ -28,7 +28,7 @@ int main() {
   vec.pop_back();  // remove the last element
 
   std::cout << "Contents of vec: {";
-  for (int i=0; i<vec.size(); ++i) {
+  for (size_t i=0; i<vec.size(); ++i) {
     std::cout << " " << vec[i];
   }
   std::cout << " }" << std::endl << std::endl;
@@ -78,7 +78,7 @@ int main() {
   deq.push_back("!");
 
   std::cout << "Contents of deq: ";
-  for (int i=0; i<deq.size(); ++i) {
+  for (size_t i=0; i<deq.size(); ++i) {
     std::cout << " " << deq[i];
   }
   std::cout << std::endl << std::endl;

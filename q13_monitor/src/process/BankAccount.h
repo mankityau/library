@@ -13,7 +13,7 @@ class BankAccount   {
  private:
   struct BankData {
     double balance ;	// the data to be protected
-    int initialized;    // special marker for ensuring our bank account is initialized
+    size_t initialized;    // special marker for ensuring our bank account is initialized
   };
 
   cpen333::process::shared_object<BankData> data_;

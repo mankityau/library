@@ -17,7 +17,7 @@ class BarberShop {
     int waiters;       // number of people waiting
     int barbers;       // number of barbers waiting
     bool open;         // barshop open
-    int initialized;   // magic number for checking initialization
+    size_t initialized;   // magic number for checking initialization
   };
 
   std::string name_ ;

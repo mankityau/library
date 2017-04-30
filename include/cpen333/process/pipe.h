@@ -41,7 +41,7 @@ class pipe : public named_resource {
   bool write(const void* data, size_t size) {
     uint8_t *ptr = (uint8_t *) data;
 
-    for (int i = 0; i < size; ++i) {
+    for (size_t i = 0; i < size; ++i) {
       consumer_.wait();  // wait until there is space in the pipe
       std::lock_guard<decltype(wmutex_)> lock(wmutex_);
 
@@ -74,7 +74,7 @@ class pipe : public named_resource {
   bool read(void* data, size_t size) {
     uint8_t *ptr = (uint8_t *) data;
 
-    for (int i = 0; i < size; ++i) {
+    for (size_t i = 0; i < size; ++i) {
       producer_.wait();  // wait until there is data in the pipe
       std::lock_guard<decltype(rmutex_)> lock(rmutex_);
 

@@ -31,12 +31,12 @@ class message_queue : named_resource {
   template <typename Rep, typename Period>
   bool try_send_for(const MessageType& val, std::chrono::duration<Rep, Period>& rel_time) {
     return try_send_until(val, std::chrono::steady_clock::now()+rel_time);
-  };
+  }
 
   template<typename Clock, typename Duration>
   bool try_send_until(const MessageType& val, const std::chrono::time_point<Clock,Duration>& timeout) {
     return fifo_.try_push_until(val, timeout);
-  };
+  }
 
   MessageType receive() {
     return fifo_.pop();
@@ -53,12 +53,12 @@ class message_queue : named_resource {
   template <typename Rep, typename Period>
   bool try_receive_for(MessageType* val, std::chrono::duration<Rep, Period>& rel_time) {
     return try_receive_until(val, std::chrono::steady_clock::now()+rel_time);
-  };
+  }
 
   template<typename Clock, typename Duration>
   bool try_receive_until(MessageType* val, const std::chrono::time_point<Clock,Duration>& timeout) {
     return fifo_.try_pop_until(val, timeout);
-  };
+  }
 
   MessageType peek() {
     return fifo_.peek();
@@ -75,12 +75,12 @@ class message_queue : named_resource {
   template <typename Rep, typename Period>
   bool try_peek_for(MessageType* val, std::chrono::duration<Rep, Period>& rel_time) {
     return try_peek_until(val, std::chrono::steady_clock::now()+rel_time);
-  };
+  }
 
   template<typename Clock, typename Duration>
   bool try_peek_until(MessageType* val, const std::chrono::time_point<Clock,Duration>& timeout) {
     return fifo_.try_peek_until(val, timeout);
-  };
+  }
 
   bool empty() {
     return fifo_.empty();

@@ -20,7 +20,7 @@ struct MessageType {
   // convenience constructor to use string
   MessageType(MessageCode code, const std::string& msg, const std::string& sender) : code(code) , msg{}, sender{} {
     // copy strings to msg/sender
-    int i = 0;
+    size_t i = 0;
     for (; i<sizeof(this->msg)-1 && i < msg.length(); ++i) {
       this->msg[i] = msg[i];
     }

@@ -46,7 +46,7 @@ class runner {
       
       // call function cc times in a row, outside of lock so notify() will not block
       // for long-lasting functions
-      for (int i=0; i<cc; ++i) {
+      for (size_t i=0; i<cc; ++i) {
         func_();
       }
     }

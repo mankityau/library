@@ -44,7 +44,7 @@ class condition : private condition_base {
   template<class Rep, class Period>
   bool wait_for(const std::chrono::duration<Rep, Period>& rel_time) {
     return wait_until(std::chrono::steady_clock::now()+rel_time);
-  };
+  }
 
   template< class Clock, class Duration >
   bool wait_until( const std::chrono::time_point<Clock, Duration>& timeout_time ) {
@@ -61,7 +61,7 @@ class condition : private condition_base {
       }
     }
     return true;
-  };
+  }
 
   void notify() {
     // open gate
@@ -96,7 +96,7 @@ class condition : private condition_base {
  private:
   struct shared_data {
     bool value;
-    int initialized;
+    size_t initialized;
   };
   cpen333::process::shared_object<shared_data> storage_;
   cpen333::process::mutex mutex_;

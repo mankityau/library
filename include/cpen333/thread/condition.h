@@ -23,7 +23,7 @@ class condition {
   template<class Rep, class Period>
   bool wait_for(const std::chrono::duration<Rep, Period>& rel_time) {
     return wait_until(std::chrono::steady_clock::now()+rel_time);
-  };
+  }
 
   template< class Clock, class Duration >
   bool wait_until( const std::chrono::time_point<Clock, Duration>& timeout_time ) {
@@ -32,7 +32,7 @@ class condition {
       return false;
     }
     return cv_.wait_until(lock, timeout_time, [&](){return open_;});
-  };
+  }
 
   void notify() {
     // protect data and open gate

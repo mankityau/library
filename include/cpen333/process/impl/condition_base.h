@@ -79,13 +79,13 @@ class condition_base : public named_resource {
       return std::cv_status::no_timeout;
     }
     return std::cv_status::timeout;
-  };
+  }
 
   template<class Clock, class Duration >
   bool wait_until( std::unique_lock<cpen333::process::mutex>& lock,
                              const std::chrono::time_point<Clock, Duration>& timeout_time ) {
     return wait(lock, true, timeout_time);
-  };
+  }
 
   void notify_one() {
     notify(false);

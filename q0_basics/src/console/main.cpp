@@ -57,16 +57,16 @@ int main() {
     std::cout << str;
 
     // special rows
-    int idx = str.find("red");
-    if (idx >= 0) {
-      console.set_cursor_position(r, idx+c);
+    size_t idx = str.find("red");
+    if (idx != std::string::npos) {
+      console.set_cursor_position(r, (int)idx+c);
       console.set_foreground_color(color::RED);
       std::cout << "RED";
       console.set_foreground_color(color::WHITE);
     } else {
       idx = str.find("green");
-      if (idx >= 0) {
-        console.set_cursor_position(r, idx+c);
+      if (idx != std::string::npos) {
+        console.set_cursor_position(r, (int)idx+c);
         console.set_foreground_color(color::GREEN);
         std::cout << "GREEN";
         console.set_foreground_color(color::WHITE);

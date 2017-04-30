@@ -52,13 +52,13 @@ class event {
       return std::cv_status::no_timeout;
     }
     return std::cv_status::timeout;
-  };
+  }
 
   template<class Clock, class Duration >
   bool wait_until(const std::chrono::time_point<Clock, Duration>& timeout_time ) {
     std::unique_lock<std::mutex> lock(external_);
     return wait(lock, true, timeout_time);
-  };
+  }
 
   void notify_one() {
     notify(false);

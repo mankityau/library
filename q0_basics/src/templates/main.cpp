@@ -48,7 +48,7 @@ class Container {
 template<typename S, typename T>
 void print_this(const S& s, const T& t) {
   std::cout << s << ": " << t << std::endl;
-};
+}
 
 int main() {
 

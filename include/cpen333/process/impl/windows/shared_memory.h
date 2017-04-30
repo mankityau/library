@@ -37,9 +37,8 @@ class shared_memory : public named_resource {
       cpen333::perror(std::string("Cannot create shared memory ") + this->name());
       return;
     }
-
-    // see if we need to initialize
-    bool initialize = GetLastError() != ERROR_ALREADY_EXISTS;
+    // see if we need to initialize??
+    // bool initialize = GetLastError() != ERROR_ALREADY_EXISTS;
 
     // map (if not already mapped
     int flags = (readonly ? FILE_MAP_READ : FILE_MAP_WRITE);
