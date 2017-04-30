@@ -1,10 +1,10 @@
 #ifndef CPEN333_PROCESS_PIPE_H
 #define CPEN333_PROCESS_PIPE_H
 
-#define PIPE_NAME_SUFFIX "__pipe__"
-#define PIPE_WRITE_SUFFIX "__pipe_w__"
-#define PIPE_READ_SUFFIX "__pipe_r__"
-#define PIPE_INFO_SUFFIX "__pipe_info__"
+#define PIPE_NAME_SUFFIX "_pipe_"
+#define PIPE_WRITE_SUFFIX "_pipe_w_"
+#define PIPE_READ_SUFFIX "_pipe_r_"
+#define PIPE_INFO_SUFFIX "_pipe_i_"
 #define PIPE_INITIALIZED 0x18763023
 
 #include "cpen333/process/impl/named_resource.h"

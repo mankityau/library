@@ -2,7 +2,7 @@
 #define CPEN333_PROCESS_EVENT_H
 
 // suffix to append to mutex names for uniqueness
-#define EVENT_NAME_SUFFIX "__event__"
+#define EVENT_NAME_SUFFIX "_ev_"
 
 #include <string>
 #include <chrono>

@@ -2,7 +2,7 @@
 #define CPEN333_PROCESS_MUTEX_POSIX_H
 
 // suffix to append to mutex names for uniqueness
-#define MUTEX_NAME_SUFFIX "__mutex__"
+#define MUTEX_NAME_SUFFIX "_mut_"
 
 #include <string>
 #include <chrono>

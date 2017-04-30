@@ -1,7 +1,7 @@
 #ifndef CPEN333_PROCESS_SHARED_MUTEX_FAIR_H
 #define CPEN333_PROCESS_SHARED_MUTEX_FAIR_H
 
-#define SHARED_MUTEX_FAIR_NAME_SUFFIX "__shared_mutex_fair__"
+#define SHARED_MUTEX_FAIR_NAME_SUFFIX "_s_mut_f_"
 #define SHARED_MUTEX_FAIR_INITIALIZED 0x91271238
 
 #include "cpen333/process/mutex.h"

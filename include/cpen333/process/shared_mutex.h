@@ -1,7 +1,6 @@
 #ifndef CPEN333_PROCESS_SHARED_MUTEX_H
 #define CPEN333_PROCESS_SHARED_MUTEX_H
 
-
 #include <shared_mutex>
 #include "cpen333/process/mutex.h"
 #include "cpen333/process/semaphore.h"

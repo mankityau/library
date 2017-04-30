@@ -2,7 +2,7 @@
 #define CPEN333_PROCESS_CONDITION_VARIABLE_H
 
 // suffix to append to mutex names for uniqueness
-#define CONDITION_VARIABLE_NAME_SUFFIX "__condition_variable__"
+#define CONDITION_VARIABLE_NAME_SUFFIX "_cv_"
 
 #include <string>
 #include <chrono>

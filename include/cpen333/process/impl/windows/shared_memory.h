@@ -2,7 +2,7 @@
 #define CPEN333_PROCESS_WINDOWS_SHARED_MEMORY_H
 
 // suffix to append to shared memory names for uniqueness
-#define SHARED_MEMORY_NAME_SUFFIX "__shared_memory__"
+#define SHARED_MEMORY_NAME_SUFFIX "_shm_"
 
 #include <string>
 #include <cstdint>
