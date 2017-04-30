@@ -50,7 +50,7 @@ class mutex : public named_resource {
     //      thread_ = std::this_thread::get_id();
     //    }
     return success;
-  };
+  }
 
   template< class Clock, class Duration >
   bool try_lock_until( const std::chrono::time_point<Clock,Duration>& timeout_time ) {
@@ -59,7 +59,7 @@ class mutex : public named_resource {
     //      thread_ = std::this_thread::get_id();
     //    }
     return success;
-  };
+  }
 
   void unlock() {
     //    if (thread_ != std::this_thread::get_id()) {

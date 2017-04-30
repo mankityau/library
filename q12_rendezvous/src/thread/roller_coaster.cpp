@@ -1,6 +1,7 @@
 #include <iostream> // for io
 #include <thread>
 #include <vector>
+#include <string>
 #include "cpen333/thread/rendezvous.h"
 
 //
@@ -10,7 +11,7 @@
 //  you have, and the scheduler.
 //
 
-void person(cpen333::thread::rendezvous& rendezvous, const std::string name, int time) {
+void person(cpen333::thread::rendezvous& rendezvous, const std::string& name, int time) {
   std::cout << name << " arrived at roller coaster" << std::endl;
 
   for(int i = 0; i < 10; i ++)	{

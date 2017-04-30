@@ -21,7 +21,7 @@ class named_resource {
       for (size_t i=0; i<MAX_RESOURCE_NAME-1 && i <name.size(); ++i) {
         name_[i] = name[i];
       }
-      for (int i=name.size(); i<MAX_RESOURCE_NAME; ++i) {
+      for (size_t i=name.size(); i<MAX_RESOURCE_NAME; ++i) {
         name_[i] = 0;
       }
     } else {

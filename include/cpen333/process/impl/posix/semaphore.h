@@ -81,7 +81,7 @@ class semaphore : public named_resource {
   template< class Rep, class Period >
   bool wait_for( const std::chrono::duration<Rep,Period>& timeout_duration ) {
     return wait_until(std::chrono::steady_clock::now()+timeout_duration);
-  };
+  }
 
   template< class Clock, class Duration >
   bool wait_until( const std::chrono::time_point<Clock,Duration>& timeout_time ) {
@@ -95,7 +95,7 @@ class semaphore : public named_resource {
       cpen333::perror(std::string("Failed to wait on semaphore ")+name());
     }
     return (success == 0);
-  };
+  }
 
   native_handle_type native_handle() const {
     return handle_;

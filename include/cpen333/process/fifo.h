@@ -235,7 +235,7 @@ class fifo : named_resource {
   // only to be called internally, does not wait for semaphore
   void push_item(const ValueType &val) {
     // lock is fast (only index increment), so will not trigger wait
-    int loc = 0;
+    size_t loc = 0;
     {
       // look at index, protect memory from multiple simultaneous pushes
       std::lock_guard<cpen333::process::mutex> lock(pmutex_);
@@ -254,7 +254,7 @@ class fifo : named_resource {
 
   void peek_item(ValueType* val) {
     // lock is fast (only index increment), so will not trigger wait
-    int loc = 0;  // will store location of item to take
+    size_t loc = 0;  // will store location of item to take
     {
       // look at index, protect memory from multiple simultaneous pops
       std::lock_guard<cpen333::process::mutex> lock(cmutex_);
@@ -270,7 +270,7 @@ class fifo : named_resource {
 
   void pop_item(ValueType* val) {
     // lock is fast (only index increment), so will not trigger wait
-    int loc = 0;  // will store location of item to take
+    size_t loc = 0;  // will store location of item to take
     {
       // look at index, protect memory from multiple simultaneous pops
       std::lock_guard<cpen333::process::mutex> lock(cmutex_);

@@ -6,7 +6,7 @@
 
 #include "cpen333/thread/rendezvous.h"  // rendezvous to all start at the same time
 using rendezvous = cpen333::thread::rendezvous;
-volatile bool terminate = false;        // marker for telling philosophers to leave table
+volatile bool quit = false;        // marker for telling philosophers to leave table
 
 /**
  * Pick up fork with lowest id first, breaking dependency cycle
@@ -22,7 +22,7 @@ void diner_thread(int id, Fork* left, Fork* right, rendezvous* rdv) {
   rdv->wait();
 
   // eat/think loop
-  while (!terminate) {
+  while (!quit) {
     std::cout << "Philosopher " << phil.id() << " is hungry." << std::endl;
 
     if (left->id() < right->id()) {
@@ -66,8 +66,8 @@ int main() {
   // let them try to eat for a while
   std::this_thread::sleep_for(std::chrono::seconds(30));
 
-  // Try to terminate everyone
-  terminate = true;  // signal termination
+  // Try to quit everyone
+  quit = true;  // signal termination
   for (int i=0; i<num_diners; ++i) {
     threads[i]->join();
     delete threads[i];

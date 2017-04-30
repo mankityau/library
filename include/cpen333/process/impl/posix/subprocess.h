@@ -62,21 +62,20 @@ class subprocess {
       return false;
     }
 
-    int flags = 0; // process flags
-
     // fork/exec
     pid_ = fork();
     if (pid_ == 0) {
       // we are in child
       std::vector<char*> c;
-      for(int i = 0; i < exec_.size(); ++i){
+      for(size_t i = 0; i < exec_.size(); ++i){
         char *str = (char*)(&exec_[i][0]);
         c.push_back(str);
       }
       c.push_back(nullptr);  // null-terminated array of strings for execvp
 
       if (detached_) {
-        pid_t sid = setsid(); // detach process
+        // pid_t sid =
+        setsid(); // detach process
       }
       int status = execvp(&(exec_[0][0]), c.data());
       cpen333::perror("Cannot create subprocess ");
