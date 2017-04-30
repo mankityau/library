@@ -2,7 +2,7 @@
 #define CPEN333_PROCESS_POSIX_SHARED_MEMORY_H
 
 // suffix to append to shared memory names for uniqueness
-#define SHARED_MEMORY_NAME_SUFFIX "_shm_"
+#define SHARED_MEMORY_NAME_SUFFIX "sm"
 
 #include <string>
 #include <cstring>  // for memcpy

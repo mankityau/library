@@ -2,7 +2,7 @@
 #define CPEN333_PROCESS_CONDITION_H
 
 // suffix to append to mutex names for uniqueness
-#define CONDITION_NAME_SUFFIX "_cond_"
+#define CONDITION_NAME_SUFFIX "cc"
 
 // magic number of testing initialization
 #define CONDITION_INITIALIZED 0x87621232

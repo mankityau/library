@@ -2,7 +2,7 @@
 #define CPEN333_PROCESS_MUTEX_WINDOWS_H
 
 // suffix to append to mutex names for uniqueness
-#define MUTEX_NAME_SUFFIX "_mut_"
+#define MUTEX_NAME_SUFFIX "mx"
 
 #include <string>
 #include <chrono>
