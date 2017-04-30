@@ -688,7 +688,7 @@ class console {
   /**
    * Clears display and resets all console attributes
    */
-  void clear() {
+  void clear_all() {
     handler_.reset();
     handler_.clear_display();
     handler_.set_cursor_position(0, 0);

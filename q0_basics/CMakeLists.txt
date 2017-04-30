@@ -52,6 +52,14 @@ set_target_properties(${PROJECT}_containers  PROPERTIES
         OUTPUT_NAME "containers")
 
 #==============  Advanced ===============================
+add_executable(${PROJECT}_console src/console/main.cpp)
+target_include_directories(${PROJECT}_console PRIVATE ../include)
+
+# customize output name (otherwise would be given target name by default)
+set_target_properties(${PROJECT}_console  PROPERTIES
+        OUTPUT_NAME "console")
+
+#==============  Advanced ===============================
 add_executable(${PROJECT}_advanced src/advanced/main.cpp)
 
 # customize output name (otherwise would be given target name by default)
