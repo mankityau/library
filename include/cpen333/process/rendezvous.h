@@ -18,7 +18,7 @@ class rendezvous : public named_resource {
   rendezvous(const std::string &name, size_t size) :
       named_resource{name + std::string(RENDEZVOUS_NAME_SUFFIX)},
       shared_{name + std::string(RENDEZVOUS_NAME_SUFFIX)},
-      semaphore_{name + std::string(RENDEZVOUS_NAME_SUFFIX), {0}},
+      semaphore_{name + std::string(RENDEZVOUS_NAME_SUFFIX), 0},
       mutex_{name + std::string(RENDEZVOUS_NAME_SUFFIX)}{
 
     // initialize data
