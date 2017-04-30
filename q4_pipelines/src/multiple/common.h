@@ -1,7 +1,7 @@
-#ifndef Q4_MULTIPIPE_COMMON_H
-#define Q4_MULTIPIPE_COMMON_H
+#ifndef PIPELINES_MULTIPLE_COMMON_H
+#define MULTIPIPE_COMMON_H
 
 // common pipe name prefix
-#define Q4_MULTIPIPE_PREFIX "q7_pipe_"
+#define PIPELINES_MULTIPLE_PREFIX "pipe_"
 
-#endif //Q4_MULTIPIPE_COMMON_H
+#endif //MULTIPIPE_COMMON_H

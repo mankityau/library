@@ -1,21 +1,87 @@
 #ifndef CPEN333_THREAD_TIMER_H
 #define CPEN333_THREAD_TIMER_H
 
-#include <functional>
+#include <functional>  // for storing std::function<void()>
 #include <chrono>
 #include <thread>
+#include <mutex>
 #include <condition_variable>
+#include "cpen333/thread/semaphore.h"
 
 namespace cpen333 {
 namespace thread {
 
 namespace detail {
-
-struct void_function_t {
+struct noop_function_t {
   operator () () const {}
 };
+constexpr const noop_function_t noop_function;  // constant instance
 
-constexpr const void_function_t void_function;  // constant instance
+template<typename T>
+class runner {
+
+  T func_;
+  std::mutex mutex_;
+  std::condition_variable cv_;
+  size_t count_;   // run count
+  bool terminate_; // not accepting any more
+  std::unique_ptr<std::thread> thread_;
+
+  void run() {
+
+    // do not run just yet
+    std::unique_lock<std::mutex> lock(mutex_, std::defer_lock);
+    size_t cc = 0;  // number of times run
+    
+    while(!terminate_) {
+      // wait until terminate or one more item
+      lock.lock();
+      {
+        // reduce count by number of times we have since ran func_()
+        count_ -= cc;
+        cv_.wait(lock, [&]() { return terminate_ || count_ > 0; });
+        cc = count_;    // current count is the # of times to run func_() now
+      }
+      lock.unlock();  // relinquish lock
+      
+      // call function cc times in a row, outside of lock so notify() will not block
+      // for long-lasting functions
+      for (int i=0; i<cc; ++i) {
+        func_();
+      }
+    }
+  }
+
+ public:
+  runner(T&& func) : func_{std::move(func)}, mutex_{}, cv_{}, 
+                     count_{0}, terminate_{0}, thread_{} {}
+
+  void start() {
+    // spawn new thread
+    thread_ = std::unique_ptr<std::thread>(new std::thread(&runner::run, this));
+  }
+  
+  void terminate() {
+    std::lock_guard<std::mutex> lock(mutex_);
+    terminate_ = true;
+    cv_.notify_one();
+  }
+
+  ~runner() {
+    terminate();
+    if (thread_.get() != nullptr) {
+      thread_->join();  // need to "join", otherwise thread will refer to non-existent variables
+    }
+  }
+
+  void notify() {
+    { // localized lock
+      std::lock_guard<std::mutex> lock(mutex_);
+      ++count_;
+    }
+    cv_.notify_one();
+  }
+};
 
 }
 
@@ -25,23 +91,26 @@ class timer {
  public:
 
   template<typename Func, typename...Args>
-  timer(const Duration& time) : timer(time, detail::void_function) {}
+  timer(const Duration& time) : timer(time, detail::noop_function) {}
 
   template<typename Func, typename...Args>
   timer(const Duration& time, Func &&func, Args &&... args) :
     time_{time}, ring_{false}, run_{false}, terminate_{false},
-    callback_{std::bind(std::forward<Func>(func), std::forward<Args>(args)...)},
+    runner_{std::bind(std::forward<Func>(func), std::forward<Args>(args)...)},
     mutex_{}, cv_{},
     thread_{&timer::run, this} {
+    runner_.start();  // start new thread running
   }
 
   /**
    * Start timer running, resets clock to zero and "test" flag
    */
   void start() {
-    std::lock_guard<decltype(mutex_)> lock(mutex_);
-    run_ = true;    // start your races
-    ring_ = false;  // turn off last ring
+    {
+      std::lock_guard<decltype(mutex_)> lock(mutex_);
+      run_ = true;    // start your races
+      ring_ = false;  // turn off last ring
+    }
     cv_.notify_all();
   }
 
@@ -49,8 +118,10 @@ class timer {
    * Stops timer running, leaves "test" flag in tact to see if it has gone off
    */
   void stop() {
-    std::lock_guard<decltype(mutex_)> lock(mutex_);
-    run_ = false;  // stop running
+    {
+      std::lock_guard<decltype(mutex_)> lock(mutex_);
+      run_ = false;  // stop running
+    }
     cv_.notify_all();
   }
 
@@ -98,8 +169,8 @@ class timer {
       terminate_ = true;
       cv_.notify_all();
     }
-    // detach thread to let it die
-    thread_.detach();
+    // let thread finish, since refers to member data
+    thread_.join();
   }
 
  private:
@@ -118,23 +189,25 @@ class timer {
 
         // we've hit stop, wait again until start is hit
         cv_.wait(lock, [&](){return run_ || terminate_;});
-        std::chrono::steady_clock::now() + time_;
+        std::chrono::steady_clock::now() + time_;  // start time from now
+
       } else {
         // timeout, run callback
-        tick_ += time_;   // set up next tick immediately
-        callback_();      // call function
-        ring_ = true;
-        cv_.notify_all();  // let everyone know condition went off
+        tick_ += time_;    // set up next tick immediately so no time is wasted
+        ring_ = true;      // let people know timer has gone off
+        cv_.notify_all();  // wake up anyone waiting for event
+
+        // notify runner to run another instance
+        runner_.notify();
       }
     }
-
   }
 
   Duration time_;
   bool ring_;
   bool run_;
   bool terminate_;         // signal to terminate
-  std::function<void()> callback_;  // callback
+  detail::runner<std::function<void()>>   runner_;  // callback
   std::mutex mutex_;                // controls terminate
   std::condition_variable cv_;      // controls waiting
   std::thread thread_;              // timer thread

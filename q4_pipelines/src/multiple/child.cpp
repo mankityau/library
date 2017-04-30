@@ -13,7 +13,7 @@ int main(int argc, char* argv[]) {
     id = atoi(argv[1]);
   }
 
-  std::string pipe_name = std::string(Q7_MULTIPIPE_PREFIX) + std::to_string(id);
+  std::string pipe_name = std::string(PIPELINES_MULTIPLE_PREFIX) + std::to_string(id);
 
   std::cout << "Child " << id << " Process Creating the Pipeline \"" << pipe_name << "\"..." << std::endl;
   cpen333::process::pipe pipe(pipe_name);

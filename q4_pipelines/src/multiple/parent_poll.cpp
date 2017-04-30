@@ -24,7 +24,7 @@ int main() {
 
   // create pipes, unlinkers, and processes
   for (int i=0; i<NUM_PIPES; ++i) {
-    std::string pipe_name = std::string(Q7_MULTIPIPE_PREFIX) + std::to_string(i);
+    std::string pipe_name = std::string(PIPELINES_MULTIPLE_PREFIX) + std::to_string(i);
     pipes[i] = new cpen333::process::pipe(pipe_name);
     processes[i] = new cpen333::process::subprocess({"./child", std::to_string(i)}, true, true);
   }

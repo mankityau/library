@@ -1,5 +1,5 @@
-#ifndef Q0NAMESPACES_BAR_H
-#define Q0NAMESPACES_BAR_H
+#ifndef NAMESPACES_BAR_H
+#define NAMESPACES_BAR_H
 
 // other "includes" should generally be outside the namespace, otherwise the namespace
 // identifier will be prepended to their own internal namespaces (unless that's exactly what you want).
@@ -22,4 +22,4 @@ class FooBar {
 
 } // bar
 
-#endif //Q0NAMESPACES_BAR_H
+#endif //NAMESPACES_BAR_H

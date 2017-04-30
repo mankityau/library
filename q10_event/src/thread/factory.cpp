@@ -4,6 +4,11 @@
 #include "cpen333/thread/event.h"
 #include "cpen333/thread/thread_object.h"
 
+//
+//   An event is just like a "condition", except that it auto-resets once other threads/processes pass through.  It also
+//   has the option to either let one thread pass, notify_one(), or all currently waiting threads pass, notify_all().
+//
+
 // Production Line
 class ProductionLine : public cpen333::thread::thread_object {
  private:

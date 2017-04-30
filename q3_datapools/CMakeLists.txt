@@ -27,10 +27,14 @@ target_link_libraries(${PROJECT}_parent Threads::Threads)    # link with threads
 if(UNIX)
     target_link_libraries(${PROJECT}_parent rt)
 endif()
-set_target_properties(${PROJECT}_parent PROPERTIES OUTPUT_NAME "parent")
+set_target_properties(${PROJECT}_parent PROPERTIES
+        OUTPUT_NAME "parent"
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/process")
 add_dependencies(${PROJECT}_parent ${PROJECT}_child)   # parent depends on child
 
 #==============  Datapool thread  ======================================
 add_executable(${PROJECT}_threads src/thread/main.cpp)
 target_link_libraries(${PROJECT}_threads Threads::Threads)    # link with threads library
-set_target_properties(${PROJECT}_parent PROPERTIES OUTPUT_NAME "threads")
+set_target_properties(${PROJECT}_parent PROPERTIES
+        OUTPUT_NAME "datapool"
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/thread")

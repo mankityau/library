@@ -1,72 +1,73 @@
 cmake_minimum_required(VERSION 3.1.3)
-project(q6_event)
+
+# Name project based on current directory
+get_filename_component(PROJECT ${CMAKE_CURRENT_SOURCE_DIR} NAME)
+project(PROJECT)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin/${PROJECT})
 
 set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin/${PROJECT_NAME})
+find_package( Threads REQUIRED )  # Multithreading package required
 
-# Multithreading
-find_package( Threads REQUIRED )
-
-# library directories
-include_directories(../include src)
+# directories to search for header files
+include_directories(../include)
 
 #==============  Process Robot ===============================
-add_executable(q6_event_process_robot src/process/robot.cpp)
-target_include_directories(q6_event_process_robot PRIVATE src/process)  # local headers
+add_executable(${PROJECT}_process_robot src/process/robot.cpp)
+target_include_directories(${PROJECT}_process_robot PRIVATE src/process)  # local headers
 
 # add required libraries
-target_link_libraries(q6_event_process_robot Threads::Threads)
+target_link_libraries(${PROJECT}_process_robot Threads::Threads)
 if(UNIX)
-    target_link_libraries(q6_event_process_robot rt)
+    target_link_libraries(${PROJECT}_process_robot rt)
 endif()
 
 # set output directory and executable name
-set_target_properties( q6_event_process_robot PROPERTIES
+set_target_properties( ${PROJECT}_process_robot PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/process"
         OUTPUT_NAME "robot")
 
 #==============  Process Production Line ===============================
 
-add_executable(q6_event_process_production_line src/process/production_line.cpp)
-target_include_directories(q6_event_process_production_line PRIVATE src/process)  # local headers
+add_executable(${PROJECT}_process_production_line src/process/production_line.cpp)
+target_include_directories(${PROJECT}_process_production_line PRIVATE src/process)  # local headers
 
 # add required libraries
-target_link_libraries(q6_event_process_production_line Threads::Threads)
+target_link_libraries(${PROJECT}_process_production_line Threads::Threads)
 if(UNIX)
-    target_link_libraries(q6_event_process_production_line rt)
+    target_link_libraries(${PROJECT}_process_production_line rt)
 endif()
 
 # set output directory and executable name
-set_target_properties( q6_event_process_production_line PROPERTIES
+set_target_properties( ${PROJECT}_process_production_line PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/process"
         OUTPUT_NAME "production_line")
 
 #==============  Process Factory ===============================
 
-add_executable(q6_event_process_factory src/process/factory.cpp)
+add_executable(${PROJECT}_process_factory src/process/factory.cpp)
 
 # add required libraries
-target_link_libraries(q6_event_process_factory Threads::Threads)
+target_link_libraries(${PROJECT}_process_factory Threads::Threads)
 if(UNIX)
-    target_link_libraries(q6_event_process_factory rt)
+    target_link_libraries(${PROJECT}_process_factory rt)
 endif()
 
 # set output directory and executable name
-set_target_properties( q6_event_process_factory PROPERTIES
+set_target_properties( ${PROJECT}_process_factory PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/process"
         OUTPUT_NAME "factory")
 
 # factory depends on both robot and production_line
-add_dependencies(q6_event_process_factory q6_event_process_robot q6_event_process_production_line)
+add_dependencies(${PROJECT}_process_factory ${PROJECT}_process_robot ${PROJECT}_process_production_line)
 
 #==============  Thread Factory ===============================
 
-add_executable(q6_event_thread_factory src/thread/factory.cpp)
+add_executable(${PROJECT}_thread_factory src/thread/factory.cpp)
 
 # add required libraries
-target_link_libraries(q6_event_thread_factory Threads::Threads)
+target_link_libraries(${PROJECT}_thread_factory Threads::Threads)
 
 # set output directory and executable name
-set_target_properties( q6_event_thread_factory PROPERTIES
+set_target_properties( ${PROJECT}_thread_factory PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/thread"
         OUTPUT_NAME "factory")

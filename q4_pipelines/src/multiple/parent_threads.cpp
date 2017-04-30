@@ -20,7 +20,7 @@ volatile bool done = false;
 
 void thread_consumer(int id) {
   // connect to shared pipe
-  std::string pipe_name = std::string(Q7_MULTIPIPE_PREFIX) + std::to_string(id);
+  std::string pipe_name = std::string(PIPELINES_MULTIPLE_PREFIX) + std::to_string(id);
   cpen333::process::pipe pipe(pipe_name);
   cpen333::process::unlinker<decltype(pipe)> unlinker(pipe);  // clean-up by unlinking name when thread is finished
 

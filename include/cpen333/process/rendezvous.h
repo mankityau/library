@@ -62,7 +62,7 @@ class rendezvous : public named_resource {
 
   static bool unlink(const std::string& name) {
 
-    bool b1 = cpen333::process::shared_object<pipe_info>::unlink(name + std::string(RENDEZVOUS_NAME_SUFFIX));
+    bool b1 = cpen333::process::shared_object<shared_data>::unlink(name + std::string(RENDEZVOUS_NAME_SUFFIX));
     bool b2 = cpen333::process::semaphore::unlink(name + std::string(RENDEZVOUS_NAME_SUFFIX));
     bool b3 = cpen333::process::mutex::unlink(name + std::string(RENDEZVOUS_NAME_SUFFIX));
 
