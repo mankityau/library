@@ -17,7 +17,7 @@ target_include_directories(${PROJECT}_process_robot PRIVATE src/process)  # loca
 
 # add required libraries
 target_link_libraries(${PROJECT}_process_robot Threads::Threads)
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_process_robot rt)
 endif()
 
@@ -33,7 +33,7 @@ target_include_directories(${PROJECT}_process_production_line PRIVATE src/proces
 
 # add required libraries
 target_link_libraries(${PROJECT}_process_production_line Threads::Threads)
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_process_production_line rt)
 endif()
 
@@ -48,7 +48,7 @@ add_executable(${PROJECT}_process_factory src/process/factory.cpp)
 
 # add required libraries
 target_link_libraries(${PROJECT}_process_factory Threads::Threads)
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_process_factory rt)
 endif()
 

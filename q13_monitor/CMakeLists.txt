@@ -16,7 +16,7 @@ add_executable(${PROJECT}_process_child src/process/child.cpp)
 
 # add required libraries
 target_link_libraries(${PROJECT}_process_child Threads::Threads)
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_process_child rt)
 endif()
 
@@ -31,7 +31,7 @@ add_executable(${PROJECT}_process_mom src/process/mom.cpp)
 
 # add required libraries
 target_link_libraries(${PROJECT}_process_mom Threads::Threads)
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_process_mom rt)
 endif()
 
@@ -48,7 +48,7 @@ add_executable(${PROJECT}_thread_spender src/thread/spender.cpp)
 
 # add required libraries
 target_link_libraries(${PROJECT}_thread_spender Threads::Threads)
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_thread_spender rt)
 endif()
 

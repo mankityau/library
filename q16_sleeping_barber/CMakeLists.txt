@@ -16,7 +16,7 @@ add_executable(${PROJECT}_barber src/barber.cpp)
 
 # add required libraries
 target_link_libraries(${PROJECT}_barber Threads::Threads)
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_barber rt)
 endif()
 
@@ -29,7 +29,7 @@ add_executable(${PROJECT}_customer src/customer.cpp)
 
 # add required libraries
 target_link_libraries(${PROJECT}_customer Threads::Threads)
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_customer rt)
 endif()
 
@@ -43,7 +43,7 @@ add_executable(${PROJECT}_barber_shop src/barber_shop.cpp)
 
 # add required libraries
 target_link_libraries(${PROJECT}_barber_shop Threads::Threads)
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_barber_shop rt)
 endif()
 
@@ -56,7 +56,7 @@ add_executable(${PROJECT}_sleeping_barbers src/sleeping_barbers.cpp)
 
 # add required libraries
 target_link_libraries(${PROJECT}_sleeping_barbers Threads::Threads)
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_sleeping_barbers rt)
 endif()
 

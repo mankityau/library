@@ -18,7 +18,7 @@ target_include_directories(${PROJECT}_process_child_unsafe PRIVATE src/process) 
 
 # add required libraries
 target_link_libraries(${PROJECT}_process_child_unsafe Threads::Threads)
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_process_child_unsafe rt)
 endif()
 
@@ -34,7 +34,7 @@ target_include_directories(${PROJECT}_process_child_safe PRIVATE src/process)  #
 
 # add required libraries
 target_link_libraries(${PROJECT}_process_child_safe Threads::Threads)
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_process_child_safe rt)
 endif()
 
@@ -49,7 +49,7 @@ target_include_directories(${PROJECT}_process_parent PRIVATE src/process)  # loc
 
 # add required libraries
 target_link_libraries(${PROJECT}_process_parent Threads::Threads)
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_process_parent rt)
 endif()
 

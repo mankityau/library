@@ -27,7 +27,7 @@ add_executable(${PROJECT}_process_read src/process/read_priority.cpp)
 
 # add required libraries
 target_link_libraries(${PROJECT}_process_read Threads::Threads)
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_process_read rt)
 endif()
 
@@ -53,7 +53,7 @@ add_executable(${PROJECT}_process_write src/process/write_priority.cpp)
 
 # add required libraries
 target_link_libraries(${PROJECT}_process_write Threads::Threads)
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_process_write rt)
 endif()
 
@@ -78,7 +78,7 @@ add_executable(${PROJECT}_process_fair src/process/fair_priority.cpp)
 
 # add required libraries
 target_link_libraries(${PROJECT}_process_fair Threads::Threads)
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_process_fair rt)
 endif()
 

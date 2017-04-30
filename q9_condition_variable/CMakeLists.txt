@@ -14,7 +14,7 @@ include_directories(../include)
 #==============  Condition Variable Dishwasher ===============================
 add_executable(${PROJECT}_process_dishwasher src/process/dishwasher.cpp)
 target_link_libraries(${PROJECT}_process_dishwasher Threads::Threads)
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_process_dishwasher rt)
 endif()
 set_target_properties(${PROJECT}_process_dishwasher PROPERTIES
@@ -24,7 +24,7 @@ set_target_properties(${PROJECT}_process_dishwasher PROPERTIES
 #==============  Condition Pedestrian =======================
 add_executable(${PROJECT}_process_customer src/process/customer.cpp)
 target_link_libraries(${PROJECT}_process_customer Threads::Threads)
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_process_customer rt)
 endif()
 set_target_properties(${PROJECT}_process_customer PROPERTIES
@@ -35,7 +35,7 @@ set_target_properties(${PROJECT}_process_customer PROPERTIES
 add_executable(${PROJECT}_process_restaurant src/process/restaurant.cpp)
 target_link_libraries(${PROJECT}_process_restaurant Threads::Threads)
 # shared_memory requires linking with the rt library
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_process_restaurant rt)
 endif()
 set_target_properties(${PROJECT}_process_restaurant PROPERTIES

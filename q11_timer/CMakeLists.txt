@@ -34,7 +34,7 @@ add_executable(${PROJECT}_process_faucet src/process/faucet.cpp)
 
 # add required libraries
 target_link_libraries(${PROJECT}_process_faucet Threads::Threads)
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_process_faucet rt)
 endif()
 
@@ -48,7 +48,7 @@ add_executable(${PROJECT}_process_house src/process/house.cpp)
 
 # add required libraries
 target_link_libraries(${PROJECT}_process_house Threads::Threads)
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_process_house rt)
 endif()
 

@@ -15,7 +15,7 @@ include_directories(../include)
 add_executable(${PROJECT}_process_person src/process/person.cpp)
 target_link_libraries(${PROJECT}_process_person Threads::Threads)
 # shared_memory requires linking with the rt library
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_process_person rt)
 endif()
 
@@ -28,7 +28,7 @@ set_target_properties( ${PROJECT}_process_person PROPERTIES
 add_executable(${PROJECT}_process_roller_coaster src/process/roller_coaster.cpp)
 target_link_libraries(${PROJECT}_process_roller_coaster Threads::Threads)
 # shared_memory requires linking with the rt library
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_process_roller_coaster rt)
 endif()
 
@@ -43,7 +43,7 @@ add_dependencies(${PROJECT}_process_roller_coaster ${PROJECT}_process_person)
 add_executable(${PROJECT}_thread_roller_coaster src/thread/roller_coaster.cpp)
 target_link_libraries(${PROJECT}_thread_roller_coaster Threads::Threads)
 # shared_memory requires linking with the rt library
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_thread_roller_coaster rt)
 endif()
 

@@ -14,7 +14,7 @@ include_directories(../include)
 #==============  Condition Car ===============================
 add_executable(${PROJECT}_process_car src/process/car.cpp)
 target_link_libraries(${PROJECT}_process_car Threads::Threads)
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_process_car rt)
 endif()
 set_target_properties(${PROJECT}_process_car PROPERTIES
@@ -24,7 +24,7 @@ set_target_properties(${PROJECT}_process_car PROPERTIES
 #==============  Condition Pedestrian =======================
 add_executable(${PROJECT}_process_pedestrian src/process/pedestrian.cpp)
 target_link_libraries(${PROJECT}_process_pedestrian Threads::Threads)
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_process_pedestrian rt)
 endif()
 set_target_properties(${PROJECT}_process_pedestrian PROPERTIES
@@ -35,7 +35,7 @@ set_target_properties(${PROJECT}_process_pedestrian PROPERTIES
 add_executable(${PROJECT}_process_intersection src/process/intersection.cpp)
 target_link_libraries(${PROJECT}_process_intersection Threads::Threads)
 # shared_memory requires linking with the rt library
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_process_intersection rt)
 endif()
 set_target_properties(${PROJECT}_process_intersection PROPERTIES

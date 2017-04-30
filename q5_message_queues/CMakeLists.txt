@@ -16,7 +16,7 @@ add_executable(${PROJECT}_penpal src/penpal.cpp)
 
 # add required libraries
 target_link_libraries(${PROJECT}_penpal Threads::Threads)
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_penpal rt)
 endif()
 
@@ -29,7 +29,7 @@ add_executable(${PROJECT}_parent src/parent.cpp)
 
 # add required libraries
 target_link_libraries(${PROJECT}_parent Threads::Threads)
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_parent rt)
 endif()
 

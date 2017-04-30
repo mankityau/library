@@ -9,7 +9,7 @@
 #include <thread>
 
 #include "cpen333/util.h"
-#include "cpen333/process/impl/posix/semaphore.h"
+#include "cpen333/process/semaphore.h"
 
 namespace cpen333 {
 namespace process {

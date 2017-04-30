@@ -79,7 +79,8 @@ class subprocess {
       }
       int status = execvp(&(exec_[0][0]), c.data());
       cpen333::perror("Cannot create subprocess ");
-      std::quick_exit(status); // execvp failed, terminate child
+      //std::quick_exit(status); // execvp failed, terminate child
+      std::_Exit(status); // OSX doesn't seem to have quick_exit() defined
     }
 
     bool success = (pid_ >= 0);

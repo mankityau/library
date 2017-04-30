@@ -16,7 +16,7 @@ add_executable(${PROJECT}_baker src/baker.cpp)
 
 # add required libraries
 target_link_libraries(${PROJECT}_baker Threads::Threads)
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_baker rt)
 endif()
 
@@ -29,7 +29,7 @@ add_executable(${PROJECT}_cookie_monster src/cookie_monster.cpp)
 
 # add required libraries
 target_link_libraries(${PROJECT}_cookie_monster Threads::Threads)
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_cookie_monster rt)
 endif()
 
@@ -42,7 +42,7 @@ add_executable(${PROJECT}_bakery src/bakery.cpp)
 
 # add required libraries
 target_link_libraries(${PROJECT}_bakery Threads::Threads)
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_bakery rt)
 endif()
 

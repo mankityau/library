@@ -18,7 +18,7 @@ target_include_directories(${PROJECT}_process_car PRIVATE src/process)  # local 
 
 # add required libraries
 target_link_libraries(${PROJECT}_process_car Threads::Threads)
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_process_car rt)
 endif()
 
@@ -33,7 +33,7 @@ target_include_directories(${PROJECT}_process_gas_station PRIVATE src/process)  
 
 # add required libraries
 target_link_libraries(${PROJECT}_process_gas_station Threads::Threads)
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_process_gas_station rt)
 endif()
 

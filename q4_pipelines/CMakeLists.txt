@@ -15,7 +15,7 @@ include_directories(../include)
 add_executable(${PROJECT}_single_child src/single/child.cpp)
 target_link_libraries(${PROJECT}_single_child Threads::Threads)    # link with threads library
 # shared_memory requires linking with the rt library
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_single_child rt)
 endif()
 set_target_properties(${PROJECT}_single_child PROPERTIES
@@ -26,7 +26,7 @@ set_target_properties(${PROJECT}_single_child PROPERTIES
 add_executable(${PROJECT}_single_parent src/single/parent.cpp)
 target_link_libraries(${PROJECT}_single_parent Threads::Threads)    # link with threads library
 # shared_memory requires linking with the rt library
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_single_parent rt)
 endif()
 set_target_properties(${PROJECT}_single_parent PROPERTIES
@@ -38,7 +38,7 @@ add_dependencies(${PROJECT}_single_parent ${PROJECT}_single_child)   # parent de
 add_executable(${PROJECT}_multiple_child src/multiple/child.cpp)
 target_link_libraries(${PROJECT}_multiple_child Threads::Threads)    # link with threads library
 # shared_memory requires linking with the rt library
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_multiple_child rt)
 endif()
 set_target_properties(${PROJECT}_multiple_child PROPERTIES
@@ -49,7 +49,7 @@ set_target_properties(${PROJECT}_multiple_child PROPERTIES
 add_executable(${PROJECT}_multiple_parent_poll src/multiple/parent_poll.cpp)
 target_link_libraries(${PROJECT}_multiple_parent_poll Threads::Threads)    # link with threads library
 # shared_memory requires linking with the rt library
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_multiple_parent_poll rt)
 endif()
 set_target_properties(${PROJECT}_multiple_parent_poll PROPERTIES
@@ -61,7 +61,7 @@ add_dependencies(${PROJECT}_multiple_parent_poll ${PROJECT}_multiple_child)   # 
 add_executable(${PROJECT}_multiple_parent_threads src/multiple/parent_threads.cpp)
 target_link_libraries(${PROJECT}_multiple_parent_threads Threads::Threads)    # link with threads library
 # shared_memory requires linking with the rt library
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_multiple_parent_threads rt)
 endif()
 set_target_properties(${PROJECT}_multiple_parent_threads PROPERTIES

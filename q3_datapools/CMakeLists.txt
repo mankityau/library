@@ -15,7 +15,7 @@ include_directories(../include)
 add_executable(${PROJECT}_child src/process/child.cpp)
 target_link_libraries(${PROJECT}_child Threads::Threads)    # link with threads library
 # shared_memory requires linking with the rt library
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_child rt)
 endif()
 set_target_properties(${PROJECT}_child PROPERTIES OUTPUT_NAME "child")
@@ -24,7 +24,7 @@ set_target_properties(${PROJECT}_child PROPERTIES OUTPUT_NAME "child")
 add_executable(${PROJECT}_parent src/process/parent.cpp)
 target_link_libraries(${PROJECT}_parent Threads::Threads)    # link with threads library
 # shared_memory requires linking with the rt library
-if(UNIX)
+if(UNIX AND NOT APPLE)
     target_link_libraries(${PROJECT}_parent rt)
 endif()
 set_target_properties(${PROJECT}_parent PROPERTIES

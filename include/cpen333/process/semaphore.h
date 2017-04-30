@@ -6,6 +6,9 @@
 #ifdef WINDOWS
 #include "cpen333/process/impl/windows/semaphore.h"
 #else
+#ifdef APPLE
+#include "cpen333/process/impl/osx/sem_timedwait.c" // missing sem_timedwait functionality
+#endif
 #include "cpen333/process/impl/posix/semaphore.h"
 #endif
 

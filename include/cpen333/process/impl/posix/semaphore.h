@@ -42,8 +42,13 @@ class semaphore : public named_resource {
   }
 
   size_t value() {
-    int val;
+    int val = 0;
+#ifdef __APPLE__
+    int success = -1;
+    errno = ENOSYS; // not supported on OSX
+#else
     int success = sem_getvalue(handle_, &val);
+#endif
     if (success != 0) {
       cpen333::perror(std::string("Failed to get semaphore value ")+name());
     }
