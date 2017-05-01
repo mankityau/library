@@ -8,6 +8,7 @@ int main() {
 
   // barbershop
   cpen333::process::condition barbershop_opened(BARBER_SHOP_NAME);
+  barbershop_opened.reset();  // in case was open last time
 
   cpen333::process::subprocess barbershop({"./barber_shop"}, true, true);
   barbershop_opened.wait();  // wait until shop opened

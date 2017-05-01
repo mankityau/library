@@ -22,7 +22,7 @@ endif()
 
 # set output directory and executable name
 set_target_properties( ${PROJECT}_baker PROPERTIES
-        OUTPUT_NAME "Baker")
+        OUTPUT_NAME "baker")
 
 #==============  Cookie Monster ===============================
 add_executable(${PROJECT}_cookie_monster src/cookie_monster.cpp)

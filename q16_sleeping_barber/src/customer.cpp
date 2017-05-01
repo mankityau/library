@@ -15,14 +15,14 @@ int main(int argc, char* argv[]) {
   // load barbershop
   BarberShop barbershop(BARBER_SHOP_NAME, BARBER_SHOP_CHAIRS);
 
-  for (int i=0; i<10; ++i) {
+  // keep going until barbershop is closed
+  while(true) {
     std::cout << "Customer " << name << " arriving for haircut" << std::endl;
     if (!barbershop.CustomerWaitsForHaircut()) {
       std::cout << name << " turned away :(" << std::endl;
       if (!barbershop.Opened()) {
         break;  // leave if shop is now closed
       }
-      --i;  // try again
     } else {
       std::cout << name << "'s haircut is complete" << std::endl;
     }

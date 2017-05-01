@@ -95,7 +95,7 @@ class shared_mutex_fair : named_resource {
     // one more waiting
     ++(state_->etotal);
     // wait until there are no readers or writers
-    econd_.wait(lock, [&](){ return state_->shared[(size_t)(state_->this_batch)]+state_->exclusive == 0; });
+    econd_.wait(lock, [&](){ return state_->exclusive == 0 && state_->shared[(size_t)(state_->this_batch)] == 0; });
     state_->exclusive = 1;  // exclusive lock on
   }
 
