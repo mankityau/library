@@ -111,6 +111,13 @@ class subprocess {
     return true;
   }
 
+  /**
+   * Waits for the process to terminate, waiting for a certain amount of time.
+   * @tparam Rep  duration representation
+   * @tparam Period  duration tick period
+   * @param duration time to wait for
+   * @return true if process terminated (even if state was previously queried)
+   */
   template<typename Rep, typename Period>
   bool wait_for(const std::chrono::duration<Rep,Period>& duration) {
 
@@ -119,7 +126,7 @@ class subprocess {
 
     // already terminated
     if (terminated_) {
-      return false;
+      return true;
     }
 
     auto timeout = std::chrono::steady_clock::now()+duration;
@@ -147,6 +154,14 @@ class subprocess {
 
     return terminated_;
 
+  }
+
+  bool terminated() {
+    if (terminated_) {
+      return true;
+    }
+    // check wait
+    return wait_for(std::chrono::milliseconds(0));
   }
 
 };

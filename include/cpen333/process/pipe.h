@@ -261,23 +261,25 @@ class pipe : public named_resource {
   bool unlink() {
     bool b1 = wmutex_.unlink();
     bool b2 = rmutex_.unlink();
-    bool b3 = info_.unlink();
-    bool b4 = pipe_.unlink();
-    bool b5 = producer_.unlink();
-    bool b6 = consumer_.unlink();
-    return b1 && b2 && b3 && b4 && b5 && b6;
+    bool b3 = omutex_.unlink();
+    bool b4 = info_.unlink();
+    bool b5 = pipe_.unlink();
+    bool b6 = producer_.unlink();
+    bool b7 = consumer_.unlink();
+    return b1 && b2 && b3 && b4 && b5 && b6 && b7;
   }
 
   static bool unlink(const std::string& name) {
 
     bool b1 = cpen333::process::mutex::unlink(name + std::string(PIPE_WRITE_SUFFIX));
     bool b2 = cpen333::process::mutex::unlink(name + std::string(PIPE_READ_SUFFIX));
-    bool b3 = cpen333::process::shared_object<pipe_info>::unlink(name + std::string(PIPE_INFO_SUFFIX));
-    bool b4 = cpen333::process::shared_memory::unlink(name + std::string(PIPE_NAME_SUFFIX));
-    bool b5 = cpen333::process::semaphore::unlink(name + std::string(PIPE_WRITE_SUFFIX));
-    bool b6 = cpen333::process::semaphore::unlink(name + std::string(PIPE_READ_SUFFIX));
+    bool b3 = cpen333::process::mutex::unlink(name + std::string(PIPE_OPEN_SUFFIX));
+    bool b4 = cpen333::process::shared_object<pipe_info>::unlink(name + std::string(PIPE_INFO_SUFFIX));
+    bool b5 = cpen333::process::shared_memory::unlink(name + std::string(PIPE_NAME_SUFFIX));
+    bool b6 = cpen333::process::semaphore::unlink(name + std::string(PIPE_WRITE_SUFFIX));
+    bool b7 = cpen333::process::semaphore::unlink(name + std::string(PIPE_READ_SUFFIX));
 
-    return b1 && b2 && b3 && b4 && b5 && b6;
+    return b1 && b2 && b3 && b4 && b5 && b6 && b7;
   }
 
  private:

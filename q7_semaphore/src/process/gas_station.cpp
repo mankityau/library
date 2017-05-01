@@ -27,8 +27,8 @@ int main() {
 
   std::vector<cpen333::process::subprocess> cars;
 
-  // spawn 100 processes :S
-  for (int i=0; i<100; ++i) {
+  // spawn 30 processes :S
+  for (int i=0; i<30; ++i) {
     cars.push_back(cpen333::process::subprocess({"./car", std::to_string(i+1)}, true, false));
   }
 

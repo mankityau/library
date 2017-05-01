@@ -34,27 +34,27 @@ int main() {
   // loop while the intersection is not empty
   bool empty = false;
   while(!empty)	{
-    safetocross.reset();                                    // stop pedestrians
-    std::cout << std::endl <<  "No Walking" << std::endl;
-    std::this_thread::sleep_for(std::chrono::seconds(2));   // wait a suitable time delay between lights changing
-    std::cout << "Green Light" << std::endl;
+    std::cout << std::endl << "Green Light" << std::endl;
     safetodrive.notify();                                   // allow cars to drive over pedestrian crossing
     std::this_thread::sleep_for(std::chrono::seconds(10));  // wait a suitable time delay between lights changing
     safetodrive.reset();                                    // stop cars
     std::cout << std::endl << "Red Light" << std::endl;
     std::this_thread::sleep_for(std::chrono::seconds(2));   // wait a suitable time delay between lights changing
-    std::cout << "Walk on" << std::endl;
+    std::cout << std::endl << "Walk on" << std::endl;
     safetocross.notify();                                   // allow pedestrians to cross
     std::this_thread::sleep_for(std::chrono::seconds(15));  // allow pedestrians to cross for 15 seconds
+    safetocross.reset();                                    // stop pedestrians
+    std::cout << std::endl <<  "No Walking" << std::endl;
+    std::this_thread::sleep_for(std::chrono::seconds(2));   // wait a suitable time delay between lights changing
 
     // count remaining processes
     empty = true;  // assume intersection empty
     for (int i=0; i<10; ++i) {
-      if (!pedestrians[i]->wait_for(std::chrono::milliseconds(0))) {
+      if (!pedestrians[i]->terminated()) {
         empty = false;
         break;
       }
-      if (!cars[i]->wait_for(std::chrono::milliseconds(0))) {
+      if (!cars[i]->terminated()) {
         empty = false;
         break;
       }

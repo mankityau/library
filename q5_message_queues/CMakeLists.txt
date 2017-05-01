@@ -22,7 +22,7 @@ endif()
 
 # set output directory and executable name
 set_target_properties( ${PROJECT}_penpal PROPERTIES
-        OUTPUT_NAME "PenPal")
+        OUTPUT_NAME "penpal")
 
 #==============  Main ===============================
 add_executable(${PROJECT}_parent src/parent.cpp)

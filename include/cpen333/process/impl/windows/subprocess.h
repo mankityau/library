@@ -108,6 +108,13 @@ class subprocess {
     return wait_for_internal(INFINITE);
   }
 
+  /**
+   * Waits for the process to terminate, waiting for a certain amount of time.
+   * @tparam Rep  duration representation
+   * @tparam Period  duration tick period
+   * @param duration time to wait for
+   * @return true if process terminated (even if state was previously queried)
+   */
   template<typename Rep, typename Period>
   bool wait_for(const std::chrono::duration<Rep,Period>& duration) {
     // convert to milliseconds
@@ -115,11 +122,19 @@ class subprocess {
     return wait_for_internal(time);
   }
 
+  bool terminated() {
+    if (terminated_) {
+      return true;
+    }
+    // check wait
+    return wait_for(std::chrono::milliseconds(0));
+  }
+
  protected:
 
   bool wait_for_internal(DWORD time) {
     if (terminated_) {
-      return false;
+      return true;
     }
 
     UINT result = 0;

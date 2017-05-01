@@ -83,7 +83,7 @@ int main() {
   std::thread read_thread(message_reader);
 
   // Take a nap here for a bit while things run
-  std::this_thread::sleep_for(std::chrono::seconds(60));
+  std::this_thread::sleep_for(std::chrono::seconds(20));
 
   timer.stop();  // stop timer
 

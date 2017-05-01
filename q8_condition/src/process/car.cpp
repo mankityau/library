@@ -22,8 +22,8 @@ int main(int argc, char* argv[]) {
   using clock = std::chrono::steady_clock;
   auto start_time = clock::now();
 
-  // loop for 60 seconds
-  while(std::chrono::duration_cast<std::chrono::seconds>(clock::now()-start_time).count() < 60) {
+  // loop for 45 seconds
+  while(std::chrono::duration_cast<std::chrono::seconds>(clock::now()-start_time).count() < 45) {
     std::this_thread::sleep_for(std::chrono::milliseconds(300*id));		// sleep for a time period
     drive.wait() ;							              // wait for green light
     std::cout << "C" << id << " ";   // show that I have crossed
