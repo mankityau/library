@@ -91,7 +91,7 @@ class message_queue : named_resource {
   }
 
   static bool unlink(const std::string& name) {
-    return cpen333::process::fifo<MessageType>::unlink(name);
+    return cpen333::process::fifo<MessageType>::unlink(name + std::string(MESSAGE_QUEUE_SUFFIX));
   }
 
  private:
