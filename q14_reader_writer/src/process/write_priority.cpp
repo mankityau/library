@@ -36,7 +36,7 @@ void read_thread(const std::string& mutex_name, size_t n) {
       std::shared_lock<MutexType> lock(mutex);
       std::cout << "R";
       std::cout.flush();  // flush read
-      // std::this_thread::sleep_for(std::chrono::milliseconds(100));  // reads are usually pretty fast
+      std::this_thread::sleep_for(std::chrono::milliseconds(10));  // reads are usually pretty fast
     }
     std::this_thread::yield();  // prevent any single thread from hogging
   }
@@ -52,7 +52,7 @@ void write_thread(const std::string& mutex_name, size_t n) {
       std::lock_guard<MutexType> lock(mutex);
       std::cout << "W";
       std::cout.flush();  // flush read
-      // std::this_thread::sleep_for(std::chrono::milliseconds(100));  // writes usually take longer
+      std::this_thread::sleep_for(std::chrono::milliseconds(50));  // writes usually take longer
     }
     std::this_thread::yield();  // prevent any single thread from hogging
   }
@@ -70,17 +70,17 @@ int main() {
   cpen333::process::shared_mutex_exclusive wmutex("write_priority");  // gives preference to exclusive (in our case, writers)
   cpen333::process::unlinker<decltype(wmutex)> unlinker(wmutex);  // unlink when done
 
-  for (int i=0; i<100; ++i) {
-    writers.push_back(std::thread(&write_thread<decltype(wmutex)>, "write_priority", 200));
-    readers.push_back(std::thread(&read_thread<decltype(wmutex)>, "write_priority", 200));
+  for (int i=0; i<10; ++i) {
+    writers.push_back(std::thread(&write_thread<decltype(wmutex)>, "write_priority", 50));
+    readers.push_back(std::thread(&read_thread<decltype(wmutex)>, "write_priority", 50));
   }
   // wait until all threads complete, then dispose
-  for (int i=0; i<100; ++i) {
+  for (size_t i=0; i<readers.size(); ++i) {
     readers[i].join();
+  }
+  for (size_t i=0; i<writers.size(); ++i) {
     writers[i].join();
   }
-  readers.clear();
-  writers.clear();
 
   std::cout << std::endl << "Done." << std::endl;
   return 0;
