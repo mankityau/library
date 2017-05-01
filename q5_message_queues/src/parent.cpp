@@ -39,7 +39,7 @@ int main() {
 
   // I am Po
   std::string my_name = "Po";
-  cpen333::process::message_queue<MessageType> my_mailbox(my_name, 64);
+  cpen333::process::message_queue<MessageType> my_mailbox(my_name);
 
   // These are my friends
   std::vector<std::string> friend_names = {"Tigress", "Master Shifu", "Viper", "Monkey", "Mantis", "Crane"};
