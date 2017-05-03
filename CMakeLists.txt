@@ -44,5 +44,8 @@ add_subdirectory("q15_producer_consumer")
 add_subdirectory("q16_sleeping_barber")
 add_subdirectory("q17_dining_philosophers")
 
+# Tools
+add_subdirectory("tools")
+
 # Tests
 add_subdirectory("test")
