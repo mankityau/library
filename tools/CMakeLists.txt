@@ -13,6 +13,8 @@ include_directories(../include)
 
 #==============  SEM UNLINK ===============================
 add_executable(${PROJECT}_sem_unlink src/sem_unlink.cpp)
+# add required libraries
+target_link_libraries(${PROJECT}_sem_unlink Threads::Threads)
 
 # set output directory and executable name
 set_target_properties( ${PROJECT}_sem_unlink PROPERTIES
