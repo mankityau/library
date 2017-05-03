@@ -7,6 +7,7 @@
 #include "cpen333/process/mutex.h"
 #include "cpen333/process/condition_variable.h"
 #include "cpen333/process/shared_memory.h"
+#include "cpen333/process/named_resource.h"
 
 namespace cpen333 {
 namespace process {
@@ -16,7 +17,7 @@ namespace impl {
 // A more fair shared mutex, access is granted in batches: 1 writer, batch of readers, 1 writer, batch of readers
 // Based on the alternating method described here:
 //     http://www.tools-of-computing.com/tc/CS/Monitors/AlternatingRW.htm
-class shared_mutex_fair : named_resource {
+class shared_mutex_fair : public virtual named_resource {
  protected:
 
   struct shared_data {
@@ -34,7 +35,6 @@ class shared_mutex_fair : named_resource {
 
  public:
   shared_mutex_fair(const std::string &name) :
-      named_resource{name + std::string(SHARED_MUTEX_FAIR_NAME_SUFFIX)},
       mutex_{name + std::string(SHARED_MUTEX_FAIR_NAME_SUFFIX)},
       econd_{name + std::string(SHARED_MUTEX_FAIR_NAME_SUFFIX)},
       state_{name + std::string(SHARED_MUTEX_FAIR_NAME_SUFFIX)} {

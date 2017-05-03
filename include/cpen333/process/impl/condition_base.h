@@ -13,7 +13,7 @@
 #include <chrono>
 #include <condition_variable>
 
-#include "cpen333/process/impl/named_resource.h"
+#include "cpen333/process/named_resource.h"
 #include "cpen333/process/mutex.h"
 #include "cpen333/process/semaphore.h"
 #include "cpen333/process/shared_memory.h"  // for keeping a "waiters" count needed for notify_all()
@@ -41,11 +41,10 @@ class lock_inverter {
 //
 // Implementation based on boost's boost/interpress/sync/detail/condition_algorithm_8a.hpp
 // Their implementation guarantees not to have spurious wake-ups
-class condition_base : public named_resource {
+class condition_base : public virtual named_resource {
   
  public:
   condition_base(const std::string &name) :
-      named_resource{name + std::string(CONDITION_BASE_NAME_SUFFIX)},
       waiters_{name + std::string(CONDITION_BASE_STORAGE_SUFFIX)},
       block_lock_{name + std::string(CONDITION_BASE_BLOCK_LOCK_SUFFIX),1},
       block_queue_{name + std::string(CONDITION_BASE_BLOCK_QUEUE_SUFFIX),0},

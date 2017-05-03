@@ -8,12 +8,13 @@
 #include <chrono>
 
 #include "cpen333/process/impl/condition_base.h"
+#include "cpen333/process/named_resource.h"
 
 namespace cpen333 {
 namespace process {
 
 // a condition with optional predicate to control wait
-class condition_variable : public condition_base {
+class condition_variable : public condition_base, public virtual named_resource {
 
  public:
   condition_variable(const std::string &name) :

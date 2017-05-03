@@ -8,13 +8,14 @@
 #include <chrono>
 #include <condition_variable>
 
+#include "cpen333/process/named_resource.h"
 #include "cpen333/process/impl/condition_base.h"
 #include "cpen333/process/mutex.h"
 
 namespace cpen333 {
 namespace process {
 
-class event : private condition_base {
+class event : private condition_base, public virtual named_resource {
  public:
 
   event(const std::string &name) :

@@ -9,7 +9,7 @@
 #include <string>
 #include <chrono>
 
-#include "cpen333/process/impl/named_resource.h"
+#include "cpen333/process/named_resource.h"
 #include "cpen333/process/shared_memory.h"
 #include "cpen333/process/mutex.h"
 #include "cpen333/process/semaphore.h"
@@ -23,13 +23,12 @@ namespace process {
  * @tparam ValueType type of data to store in the queue
  */
 template<typename ValueType>
-class fifo : named_resource {
+class fifo : public virtual named_resource {
 
  public:
   using value_type = ValueType;
 
   fifo(const std::string& name, size_t size = 1024) :
-      named_resource{name + std::string(FIFO_SUFFIX)},
       memory_{name + std::string(FIFO_SUFFIX), sizeof(fifo_info)+size*sizeof(ValueType)}, // reserve memory
       info_{nullptr}, data_{nullptr}, // will initialize these after memory valid
       pmutex_{name + std::string(FIFO_PRODUCER_SUFFIX)},

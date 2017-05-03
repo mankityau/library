@@ -10,6 +10,7 @@
 
 #include "cpen333/util.h"
 #include "cpen333/process/semaphore.h"
+#include "cpen333/process/named_resource.h"
 
 namespace cpen333 {
 namespace process {
@@ -18,12 +19,11 @@ namespace posix {
 /**
  * Based on a named semaphore, but tracks the thread id
  */
-class mutex : public named_resource {
+class mutex : public virtual named_resource {
  public:
   using native_handle_type = semaphore::native_handle_type;
 
   mutex(const std::string& name) :
-    named_resource{name + std::string(MUTEX_NAME_SUFFIX)},
     semaphore_{name + std::string(MUTEX_NAME_SUFFIX), 1}
     // thread_{}
   {}

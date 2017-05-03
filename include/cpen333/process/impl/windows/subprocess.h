@@ -9,7 +9,7 @@
 #include <windows.h>
 
 #include "cpen333/util.h"
-#include "cpen333/process/impl/named_resource.h"
+#include "cpen333/process/impl/named_resource_base.h"
 
 namespace cpen333 {
 namespace process {

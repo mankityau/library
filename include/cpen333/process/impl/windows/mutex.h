@@ -10,18 +10,18 @@
 #include <windows.h>
 
 #include "cpen333/util.h"
-#include "cpen333/process/impl/named_resource.h"
+#include "cpen333/process/impl/named_resource_base.h"
 
 namespace cpen333 {
 namespace process {
 namespace windows {
 
-class mutex : public named_resource {
+class mutex : public impl::named_resource_base {
  public:
   using native_handle_type = HANDLE;
 
   mutex(const std::string& name) :
-    named_resource{name + std::string(MUTEX_NAME_SUFFIX)} {
+    impl::named_resource_base{name + std::string(MUTEX_NAME_SUFFIX)} {
     handle_  = CreateMutex(NULL, false, name_ptr()) ;
     if (handle_ == INVALID_HANDLE_VALUE) {
       cpen333::perror(std::string("Cannot create mutex ")+this->name());

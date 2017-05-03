@@ -8,7 +8,7 @@
 #include <cstring>  // for memcpy
 
 #include "cpen333/util.h"
-#include "cpen333/process/impl/named_resource.h"
+#include "cpen333/process/impl/named_resource_base.h"
 
 #include <unistd.h>
 #include <sys/types.h>
@@ -20,12 +20,12 @@ namespace cpen333 {
 namespace process {
 namespace posix {
 
-class shared_memory : public named_resource {
+class shared_memory : public impl::named_resource_base {
  public:
   using native_handle_type = int;
 
   shared_memory(const std::string &name, size_t size, bool readonly = false) :
-    named_resource{name+std::string(SHARED_MEMORY_NAME_SUFFIX)}, fid_{-1},
+    impl::named_resource_base{name+std::string(SHARED_MEMORY_NAME_SUFFIX)}, fid_{-1},
     data_{nullptr}, size_{size} {
 
     // try opening new
@@ -91,7 +91,7 @@ class shared_memory : public named_resource {
 
   static bool unlink(const std::string& name) {
     char nm[MAX_RESOURCE_NAME];
-    named_resource::make_resource_name(name+std::string(SHARED_MEMORY_NAME_SUFFIX), nm);
+    impl::named_resource_base::make_resource_name(name+std::string(SHARED_MEMORY_NAME_SUFFIX), nm);
     int status = shm_unlink(&nm[0]);
     if (status != 0) {
       cpen333::perror(std::string("Failed to unlink shared memory with id ") + std::string(nm));

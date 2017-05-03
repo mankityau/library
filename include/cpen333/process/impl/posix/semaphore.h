@@ -15,18 +15,18 @@
 #include <semaphore.h>
 
 #include "cpen333/util.h"
-#include "cpen333/process/impl/named_resource.h"
+#include "cpen333/process/impl/named_resource_base.h"
 
 namespace cpen333 {
 namespace process {
 namespace posix {
 
-class semaphore : public named_resource {
+class semaphore : public impl::named_resource_base {
  public:
   using native_handle_type = sem_t*;
 
   semaphore(const std::string& name, size_t value = 1) :
-      named_resource{name+std::string(SEMAPHORE_NAME_SUFFIX)}, handle_{nullptr} {
+      impl::named_resource_base{name+std::string(SEMAPHORE_NAME_SUFFIX)}, handle_{nullptr} {
     // create named semaphore
     errno = 0;
     // has O_CREAT | O_RDWR, but latter not documented for OSX
@@ -124,7 +124,7 @@ class semaphore : public named_resource {
 
   static bool unlink(const std::string& name) {
     char nm[MAX_RESOURCE_NAME];
-    named_resource::make_resource_name(name+std::string(SEMAPHORE_NAME_SUFFIX), nm);
+    impl::named_resource_base::make_resource_name(name+std::string(SEMAPHORE_NAME_SUFFIX), nm);
     int status = sem_unlink(&nm[0]);
     if (status != 0) {
       cpen333::perror(std::string("Failed to unlink semaphore with id ")+std::string(nm));

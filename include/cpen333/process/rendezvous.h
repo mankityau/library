@@ -4,7 +4,7 @@
 #define RENDEZVOUS_NAME_SUFFIX "_rdv"
 #define RENDEZVOUS_INITIALIZED 0x38973823
 
-#include "cpen333/process/impl/named_resource.h"
+#include "cpen333/process/named_resource.h"
 #include "cpen333/process/shared_memory.h"
 #include "cpen333/process/semaphore.h"
 #include "cpen333/process/mutex.h"
@@ -12,11 +12,10 @@
 namespace cpen333 {
 namespace process {
 
-class rendezvous : public named_resource {
+class rendezvous : public virtual named_resource {
 
  public:
   rendezvous(const std::string &name, size_t size) :
-      named_resource{name + std::string(RENDEZVOUS_NAME_SUFFIX)},
       shared_{name + std::string(RENDEZVOUS_NAME_SUFFIX)},
       semaphore_{name + std::string(RENDEZVOUS_NAME_SUFFIX), 0},
       mutex_{name + std::string(RENDEZVOUS_NAME_SUFFIX)}{

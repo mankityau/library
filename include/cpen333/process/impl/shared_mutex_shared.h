@@ -7,6 +7,7 @@
 #include "cpen333/process/mutex.h"
 #include "cpen333/process/semaphore.h"
 #include "cpen333/process/shared_memory.h"
+#include "cpen333/process/named_resource.h"
 
 namespace cpen333 {
 namespace process {
@@ -18,7 +19,7 @@ namespace impl {
  * Shared-mutex implementation based on the mutex/semaphore pattern
  * See https://en.wikipedia.org/wiki/Readers%E2%80%93writer_lock for details
  */
-class shared_mutex_shared : named_resource {
+class shared_mutex_shared : public virtual named_resource {
  protected:
 
   struct shared_data {
@@ -32,7 +33,6 @@ class shared_mutex_shared : named_resource {
 
  public:
   shared_mutex_shared(const std::string &name) :
-      named_resource{name + std::string(SHARED_MUTEX_SHARED_NAME_SUFFIX)},
       shared_{name + std::string(SHARED_MUTEX_SHARED_NAME_SUFFIX)},
       global_{name + std::string(SHARED_MUTEX_SHARED_NAME_SUFFIX), 1},
       count_{name + std::string(SHARED_MUTEX_SHARED_NAME_SUFFIX)} {

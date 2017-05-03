@@ -3,6 +3,7 @@ project(labs)
 
 # customize binary directory
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+SET(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 # Highest warning level
 if(MSVC)
@@ -42,3 +43,6 @@ add_subdirectory("q14_reader_writer")
 add_subdirectory("q15_producer_consumer")
 add_subdirectory("q16_sleeping_barber")
 add_subdirectory("q17_dining_philosophers")
+
+# Tests
+add_subdirectory("test")

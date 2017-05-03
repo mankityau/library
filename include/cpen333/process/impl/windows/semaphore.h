@@ -13,18 +13,18 @@
 #include <windows.h>
 
 #include "cpen333/util.h"
-#include "cpen333/process/impl/named_resource.h"
+#include "cpen333/process/impl/named_resource_base.h"
 
 namespace cpen333 {
 namespace process {
 namespace windows {
 
-class semaphore : public named_resource {
+class semaphore : public impl::named_resource_base {
  public:
   using native_handle_type = HANDLE;
 
   semaphore(const std::string& name, size_t value = 1) :
-      named_resource{name+std::string(SEMAPHORE_NAME_SUFFIX)}, handle_{NULL} {
+      impl::named_resource_base{name+std::string(SEMAPHORE_NAME_SUFFIX)}, handle_{NULL} {
 
     // create named semaphore
     handle_ = CreateSemaphore(NULL, value, MAX_SEMAPHORE_SIZE, name_ptr());

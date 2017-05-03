@@ -10,6 +10,7 @@
 #include <string>
 #include <chrono>
 
+#include "cpen333/process/named_resource.h"
 #include "cpen333/process/impl/condition_base.h"
 
 namespace cpen333 {
@@ -17,7 +18,7 @@ namespace process {
 
 
 // an event with optional predicate to control wait
-class condition : private condition_base {
+class condition : private condition_base, public virtual named_resource {
  public:
 
   condition(const std::string &name, bool value = false) :

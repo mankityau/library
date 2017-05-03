@@ -13,7 +13,7 @@ namespace cpen333 {
 namespace process {
 
 template<typename T>
-class shared_object : private shared_memory {
+class shared_object : private shared_memory, public virtual named_resource {
 
  public:
   shared_object(const std::string &name, bool readonly = false) :
@@ -37,6 +37,10 @@ class shared_object : private shared_memory {
 
   static bool unlink(const std::string &name) {
     return shared_memory::unlink(name);
+  }
+
+  std::string name() const {
+    return shared_memory::name();
   }
 };
 

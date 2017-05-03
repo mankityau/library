@@ -8,7 +8,7 @@
 #define PIPE_OPEN_SUFFIX "_ppo"
 #define PIPE_INITIALIZED 0x18763023
 
-#include "cpen333/process/impl/named_resource.h"
+#include "cpen333/process/named_resource.h"
 #include "cpen333/process/mutex.h"
 #include "cpen333/process/semaphore.h"
 #include "cpen333/process/shared_memory.h"
@@ -18,7 +18,7 @@ namespace cpen333 {
 namespace process {
 
 
-class pipe : public named_resource {
+class pipe : public virtual named_resource {
 
  public:
 
@@ -27,7 +27,6 @@ class pipe : public named_resource {
   };
 
   pipe(const std::string& name, mode mode, size_t size = 1024) :
-      named_resource{name + std::string(PIPE_NAME_SUFFIX)},
       mode_{mode},
       wmutex_{name + std::string(PIPE_WRITE_SUFFIX)},
       rmutex_{name + std::string(PIPE_READ_SUFFIX)},
@@ -73,7 +72,7 @@ class pipe : public named_resource {
     }
   }
 
-  ~pipe() {
+  virtual ~pipe() {
     close();  // close pipe
   }
 

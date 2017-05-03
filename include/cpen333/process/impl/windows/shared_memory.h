@@ -9,18 +9,18 @@
 #include <windows.h>
 
 #include "cpen333/util.h"
-#include "cpen333/process/impl/named_resource.h"
+#include "cpen333/process/impl/named_resource_base.h"
 
 namespace cpen333 {
 namespace process {
 namespace windows {
 
-class shared_memory : public named_resource {
+class shared_memory : public impl::named_resource_base {
  public:
   using native_handle_type = HANDLE;
 
   shared_memory(const std::string &name, size_t size, bool readonly = false ) :
-      named_resource{name+std::string(SHARED_MEMORY_NAME_SUFFIX)},
+      impl::named_resource_base{name+std::string(SHARED_MEMORY_NAME_SUFFIX)},
       handle_{NULL},
       data_{nullptr},
       size_{size} {

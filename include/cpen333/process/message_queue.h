@@ -6,18 +6,18 @@
 #include <string>
 #include <chrono>
 #include "cpen333/process/fifo.h"
+#include "cpen333/process/named_resource.h"
 
 namespace cpen333 {
 namespace process {
 
 // Basic implementation based on FIFO, does not support priorities or filtering
 template<typename MessageType>
-class message_queue : named_resource {
+class message_queue : public virtual named_resource {
  public:
   using message_type = MessageType;
 
   message_queue(const std::string& name, size_t size = 1024) :
-      named_resource{name + std::string(MESSAGE_QUEUE_SUFFIX)},
       fifo_{name + std::string(MESSAGE_QUEUE_SUFFIX), size} {}
 
   void send(const MessageType& msg) {
