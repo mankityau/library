@@ -6,6 +6,7 @@
 #include "common.h"
 #include "cpen333/process/subprocess.h"
 #include "cpen333/process/message_queue.h"
+#include "cpen333/process/unlinker.h"
 #include "cpen333/thread/timer.h"  // timer
 
 //
@@ -40,6 +41,8 @@ int main() {
   // I am Po
   std::string my_name = "Po";
   cpen333::process::message_queue<MessageType> my_mailbox(my_name);
+  // unlink resource name when out of scope
+  cpen333::process::unlinker<decltype(my_mailbox)> unlink(my_mailbox);
 
   // These are my friends
   std::vector<std::string> friend_names = {"Tigress", "Master Shifu", "Viper", "Monkey", "Mantis", "Crane"};
@@ -101,7 +104,6 @@ int main() {
   // say goodbye to myself to close my reader thread
   my_mailbox.send({MessageCode::GOODBYE, "", my_name});
   read_thread.join();
-  my_mailbox.unlink();
 
   std::cout << "Goodbye." << std::endl;
   return 0;
