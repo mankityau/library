@@ -36,7 +36,7 @@ int main(int argc, char* argv[]) {
     std::cout << "Usage:" << std::endl;
     std::cout << argv[0] << " <list of semaphore IDs...>" << std::endl;
     std::cout << "\tSemaphore IDs can be found on OSX by using the command" << std::endl;
-    std::cout << "\t\tlsof | grep PSXSEM'" << std::endl;
+    std::cout << "\t\tlsof | grep PSXSEM" << std::endl;
     std::cout << "\tThese can be piped in directly, i.e." << std::endl;
     std::cout << "\t\tlsof | grep PSXSEM | awk '{print $7}' | " << argv[0] << std::endl;
   }

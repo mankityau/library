@@ -36,7 +36,7 @@ int main(int argc, char* argv[]) {
     std::cout << "Usage:" << std::endl;
     std::cout << argv[0] << " <list of shared memory IDs...>" << std::endl;
     std::cout << "\tShared memory IDs can be found on OSX by using the command" << std::endl;
-    std::cout << "\tlsof | grep PSXSHM | awk '{print $7}'" << std::endl;
+    std::cout << "\tlsof | grep PSXSHM" << std::endl;
     std::cout << "\tThese can be piped in directly, i.e." << std::endl;
     std::cout << "\t\tlsof | grep PSXSHM | awk '{print $7}' | " << argv[0] << std::endl;
   }
