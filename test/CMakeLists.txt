@@ -11,6 +11,8 @@ find_package( Threads REQUIRED )  # Multithreading package required
 # directories to search for header files
 include_directories(../include)
 
+include(CTest) 
+
 enable_testing()
 
 #==============  Unlinker  ====================================
@@ -25,4 +27,4 @@ set_target_properties( ${PROJECT}_process_unlinker_unlinker PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/process/unlinker"
         OUTPUT_NAME "unlinker")
 
-add_test(${PROJECT}_process_unlinker_unlinker_test ${PROJECT}_process_unlinker_unlinker)
+add_test(NAME ${PROJECT}_process_unlinker_unlinker_test COMMAND ${PROJECT}_process_unlinker_unlinker)
