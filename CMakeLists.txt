@@ -62,7 +62,7 @@ add_subdirectory("tools")
 
 # Tests
 # Enable top-level testing
-include (CTest)
+# include (CTest)
 enable_testing()
 add_subdirectory("test")
 
