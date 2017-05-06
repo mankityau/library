@@ -3,38 +3,21 @@ cmake_minimum_required(VERSION 3.1.3)
 # Name project based on current directory
 get_filename_component(PROJECT ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 project(${PROJECT})
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/${PROJECT})
+
+# customize output directory
+set(MY_OUTPUT_DIR ${MY_OUTPUT_DIR}/${PROJECT})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/${MY_OUTPUT_DIR})
 
 set(CMAKE_CXX_STANDARD 11)
-find_package( Threads REQUIRED )  # Multithreading package required
+include(../Macros.cmake)          # add_rt_executable and add_thread_executable
 
 # directories to search for header files
-include_directories(../include src)
+include_directories(../include)
 
-#==============  PenPal ===============================
-add_executable(${PROJECT}_penpal src/penpal.cpp)
+#==============  PenPals ===============================
 
-# add required libraries
-target_link_libraries(${PROJECT}_penpal Threads::Threads)
-if(UNIX AND NOT APPLE)
-    target_link_libraries(${PROJECT}_penpal rt)
-endif()
-
-# set output directory and executable name
-set_target_properties( ${PROJECT}_penpal PROPERTIES
-        OUTPUT_NAME "penpal")
-
-#==============  Main ===============================
-add_executable(${PROJECT}_parent src/parent.cpp)
-
-# add required libraries
-target_link_libraries(${PROJECT}_parent Threads::Threads)
-if(UNIX AND NOT APPLE)
-    target_link_libraries(${PROJECT}_parent rt)
-endif()
-
-# set output directory and executable name
-set_target_properties( ${PROJECT}_parent PROPERTIES
-        OUTPUT_NAME "parent")
-
+add_rt_executable(${PROJECT}_penpal penpal . src/penpal.cpp)
+add_rt_executable(${PROJECT}_parent parent . src/parent.cpp)
 add_dependencies(${PROJECT}_parent ${PROJECT}_penpal)
+install(TARGETS ${PROJECT}_parent ${PROJECT}_penpal
+        DESTINATION bin/${MY_OUTPUT_DIR})

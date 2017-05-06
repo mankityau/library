@@ -3,72 +3,27 @@ cmake_minimum_required(VERSION 3.1.3)
 # Name project based on current directory
 get_filename_component(PROJECT ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 project(${PROJECT})
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/${PROJECT})
+
+# customize output directory
+set(MY_OUTPUT_DIR ${MY_OUTPUT_DIR}/${PROJECT})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/${MY_OUTPUT_DIR})
 
 set(CMAKE_CXX_STANDARD 11)
-find_package( Threads REQUIRED )  # Multithreading package required
+include(../Macros.cmake)
 
 # directories to search for header files
-include_directories(../include src)
+include_directories(../include)
 
-#==============  Process Child ===============================
+#==============  Process  ===============================
 
-add_executable(${PROJECT}_process_child_unsafe src/process/child_unsafe.cpp)
-target_include_directories(${PROJECT}_process_child_unsafe PRIVATE src/process)  # local headers
-
-# add required libraries
-target_link_libraries(${PROJECT}_process_child_unsafe Threads::Threads)
-if(UNIX AND NOT APPLE)
-    target_link_libraries(${PROJECT}_process_child_unsafe rt)
-endif()
-
-# set output directory and executable name
-set_target_properties( ${PROJECT}_process_child_unsafe PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/process"
-        OUTPUT_NAME "child_unsafe")
-
-#==============  Process Child ===============================
-
-add_executable(${PROJECT}_process_child_safe src/process/child_safe.cpp)
-target_include_directories(${PROJECT}_process_child_safe PRIVATE src/process)  # local headers
-
-# add required libraries
-target_link_libraries(${PROJECT}_process_child_safe Threads::Threads)
-if(UNIX AND NOT APPLE)
-    target_link_libraries(${PROJECT}_process_child_safe rt)
-endif()
-
-# set output directory and executable name
-set_target_properties( ${PROJECT}_process_child_safe PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/process"
-        OUTPUT_NAME "child_safe")
-
-#==============  Process Parent ===============================
-add_executable(${PROJECT}_process_parent src/process/parent.cpp)
-target_include_directories(${PROJECT}_process_parent PRIVATE src/process)  # local headers
-
-# add required libraries
-target_link_libraries(${PROJECT}_process_parent Threads::Threads)
-if(UNIX AND NOT APPLE)
-    target_link_libraries(${PROJECT}_process_parent rt)
-endif()
-
-# set output directory and executable name
-set_target_properties( ${PROJECT}_process_parent PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/process"
-        OUTPUT_NAME "parent")
-
-# parent depends on child
-add_dependencies(${PROJECT}_process_parent ${PROJECT}_process_child_safe ${PROJECT}_process_child_unsafe)
+add_rt_executable(${PROJECT}_process_child_unsafe child_unsafe process src/process/child_unsafe.cpp)
+add_rt_executable(${PROJECT}_process_child_safe child_safe process src/process/child_safe.cpp)
+add_rt_executable(${PROJECT}_process_parent parent process src/process/parent.cpp)
+add_dependencies(${PROJECT}_process_parent ${PROJECT}_process_child_unsafe ${PROJECT}_process_child_safe)
+install(TARGETS ${PROJECT}_process_parent ${PROJECT}_process_child_unsafe ${PROJECT}_process_child_safe
+        DESTINATION bin/${MY_OUTPUT_DIR}/process)
 
 #==============  Thread ===============================
 
-add_executable(${PROJECT}_thread_thread src/thread/main.cpp)
-
-# add required libraries
-target_link_libraries(${PROJECT}_thread_thread Threads::Threads)
-
-# set output directory and executable name
-set_target_properties( ${PROJECT}_thread_thread PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/thread"
-        OUTPUT_NAME "thread")
+add_thread_executable(${PROJECT}_thread_thread thread thread src/thread/main.cpp)
+install(TARGETS ${PROJECT}_thread_thread DESTINATION bin/${MY_OUTPUT_DIR}/thread)

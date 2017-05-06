@@ -3,51 +3,25 @@ cmake_minimum_required(VERSION 3.1.3)
 # Name project based on current directory
 get_filename_component(PROJECT ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 project(${PROJECT})
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/${PROJECT})
+
+# customize output directory
+set(MY_OUTPUT_DIR ${MY_OUTPUT_DIR}/${PROJECT})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/${MY_OUTPUT_DIR})
 
 set(CMAKE_CXX_STANDARD 11)
-find_package( Threads REQUIRED )  # Multithreading package required
+include(../Macros.cmake)
 
 # directories to search for header files
 include_directories(../include)
 
-#==============  Rendezvous Person ===============================
-add_executable(${PROJECT}_process_person src/process/person.cpp)
-target_link_libraries(${PROJECT}_process_person Threads::Threads)
-# shared_memory requires linking with the rt library
-if(UNIX AND NOT APPLE)
-    target_link_libraries(${PROJECT}_process_person rt)
-endif()
-
-# set output directory and executable name
-set_target_properties( ${PROJECT}_process_person PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/process"
-        OUTPUT_NAME "person")
-
-#==============  Rendezvous Roller Coaster ===============================
-add_executable(${PROJECT}_process_roller_coaster src/process/roller_coaster.cpp)
-target_link_libraries(${PROJECT}_process_roller_coaster Threads::Threads)
-# shared_memory requires linking with the rt library
-if(UNIX AND NOT APPLE)
-    target_link_libraries(${PROJECT}_process_roller_coaster rt)
-endif()
-
-# set output directory and executable name
-set_target_properties( ${PROJECT}_process_roller_coaster PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/process"
-        OUTPUT_NAME "roller_coaster")
-
+#==============  Rendezvous Process ===============================
+add_rt_executable(${PROJECT}_process_person person process src/process/person.cpp)
+add_rt_executable(${PROJECT}_process_roller_coaster roller_coaster process src/process/roller_coaster.cpp)
 add_dependencies(${PROJECT}_process_roller_coaster ${PROJECT}_process_person)
+install(TARGETS ${PROJECT}_process_roller_coaster ${PROJECT}_process_person
+        DESTINATION bin/${MY_OUTPUT_DIR}/process)
 
-#==============  Rendezvous Thread Roller Coaster ===============================
-add_executable(${PROJECT}_thread_roller_coaster src/thread/roller_coaster.cpp)
-target_link_libraries(${PROJECT}_thread_roller_coaster Threads::Threads)
-# shared_memory requires linking with the rt library
-if(UNIX AND NOT APPLE)
-    target_link_libraries(${PROJECT}_thread_roller_coaster rt)
-endif()
-
-# set output directory and executable name
-set_target_properties( ${PROJECT}_thread_roller_coaster PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/thread"
-        OUTPUT_NAME "roller_coaster")
+#==============  Rendezvous Thread ===============================
+add_thread_executable(${PROJECT}_thread_roller_coaster roller_coaster thread src/thread/roller_coaster.cpp)
+install(TARGETS ${PROJECT}_thread_roller_coaster
+        DESTINATION bin/${MY_OUTPUT_DIR}/thread)

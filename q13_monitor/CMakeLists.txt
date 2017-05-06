@@ -3,57 +3,25 @@ cmake_minimum_required(VERSION 3.1.3)
 # Name project based on current directory
 get_filename_component(PROJECT ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 project(${PROJECT})
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/${PROJECT})
+
+# customize output directory
+set(MY_OUTPUT_DIR ${MY_OUTPUT_DIR}/${PROJECT})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/${MY_OUTPUT_DIR})
 
 set(CMAKE_CXX_STANDARD 11)
-find_package( Threads REQUIRED )  # Multithreading package required
+include(../Macros.cmake)
 
 # directories to search for header files
 include_directories(../include)
 
-#==============  Process Child ===============================
-add_executable(${PROJECT}_process_child src/process/child.cpp)
+#==============  Process Monitor ===============================
+add_rt_executable(${PROJECT}_process_child child process src/process/child.cpp)
+add_rt_executable(${PROJECT}_process_mom mom process src/process/mom.cpp)
+add_dependencies(${PROJECT}_process_mom ${PROJECT}_process_child)
+install(TARGETS ${PROJECT}_process_mom ${PROJECT}_process_child
+        DESTINATION bin/${MY_OUTPUT_DIR}/process)
 
-# add required libraries
-target_link_libraries(${PROJECT}_process_child Threads::Threads)
-if(UNIX AND NOT APPLE)
-    target_link_libraries(${PROJECT}_process_child rt)
-endif()
-
-# set output directory and executable name
-set_target_properties( ${PROJECT}_process_child PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/process"
-        OUTPUT_NAME "child")
-
-#==============  Process Parent ===============================
-
-add_executable(${PROJECT}_process_mom src/process/mom.cpp)
-
-# add required libraries
-target_link_libraries(${PROJECT}_process_mom Threads::Threads)
-if(UNIX AND NOT APPLE)
-    target_link_libraries(${PROJECT}_process_mom rt)
-endif()
-
-# set output directory and executable name
-set_target_properties( ${PROJECT}_process_mom PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/process"
-        OUTPUT_NAME "mom")
-
-# mom depends on child
-add_dependencies(${PROJECT}_process_mom ${PROJECT}_thread_spender)
-
-#==============  Process Child ===============================
-add_executable(${PROJECT}_thread_spender src/thread/spender.cpp)
-
-# add required libraries
-target_link_libraries(${PROJECT}_thread_spender Threads::Threads)
-if(UNIX AND NOT APPLE)
-    target_link_libraries(${PROJECT}_thread_spender rt)
-endif()
-
-# set output directory and executable name
-set_target_properties( ${PROJECT}_thread_spender PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/thread"
-        OUTPUT_NAME "spender")
-
+#==============  Thread Monitor ===============================
+add_thread_executable(${PROJECT}_thread_spender spender thread src/thread/spender.cpp)
+install(TARGETS ${PROJECT}_thread_spender
+        DESTINATION bin/${MY_OUTPUT_DIR}/process)

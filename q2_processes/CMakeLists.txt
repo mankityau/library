@@ -6,9 +6,9 @@ project(${PROJECT})
 
 set(CMAKE_CXX_STANDARD 11)
 
-# customize output directory to be within a "bin/<project>" folder, relative to the BASE CMakeLists.txt file
-#   (i.e. if this project is added to another top-level one, the bin folder will be relative to the top level)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/${PROJECT})
+# customize output directory
+set(MY_OUTPUT_DIR ${MY_OUTPUT_DIR}/${PROJECT})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/${MY_OUTPUT_DIR})
 
 # directories to search for header files
 include_directories(../include)
@@ -29,3 +29,7 @@ set_target_properties(${PROJECT}_parent PROPERTIES OUTPUT_NAME "parent")
 
 # Parent executable depends on all children (since it tries to spawn them)
 add_dependencies(${PROJECT}_parent ${PROJECT}_child1 ${PROJECT}_child2 ${PROJECT}_child3)
+
+# install all targets
+install(TARGETS ${PROJECT}_child1 ${PROJECT}_child2 ${PROJECT}_child3 ${PROJECT}_parent
+        DESTINATION bin/${MY_OUTPUT_DIR})
