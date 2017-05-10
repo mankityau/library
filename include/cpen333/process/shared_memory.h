@@ -12,6 +12,16 @@
 namespace cpen333 {
 namespace process {
 
+/**
+ * @brief Shared memory with a a specific stored type
+ *
+ * With typed shared memory, the size of the required memory block is automatically
+ * computed, and the data pointer is automatically cast to the correct type in get().
+ * Member access operators are also overloaded for convenience so the shared object can be used
+ * as if it is a direct pointer to the underlying data.
+ *
+ * @tparam T data type
+ */
 template<typename T>
 class shared_object : private shared_memory, public virtual named_resource {
 

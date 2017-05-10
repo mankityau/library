@@ -1,3 +1,8 @@
+/**
+ * @file
+ * @brief Utility class for manipulating the console
+ */
+
 #ifndef CPEN333_CONSOLE_H
 #define CPEN333_CONSOLE_H
 
@@ -16,6 +21,11 @@
 
 namespace cpen333 {
 
+/**
+ * @brief Colours for foreground/background
+ *
+ * Colour definitions used for setting the foreground and background colours.
+ */
 enum color {
   BLACK, DARK_RED, DARK_GREEN, DARK_YELLOW, DARK_BLUE, DARK_MAGENTA, DARK_CYAN, LIGHT_GREY,
   DARK_GREY, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE, DEFAULT
@@ -23,6 +33,9 @@ enum color {
 
 namespace detail {
 
+/**
+ * @brief ANSI codes used for POSIX terminal formatting and manipulation
+ */
 struct ANSI_CODES {
   static constexpr const char *FOREGROUND_COLOR_BLACK = "\u001B[30m";
   static constexpr const char *FOREGROUND_COLOR_DARK_RED = "\u001B[31m";
@@ -628,28 +641,71 @@ class console_handler {
 
 } // detail
 
-// template <typename Dummy = void>
+/**
+ * @brief Methods for manipulating the console
+ *
+ * Useful for cursor placement and visibility, foreground and background colors, and clearing
+ * part or all of the screen.
+ */
 class console {
  public:
+
+  /**
+   * @brief Default constructor
+   */
   console() : handler_{}, foreground_{color::DEFAULT}, background_{color::DEFAULT}, reversed_{false} {}
 
+  /**
+   * @brief Destructor, currently does nothing
+   *
+   * Note that once the console instance is destructed, any modified console attributes
+   * will remain in effect.  It is <em>highly</em> recommended to call `clear_all()` prior
+   * to terminating your program.
+   */
   virtual ~console() {}
 
+  /**
+   * @brief Sets the foreground colour
+   *
+   * Sets the color of the foreground text, unless colours are set to "reverse", in which case
+   * would set the text background color.
+   *
+   * @param color color to use for foreground
+   */
   void set_foreground_color(const color &color) {
     handler_.set_foreground_color(color);
     foreground_ = color;
   }
 
+  /**
+   * @brief Sets the background colour
+   *
+   * Sets the color of the text background, unless colours are set to "reverse", in which case
+   * would set the text foreground color.
+   * @param color color to use for background
+   */
   void set_background_color(const color &color) {
     handler_.set_background_color(color);
     background_ = color;
   }
 
+  /**
+   * @brief Reverse role of foreground/background colours
+   *
+   * If set is `true`, then the foreground colour acts as the background colour, and vice versa.
+   * @param set enable or disable reversing of foreground/background colors
+   */
   void set_colors_reverse(bool set) {
     handler_.set_colors_reverse(set);
     reversed_ = set;
   }
 
+  /**
+   * @brief Reset colours to original values
+   *
+   * Resets the foreground and background colours to those encountered when this console instance was
+   * constructed.
+   */
   void reset_colors() {
     handler_.reset_colors();
     foreground_ = DEFAULT;
@@ -657,36 +713,82 @@ class console {
     reversed_ = false;
   }
 
+  /**
+   * @brief Sets the cursor position
+   *
+   * The cursor position is the location relative to the top-left corner of the console at which
+   * the next printed text is to appear.
+   * @param r row, counted from the top which has index `r=0`
+   * @param c column, counted from the left which has index `c=0`
+   */
   void set_cursor_position(int r, int c) {
     handler_.set_cursor_position(r,c);
   }
 
+  /**
+   * @brief Clears contents visible in the console
+   *
+   * Clears all text and fills the console background with the currently set background colour.
+   */
   void clear_display() {
     handler_.clear_display();
   }
 
+  /**
+   * @brief Clears the current console line
+   *
+   * Clears all text and fills the current console line's background with the currently set
+   * background colour.
+   */
   void clear_line() {
     handler_.clear_line();
   }
 
+  /**
+   * @brief Clears contents of the current row to the right of the cursor's position
+   *
+   * Clears text in the starting with and including the current cursor position until the end of
+   * the row, filling with the currently set background colour.
+   */
   void clear_line_right() {
     handler_.clear_line_right();
   }
 
+  /**
+   * @brief Clears contents of the current row to the left of the cursor's position
+   *
+   * Clears all text starting with the beginning of the current row and ending with and including
+   * the current cursor position, filling with the currently set background colour.
+   */
   void clear_line_left() {
     handler_.clear_line_left();
   }
-  
+
+  /**
+   * @brief Show or hide the cursor
+   * @param visible if `true`, the cursor will be set visible, otherwise the cursor will be hidden
+   */
   void set_cursor_visible(bool visible) {
     handler_.set_cursor_visible(visible);
   }
 
+  /**
+   * @brief Reset colours and cursor visibility
+   *
+   * Resets the foreground and background colour to their original values, and re-enables
+   * cursor visibility if it was set to hidden
+   */
   void reset() {
     handler_.reset();
   }
 
   /**
-   * Clears display and resets all console attributes
+   * @brief Clears display and resets all console attributes
+   *
+   * Resets all console attributes, including foreground and background colours as well as
+   * cursor visibility, and clears the contents of the entire display.  The cursor's position
+   * is set to the top-left position.  This method should be called prior to program termination
+   * to prevent modified console attributes from persisting beyond the lifetime of the process.
    */
   void clear_all() {
     handler_.reset();

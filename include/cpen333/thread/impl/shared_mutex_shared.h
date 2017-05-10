@@ -15,7 +15,7 @@ namespace impl {
  * See https://en.wikipedia.org/wiki/Readers%E2%80%93writer_lock for details
  */
 class shared_mutex_shared {
- protected:
+ private:
 
   std::mutex mutex_;     // mutex for shared access
   cpen333::thread::semaphore global_; // global semaphore

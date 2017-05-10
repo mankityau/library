@@ -1,3 +1,7 @@
+/**
+ * @file
+ * @brief Condition synchronization primitive
+ */
 #ifndef CPEN333_PROCESS_CONDITION_H
 #define CPEN333_PROCESS_CONDITION_H
 
@@ -17,10 +21,23 @@ namespace cpen333 {
 namespace process {
 
 
-// an event with optional predicate to control wait
+/**
+ * @brief Allows multiple processes to wait until the condition is set (like a gate)
+ *
+ * A named synchronization primitive that allows multiple threads and processes to wait until the
+ * condition is notified to be set.  As long
+ * as the condition remains set, any threads that wait on the condition will immediately proceed.
+ * The condition must manually be reset in order to cause threads/processes to wait until the next
+ * time the condition is set.
+ */
 class condition : private condition_base, public virtual named_resource {
  public:
 
+  /**
+   * @brief Constructs the object
+   * @param name name identifier for creating or connecting to an existing inter-process condition
+   * @param value initial state, as either set (`true`) or reset (`false`)
+   */
   condition(const std::string &name, bool value = false) :
       condition_base{name + std::string(CONDITION_NAME_SUFFIX)},
       storage_{name + std::string(CONDITION_NAME_SUFFIX)},
@@ -35,6 +52,13 @@ class condition : private condition_base, public virtual named_resource {
 
   }
 
+  /**
+   * @brief Waits until the condition is set
+   *
+   * Causes the current thread to block until the condition is set.
+   * This condition will <em>not</em> exhibit spurious wake-ups.  A thread will be forced
+   * to wait here indefinitely until the condition is set.
+   */
   void wait() {
     std::unique_lock<cpen333::process::mutex> lock(mutex_);
     while (!storage_->value) {
@@ -42,11 +66,32 @@ class condition : private condition_base, public virtual named_resource {
     }
   }
 
+  /**
+   * @brief Waits for the condition to be set or for a timeout period to elapse
+   *
+   * Causes the current thread to block until the condition is set, or until
+   * the specified timeout period elapses, whichever comes first.
+   * @tparam Rep timeout duration representation
+   * @tparam Period timeout clock period
+   * @param rel_time maximum relative time to wait for condition to be set
+   * @return `true` if condition is set, `false` if timeout has elapsed without condition being set
+   */
   template<class Rep, class Period>
   bool wait_for(const std::chrono::duration<Rep, Period>& rel_time) {
     return wait_until(std::chrono::steady_clock::now()+rel_time);
   }
 
+  /**
+   * @brief Waits for the condition to be set or for a time-point to be reached
+   * 
+   * Causes the current thread to block until the condition is set, or until the
+   * specified timeout time has been reached, whichever comes first.
+   * 
+   * @tparam Clock clock type
+   * @tparam Duration clock duration type
+   * @param timeout_time absolute timeout time 
+   * @return `true` if condition is set, `false` if timeout time has been reached without condition being set
+   */
   template< class Clock, class Duration >
   bool wait_until( const std::chrono::time_point<Clock, Duration>& timeout_time ) {
     std::unique_lock<cpen333::process::mutex> lock(mutex_, std::defer_lock);
@@ -64,6 +109,12 @@ class condition : private condition_base, public virtual named_resource {
     return true;
   }
 
+  /**
+   * @brief Sets the condition to `true` and wakes up threads
+   *
+   * Sets the condition's internal state to `true` and wakes up any threads waiting on
+   * the condition.  The condition will remain in the `set` state until it is manually reset.
+   */
   void notify() {
     // open gate
     {
@@ -74,6 +125,12 @@ class condition : private condition_base, public virtual named_resource {
     condition_base::notify(true);
   }
 
+  /**
+   * @brief Resets the condition
+   *
+   * Sets the condition's internal state to `false`.  This will call any future `wait` calls to block
+   * until the condition is again notified.
+   */
   void reset() {
     // reset the value
     std::lock_guard<cpen333::process::mutex> lock(mutex_);
@@ -87,6 +144,16 @@ class condition : private condition_base, public virtual named_resource {
     return b1 && b2 && b3;
   }
 
+  /**
+   * @brief Unlinks any condition with the provided name
+   *
+   * Allows a name to be freed without needing to create a new condition resource.  This is
+   * useful for clean-up of previously terminated processes that failed to release the resource
+   * properly.
+   *
+   * @param name name of condition resource
+   * @return `true` if unlink successful, `false` if an error occurred or if not supported
+   */
   static bool unlink(const std::string& name) {
     bool b1 = cpen333::process::condition_base::unlink(name + std::string(CONDITION_NAME_SUFFIX));
     bool b2 = cpen333::process::shared_object<shared_data>::unlink(name + std::string(CONDITION_NAME_SUFFIX));

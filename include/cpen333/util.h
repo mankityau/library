@@ -1,6 +1,10 @@
-//
-// Created by Antonio on 2017-04-15.
-//
+/**
+ * @file
+ * @brief Utility functions
+ *
+ * Contains functions for formatting strings, testing for data on standard input, and printing
+ * system library errors.
+ */
 
 #ifndef CPEN333_UTIL_H
 #define CPEN333_UTIL_H
@@ -62,6 +66,14 @@ int _kbhit() {
 }
 #endif
 
+/**
+ * @brief Tests for keyboard input
+ *
+ * Wrapper around platform-specific code for detecting the presence of data available on the
+ * standard input stream `stdin`.  This call returns immediately, without blocking.
+ *
+ * @return non-zero value if there is content
+ */
 inline int test_stdin() {
 #ifdef WINDOWS
   return _kbhit();
@@ -71,7 +83,18 @@ inline int test_stdin() {
 }
 
 /**
- * Print error message
+ * @brief Print error message
+ *
+ * Attempts to detect the last system error that occured, interprets the corresponding error message,
+ * and prints it to sterr (the standard error output stream, usually the console), preceding it with the
+ * custom message specified in msg.
+ *
+ * On Windows, the error corresponds to that obtained by GetLastError().  On Linux and OSX, it is the
+ * build-in `errno`.  The error message produced by perror is platform-depend.
+ *
+ * perror should be called right after the error was produced, otherwise it may be overwritten by calls
+ * to other system functions.
+ *
  * @param msg custom message
  */
 inline void perror(const std::string& msg) {
@@ -87,4 +110,5 @@ inline void perror(const std::string& msg) {
 }
 
 }// cpen333
+
 #endif //CPEN333_UTIL_H

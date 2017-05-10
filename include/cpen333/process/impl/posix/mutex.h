@@ -1,3 +1,10 @@
+/**
+ * @file
+ * @brief POSIX implementation of an inter-process named mutex
+ *
+ * Uses a binary POSIX semaphore (rather than pthreads, which doesn't seem to easily support named mutexes).
+ */
+
 #ifndef CPEN333_PROCESS_MUTEX_POSIX_H
 #define CPEN333_PROCESS_MUTEX_POSIX_H
 
@@ -93,6 +100,7 @@ class mutex : public virtual named_resource {
 } // native implementation
 
 using mutex = posix::mutex;
+
 using timed_mutex = posix::mutex;
 
 } // process

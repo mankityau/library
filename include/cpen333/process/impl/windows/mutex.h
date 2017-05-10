@@ -105,6 +105,12 @@ class mutex : public impl::named_resource_base {
 
 } // native implementation
 
+/**
+ * @brief a named inter-process mutual exclusion primitive
+ *
+ * A named inter-process mutual exclusion primitive, useful for protecting
+ * access to a resource.
+ */
 using mutex = windows::mutex;
 using timed_mutex = windows::mutex;
 

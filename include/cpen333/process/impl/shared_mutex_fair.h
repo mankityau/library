@@ -18,8 +18,11 @@ namespace impl {
 // Based on the alternating method described here:
 //     http://www.tools-of-computing.com/tc/CS/Monitors/AlternatingRW.htm
 class shared_mutex_fair : public virtual named_resource {
- protected:
+ private:
 
+  /**
+   * @internal
+   */
   struct shared_data {
     size_t shared[2];   // readers or queued
     char this_batch;    // index within shared of current batch sharing access
