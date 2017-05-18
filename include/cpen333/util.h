@@ -28,6 +28,18 @@
 
 namespace cpen333 {
 
+/**
+ * @brief Formats a string according to standard C printf rules.
+ *
+ * Writes the string described by `format` to a new output string.
+ * If `format` includes format specifiers (subsequences beginning with @%), the additional arguments following
+ * `format` are formatted and inserted in the resulting string replacing their respective specifiers.
+ *
+ * @tparam Args variadic template types of additional arguments
+ * @param format format specifier string
+ * @param args additional arguments
+ * @return new formatted string
+ */
 template<typename ... Args>
 std::string string_format( const std::string& format, Args ... args ) {
   // compute size of necessary string

@@ -86,10 +86,20 @@ class condition_base : public virtual named_resource {
     return wait(lock, true, timeout_time);
   }
 
+  /**
+   * @brief Notify one waiting thread
+   *
+   * Wake up a single waiting thread and notify them of a potential change
+   */
   void notify_one() {
     notify(false);
   }
 
+  /**
+   * @brief Notify all waiting threads
+   *
+   * Wake up all waiting threads and notify them of a potential change
+   */
   void notify_all() {
     notify(true);
   }

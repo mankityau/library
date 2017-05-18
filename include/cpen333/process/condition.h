@@ -5,10 +5,14 @@
 #ifndef CPEN333_PROCESS_CONDITION_H
 #define CPEN333_PROCESS_CONDITION_H
 
-// suffix to append to mutex names for uniqueness
+/**
+ * @brief Suffix to append to mutex names for uniqueness
+ */
 #define CONDITION_NAME_SUFFIX "_con"
 
-// magic number of testing initialization
+/**
+ * @brief Magic number of testing initialization
+ */
 #define CONDITION_INITIALIZED 0x87621232
 
 #include <string>
@@ -22,10 +26,10 @@ namespace process {
 
 
 /**
- * @brief Allows multiple processes to wait until the condition is set (like a gate)
+ * @brief Allows multiple processes to wait until the condition is set, acting like a gate.
  *
  * A named synchronization primitive that allows multiple threads and processes to wait until the
- * condition is notified to be set.  As long
+ * condition is notified as being set.  As long
  * as the condition remains set, any threads that wait on the condition will immediately proceed.
  * The condition must manually be reset in order to cause threads/processes to wait until the next
  * time the condition is set.
