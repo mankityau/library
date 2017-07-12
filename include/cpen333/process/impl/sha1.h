@@ -1,9 +1,3 @@
-#include <stdint.h>
-#include <string.h>
-
-#define SHA1_HEX_SIZE (40 + 1)
-#define SHA1_BASE64_SIZE (28 + 1)
-
 //
 //  Source: https://github.com/983/SHA1/blob/master/sha1.hpp
 //
@@ -32,6 +26,21 @@
 
     For more information, please refer to <http://unlicense.org>
  */
+
+/**
+ * @file
+ * @brief SHA1 hash implementation
+ * @cond
+ */
+
+#ifndef SHA1_H_
+#define SHA1_H_
+
+#include <stdint.h>
+#include <string.h>
+
+#define SHA1_HEX_SIZE (40 + 1)
+#define SHA1_BASE64_SIZE (28 + 1)
 
 class sha1 {
  private:
@@ -281,3 +290,9 @@ class sha1 {
     return *this;
   }
 };
+
+#endif
+
+/**
+ * @endcond
+ */

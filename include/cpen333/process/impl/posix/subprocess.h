@@ -1,3 +1,7 @@
+/**
+ * @file
+ * @brief POSIX implementation of a child process
+ */
 #ifndef CPEN333_PROCESS_POSIX_SUBPROCESS_H
 #define CPEN333_PROCESS_POSIX_SUBPROCESS_H
 
@@ -19,6 +23,11 @@ namespace cpen333 {
 namespace process {
 namespace posix {
 
+/**
+ * @brief A child process
+ *
+ * Allows launching of a child process, with environment inherited from the current process.
+ */
 class subprocess {
  private:
   pid_t pid_;
@@ -28,6 +37,22 @@ class subprocess {
   bool terminated_;
 
  public:
+  /**
+   * @brief Alias to native handle type, on POSIX is pid_t
+   */
+  using native_handle_type = pid_t;
+
+  /**
+   * @brief Constructs a new subprocess
+   *
+   * The new process will run the command exec[0] with argv parameters {exec[1], exec[2], ...}.  A detached child
+   * process will run in a separate thread, concurrently with the parent process.  If not detached, the parent will wait
+   * for a running child to complete.
+   *
+   * @param exec command and arguments to execute
+   * @param start whether to start the subprocess immediately
+   * @param detached run the subprocess in `detached' mode
+   */
   subprocess(const std::vector<std::string> &exec, bool start = true, bool detached = false) :
       pid_{-1}, exec_{exec}, detached_{detached}, started_{false}, terminated_{false} {
     if (start) {
@@ -36,26 +61,30 @@ class subprocess {
   }
 
   // XXX results in ambiguity for common use-cases
-//  subprocess(const std::string &cmd, bool start = true, bool detached = false) :
-//      pid_{-1}, exec_{}, detached_{detached}, started_{false}, terminated_{false} {
-//
-//    wordexp_t p;
-//    char **w;
-//    int i;
-//
-//    wordexp("[a-c]*.c", &p, 0);
-//    w = p.we_wordv;
-//    for (i = 0; i < p.we_wordc; i++) {
-//      printf("%s\n", w[i]);
-//      exec_.push_back(w[i]);
-//    }
-//    wordfree(&p);
-//
-//    if (start) {
-//      this->start();
-//    }
-//  }
+  //  subprocess(const std::string &cmd, bool start = true, bool detached = false) :
+  //      pid_{-1}, exec_{}, detached_{detached}, started_{false}, terminated_{false} {
+  //
+  //    wordexp_t p;
+  //    char **w;
+  //    int i;
+  //
+  //    wordexp("[a-c]*.c", &p, 0);
+  //    w = p.we_wordv;
+  //    for (i = 0; i < p.we_wordc; i++) {
+  //      printf("%s\n", w[i]);
+  //      exec_.push_back(w[i]);
+  //    }
+  //    wordfree(&p);
+  //
+  //    if (start) {
+  //      this->start();
+  //    }
+  //  }
 
+  /**
+   * @brief Starts the subprocess
+   * @return true if started, false if process already started or an error occurs
+   */
   bool start() {
 
     if (started_) {
@@ -92,6 +121,10 @@ class subprocess {
     return success;
   }
 
+  /**
+   * @brief Waits for the subprocess to complete execution
+   * @return true if joined successfully, false if the process has already been joined or if an error occurs
+   */
   bool join() {
     if (pid_ < 0 || terminated_) {
       return false;
@@ -112,14 +145,40 @@ class subprocess {
   }
 
   /**
-   * Waits for the process to terminate, waiting for a certain amount of time.
+   * @brief Waits for the subprocess to complete execution
+   *
+   * Similar to join(), but will return true if the process has already been joined
+   *
+   * @return true if process terminates or is already terminated
+   */
+  bool wait() {
+    if (terminated_) {
+      return true;
+    }
+    return join();
+  }
+
+  /**
+   * @brief Waits for the process to terminate up to a maximum amount of time
    * @tparam Rep  duration representation
    * @tparam Period  duration tick period
-   * @param duration time to wait for
-   * @return true if process terminated (even if state was previously queried)
+   * @param duration maximum relative time to wait for
+   * @return true if process terminates or is already terminated
    */
   template<typename Rep, typename Period>
   bool wait_for(const std::chrono::duration<Rep,Period>& duration) {
+    return wait_until(std::chrono::steady_clock::now()+duration);
+  }
+
+  /**
+   * @brief Waits for the process to terminate up to a maximum absolute time
+   * @tparam Clock timeout clock type
+   * @tparam Duration timeout clock duration type
+   * @param timeout_time absolute timeout time
+   * @return true if process terminates or is already terminated
+   */
+  template< class Clock, class Duration >
+  bool wait_until( const std::chrono::time_point<Clock,Duration>& timeout_time ) {
 
     // There is self-pipe trick to try to catch SIGCHLD, but here we will just poll
     // http://stackoverflow.com/questions/282176/waitpid-equivalent-with-timeout
@@ -129,7 +188,6 @@ class subprocess {
       return true;
     }
 
-    auto timeout = std::chrono::steady_clock::now()+duration;
     int status = 0;
     int r = 0;
     do {
@@ -142,7 +200,7 @@ class subprocess {
       }
 
       std::this_thread::yield();  // yield to other threads to prevent excessive polling
-    } while (r != pid_ && std::chrono::steady_clock::now() < timeout);
+    } while (r != pid_ && std::chrono::steady_clock::now() < timeout_time);
 
     if ( r == pid_ && WIFEXITED(status) ) {
       terminated_ = true;
@@ -156,6 +214,10 @@ class subprocess {
 
   }
 
+  /**
+   * @brief Checks if the process has already been terminated
+   * @return
+   */
   bool terminated() {
     if (terminated_) {
       return true;
@@ -168,6 +230,9 @@ class subprocess {
 
 } // native implementation
 
+/**
+ * @brief Alias to POSIX implementation of a child process
+ */
 using subprocess = posix::subprocess;
 
 } // process

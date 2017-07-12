@@ -1,17 +1,22 @@
+/**
+ * @file
+ * @brief POSIX implementation of an inter-process named semaphore
+ *
+ * Uses a POSIX semaphore
+ */
 #ifndef CPEN333_PROCESS_POSIX_SEMAPHORE_H
 #define CPEN333_PROCESS_POSIX_SEMAPHORE_H
 
-// maximum possible size of a semaphore
-#define MAX_SEMAPHORE_SIZE LONG_MAX
-
-// suffix appended to semaphore names for uniqueness
+/**
+ * @brief Suffix to append to semaphore names for uniqueness
+ */
 #define SEMAPHORE_NAME_SUFFIX "_sem"
 
 #include <string>
 #include <chrono>
 #include <thread>       // for yield
-#include <fcntl.h>      /* For O_* constants */
-#include <sys/stat.h>   /* For mode constants */
+#include <fcntl.h>      // for O_* constants
+#include <sys/stat.h>   // for mode constants
 #include <semaphore.h>
 
 #include "cpen333/util.h"
@@ -21,10 +26,35 @@ namespace cpen333 {
 namespace process {
 namespace posix {
 
+/**
+ * @brief Inter-process named semaphore primitive
+ *
+ * Used to limit access to a number of resources.  Contains an integer whose value is never allowed to fall below zero.
+ * There are two main supported actions: wait(), which decrements the internal value, and notify() which increments the
+ * value.  If the value of the semaphore is zero, then wait() will cause the thread to block until the value becomes
+ * greater than zero.
+ *
+ * This implementation has no explicit maximum value
+ *
+ * This semaphore has KERNEL PERSISTENCE, meaning if not unlink()-ed, will continue to exist in its current state
+ * until the system is shut down (persisting beyond the life of the initiating program)
+ *
+ */
 class semaphore : public impl::named_resource_base {
  public:
+  /**
+   * @brief Alias to native handle type for semaphore
+   *
+   * In this case, a POSIX sem_t*
+   */
   using native_handle_type = sem_t*;
 
+  /**
+   * @brief Constructs or connects to a named semaphore
+   *
+   * @param name  identifier for creating or connecting to an existing inter-process semaphore
+   * @param value initial value (defaults to 1)
+   */
   semaphore(const std::string& name, size_t value = 1) :
       impl::named_resource_base{name+std::string(SEMAPHORE_NAME_SUFFIX)}, handle_{nullptr} {
     // create named semaphore
@@ -37,6 +67,9 @@ class semaphore : public impl::named_resource_base {
     }
   }
 
+  /**
+   * @brief Destructor
+   */
   ~semaphore() {
     // release the semaphore
     if (sem_close(handle_) != 0) {
@@ -45,8 +78,11 @@ class semaphore : public impl::named_resource_base {
   }
 
   /**
-   * Tries to return the value of the semaphore.  This really should never be
-   * used, except for possibly debugging.
+   * @brief Determines the current stored value of the semaphore
+   *
+   * This should never be used, except for possibly debugging, as the value may change without notice from other
+   * threads.  This method will cause an error on OSX.
+   *
    * @return
    */
   size_t value() {
@@ -63,6 +99,12 @@ class semaphore : public impl::named_resource_base {
     return val;
   }
 
+  /**
+   * @brief Waits for and decrements the semaphore value
+   *
+   * If the value is greater than zero, will decrement it and return immediately.  Otherwise, the thread will
+   * block until it becomes possible to perform the decrement.
+   */
   void wait() {
     int success = 0;
     // continuously loop until we have the lock
@@ -75,6 +117,13 @@ class semaphore : public impl::named_resource_base {
     }
   }
 
+  /**
+   * @brief Tries to wait for the semaphore, returning immediately
+   *
+   * If the value is greater than zero, will decrement the semaphore and return true.  Otherwise, will return false.
+   *
+   * @return true if decrement successful, false otherwise
+   */
   bool try_wait() {
     int success = sem_trywait(handle_);
     if (errno == EINVAL) {
@@ -83,6 +132,12 @@ class semaphore : public impl::named_resource_base {
     return (success == 0);
   }
 
+  /**
+   * @brief Increments the semaphore value
+   *
+   * If the semaphore's value consequently becomes greater than zero, then one process or thread that is currently
+   * blocked in a wait() operation will be woken up and will proceed.
+   */
   void notify() {
     // std::cout << "notifying sem " << name() << std::endl;
     int success = sem_post(handle_);
@@ -91,11 +146,33 @@ class semaphore : public impl::named_resource_base {
     }
   }
 
+  /**
+   * @brief Tries to wait for the semaphore for up to a maximum timeout duration
+   *
+   * If the semaphore's value is greater than zero, will decrement it and return true immediately.  Otherwise,
+   * will wait (blocking) up to a maximum relative timeout period.
+   *
+   * @tparam Rep time representation
+   * @tparam Period timeout period type
+   * @param timeout_duration maximum relative duration for waiting
+   * @return true if semaphore successfully decremented, false if timed-out
+   */
   template< class Rep, class Period >
   bool wait_for( const std::chrono::duration<Rep,Period>& timeout_duration ) {
     return wait_until(std::chrono::steady_clock::now()+timeout_duration);
   }
 
+  /**
+   * @brief Tries to wait for the semaphore for up to a maximum absolute time
+   *
+   * If the semaphore's value is greater than zero, will decrement it and return true immediately.  Otherwise,
+   * will wait (blocking) up to a maximum relative timeout period.
+   *
+   * @tparam Clock timeout clock type
+   * @tparam Duration timeout duration type
+   * @param timeout_time maximum absolute time for waiting
+   * @return true if semaphore successfully decremented, false if timed-out
+   */
   template< class Clock, class Duration >
   bool wait_until( const std::chrono::time_point<Clock,Duration>& timeout_time ) {
     auto duration = timeout_time.time_since_epoch();
@@ -110,6 +187,15 @@ class semaphore : public impl::named_resource_base {
     return (success == 0);
   }
 
+  /**
+   * @brief Returns a native handle to the semaphore
+   *
+   * The native handle has a type aliased to semaphore::native_handle_type
+   *
+   * On POSIX systems, is of type sem_t*.
+   *
+   * @return native semaphore handle
+   */
   native_handle_type native_handle() const {
     return handle_;
   }
@@ -122,6 +208,9 @@ class semaphore : public impl::named_resource_base {
     return (status == 0);
   }
 
+  /**
+   * @copydoc cpen333::process::named_resource::unlink(const std::string&)
+   */
   static bool unlink(const std::string& name) {
     char nm[MAX_RESOURCE_NAME];
     impl::named_resource_base::make_resource_name(name+std::string(SEMAPHORE_NAME_SUFFIX), nm);
@@ -139,6 +228,9 @@ class semaphore : public impl::named_resource_base {
 
 } // native implementation
 
+/**
+ * @brief Alias to POSIX native implementation of inter-process semaphore
+ */
 using semaphore = posix::semaphore;
 
 } // process

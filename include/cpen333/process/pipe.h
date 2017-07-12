@@ -1,11 +1,33 @@
+/**
+ * @file
+ * @brief Basic inter-process pipe implementation based on a FIFO
+ */
 #ifndef CPEN333_PROCESS_PIPE_H
 #define CPEN333_PROCESS_PIPE_H
 
+/**
+ * @brief Suffix to add to the pipe's internal memory name for uniqueness
+ */
 #define PIPE_NAME_SUFFIX "_pp"
+/**
+ * @brief Suffix to add to the pipe's writer's semaphore/mutex
+ */
 #define PIPE_WRITE_SUFFIX "_ppw"
+/**
+ * @brief Suffix to add to the pipe's reader's semaphore/mutex
+ */
 #define PIPE_READ_SUFFIX "_ppr"
+/**
+ * @brief Suffix to add to the pipe's information block
+ */
 #define PIPE_INFO_SUFFIX "_ppi"
+/**
+ * @brief Suffix to add to the pipe's "open" mutex for ensuring valid pipe connections
+ */
 #define PIPE_OPEN_SUFFIX "_ppo"
+/**
+ * @brief Magic number for ensuring pipe has been initialized
+ */
 #define PIPE_INITIALIZED 0x18763023
 
 #include "cpen333/process/named_resource.h"
@@ -17,15 +39,38 @@
 namespace cpen333 {
 namespace process {
 
-
+/**
+ * @brief Inter-process pipe with one read-end and one write-end, emulated using a shared FIFO-style queue
+ *
+ * Allows sending/receiving of unstructured information between two connected processes.  One process must be
+ * designated as the reader and the other as the writer.
+ *
+ */
 class pipe : public virtual named_resource {
 
  public:
 
+  /**
+   * @brief pipe access mode
+   */
   enum mode {
-    READ, WRITE
+    /**
+     * @brief open read-end of pipe
+     */
+    READ,
+    /**
+     * @brief open write-end of pipe
+     */
+    WRITE
   };
 
+  /**
+   * @brief Constructs a named pipe instance
+   *
+   * @param name  identifier for creating or connecting to an existing inter-process pip
+   * @param mode  access mode, either read or write
+   * @param size  if creating, the maximum number of bytes that can be stored in the pipe without blocking
+   */
   pipe(const std::string& name, mode mode, size_t size = 1024) :
       mode_{mode},
       wmutex_{name + std::string(PIPE_WRITE_SUFFIX)},
@@ -72,14 +117,20 @@ class pipe : public virtual named_resource {
     }
   }
 
+  /**
+   * @brief Destructor, automatically closes the pipe
+   */
   virtual ~pipe() {
     close();  // close pipe
   }
 
   /**
-   * Writes data to the pipe
+   * @brief Writes data to the pipe
+   *
+   * If the pipe becomes full, will block until there is room to complete the message.
+   *
    * @param data data to write
-   * @param size size in bytes
+   * @param size number of bytes to write
    * @return true if pipe is open and write is successful, false if pipe is closed
    *              or we are not in WRITE mode
    */
@@ -129,18 +180,43 @@ class pipe : public virtual named_resource {
     return true;
   }
 
+  /**
+   * @brief Writes an object to the pipe
+   *
+   * Convenience method for writing objects to the pipe, auto-detecting the appropriate number of bytes.  This method
+   * will block until there is sufficient room to finish writing the object
+   *
+   * @tparam T type of object to write
+   * @param data reference to data
+   * @return true if pipe is open and write is successful, false if pipe is closed
+   *              or we are not in WRITE mode
+   */
   template<typename T>
   bool write(const T& data) {
     return this->write<T>(&data);
   }
 
+  /**
+   * @brief Writes an object to the pipe
+   *
+   * Convenience method for writing objects to the pipe, auto-detecting the appropriate number of bytes.  This method
+   * will block until there is sufficient room to finish writing the object
+   *
+   * @tparam T type of object to write
+   * @param data pointer to data
+   * @return true if pipe is open and write is successful, false if pipe is closed or we are not in WRITE mode
+   */
   template<typename T>
   bool write(const T* data) {
     return this->write((void*)data, sizeof(T));
   }
 
   /**
-   * Reads data from the pipe
+   * @brief Reads data from the pipe
+   *
+   * Reads the specified number of bytes from the head of the pipe.  This method will block until the desired number of
+   * bytes are read.
+   *
    * @param data memory address to fill with pipe contents
    * @param size number of bytes
    * @return true if successful, false if not opened in read mode, or pipe is closed
@@ -189,7 +265,7 @@ class pipe : public virtual named_resource {
   }
 
   /**
-   * Read a single byte
+   * @brief Read a single byte
    * @return next byte in the stream
    */
   uint8_t read() {
@@ -198,11 +274,30 @@ class pipe : public virtual named_resource {
     return byte;
   }
 
+  /**
+   * @brief Reads an object from the pipe
+   *
+   * Convenience method for reading an object from the pipe, auto-detecting the appropriate number of bytes to read.
+   * This method will block until the complete object is read.
+   *
+   * @tparam T type of object
+   * @param data pointer to object to populate
+   * @return true if successful, false if not opened in read mode, or pipe is closed
+   *              and does not have enough bytes left
+   */
   template<typename T>
   bool read(T* data) {
     return read((void*)data, sizeof(T));
   }
 
+  /**
+   * @brief Determines the number of bytes currently remaining in the pipe.
+   *
+   * This method should rarely be used, as the number of bytes is subject to change rapidly.  One possible use-case
+   * is if there is a single reader, and the reader wants to check if there is any data available.
+   *
+   * @return number of bytes currently remaining in the pipe
+   */
   size_t available() {
     // lock both read and write to get indices, don't want them changing between here
     std::lock_guard<decltype(rmutex_)> rlock(rmutex_);
@@ -215,6 +310,12 @@ class pipe : public virtual named_resource {
     return w-r;
   }
 
+  /**
+   * @brief closes one end of the pipe
+   *
+   * If the current instance is a reader, then closes the read-end of the pipe.  If a writer, closes, the write-end.
+   *
+   */
   void close() {
     std::unique_lock<decltype(omutex_)> lock(omutex_);
     switch (mode_) {
@@ -268,6 +369,9 @@ class pipe : public virtual named_resource {
     return b1 && b2 && b3 && b4 && b5 && b6 && b7;
   }
 
+  /**
+  * @copydoc cpen333::process::named_resource::unlink(const std::string&)
+  */
   static bool unlink(const std::string& name) {
 
     bool b1 = cpen333::process::mutex::unlink(name + std::string(PIPE_WRITE_SUFFIX));

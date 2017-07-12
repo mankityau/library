@@ -1,10 +1,20 @@
+/**
+ * @file
+ * @brief Windows implementation of an inter-process named semaphore
+ *
+ * Uses a Windows Semaphore
+ */
 #ifndef CPEN333_PROCESS_WINDOWS_SEMAPHORE_H
 #define CPEN333_PROCESS_WINDOWS_SEMAPHORE_H
 
-// maximum possible size of a semaphore
+/**
+ * @brief Maximum possible size of a semaphore
+ */
 #define MAX_SEMAPHORE_SIZE LONG_MAX
 
-// suffix appended to semaphore names for uniqueness
+/**
+ * @brief Suffix appended to semaphore names for uniqueness
+ */
 #define SEMAPHORE_NAME_SUFFIX "_sem"
 
 #include <string>
@@ -19,10 +29,32 @@ namespace cpen333 {
 namespace process {
 namespace windows {
 
+/**
+ * @brief Inter-process named semaphore primitive
+ *
+ * Used to limit access to a number of resources.  Contains an integer whose value is never allowed to fall below zero.
+ * There are two main supported actions: wait(), which decrements the internal value, and notify() which increments the
+ * value.  If the value of the semaphore is zero, then wait() will cause the thread to block until the value becomes
+ * greater than zero.
+ *
+ * This implementation has no explicit maximum value
+ *
+ * This semaphore has USAGE PERSISTENCE, meaning the mutex will continue to exist as long as at least one process/thread
+ * is holding a reference to it.
+ *
+ */
 class semaphore : public impl::named_resource_base {
  public:
+  /**
+   * @brief Alias to native handle type for semaphore
+   *
+   * In this case, a Windows HANDLE to a Semaphore
+   */
   using native_handle_type = HANDLE;
 
+  /**
+   * @copydoc cpen333::process::posix::semaphore::semaphore()
+   */
   semaphore(const std::string& name, size_t value = 1) :
       impl::named_resource_base{name+std::string(SEMAPHORE_NAME_SUFFIX)}, handle_{NULL} {
 
@@ -33,6 +65,9 @@ class semaphore : public impl::named_resource_base {
     }
   }
 
+  /**
+   * @brief Destructor
+   */
   ~semaphore() {
     // close the semaphore
     if (!CloseHandle(handle_)) {
@@ -40,6 +75,9 @@ class semaphore : public impl::named_resource_base {
     }
   }
 
+  /**
+   * @copydoc cpen333::process::posix::semaphore::value()
+   */
   size_t value() {
     LONG val = 0;
     // check if one available, if so grab it, otherwise count was zero
@@ -53,6 +91,9 @@ class semaphore : public impl::named_resource_base {
     return val;
   }
 
+  /**
+   * @copydoc cpen333::process::posix::semaphore::wait()
+   */
   void wait() {
     UINT result;
     // wait on handle_ until we are successful
@@ -65,6 +106,9 @@ class semaphore : public impl::named_resource_base {
     }
   }
 
+  /**
+   * @copydoc cpen333::process::posix::semaphore::try_wait()
+   */
   bool try_wait() {
     // try locking with a 0 timeout
     UINT result = WaitForSingleObject(handle_, 0) ;
@@ -75,6 +119,9 @@ class semaphore : public impl::named_resource_base {
     return (result == WAIT_OBJECT_0);
   }
 
+  /**
+   * @copydoc cpen333::process::posix::semaphore::wait_for()
+   */
   template< class Rep, class Period >
   bool wait_for( const std::chrono::duration<Rep,Period>& timeout_duration ) {
     DWORD time = std::chrono::duration_cast<std::chrono::milliseconds>(timeout_duration).count();
@@ -89,12 +136,18 @@ class semaphore : public impl::named_resource_base {
     return (result == WAIT_OBJECT_0);
   }
 
+  /**
+   * @copydoc cpen333::process::posix::semaphore::wait_until()
+   */
   template< class Clock, class Duration >
   bool wait_until( const std::chrono::time_point<Clock,Duration>& timeout_time ) {
     auto duration = timeout_time - std::chrono::steady_clock::now();
     return wait_for(duration);
   }
 
+  /**
+   * @copydoc cpen333::process::posix::semaphore::notify()
+   */
   void notify() {
     bool success = ReleaseSemaphore(handle_, 1, NULL) ;  // FALSE on failure, TRUE on success
     if (!success) {
@@ -102,18 +155,26 @@ class semaphore : public impl::named_resource_base {
     }
   }
 
+  /**
+   * @brief Returns a native handle to the semaphore
+   *
+   * The native handle has a type aliased to semaphore::native_handle_type
+   *
+   * On Windows systems, is of type HANDLE to a Semaphore.
+   *
+   * @return native semaphore handle
+   */
   native_handle_type native_handle() {
     return handle_;
   }
 
-  /**
-   * Windows does not support unlinking of named objects
-   * @return false
-   */
   bool unlink() {
     return false;
   }
 
+  /**
+   * @copydoc cpen333::process::named_resource::unlink(const std::string&)
+   */
   static bool unlink(const std::string& name) {
     return false;
   }
@@ -125,6 +186,9 @@ class semaphore : public impl::named_resource_base {
 
 } // native implementation
 
+/**
+ * @brief Alias to a Windows implementation of a semaphore
+ */
 using semaphore = windows::semaphore;
 
 } // process

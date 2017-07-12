@@ -1,3 +1,7 @@
+/**
+ * @file
+ * @brief Inter-process shared memory (a.k.a. datapool) implementation
+ */
 #ifndef CPEN333_PROCESS_SHARED_MEMORY_H
 #define CPEN333_PROCESS_SHARED_MEMORY_H
 
@@ -26,17 +30,36 @@ template<typename T>
 class shared_object : private shared_memory, public virtual named_resource {
 
  public:
+  /**
+   * @brief Construct shared memory object
+   * @param name   identifier for creating or connecting to an existing inter-process shared_object
+   * @param readonly whether to treat the memory as read-only or read-write
+   */
   shared_object(const std::string &name, bool readonly = false) :
       shared_memory(name, sizeof(T), readonly) {}
 
+  /**
+   * @brief Get a reference to the internal shared memory object
+   *
+   * @return reference to shared data object
+   */
   T& operator*() {
     return *shared_memory::get<T>();
   }
 
+  /**
+   * @brief Get a pointer to the underlying shared memory object
+   *
+   * @return pointer to shared data object
+   */
   T *operator->() {
     return shared_memory::get<T>();
   }
 
+  /**
+   * @brief Get a pointer to the underlying shared memory object
+   * @return pointer to shared data object
+   */
   T *get() {
     return shared_memory::get<T>();
   }
@@ -45,13 +68,13 @@ class shared_object : private shared_memory, public virtual named_resource {
     return shared_memory::unlink();
   }
 
+  /**
+  * @copydoc cpen333::process::named_resource::unlink(const std::string&)
+  */
   static bool unlink(const std::string &name) {
     return shared_memory::unlink(name);
   }
 
-  std::string name() const {
-    return shared_memory::name();
-  }
 };
 
 } // process

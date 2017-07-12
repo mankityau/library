@@ -1,7 +1,19 @@
+/**
+ * @file
+ * @brief Implementation of an inter-process mutex with shared access that tries to fairly balance priorities
+ * between exclusive and shared use
+ */
+
 #ifndef CPEN333_PROCESS_SHARED_MUTEX_FAIR_H
 #define CPEN333_PROCESS_SHARED_MUTEX_FAIR_H
 
+/**
+ * @brief Name suffix for internals to guarantee uniqueness
+ */
 #define SHARED_MUTEX_FAIR_NAME_SUFFIX "_smf"
+/**
+ * @brief Magic number used to test initialization
+ */
 #define SHARED_MUTEX_FAIR_INITIALIZED 0x91271238
 
 #include "cpen333/process/mutex.h"
@@ -14,15 +26,16 @@ namespace process {
 
 namespace impl {
 
-// A more fair shared mutex, access is granted in batches: 1 writer, batch of readers, 1 writer, batch of readers
-// Based on the alternating method described here:
-//     http://www.tools-of-computing.com/tc/CS/Monitors/AlternatingRW.htm
+/**
+ * @brief An inter-process shared mutex implementation with balanced priorities
+ *
+ * A more fair shared mutex, access is granted in batches: 1 writer, batch of readers, 1 writer, batch of readers
+ * Based on the alternating method described here:
+ *     http://www.tools-of-computing.com/tc/CS/Monitors/AlternatingRW.htm
+ */
 class shared_mutex_fair : public virtual named_resource {
  private:
 
-  /**
-   * @internal
-   */
   struct shared_data {
     size_t shared[2];   // readers or queued
     char this_batch;    // index within shared of current batch sharing access
@@ -37,6 +50,11 @@ class shared_mutex_fair : public virtual named_resource {
   cpen333::process::shared_object<shared_data> state_;     // shared counter object
 
  public:
+
+  /**
+   * @brief Constructor, creates a fair shared mutex
+   * @param name identifier for creating or connecting to an existing inter-process shared mutex
+   */
   shared_mutex_fair(const std::string &name) :
       mutex_{name + std::string(SHARED_MUTEX_FAIR_NAME_SUFFIX)},
       econd_{name + std::string(SHARED_MUTEX_FAIR_NAME_SUFFIX)},
@@ -61,6 +79,9 @@ class shared_mutex_fair : public virtual named_resource {
   shared_mutex_fair &operator=(const shared_mutex_fair &) = delete;
   shared_mutex_fair &operator=(shared_mutex_fair &&) = delete;
 
+  /**
+   * @copydoc cpen333::process::impl::shared_mutex_exclusive::lock_shared()
+   */
   void lock_shared() {
     std::unique_lock<cpen333::process::mutex> lock(mutex_);
     if (state_->etotal == 0) {
@@ -74,6 +95,9 @@ class shared_mutex_fair : public virtual named_resource {
     }
   }
 
+  /**
+   * @copydoc cpen333::process::impl::shared_mutex_exclusive::try_lock_shared()
+   */
   bool try_lock_shared() {
     std::unique_lock<cpen333::process::mutex> lock(mutex_, std::defer_lock);
     if (!lock.try_lock()) {
@@ -86,6 +110,9 @@ class shared_mutex_fair : public virtual named_resource {
     return true;
   }
 
+  /**
+   * @copydoc cpen333::process::impl::shared_mutex_exclusive::unlock_shared()
+   */
   void unlock_shared() {
     std::unique_lock<cpen333::process::mutex> lock(mutex_);
     if (--(state_->shared[(size_t)(state_->this_batch)]) == 0) {
@@ -93,6 +120,9 @@ class shared_mutex_fair : public virtual named_resource {
     }
   }
 
+  /**
+   * @copydoc cpen333::process::impl::shared_mutex_exclusive::lock()
+   */
   void lock() {
     std::unique_lock<cpen333::process::mutex> lock(mutex_);
     // one more waiting
@@ -102,6 +132,9 @@ class shared_mutex_fair : public virtual named_resource {
     state_->exclusive = 1;  // exclusive lock on
   }
 
+  /**
+   * @copydoc cpen333::process::impl::shared_mutex_exclusive::try_lock()
+   */
   bool try_lock() {
     std::unique_lock<cpen333::process::mutex> lock(mutex_, std::defer_lock);
     if (!lock.try_lock()) {
@@ -119,6 +152,9 @@ class shared_mutex_fair : public virtual named_resource {
     return true;
   }
 
+  /**
+   * @copydoc cpen333::process::impl::shared_mutex_exclusive::unlock()
+   */
   void unlock() {
     std::lock_guard<cpen333::process::mutex> lock(mutex_);
     state_->exclusive = 0;
@@ -129,11 +165,7 @@ class shared_mutex_fair : public virtual named_resource {
   }
 
   /**
-   * tries to lock the mutex, returns if the mutex has been unavailable for the specified timeout duration
-   * @tparam Rep duration representation
-   * @tparam Period duration period
-   * @param timeout_duration timeout
-   * @return true if locked successfully
+   * @copydoc cpen333::process::impl::shared_mutex_exclusive::try_lock_for()
    */
   template<class Rep, class Period>
   bool try_lock_for(const std::chrono::duration<Rep, Period> &timeout_duration) {
@@ -141,11 +173,7 @@ class shared_mutex_fair : public virtual named_resource {
   }
 
   /**
-   * tries to lock the mutex, returns if the mutex has been unavailable until specified time point has been reached
-   * @tparam Clock clock representation
-   * @tparam Duration time
-   * @param timeout_time time of timeout
-   * @return true if locked successfully
+   * @copydoc cpen333::process::impl::shared_mutex_exclusive::try_lock_until()
    */
   template<class Clock, class Duration>
   bool try_lock_until(const std::chrono::time_point<Clock, Duration> &timeout_time) {
@@ -170,11 +198,7 @@ class shared_mutex_fair : public virtual named_resource {
   }
 
   /**
-   * tries to lock the mutex, returns if the mutex has been unavailable for the specified timeout duration
-   * @tparam Rep duration representation
-   * @tparam Period duration period
-   * @param timeout_duration timeout
-   * @return true if locked successfully
+   * @copydoc cpen333::process::impl::shared_mutex_exclusive::try_lock_shared_for()
    */
   template<class Rep, class Period>
   bool try_lock_shared_for(const std::chrono::duration<Rep, Period> &timeout_duration) {
@@ -182,11 +206,7 @@ class shared_mutex_fair : public virtual named_resource {
   }
 
   /**
-   * tries to lock the mutex, returns if the mutex has been unavailable until specified time point has been reached
-   * @tparam Clock clock representation
-   * @tparam Duration time
-   * @param timeout_time time of timeout
-   * @return true if locked successfully
+   * @copydoc cpen333::process::impl::shared_mutex_exclusive::try_lock_shared_until()
    */
   template<class Clock, class Duration>
   bool try_lock_shared_until(const std::chrono::time_point<Clock, Duration> &timeout_time) {
@@ -219,6 +239,9 @@ class shared_mutex_fair : public virtual named_resource {
     return (b1 && b2 && b3);
   }
 
+  /**
+   * @copydoc cpen333::process::named_resource::unlink(const std::string&)
+   */
   static bool unlink(const std::string& name) {
     bool b1 = cpen333::process::mutex::unlink(name + std::string(SHARED_MUTEX_FAIR_NAME_SUFFIX));
     bool b2 = cpen333::process::condition_variable::unlink(name + std::string(SHARED_MUTEX_FAIR_NAME_SUFFIX));
@@ -230,7 +253,13 @@ class shared_mutex_fair : public virtual named_resource {
 
 } // impl
 
+/**
+ * @brief Alias for default shared mutex with fair priority
+ */
 using shared_mutex_fair = impl::shared_mutex_fair;
+/**
+ * @brief Alias for default shared timed mutex with fair priority
+ */
 using shared_timed_mutex_fair = impl::shared_mutex_fair;
 
 } // process

@@ -1,3 +1,8 @@
+/**
+ * @file
+ * @brief Inter-process shared mutex implementation
+ */
+
 #ifndef CPEN333_PROCESS_MUTEX_H
 #define CPEN333_PROCESS_MUTEX_H
 

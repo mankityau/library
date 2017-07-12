@@ -1,7 +1,15 @@
+/**
+ * @file
+ * @brief Windows implementation of an inter-process named mutex
+ *
+ * Uses a Windows mutex.
+ */
 #ifndef CPEN333_PROCESS_MUTEX_WINDOWS_H
 #define CPEN333_PROCESS_MUTEX_WINDOWS_H
 
-// suffix to append to mutex names for uniqueness
+/**
+ * @brief Suffix to append to mutex names for uniqueness
+ */
 #define MUTEX_NAME_SUFFIX "_mux"
 
 #include <string>
@@ -16,10 +24,24 @@ namespace cpen333 {
 namespace process {
 namespace windows {
 
+/**
+ * @brief Inter-process named mutual exclusion primitive
+ *
+ * Used to limit resource access to one thread at a time
+ *
+ * This mutex has USAGE PERSISTENCE, meaning the mutex will continue to exist as long as at least one process/thread
+ * is holding a reference to it.
+ */
 class mutex : public impl::named_resource_base {
  public:
+  /**
+   * @brief Alias to native handle type, which on Windows is type HANDLE
+   */
   using native_handle_type = HANDLE;
 
+  /**
+   * @copydoc cpen333::process::posix::mutex::mutex()
+   */
   mutex(const std::string& name) :
     impl::named_resource_base{name + std::string(MUTEX_NAME_SUFFIX)} {
     handle_  = CreateMutex(NULL, false, name_ptr()) ;
@@ -28,12 +50,18 @@ class mutex : public impl::named_resource_base {
     }
   }
 
+  /**
+   * @brief Destructor, closes this instance's handle to the shared mutex
+   */
   ~mutex() {
     if (!CloseHandle(handle_)) {
       cpen333::perror(std::string("Cannot destroy mutex ")+name());
     }
   }
 
+  /**
+   * @copydoc cpen333::process::posix::mutex::lock()
+   */
   void lock() {
     UINT result;
     // wait on handle_ until we are successful (ignore spurious wakes)
@@ -45,6 +73,9 @@ class mutex : public impl::named_resource_base {
     }
   }
 
+  /**
+   * @copydoc cpen333::process::posix::mutex::try_lock()
+   */
   bool try_lock() {
     // try locking with a 0 timeout
     UINT result = WaitForSingleObject(handle_, 0) ;
@@ -56,6 +87,9 @@ class mutex : public impl::named_resource_base {
     return (result == WAIT_OBJECT_0);
   }
 
+  /**
+   * @copydoc cpen333::process::posix::mutex::try_lock_for()
+   */
   template< class Rep, class Period >
   bool try_lock_for( const std::chrono::duration<Rep,Period>& timeout_duration ) {
     DWORD time = std::chrono::duration_cast<std::chrono::milliseconds>(timeout_duration).count();
@@ -67,6 +101,9 @@ class mutex : public impl::named_resource_base {
     return (result == WAIT_OBJECT_0);
   }
 
+  /**
+   * @copydoc cpen333::process::posix::mutex::try_lock_until()
+   */
   template< class Clock, class Duration >
   bool try_lock_until( const std::chrono::time_point<Clock,Duration>& timeout_time ) {
     auto duration = timeout_time - std::chrono::steady_clock::now();
@@ -78,6 +115,9 @@ class mutex : public impl::named_resource_base {
     return try_lock_for(ms);
   }
 
+  /**
+   * @copydoc cpen333::process::posix::mutex::unlock()
+   */
   bool unlock() {
     bool success = ReleaseMutex(handle_) ;  // FALSE on failure, TRUE on success
     if (!success) {
@@ -86,6 +126,13 @@ class mutex : public impl::named_resource_base {
     return success;
   }
 
+  /**
+   * @brief Returns a native handle
+   *
+   * In this case, a Windows HANDLE to the Mutex
+   *
+   * @return native handle to underlying mutex
+   */
   native_handle_type native_handle() {
     return handle_;
   }
@@ -94,6 +141,9 @@ class mutex : public impl::named_resource_base {
     return false;
   }
 
+  /**
+   * @copydoc cpen333::process::named_resource::unlink(const std::string&)
+   */
   static bool unlink(const std::string& name) {
     return false;
   }
@@ -106,12 +156,14 @@ class mutex : public impl::named_resource_base {
 } // native implementation
 
 /**
- * @brief a named inter-process mutual exclusion primitive
- *
- * A named inter-process mutual exclusion primitive, useful for protecting
- * access to a resource.
+ * @brief Alias to Windows implementation of a named mutex
  */
 using mutex = windows::mutex;
+
+
+/**
+ * @brief Alias to Windows implementation of a named mutex allowing timed waits
+ */
 using timed_mutex = windows::mutex;
 
 } // process

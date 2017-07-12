@@ -1,3 +1,7 @@
+/**
+ * @file
+ * @brief Base-class for named resources
+ */
 #ifndef CPEN333_PROCESS_IMPL_NAMED_RESOURCE_H
 #define CPEN333_PROCESS_IMPL_NAMED_RESOURCE_H
 
@@ -15,6 +19,9 @@
 // Due to the 30 character limit on POSIX, we will take a sha1 hash and base64-encode
 //      which will generate 28 characters.  Add a / prefix and terminating zero = 30.
 //      We will also replace an / with a _ in the resulting hash
+/**
+ * @brief Size required for resource unique identifier
+ */
 #define MAX_RESOURCE_NAME 30
 
 namespace cpen333 {
@@ -23,11 +30,20 @@ namespace process {
 // implementation details
 namespace impl {
 
+/**
+ * @brief Base-class for named resources
+ *
+ * Stores a unique identifier name
+ */
 class named_resource_base : public virtual named_resource {
  private:
   char name_[MAX_RESOURCE_NAME];
 
  public:
+  /**
+   * @brief Constructor for base named resource
+   * @param name unique identifier
+   */
   named_resource_base(const std::string &name) {
     make_resource_name(name, name_);
   }
@@ -38,12 +54,18 @@ class named_resource_base : public virtual named_resource {
   named_resource_base &operator=(const named_resource_base &) = delete;
   named_resource_base &operator=(named_resource_base &&) = delete;
 
+  /**
+   * @brief Destructor, does nothing
+   */
   virtual ~named_resource_base() {
     // clean-up
   }
 
   virtual bool unlink() = 0;  // abstract, force unlink to be defined
 
+  /**
+  * @copydoc cpen333::process::named_resource::unlink(const std::string&)
+  */
   static bool unlink(const std::string &name) {
     return false;
   }
@@ -51,23 +73,30 @@ class named_resource_base : public virtual named_resource {
  protected:
 
   /**
-   *  Internal-use system name
+   *  @brief Internal-use system name
+   *  @return underlying unique identifier name
    */
   std::string name() const {
     return name_;
   }
 
+  /**
+   * @brief Internal-use system name as char pointer
+   * @return pointer to underlying unique identifier name
+   */
   const char *name_ptr() const {
     return &name_[0];
   }
 
   /**
-  * Create a valid resource name for the platform, on Linux/OSX this is
-  * a leading / with sha1 base64-encoded hash of the string name.  We
-  * will also replace any other / with _
-  * @param name original resource name
-  * @param out platform-safe resource name
-  */
+   * @brief Creates a valid resource name
+   *
+   * Creates a valid resource name for the platform, on Linux/OSX this is
+   * a leading '/' with sha1 base64-encoded hash of the string name.  We
+   * will also replace any other '/' with '_'
+   * @param name original resource name
+   * @param out platform-safe resource name
+   */
   static void make_resource_name(const std::string &name, char out[]) {
     sha1 hash = sha1(name.c_str()).finalize();
 

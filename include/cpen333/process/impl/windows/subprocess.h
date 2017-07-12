@@ -1,3 +1,7 @@
+/**
+ * @file
+ * @brief Windows implementation of a child process
+ */
 #ifndef CPEN333_PROCESS_WINDOWS_SUBPROCESS_H
 #define CPEN333_PROCESS_WINDOWS_SUBPROCESS_H
 
@@ -16,6 +20,11 @@ namespace process {
 namespace windows {
 
 // WINDOWS
+/**
+ * @brief A child process
+ *
+ * Allows launching of a child process, with environment inherited from the current process.
+ */
 class subprocess {
  private:
   PROCESS_INFORMATION process_info_;
@@ -24,32 +33,44 @@ class subprocess {
   bool started_;
   bool terminated_;
 
-  
  public:
-  subprocess(const std::vector<std::string> &exec, bool start = true, bool detached = false) :
+  /**
+   * @brief Alias to native handle type, on Windows is a PROCESS_INFORMATION structure
+   */
+  using native_handle_type = PROCESS_INFORMATION;
+
+  /**
+   * @brief Constructs a new subprocess
+   *
+   * The new process will run the command exec[0] with argv parameters {exec[1], exec[2], ...}.  A detached child
+   * process will run in a separate thread, (and on Windows, a separate window) concurrently with the parent process.
+   * If not detached, the parent will wait for a running child to complete.
+   *
+   * @param exec command and arguments to execute
+   * @param start whether to start the subprocess immediately
+   * @param detached run the subprocess in `detached' mode
+   */
+  subprocess(const std::vector<std::string> &exec, bool start = true,
+             bool detached = false) :
       process_info_{}, cmd_{create_windows_command(exec)}, detached_{detached},
       started_{false}, terminated_{false} {
     if (start) {
       this->start();
     }
   }
-//  subprocess(const std::vector<std::string> &exec, bool start = true, bool detached = false) :
-//      process_info_{}, cmd_{create_windows_command(exec)}, detached_{detached},
-//      started_{false}, terminated_{false} {
-//    if (start) {
-//      this->start();
-//    }
-//  }
 
   // XXX results in ambiguity for common use-cases
-//  subprocess(const std::string &cmd, bool start = true, bool detached = false) :
-//      process_info_{}, cmd_{cmd}, detached_{detached},
-//      started_{false}, terminated_{false} {
-//    if (start) {
-//      this->start();
-//    }
-//  }
+  //  subprocess(const std::string &cmd, bool start = true, bool detached = false) :
+  //      process_info_{}, cmd_{cmd}, detached_{detached},
+  //      started_{false}, terminated_{false} {
+  //    if (start) {
+  //      this->start();
+  //    }
+  //  }
 
+  /**
+   * @copydoc cpen333::process::posix::subprocess::start()
+   */
   bool start() {
 
     // already started
@@ -104,16 +125,25 @@ class subprocess {
     return success;
   }
 
+  /**
+   * @copydoc cpen333::process::posix::subprocess::join()
+   */
   bool join() {
     return wait_for_internal(INFINITE);
   }
 
   /**
-   * Waits for the process to terminate, waiting for a certain amount of time.
-   * @tparam Rep  duration representation
-   * @tparam Period  duration tick period
-   * @param duration time to wait for
-   * @return true if process terminated (even if state was previously queried)
+   * @copydoc cpen333::process::posix::subprocess::wait()
+   */
+  bool wait() {
+    if (terminated_) {
+      return true;
+    }
+    return join();
+  }
+
+  /**
+   * @copydoc cpen333::process::posix::subprocess::wait_for()
    */
   template<typename Rep, typename Period>
   bool wait_for(const std::chrono::duration<Rep,Period>& duration) {
@@ -122,6 +152,23 @@ class subprocess {
     return wait_for_internal(time);
   }
 
+  /**
+   * @copydoc cpen333::process::posix::subprocess::wait_until()
+   */
+  template< class Clock, class Duration >
+  bool wait_until( const std::chrono::time_point<Clock,Duration>& timeout_time ) {
+    auto now = std::chrono::steady_clock::now();
+    DWORD time = 0;
+    if (timeout_time > now) {
+      // convert to milliseconds
+      DWORD time = std::chrono::duration_cast<std::chrono::milliseconds>(timeout_time-now).count();
+    }
+    return wait_for_internal(time);
+  }
+
+  /**
+   * @copydoc cpen333::process::posix::subprocess::terminated()
+   */
   bool terminated() {
     if (terminated_) {
       return true;
@@ -130,7 +177,7 @@ class subprocess {
     return wait_for(std::chrono::milliseconds(0));
   }
 
- protected:
+ private:
 
   bool wait_for_internal(DWORD time) {
     if (terminated_) {
@@ -215,6 +262,9 @@ class subprocess {
 
 } // native implementation
 
+/**
+ * @brief Alias to Windows implementation of a child process
+ */
 using subprocess = windows::subprocess;
 
 } // process

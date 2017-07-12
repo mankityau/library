@@ -1,12 +1,30 @@
+/**
+ * @file
+ * @brief Base class for condition, condition_variable, and event classes
+ */
 #ifndef CPEN333_PROCESS_CONDITION_BASE_H
 #define CPEN333_PROCESS_CONDITION_BASE_H
 
-#define CONDITION_BASE_NAME_SUFFIX "_cb"
+/**
+ * @brief Suffix to append to shared storage identifier for uniqueness
+ */
 #define CONDITION_BASE_STORAGE_SUFFIX "_cbs"
+/**
+ * @brief Suffix to append to lock semaphore identifier
+ */
 #define CONDITION_BASE_BLOCK_LOCK_SUFFIX "_cbl"
+/**
+ * @brief Suffix to append to queue semaphore identifier
+ */
 #define CONDITION_BASE_BLOCK_QUEUE_SUFFIX "_cbq"
+/**
+ * @brief Suffix to append to unblock mutex identifier
+ */
 #define CONDITION_BASE_UNBLOCK_LOCK_SUFFIX "_cbu"
 
+/**
+ * @brief Magic number for testing initialization
+ */
 #define CONDITION_BASE_INITIALIZED 0x09812312
 
 #include <string>
@@ -22,17 +40,32 @@ namespace cpen333 {
 namespace process {
 
 /**
+ * @brief Lock inverter
+ *
  * Inverts lock/unlock operations on a lock
+ *
  * @tparam BasicLock lock type that supports lock() and unlock()
  */
 template<typename BasicLock>
 class lock_inverter {
   BasicLock &lock_;
  public:
+  /**
+   * @brief Constructor
+   * @param lock lock to invert
+   */
   lock_inverter(BasicLock& lock) : lock_{lock}{}
+
+  /**
+   * @brief Unlocks the underlying lock
+   */
   void lock() {
     lock_.unlock();
   }
+
+  /**
+   * @brief Locks the underlying lock
+   */
   void unlock() {
     lock_.lock();
   }
@@ -41,9 +74,20 @@ class lock_inverter {
 //
 // Implementation based on boost's boost/interpress/sync/detail/condition_algorithm_8a.hpp
 // Their implementation guarantees not to have spurious wake-ups
+/**
+ * @brief Base-class for conditions, condition variables, and events
+ *
+ * Like an event, has the ability to wait for ownership of a lock, and for
+ * notifying waiting threads.  This condition base DOES NOT suffer from spurious
+ * wake-ups.
+ */
 class condition_base : public virtual named_resource {
   
  public:
+  /**
+   * @brief Constructor
+   * @param name unique identifier
+   */
   condition_base(const std::string &name) :
       waiters_{name + std::string(CONDITION_BASE_STORAGE_SUFFIX)},
       block_lock_{name + std::string(CONDITION_BASE_BLOCK_LOCK_SUFFIX),1},
@@ -66,11 +110,23 @@ class condition_base : public virtual named_resource {
   condition_base(condition_base&&) = delete;
   condition_base& operator=(const condition_base&) = delete;
   condition_base& operator=(condition_base&&) = delete;
-  
+
+  /**
+   * @brief Wait until the thread is notified
+   * @param lock external lock
+   */
   void wait(std::unique_lock<cpen333::process::mutex>& lock) {
     wait(lock, false, std::chrono::steady_clock::now());
   }
 
+  /**
+   * @brief Wait until the thread is notified, or until a timeout period has elapsed
+   * @tparam Rep duration clock representation
+   * @tparam Period duration clock period
+   * @param lock external lock
+   * @param rel_time relative time to wait
+   * @return std::cv_status to indicate whether or not a timeout has occured
+   */
   template<class Rep, class Period>
   std::cv_status wait_for( std::unique_lock<cpen333::process::mutex>& lock,
                            const std::chrono::duration<Rep, Period>& rel_time) {
@@ -80,6 +136,14 @@ class condition_base : public virtual named_resource {
     return std::cv_status::timeout;
   }
 
+  /**
+   * @brief Wait until the thread is notified, or until a timeout time has been reached
+   * @tparam Clock timeout clock representation
+   * @tparam Duration timeout duration
+   * @param lock external lock
+   * @param timeout_time absolute timeout time
+   * @return true if wait is successful, false if timeout has been reached
+   */
   template<class Clock, class Duration >
   bool wait_until( std::unique_lock<cpen333::process::mutex>& lock,
                              const std::chrono::time_point<Clock, Duration>& timeout_time ) {
@@ -112,6 +176,9 @@ class condition_base : public virtual named_resource {
     return (b1 && b2 && b3 && b4);
   }
 
+  /**
+  * @copydoc cpen333::process::named_resource::unlink(const std::string&)
+  */
   static bool unlink(const std::string& name) {
     bool b1 = cpen333::process::shared_object<shared_data>::unlink(name + std::string(CONDITION_BASE_STORAGE_SUFFIX));
     bool b2 = cpen333::process::semaphore::unlink(name + std::string(CONDITION_BASE_BLOCK_LOCK_SUFFIX));
@@ -122,6 +189,10 @@ class condition_base : public virtual named_resource {
 
  protected:
 
+  /**
+   * @brief Notify (wake-up) waiting threads
+   * @param broadcast if true, wakes up all threads
+   */
   void notify(bool broadcast) {
     int signals;
     {
@@ -172,6 +243,15 @@ class condition_base : public virtual named_resource {
     }
   }
 
+  /**
+   * @brief Waits for condition to be notified
+   * @tparam Clock clock type
+   * @tparam Duration duration type
+   * @param lock external lock to ensure no simultaneous waits/notifies
+   * @param timeout whether or not to wait with a timeout
+   * @param abs_time absolute timeout time
+   * @return true if wait was successful, false if timeout occurred
+   */
   template<class Clock, class Duration>
   bool wait(std::unique_lock<cpen333::process::mutex>& lock,
             bool timeout, const std::chrono::time_point<Clock, Duration>& abs_time) {
@@ -249,6 +329,7 @@ class condition_base : public virtual named_resource {
     return !timed_out;
   }
 
+ private:
   struct shared_data {
     long blocked;   // number of waiters blocked
     long unblock;   // number of waiters to unblock

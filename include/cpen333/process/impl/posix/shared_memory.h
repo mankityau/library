@@ -1,7 +1,15 @@
+/**
+ * @file
+ * @brief POSIX implementation of an inter-process named shared memory (i.e. datapool)
+ *
+ * Uses a POSIX shared memory object (shm_open)
+ */
 #ifndef CPEN333_PROCESS_POSIX_SHARED_MEMORY_H
 #define CPEN333_PROCESS_POSIX_SHARED_MEMORY_H
 
-// suffix to append to shared memory names for uniqueness
+/**
+ *  @brief Suffix to append to shared memory names for uniqueness
+ */
 #define SHARED_MEMORY_NAME_SUFFIX "_shm"
 
 #include <string>
@@ -20,10 +28,30 @@ namespace cpen333 {
 namespace process {
 namespace posix {
 
+/**
+ * @brief Inter-process shared memory implementation
+ *
+ * Creates and shares a block of memory between threads/processes, accessible using a unique name.  The block
+ * of memory is mapped to DIFFERENT address spaces on each process.  This is essentially a
+ * memory-mapped file.
+ *
+ * This shared memory has KERNEL PERSISTENCE, meaning if not unlink()-ed, will continue to exist in its current state
+ * until the system is shut down (persisting beyond the life of the initiating program)
+ */
 class shared_memory : public impl::named_resource_base {
  public:
+  /**
+   * @brief Alias to native handle for shared memory
+   */
   using native_handle_type = int;
 
+  /**
+   * @brief Constructs or connects to a block of shared memory
+   *
+   * @param name  identifier for creating or connecting to an existing inter-process shared memory block
+   * @param size  if creating, the size of the memory block.  This size should be consistent between users
+   * @param readonly  whether or not to map the memory as read-only
+   */
   shared_memory(const std::string &name, size_t size, bool readonly = false) :
     impl::named_resource_base{name+std::string(SHARED_MEMORY_NAME_SUFFIX)}, fid_{-1},
     data_{nullptr}, size_{size} {
@@ -44,7 +72,6 @@ class shared_memory : public impl::named_resource_base {
       return;
     }
 
-
     // truncate and initialize
     if (initialize) {
       int resize = ftruncate(fid_, size_);
@@ -63,6 +90,10 @@ class shared_memory : public impl::named_resource_base {
     }
   }
 
+
+  /**
+   * @brief Destructor, unmaps this instance of the shared memory block (but does not unmap memory from other users)
+   */
   ~shared_memory() {
     // unmap
     if (data_ != nullptr) {
@@ -79,7 +110,6 @@ class shared_memory : public impl::named_resource_base {
     }
   }
 
-  // ONLY UNLINK ON PURPOSE!
   bool unlink() {
     errno = 0;
     int status = shm_unlink(name_ptr());
@@ -89,6 +119,9 @@ class shared_memory : public impl::named_resource_base {
     return status == 0;
   }
 
+  /**
+   * @copydoc cpen333::process::named_resource::unlink(const std::string&)
+   */
   static bool unlink(const std::string& name) {
     char nm[MAX_RESOURCE_NAME];
     impl::named_resource_base::make_resource_name(name+std::string(SHARED_MEMORY_NAME_SUFFIX), nm);
@@ -99,28 +132,61 @@ class shared_memory : public impl::named_resource_base {
     return status == 0;
   }
 
+  /**
+   * @brief Pointer operator for accessing underlying data
+   * @return pointer to underlying data
+   */
   void* operator->() {
     return data_;
   }
 
+  /**
+   * @brief Pointer to memory at a particular offset from the block
+   * @param offset memory offset (in bytes)
+   * @return pointer to memory offset
+   */
   void* get(size_t offset = 0) {
     return (void*)((char*)data_ + offset);
   }
 
+  /**
+   * @brief Byte access, by reference
+   * @param offset memory offset (in bytes)
+   * @return byte at particular offset
+   */
   uint8_t& operator[](size_t offset) {
     return *((uint8_t*)get(offset));
   }
 
+  /**
+   * @brief Retrieves a pointer to an object of specified type starting at a particular offset
+   *
+   * @tparam T type of pointer to return
+   * @param offset memory offset (in bytes)
+   * @return pointer to object
+   */
   template<typename T>
   T* get(size_t offset) {
     return (T*)get(offset);
   }
 
+  /**
+   * @brief Retrieves a pointer to the underlying memory, cast to a specified type
+   * @tparam T type of pointer to return
+   * @return pointer to object
+   */
   template<typename T>
   T* get() {
     return (T*)data_;
   }
 
+  /**
+   * @brief Native handle to underlying shared memory block
+   *
+   * On POSIX systems, this is a POSIX shm id
+   *
+   * @return native handle to shared memory block
+   */
   native_handle_type native_handle() {
     return fid_;
   }
@@ -134,6 +200,9 @@ class shared_memory : public impl::named_resource_base {
 
 } // native implementation
 
+/**
+ * @brief Alias to POSIX native implementation of inter=process shared memory
+ */
 using shared_memory = posix::shared_memory;
 
 } // process

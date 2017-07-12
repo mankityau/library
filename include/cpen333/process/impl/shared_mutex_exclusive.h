@@ -1,8 +1,23 @@
+/**
+ * @file
+ * @brief Implementation of an inter-process mutex with shared access that gives priority to exclusive use
+ * (write-priority)
+ */
+
 #ifndef CPEN333_PROCESS_SHARED_MUTEX_EXCLUSIVE_H
 #define CPEN333_PROCESS_SHARED_MUTEX_EXCLUSIVE_H
 
+/**
+ * @brief Name suffix for internals to guarantee uniqueness
+ */
 #define SHARED_MUTEX_EXCLUSIVE_NAME_SUFFIX "_sme"
+/**
+ * @brief Name suffix for internal mutex to guarantee uniqueness
+ */
 #define SHARED_MUTEX_EXCLUSIVE_MUTEX_SUFFIX "_smem"
+/**
+ * @brief Magic number for checking initialization
+ */
 #define SHARED_MUTEX_EXCLUSIVE_INITIALIZED 0x98292338
 
 #include "cpen333/process/mutex.h"
@@ -16,13 +31,16 @@ namespace process {
 
 namespace impl {
 
-// Write-preferring
 /**
- * Shared-mutex implementation based on the mutex/semaphore pattern
+ * @brief A write-preferring inter-process shared mutex implementation
+ *
+ * Inter-process shared mutex implementation based on the mutex/semaphore pattern.  Gives priority to
+ * exclusive access.
+ *
  * See https://en.wikipedia.org/wiki/Readers%E2%80%93writer_lock for details
  */
 class shared_mutex_exclusive : public virtual named_resource {
- protected:
+ private:
 
   struct shared_data {
     size_t shared;
@@ -37,6 +55,10 @@ class shared_mutex_exclusive : public virtual named_resource {
   cpen333::process::condition cond_;                      // condition of no writers
 
  public:
+  /**
+   * Constructor, creates a write-preferring shared mutex
+   * @param name identifier for creating or connecting to an existing inter-process shared mutex
+   */
   shared_mutex_exclusive(const std::string &name) :
       shared_{name + std::string(SHARED_MUTEX_EXCLUSIVE_NAME_SUFFIX)},
       global_{name + std::string(SHARED_MUTEX_EXCLUSIVE_NAME_SUFFIX), 1},   // gate opened
@@ -60,6 +82,12 @@ class shared_mutex_exclusive : public virtual named_resource {
   shared_mutex_exclusive &operator=(const shared_mutex_exclusive &) = delete;
   shared_mutex_exclusive &operator=(shared_mutex_exclusive &&) = delete;
 
+  /**
+   * @brief Lock the mutex in shared access mode
+   *
+   * Multiple threads can lock in shared mode concurrently, allowing simultaneous access.  This method
+   * will block if the mutex is currently locked in exclusive mode.
+   */
   void lock_shared() {
 
     cond_.wait();           // wait until no exclusive access
@@ -71,6 +99,14 @@ class shared_mutex_exclusive : public virtual named_resource {
     }
   }
 
+  /**
+   * @brief Tries to lock the mutex in shared access mode
+   *
+   * Multiple threads can lock in shared mode concurrently, allowing simultaneous access.  This method returns
+   * immediately.
+   *
+   * @return true if successfully locked, false if mutex is currently locked in exclusive access mode
+   */
   bool try_lock_shared() {
     if (!cond_.wait_for(std::chrono::milliseconds(0))) {
       return false;
@@ -94,6 +130,11 @@ class shared_mutex_exclusive : public virtual named_resource {
     return true;
   }
 
+  /**
+   * @brief Unlocks one instance of shared access
+   *
+   * The mutex will continue to remain locked in shared access mode until all shared locks are unlocked.
+   */
   void unlock_shared() {
     std::lock_guard<cpen333::process::mutex> lock(shared_);
     if (--(count_->shared) == 0) {
@@ -101,6 +142,12 @@ class shared_mutex_exclusive : public virtual named_resource {
     }
   }
 
+  /**
+   * @brief Locks the mutex in exclusive access mode
+   *
+   * Only one thread can lock in exclusive access mode.  This method
+   * will block if the mutex is currently locked in either shared or exclusive mode.
+   */
   void lock() {
     // next in line
     {
@@ -114,6 +161,13 @@ class shared_mutex_exclusive : public virtual named_resource {
     global_.wait(); // lock semaphore
   }
 
+  /**
+   * @brief Tries to lock the mutex in exclusive access mode
+   *
+   * Only one thread can lock in exclusive access mode.  This method returns immediately.
+   *
+   * @return true if successfully locked, false if already locked in either shared or exclusive access mode
+   */
   bool try_lock() {
 
     // next in line
@@ -137,6 +191,9 @@ class shared_mutex_exclusive : public virtual named_resource {
     return true;
   }
 
+  /**
+   * @brief Unlocks the exclusively-locked mutex
+   */
   void unlock() {
 
     global_.notify(); // unlock semaphore  // allow next reader/writer waiting
@@ -149,10 +206,14 @@ class shared_mutex_exclusive : public virtual named_resource {
   }
 
   /**
-   * tries to lock the mutex, returns if the mutex has been unavailable for the specified timeout duration
+   * @brief Try to exclusively lock the mutex, with a relative timeout
+   *
+   * Tries to lock the mutex in exclusive-access (write) mode, returns if the mutex
+   * has been unavailable for the specified timeout duration
+   *
    * @tparam Rep duration representation
    * @tparam Period duration period
-   * @param timeout_duration timeout
+   * @param timeout_duration timeout duration
    * @return true if locked successfully
    */
   template<class Rep, class Period>
@@ -161,7 +222,11 @@ class shared_mutex_exclusive : public virtual named_resource {
   }
 
   /**
-   * tries to lock the mutex, returns if the mutex has been unavailable until specified time point has been reached
+   * @brief Try to exclusively lock the mutex, within an absolute timeout period
+   *
+   * Tries to lock the mutex in exclusive-access (write) mode, returns if the mutex has been
+   * unavailable until specified time point has been reached
+   *
    * @tparam Clock clock representation
    * @tparam Duration time
    * @param timeout_time time of timeout
@@ -195,10 +260,14 @@ class shared_mutex_exclusive : public virtual named_resource {
   }
 
   /**
-   * tries to lock the mutex, returns if the mutex has been unavailable for the specified timeout duration
+   * @brief Try to lock the mutex in shared mode, with a relative timeout
+   *
+   * Tries to lock the mutex in shared-access (read) mode, returns if the mutex has been unavailable
+   * for the specified timeout duration
+   *
    * @tparam Rep duration representation
    * @tparam Period duration period
-   * @param timeout_duration timeout
+   * @param timeout_duration timeout duration
    * @return true if locked successfully
    */
   template<class Rep, class Period>
@@ -207,7 +276,11 @@ class shared_mutex_exclusive : public virtual named_resource {
   }
 
   /**
-   * tries to lock the mutex, returns if the mutex has been unavailable until specified time point has been reached
+   * @brief Try to lock the mutex in shared mode, with absolute timeout
+   *
+   * Tries to lock the mutex in shared-access (read) mode, returns if the mutex has been unavailable until
+   * specified time point has been reached
+   *
    * @tparam Clock clock representation
    * @tparam Duration time
    * @param timeout_time time of timeout
@@ -248,6 +321,9 @@ class shared_mutex_exclusive : public virtual named_resource {
     return (b1 && b2 && b3 && b4 && b5);
   }
 
+  /**
+   * @copydoc cpen333::process::named_resource::unlink(const std::string&)
+   */
   static bool unlink(const std::string& name) {
     bool b1 = cpen333::process::mutex::unlink(name + std::string(SHARED_MUTEX_EXCLUSIVE_NAME_SUFFIX));
     bool b2 = cpen333::process::semaphore::unlink(name + std::string(SHARED_MUTEX_EXCLUSIVE_NAME_SUFFIX));
@@ -260,7 +336,13 @@ class shared_mutex_exclusive : public virtual named_resource {
 
 } // impl
 
+/**
+ * @brief Alias for default shared mutex with exclusive (write) priority
+ */
 using shared_mutex_exclusive = impl::shared_mutex_exclusive;
+/**
+ * @brief Alias for default shared timed mutex with exclusive (write) priority
+ */
 using shared_timed_mutex_exclusive = impl::shared_mutex_exclusive;
 
 } // process

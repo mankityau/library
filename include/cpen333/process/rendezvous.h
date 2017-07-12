@@ -1,7 +1,17 @@
+/**
+ * @file
+ * @brief Basic inter-process rendezvous implementation
+ */
 #ifndef CPEN333_PROCESS_RENDEZVOUS_H
 #define CPEN333_PROCESS_RENDEZVOUS_H
 
+/**
+ * @brief Suffix to add to the rendezvous' name for uniqueness
+ */
 #define RENDEZVOUS_NAME_SUFFIX "_rdv"
+/**
+ * @brief Magic number to ensure rendezvous is initialized
+ */
 #define RENDEZVOUS_INITIALIZED 0x38973823
 
 #include "cpen333/process/named_resource.h"
@@ -12,9 +22,20 @@
 namespace cpen333 {
 namespace process {
 
+/**
+ * @brief Inter-process rendezvous implementation
+ *
+ * A synchronization primitive that allows a certain number of threads/processes to wait for others to arrive, then
+ * proceed together.
+ */
 class rendezvous : public virtual named_resource {
 
  public:
+  /**
+   * @brief Constructs a named rendezvous primitive
+   * @param name  identifier for creating or connecting to an existing inter-process rendezvous
+   * @param size  number of processes in group
+   */
   rendezvous(const std::string &name, size_t size) :
       shared_{name + std::string(RENDEZVOUS_NAME_SUFFIX)},
       semaphore_{name + std::string(RENDEZVOUS_NAME_SUFFIX), 0},
@@ -30,6 +51,12 @@ class rendezvous : public virtual named_resource {
 
   }
 
+  /**
+   * @brief Waits until all other processes are also waiting
+   *
+   * Will cause the current process to block until all (# size) processes are waiting, then will release so that
+   * the processes are synchronized.
+   */
   void wait() {
     // lock shared data to prevent concurrent modification
     std::unique_lock<decltype(mutex_)> lock(mutex_);
@@ -59,6 +86,9 @@ class rendezvous : public virtual named_resource {
     return b1 && b2 && b3;
   }
 
+  /**
+  * @copydoc cpen333::process::named_resource::unlink(const std::string&)
+  */
   static bool unlink(const std::string& name) {
 
     bool b1 = cpen333::process::shared_object<shared_data>::unlink(name + std::string(RENDEZVOUS_NAME_SUFFIX));
