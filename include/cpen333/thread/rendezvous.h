@@ -1,3 +1,7 @@
+/**
+ * @file
+ * @brief Basic rendezvous implementation
+ */
 #ifndef CPEN333_THREAD_RENDEZVOUS_H
 #define CPEN333_THREAD_RENDEZVOUS_H
 
@@ -7,7 +11,12 @@
 namespace cpen333 {
 namespace thread {
 
-// Inter-thread rendezvous class
+/**
+ * @brief Rendezvous synchronization primitive implementation
+ *
+ * A synchronization primitive that allows a certain number of threads to wait for others to arrive, then
+ * proceed together.
+ */
 class rendezvous {
   std::mutex mutex_;
   std::condition_variable cv_;
@@ -16,9 +25,18 @@ class rendezvous {
   size_t size_;
 
  public:
+  /**
+   * @brief Constructs a rendezvous primitive
+   * @param size  number of threads in group
+   */
   rendezvous(size_t size) : mutex_{}, countdown_{size}, countup_{0}, size_{size} {}
 
-  // Cause threads to wait until all arrive
+  /**
+   * @brief Waits until all other threads are also waiting
+   *
+   * Will cause the current thread to block until all (# size) threads are waiting, then will release so that
+   * the threads are synchronized.
+   */
   void wait() {
     // lock to protect access to data
     std::unique_lock<std::mutex> lock(mutex_);

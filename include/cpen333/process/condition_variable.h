@@ -6,7 +6,7 @@
 #define CPEN333_PROCESS_CONDITION_VARIABLE_H
 
 /**
- * @brief suffix to append to mutex names for uniqueness
+ * @brief Suffix to append to mutex names for uniqueness
  */
 #define CONDITION_VARIABLE_NAME_SUFFIX "_cv"
 
@@ -45,7 +45,7 @@ class condition_variable : public condition_base, public virtual named_resource 
 
  public:
   /**
-   * @brief Constructs the object
+   * @brief Creates or connects to a named condition variable
    * @param name name identifier for creating or connecting to an existing inter-process condition_variable
    */
   condition_variable(const std::string &name) :

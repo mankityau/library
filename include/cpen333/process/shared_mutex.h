@@ -17,7 +17,7 @@ namespace cpen333 {
 namespace process {
 
 /**
- * @brief Default shared mutex uses fair priority
+ * @brief Default shared mutex that uses fair priority
  */
 using shared_mutex = impl::shared_mutex_fair;
 

@@ -32,7 +32,7 @@ class rendezvous : public virtual named_resource {
 
  public:
   /**
-   * @brief Constructs a named rendezvous primitive
+   * @brief Creates or connects to a named rendezvous primitive
    * @param name  identifier for creating or connecting to an existing inter-process rendezvous
    * @param size  number of processes in group
    */

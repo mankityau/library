@@ -1,3 +1,7 @@
+/**
+ * @file
+ * @brief Event synchronization primitive
+ */
 #ifndef CPEN333_PROCESS_EVENT_H
 #define CPEN333_PROCESS_EVENT_H
 
@@ -10,28 +14,52 @@ namespace cpen333 {
 namespace thread {
 
 /**
- * Inverts lock/unlock operations on a lock
+ * @brief Inverts lock/unlock operations on a lock
  * @tparam BasicLock lock type that supports lock() and unlock()
  */
 template<typename BasicLock>
 class lock_inverter {
   BasicLock &lock_;
  public:
+  /**
+   * @brief Creates the inverter, does not lock or unlock
+   * @param lock lock to reverse
+   */
   lock_inverter(BasicLock& lock) : lock_{lock}{}
+
+  /**
+   * @brief Unlocks the underlying lock
+   */
   void lock() {
     lock_.unlock();
   }
+
+  /**
+   * @brief Locks the underlying lock
+   */
   void unlock() {
     lock_.lock();
   }
 };
 
-//
-// Implementation based on boost's boost/interpress/sync/detail/condition_algorithm_8a.hpp
-// Their implementation guarantees not to have spurious wake-ups
+/**
+ * @brief Event primitive, acting like a turnstile
+ *
+ * A synchronization primitive that allows multiple threads to wait until the
+ * event is notified.  The notifier can either `notify_one()` to let a single waiting
+ * thread through (if any), or `notify_all()` to let all currently waiting threads through.
+ *
+ * Implementation is based on boost's boost/interpress/sync/detail/condition_algorithm_8a.hpp
+ * Their implementation guarantees not to have spurious wake-ups
+ *
+ */
 class event {
 
  public:
+
+  /**
+ * @brief Creates the event
+ */
   event() : waiters_{}, block_lock_{1}, block_queue_{0}, unblock_lock_{}, external_{} {}
 
   // disable copy/move constructors
@@ -40,35 +68,72 @@ class event {
   event& operator=(const event&) = delete;
   event& operator=(event&&) = delete;
 
+  /**
+   * @brief Waits for the event to be triggered
+   *
+   * Causes the current thread to block until either `notify_all()` is called, or `notify_one()` and this thread
+   * happens to be the one awoken.  Note that order of wakes is system-dependent, and not necessarily in order of
+   * arrival.  This event will <em>not</em> exhibit spurious wake-ups.  A thread will be forced
+   * to wait here indefinitely until the event is triggered.
+   */
   void wait() {
     std::unique_lock<std::mutex> lock(external_);
     wait(lock, false, std::chrono::steady_clock::now());
   }
 
+  /**
+   * @brief Waits for the event to be triggered or for a timeout period to elapse
+   *
+   * Causes the current thread to block until `notify_all()` is called, or `notify_one()` and this thread
+   * happens to be the one awoken, or until the specified timeout period elapses, whichever comes first.
+   * @tparam Rep timeout duration representation
+   * @tparam Period timeout clock period
+   * @param rel_time maximum relative time to wait for condition to be set
+   * @return `true` if event is triggered, `false` if timeout has elapsed without event being triggered
+   */
   template<class Rep, class Period>
-  std::cv_status wait_for(const std::chrono::duration<Rep, Period>& rel_time) {
+  bool wait_for(const std::chrono::duration<Rep, Period>& rel_time) {
     std::unique_lock<std::mutex> lock(external_);
-    if (wait(lock, true, std::chrono::steady_clock::now()+rel_time)) {
-      return std::cv_status::no_timeout;
-    }
-    return std::cv_status::timeout;
+    return wait(lock, true, std::chrono::steady_clock::now()+rel_time);
   }
 
+  /**
+    * @brief Waits for the event to be triggered or for a time-point to be reached
+    *
+    * Causes the current thread to block until `notify_all()` is called, or `notify_one()` and this thread
+    * happens to be the one awoken, or until the specified timeout time has been reached, whichever comes first.
+    *
+    * @tparam Clock clock type
+    * @tparam Duration clock duration type
+    * @param timeout_time absolute timeout time
+    * @return `true` if event is triggered, `false` if timeout time has been reached without event
+    */
   template<class Clock, class Duration >
   bool wait_until(const std::chrono::time_point<Clock, Duration>& timeout_time ) {
     std::unique_lock<std::mutex> lock(external_);
     return wait(lock, true, timeout_time);
   }
 
+  /**
+   * @brief Wake a single thread waiting for the event to be triggered
+   *
+   * Note that the choice of thread to be awoken is up to the underlying system.  Threads are not necessarily
+   * notified in order of arrival.
+   */
   void notify_one() {
     notify(false);
   }
 
+  /**
+   * @brief Wake all threads waiting for the event to be triggered
+   *
+   * All threads waiting for the event will be awoken and will continue.
+   */
   void notify_all() {
     notify(true);
   }
 
- protected:
+ private:
 
   void notify(bool broadcast) {
     int signals;

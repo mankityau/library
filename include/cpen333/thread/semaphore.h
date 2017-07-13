@@ -1,7 +1,7 @@
-//
-// Created by Antonio on 2017-04-15.
-//
-
+/**
+ * @file
+ * @brief Semaphore synchronization primitive implementation
+ */
 #ifndef CPEN333_THREAD_SEMAPHORE_H
 #define CPEN333_THREAD_SEMAPHORE_H
 
@@ -12,19 +12,33 @@
 namespace cpen333 {
 namespace thread {
 
+
 /**
- * Simple implementation of a local semaphore
- * adapted from http://stackoverflow.com/questions/4792449/c0x-has-no-semaphores-how-to-synchronize-threads
+ * @brief A local semaphore synchronization primitive
+ *
+ * Used to protect access to a counted resource shared by multiple threads. Contains an integer whose value
+ * is never allowed to fall below zero.
+ * There are two main supported actions: wait(), which decrements the internal value, and notify() which increments the
+ * value.  If the value of the semaphore is zero, then wait() will cause the thread to block until the value becomes
+ * greater than zero.
+ *
+ * This implementation has no explicit maximum value.
+ *
+ * Adapted from http://stackoverflow.com/questions/4792449/c0x-has-no-semaphores-how-to-synchronize-threads
+ *
  * @tparam Mutex mutex type
  * @tparam CondVar condition variable type
  */
 template <typename Mutex, typename CondVar>
 class basic_semaphore {
  public:
+  /**
+   * @brief Alias to condition variable native handle type
+   */
   using native_handle_type = typename CondVar::native_handle_type;
 
   /**
-   * Simple constructor that allows setting the initial count
+   * @brief Simple constructor that allows setting the initial count
    * @param count resource count (default 1)
    */
   explicit basic_semaphore(size_t count = 1) : mutex_{}, cv_{}, count_{count} {}
@@ -36,7 +50,10 @@ class basic_semaphore {
   basic_semaphore& operator=(basic_semaphore&&) = delete;
 
   /**
-   * Unblocks one resource count
+   * @brief Increments the semaphore value
+   *
+   * If the semaphore's value consequently becomes greater than zero, then one process or thread that is currently
+   * blocked in a wait() operation will be woken up and will proceed.
    */
   void notify() {
     std::lock_guard<Mutex> lock{mutex_};
@@ -45,7 +62,10 @@ class basic_semaphore {
   }
 
   /**
-   * Waits for one resource count to be free
+   * @brief Waits for and decrements the semaphore value
+   *
+   * If the value is greater than zero, will decrement it and return immediately.  Otherwise, the thread will
+   * block until it becomes possible to perform the decrement.
    */
   void wait() {
     std::unique_lock<Mutex> lock{mutex_};
@@ -54,8 +74,11 @@ class basic_semaphore {
   }
 
   /**
-   * Tests if a resource is available, and if so, acquires
-   * @return true if resource acquired (i.e. was available), false otherwise
+   * @brief Tries to wait for the semaphore, returning immediately
+   *
+   * If the value is greater than zero, will decrement the semaphore and return true.  Otherwise, will return false.
+   *
+   * @return true if decrement successful, false otherwise
    */
   bool try_wait() {
     std::lock_guard<Mutex> lock{mutex_};
@@ -67,16 +90,20 @@ class basic_semaphore {
   }
 
   /**
-   * Attempt to acquire resource, but only block for a specified period of time
-   * @tparam Rep duration representation
-   * @tparam Period duration period
-   * @param d maximum time to wait (blocking) for resource
-   * @return true if resource acquired, false if specified time elapsed and unable to acquire resource
+   * @brief Tries to wait for the semaphore for up to a maximum timeout duration
+   *
+   * If the semaphore's value is greater than zero, will decrement it and return true immediately.  Otherwise,
+   * will wait (blocking) up to a maximum relative timeout period.
+   *
+   * @tparam Rep time representation
+   * @tparam Period timeout period type
+   * @param timeout_duration maximum relative duration for waiting
+   * @return true if semaphore successfully decremented, false if timed-out
    */
   template<class Rep, class Period>
-  bool wait_for(const std::chrono::duration<Rep, Period>& d) {
+  bool wait_for(const std::chrono::duration<Rep, Period>& timeout_duration) {
     std::unique_lock<Mutex> lock{mutex_};
-    bool finished = cv_.wait_for(lock, d, [&]{ return count_ > 0; });
+    bool finished = cv_.wait_for(lock, timeout_duration, [&]{ return count_ > 0; });
     if (finished) {
       --count_;
     }
@@ -85,22 +112,33 @@ class basic_semaphore {
   }
 
   /**
-   * Attempt to acquire a resource until a specified time
-   * @tparam Clock clock representation
-   * @tparam Duration duration type
-   * @param t latest time until which to wait for a resource
-   * @return true if resource acquired, false if specified time is reached without acquiring resource
+   * @brief Tries to wait for the semaphore for up to a maximum absolute time
+   *
+   * If the semaphore's value is greater than zero, will decrement it and return true immediately.  Otherwise,
+   * will wait (blocking) up to a maximum relative timeout period.
+   *
+   * @tparam Clock timeout clock type
+   * @tparam Duration timeout duration type
+   * @param timeout_time maximum absolute time for waiting
+   * @return true if semaphore successfully decremented, false if timed-out
    */
   template<class Clock, class Duration>
-  bool wait_until(const std::chrono::time_point<Clock, Duration>& t) {
+  bool wait_until(const std::chrono::time_point<Clock, Duration>& timeout_time) {
     std::unique_lock<Mutex> lock{mutex_};
-    auto finished = cv_.wait_until(lock, t, [&]{ return count_ > 0; });
+    auto finished = cv_.wait_until(lock, timeout_time, [&]{ return count_ > 0; });
     if (finished) {
       --count_;
     }
     return finished;
   }
 
+  /**
+   * @brief Returns a native handle to the semaphore
+   *
+   * The native handle has a type aliased to semaphore::native_handle_type.
+   *
+   * @return native semaphore handle
+   */
   native_handle_type native_handle() {
     return cv_.native_handle();
   }
@@ -112,18 +150,32 @@ class basic_semaphore {
 };
 
 /**
- * Default semaphore implementation
+ * @brief Alias to default semaphore implementation with std::mutex and std::condition_variable
  */
 using semaphore = basic_semaphore<std::mutex, std::condition_variable>;
 
+/**
+ * @brief Semaphore guard, similar to std::lock_guard
+ *
+ * Protects a semaphore's wait/notify using RAII to ensure all resources
+ * are returned to the system
+ * @tparam SemaphoreType basic semaphore that supports wait() and notify()
+ */
 template <typename SemaphoreType>
 class semaphore_guard {
   SemaphoreType& sem_;
  public:
+  /**
+   * @brief Constructor, waits on semaphore
+   * @param sem semaphore to wait on
+   */
   semaphore_guard(SemaphoreType& sem) : sem_{sem} {
     sem_.wait();
   }
 
+  /**
+   * @brief Destructor, automatically notifies semaphore
+   */
   ~semaphore_guard() {
     sem_.notify();
   }

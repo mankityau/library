@@ -49,7 +49,7 @@ class shared_mutex_shared : public virtual named_resource {
 
  public:
   /**
-   * Constructor, creates a read-preferring shared mutex
+   * Constructor, creates or connects to a read-preferring shared mutex
    * @param name identifier for creating or connecting to an existing inter-process shared mutex
    */
   shared_mutex_shared(const std::string &name) :

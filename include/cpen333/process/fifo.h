@@ -50,7 +50,7 @@ class fifo : public virtual named_resource {
   using value_type = ValueType;
 
   /**
-   * @brief Constructs the fifo
+   * @brief Creates or connects to an existing named fifo
    * @param name name identifier for creating or connecting to an existing inter-process fifo
    * @param size if creating, the maximum number of elements that can be stored in the queue without blocking
    */

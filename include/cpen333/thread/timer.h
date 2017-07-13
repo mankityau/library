@@ -12,11 +12,18 @@ namespace cpen333 {
 namespace thread {
 
 namespace detail {
+/**
+ * @brief No-op functor
+ */
 struct noop_function_t {
   void operator () () const {}
 };
 constexpr const noop_function_t noop_function;  // constant instance
 
+/**
+ * @brief runs events in a separate thread
+ * @tparam T functor type to run, supports operator ()
+ */
 template<typename T>
 class runner {
 
@@ -85,25 +92,64 @@ class runner {
 
 }
 
-// time-based timer
+/**
+ * @brief Timer implementation
+ *
+ * Allows tracking of timer ticks or running a callback functor
+ * at a regular tick interval.
+ *
+ * The timer is NOT started automatically.  It must be started by calling
+ * start().
+ *
+ * @tparam Duration tick duration type
+ */
 template<typename Duration>
 class timer {
  public:
 
-  template<typename Func, typename...Args>
-  timer(const Duration& time) : timer(time, detail::noop_function) {}
+  /**
+   * @brief Creates a basic timer
+   *
+   * The timer is NOT started automatically.  It must be started by calling
+   * start().
+   *
+   * @param period tick interval
+   */
+  timer(const Duration& period) : timer(period, detail::noop_function) {}
 
+  /**
+   * @brief Creates a timer with a callback function
+   *
+   * The callback function func(args...) is executed on every tick.  The function
+   * execution time should be well within a single tick period.  Callbacks are
+   * executed in a single thread, meaning that if one execution does not
+   * finish before the next tick, calls will be accumulated and run
+   * sequentially.
+   *
+   * The timer is NOT started automatically.  It must be started by calling
+   * start().
+   *
+   * @tparam Func callback function type
+   * @tparam Args callback argument types
+   * @param period tick interval
+   * @param func callback function
+   * @param args callback arguments
+   */
   template<typename Func, typename...Args>
-  timer(const Duration& time, Func &&func, Args &&... args) :
-    time_{time}, ring_{false}, run_{false}, terminate_{false},
+  timer(const Duration& period, Func &&func, Args &&... args) :
+    time_{period}, ring_{false}, run_{false}, terminate_{false},
     runner_{std::bind(std::forward<Func>(func), std::forward<Args>(args)...)},
     mutex_{}, cv_{},
-    thread_{&timer::run, this} {
+    thread_{nullptr} {
     runner_.start();  // start new thread running
+    // ensure created after all memory is allocated, otherwise may run into errors in run()
+    thread_ = new std::thread(&timer::run, this);
   }
 
   /**
-   * Start timer running, resets clock to zero and "test" flag
+   * @brief Start timer running
+   *
+   * Resets clock to zero and "test" flag
    */
   void start() {
     {
@@ -115,7 +161,9 @@ class timer {
   }
 
   /**
-   * Stops timer running, leaves "test" flag in tact to see if it has gone off
+   * @brief Stops timer running
+   *
+   * Leaves "test" flag intact to see if timer has gone off
    */
   void stop() {
     {
@@ -126,14 +174,20 @@ class timer {
   }
 
   /**
-   * Checks if timer is running
-   * @return true if running
+   * @brief Checks if timer is running
+   * @return true if running, false otherwise
    */
   bool running() {
     std::lock_guard<decltype(mutex_)> lock(mutex_);
     return run_;
   }
-  
+
+  /**
+   * @brief Waits until the next tick event
+   *
+   * Blocks the current thread until the next tick event, or the
+   * timer is stopped.
+   */
   void wait() {
     // wait until next event
     std::lock_guard<decltype(mutex_)> lock(mutex_);
@@ -141,7 +195,7 @@ class timer {
   }
 
   /**
-   * Tests if timer has gone off since last reset
+   * @brief Tests if timer has gone off since last reset
    * @return true if timer has gone off
    */
   bool test() {
@@ -150,7 +204,7 @@ class timer {
   }
 
   /**
-   * Test if timer has gone off since last call, resets flag
+   * @brief Test if timer has gone off since last call, and resets flag
    * @return true if timer has gone off since last call
    */
   bool test_and_reset() {
@@ -162,6 +216,11 @@ class timer {
     return false;
   }
 
+  /**
+   * @brief Destructor
+   *
+   * Runs any pending callbacks and terminates the timer
+   */
   ~timer() {
     // signal thread to terminate
     {
@@ -170,7 +229,9 @@ class timer {
       cv_.notify_all();
     }
     // let thread finish, since refers to member data
-    thread_.join();
+    thread_->join();
+    delete thread_;
+    thread_ = nullptr;
   }
 
  private:
@@ -210,7 +271,7 @@ class timer {
   detail::runner<std::function<void()>>   runner_;  // callback
   std::mutex mutex_;                // controls terminate
   std::condition_variable cv_;      // controls waiting
-  std::thread thread_;              // timer thread
+  std::thread* thread_;             // timer thread
 };
 
 } // thread

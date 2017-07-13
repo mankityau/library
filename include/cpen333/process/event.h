@@ -22,7 +22,7 @@ namespace cpen333 {
 namespace process {
 
 /**
- * @brief Allows multiple processes to wait until the event is triggered, acting like a turnstile
+ * @brief Event primitive, acting like a turnstile
  *
  * A named synchronization primitive that allows multiple threads and processes to wait until the
  * event is notified.  The notifier can either `notify_one()` to let a single waiter through (if any),
@@ -33,7 +33,7 @@ class event : private condition_base, public virtual named_resource {
  public:
 
   /**
-   * @brief Constructs the object
+   * @brief Creates or connects to a named event
    * @param name name identifier for creating or connecting to an existing inter-process event
    */
   event(const std::string &name) :

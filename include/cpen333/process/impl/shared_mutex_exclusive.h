@@ -3,7 +3,6 @@
  * @brief Implementation of an inter-process mutex with shared access that gives priority to exclusive use
  * (write-priority)
  */
-
 #ifndef CPEN333_PROCESS_SHARED_MUTEX_EXCLUSIVE_H
 #define CPEN333_PROCESS_SHARED_MUTEX_EXCLUSIVE_H
 
@@ -56,7 +55,7 @@ class shared_mutex_exclusive : public virtual named_resource {
 
  public:
   /**
-   * Constructor, creates a write-preferring shared mutex
+   * Constructor, creates or connects to a write-preferring shared mutex
    * @param name identifier for creating or connecting to an existing inter-process shared mutex
    */
   shared_mutex_exclusive(const std::string &name) :

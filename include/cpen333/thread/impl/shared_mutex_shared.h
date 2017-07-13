@@ -1,3 +1,8 @@
+/**
+ * @file
+ * @brief Implementation of a mutex with shared access that gives priority to shared use
+ * (read-priority)
+ */
 #ifndef CPEN333_THREAD_SHARED_MUTEX_SHARED_H
 #define CPEN333_THREAD_SHARED_MUTEX_SHARED_H
 
@@ -9,10 +14,14 @@ namespace thread {
 
 namespace impl {
 
-// Read-preferring
 /**
- * Shared-mutex implementation based on the mutex/semaphore pattern
- * See https://en.wikipedia.org/wiki/Readers%E2%80%93writer_lock for details
+ * @brief A read-preferring shared mutex implementation
+ *
+ * Shared mutex implementation based on the mutex/condition variable pattern.  Gives priority to
+ * shared (read) access.
+ *
+ * See https://en.wikipedia.org/wiki/Readers%E2%80%93writer_lock#Using_a_condition_variable_and_a_mutex
+ * for details
  */
 class shared_mutex_shared {
  private:
@@ -22,6 +31,9 @@ class shared_mutex_shared {
   size_t shared_;          // shared counter object
 
  public:
+  /**
+   * Constructor, creates a read-preferring shared mutex
+   */
   shared_mutex_shared() :  mutex_{}, global_{1}, shared_{0} { }
 
   // disable copy/move constructors
@@ -30,6 +42,10 @@ class shared_mutex_shared {
   shared_mutex_shared &operator=(const shared_mutex_shared &) = delete;
   shared_mutex_shared &operator=(shared_mutex_shared &&) = delete;
 
+
+  /**
+   * @copydoc cpen333::thread::impl::shared_mutex_exclusive::lock_shared()
+   */
   void lock_shared() {
     // may hold both mutex_ and global_ until writes are complete
     std::lock_guard <std::mutex> lock(mutex_);
@@ -38,6 +54,9 @@ class shared_mutex_shared {
     }
   }
 
+  /**
+   * @copydoc cpen333::thread::impl::shared_mutex_exclusive::try_lock_shared()
+   */
   bool try_lock_shared() {
     std::unique_lock <std::mutex> lock(mutex_, std::defer_lock); // do not try yet
     if (!lock.try_lock()) {
@@ -57,6 +76,9 @@ class shared_mutex_shared {
     return true;
   }
 
+  /**
+   * @copydoc cpen333::thread::impl::shared_mutex_exclusive::unlock_shared()
+   */
   void unlock_shared() {
     std::lock_guard <std::mutex> lock(mutex_);
     if (--shared_ == 0) {
@@ -64,24 +86,29 @@ class shared_mutex_shared {
     }
   }
 
+  /**
+   * @copydoc cpen333::thread::impl::shared_mutex_exclusive::lock()
+   */
   void lock() {
     global_.wait(); // lock semaphore
   }
 
+  /**
+   * @copydoc cpen333::thread::impl::shared_mutex_exclusive::try_lock()
+   */
   bool try_lock() {
     return global_.try_wait();
   }
 
+  /**
+   * @copydoc cpen333::thread::impl::shared_mutex_exclusive::unlock()
+   */
   void unlock() {
     global_.notify(); // unlock semaphore
   }
 
   /**
-   * tries to lock the mutex, returns if the mutex has been unavailable for the specified timeout duration
-   * @tparam Rep duration representation
-   * @tparam Period duration period
-   * @param timeout_duration timeout
-   * @return true if locked successfully
+   * @copydoc cpen333::thread::impl::shared_mutex_exclusive::try_lock_for()
    */
   template<class Rep, class Period>
   bool try_lock_for(const std::chrono::duration <Rep, Period> &timeout_duration) {
@@ -89,11 +116,7 @@ class shared_mutex_shared {
   }
 
   /**
-   * tries to lock the mutex, returns if the mutex has been unavailable until specified time point has been reached
-   * @tparam Clock clock representation
-   * @tparam Duration time
-   * @param timeout_time time of timeout
-   * @return true if locked successfully
+   * @copydoc cpen333::thread::impl::shared_mutex_exclusive::try_lock_until()
    */
   template<class Clock, class Duration>
   bool try_lock_until(const std::chrono::time_point <Clock, Duration> &timeout_time) {
@@ -101,11 +124,7 @@ class shared_mutex_shared {
   }
 
   /**
-   * tries to lock the mutex, returns if the mutex has been unavailable for the specified timeout duration
-   * @tparam Rep duration representation
-   * @tparam Period duration period
-   * @param timeout_duration timeout
-   * @return true if locked successfully
+   * @copydoc cpen333::thread::impl::shared_mutex_exclusive::try_lock_shared_for()
    */
   template<class Rep, class Period>
   bool try_lock_shared_for(const std::chrono::duration <Rep, Period> &timeout_duration) {
@@ -113,11 +132,7 @@ class shared_mutex_shared {
   }
 
   /**
-   * tries to lock the mutex, returns if the mutex has been unavailable until specified time point has been reached
-   * @tparam Clock clock representation
-   * @tparam Duration time
-   * @param timeout_time time of timeout
-   * @return true if locked successfully
+   * @copydoc cpen333::thread::impl::shared_mutex_exclusive::try_lock_shared_until()
    */
   template<class Clock, class Duration>
   bool try_lock_shared_until(const std::chrono::time_point <Clock, Duration> &timeout_time) {
@@ -142,7 +157,14 @@ class shared_mutex_shared {
 
 } // implementation
 
+/**
+ * @brief Alias for default shared mutex with shared (read) priority
+ */
 using shared_mutex_shared = impl::shared_mutex_shared;
+
+/**
+ * @brief Alias for default shared timed mutex with shared (read) priority
+ */
 using shared_timed_mutex_shared = impl::shared_mutex_shared;
 
 } // thread

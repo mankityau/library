@@ -14,11 +14,7 @@ include(../Macros.cmake)
 # directories to search for header files
 include_directories(../include)
 
+# enable testing
 enable_testing()
 
-#==============  Unlinker  ====================================
-
-add_rt_executable(${PROJECT}_process_unlinker_unlinker unlinker process/unlinker
-        src/process/unlinker/unlinker.cpp)
-add_test(NAME ${PROJECT}_process_unlinker_unlinker_test
-        COMMAND ${PROJECT}_process_unlinker_unlinker)
+# add tests here

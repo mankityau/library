@@ -38,7 +38,7 @@ class condition : private condition_base, public virtual named_resource {
  public:
 
   /**
-   * @brief Constructs the object
+   * @brief Creates or connects to the named condition
    * @param name name identifier for creating or connecting to an existing inter-process condition
    * @param value initial state, as either set (`true`) or reset (`false`)
    */
