@@ -1,0 +1,218 @@
+\hypertarget{classcpen333_1_1console}{}\section{cpen333\+:\+:console Class Reference}
+\label{classcpen333_1_1console}\index{cpen333\+::console@{cpen333\+::console}}
+
+
+Methods for manipulating the console.  
+
+
+
+
+{\ttfamily \#include $<$console.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcpen333_1_1console_abe9315029ea04b6de1c1a0f992c3361f}\label{classcpen333_1_1console_abe9315029ea04b6de1c1a0f992c3361f}} 
+\hyperlink{classcpen333_1_1console_abe9315029ea04b6de1c1a0f992c3361f}{console} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+virtual \hyperlink{classcpen333_1_1console_aef92248b810d1bbf207081e910d12545}{$\sim$console} ()
+\begin{DoxyCompactList}\small\item\em Destructor, currently does nothing. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1console_a0710a0e8e75562c189bcf81837f01fa4}{set\+\_\+foreground\+\_\+color} (const \hyperlink{console_8h_a915749711f4fc63cca8581af0c1106b3}{color} \&\hyperlink{console_8h_a915749711f4fc63cca8581af0c1106b3}{color})
+\begin{DoxyCompactList}\small\item\em Sets the foreground colour. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1console_a2328c0819515e1d3508cd1018f62c674}{set\+\_\+background\+\_\+color} (const \hyperlink{console_8h_a915749711f4fc63cca8581af0c1106b3}{color} \&\hyperlink{console_8h_a915749711f4fc63cca8581af0c1106b3}{color})
+\begin{DoxyCompactList}\small\item\em Sets the background colour. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1console_ae5cd5a356afeedd7f8cf96c2cbac3785}{set\+\_\+colors\+\_\+reverse} (bool set)
+\begin{DoxyCompactList}\small\item\em Reverse role of foreground/background colours. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1console_a20094148348d3cbb9e59ec0833fc6d3a}{reset\+\_\+colors} ()
+\begin{DoxyCompactList}\small\item\em Reset colours to original values. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1console_ad72d4364021db07a5cd7a8b7e2828182}{set\+\_\+cursor\+\_\+position} (int r, int c)
+\begin{DoxyCompactList}\small\item\em Sets the cursor position. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1console_a9be67402cba00113f607d3ec1c2d0f2c}{clear\+\_\+display} ()
+\begin{DoxyCompactList}\small\item\em Clears contents visible in the console. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1console_a34df62ef953db9403e25c10827decc4c}{clear\+\_\+line} ()
+\begin{DoxyCompactList}\small\item\em Clears the current console line. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1console_a36a1cf0fec4bab91d147e294f338c373}{clear\+\_\+line\+\_\+right} ()
+\begin{DoxyCompactList}\small\item\em Clears contents of the current row to the right of the cursor\textquotesingle{}s position. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1console_a66197024600f995776ce5d8428f6b3d1}{clear\+\_\+line\+\_\+left} ()
+\begin{DoxyCompactList}\small\item\em Clears contents of the current row to the left of the cursor\textquotesingle{}s position. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1console_aa57d406140b94183b74e3b43cf0f73f5}{set\+\_\+cursor\+\_\+visible} (bool visible)
+\begin{DoxyCompactList}\small\item\em Show or hide the cursor. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1console_adf76613205b18ce6030ad6d31b089d73}{reset} ()
+\begin{DoxyCompactList}\small\item\em Reset colours and cursor visibility. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1console_ad2a40d6f5e9016c5e58592120e3b608d}{clear\+\_\+all} ()
+\begin{DoxyCompactList}\small\item\em Clears display and resets all console attributes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Methods for manipulating the console. 
+
+Useful for cursor placement and visibility, foreground and background colors, and clearing part or all of the screen. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcpen333_1_1console_aef92248b810d1bbf207081e910d12545}\label{classcpen333_1_1console_aef92248b810d1bbf207081e910d12545}} 
+\index{cpen333\+::console@{cpen333\+::console}!````~console@{$\sim$console}}
+\index{````~console@{$\sim$console}!cpen333\+::console@{cpen333\+::console}}
+\subsubsection{\texorpdfstring{$\sim$console()}{~console()}}
+{\footnotesize\ttfamily virtual cpen333\+::console\+::$\sim$console (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Destructor, currently does nothing. 
+
+Note that once the console instance is destructed, any modified console attributes will remain in effect. It is {\itshape highly} recommended to call {\ttfamily \hyperlink{classcpen333_1_1console_ad2a40d6f5e9016c5e58592120e3b608d}{clear\+\_\+all()}} prior to terminating your program. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcpen333_1_1console_ad2a40d6f5e9016c5e58592120e3b608d}\label{classcpen333_1_1console_ad2a40d6f5e9016c5e58592120e3b608d}} 
+\index{cpen333\+::console@{cpen333\+::console}!clear\+\_\+all@{clear\+\_\+all}}
+\index{clear\+\_\+all@{clear\+\_\+all}!cpen333\+::console@{cpen333\+::console}}
+\subsubsection{\texorpdfstring{clear\+\_\+all()}{clear\_all()}}
+{\footnotesize\ttfamily void cpen333\+::console\+::clear\+\_\+all (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Clears display and resets all console attributes. 
+
+Resets all console attributes, including foreground and background colours as well as cursor visibility, and clears the contents of the entire display. The cursor\textquotesingle{}s position is set to the top-\/left position. This method should be called prior to program termination to prevent modified console attributes from persisting beyond the lifetime of the process. \mbox{\Hypertarget{classcpen333_1_1console_a9be67402cba00113f607d3ec1c2d0f2c}\label{classcpen333_1_1console_a9be67402cba00113f607d3ec1c2d0f2c}} 
+\index{cpen333\+::console@{cpen333\+::console}!clear\+\_\+display@{clear\+\_\+display}}
+\index{clear\+\_\+display@{clear\+\_\+display}!cpen333\+::console@{cpen333\+::console}}
+\subsubsection{\texorpdfstring{clear\+\_\+display()}{clear\_display()}}
+{\footnotesize\ttfamily void cpen333\+::console\+::clear\+\_\+display (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Clears contents visible in the console. 
+
+Clears all text and fills the console background with the currently set background colour. \mbox{\Hypertarget{classcpen333_1_1console_a34df62ef953db9403e25c10827decc4c}\label{classcpen333_1_1console_a34df62ef953db9403e25c10827decc4c}} 
+\index{cpen333\+::console@{cpen333\+::console}!clear\+\_\+line@{clear\+\_\+line}}
+\index{clear\+\_\+line@{clear\+\_\+line}!cpen333\+::console@{cpen333\+::console}}
+\subsubsection{\texorpdfstring{clear\+\_\+line()}{clear\_line()}}
+{\footnotesize\ttfamily void cpen333\+::console\+::clear\+\_\+line (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Clears the current console line. 
+
+Clears all text and fills the current console line\textquotesingle{}s background with the currently set background colour. \mbox{\Hypertarget{classcpen333_1_1console_a66197024600f995776ce5d8428f6b3d1}\label{classcpen333_1_1console_a66197024600f995776ce5d8428f6b3d1}} 
+\index{cpen333\+::console@{cpen333\+::console}!clear\+\_\+line\+\_\+left@{clear\+\_\+line\+\_\+left}}
+\index{clear\+\_\+line\+\_\+left@{clear\+\_\+line\+\_\+left}!cpen333\+::console@{cpen333\+::console}}
+\subsubsection{\texorpdfstring{clear\+\_\+line\+\_\+left()}{clear\_line\_left()}}
+{\footnotesize\ttfamily void cpen333\+::console\+::clear\+\_\+line\+\_\+left (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Clears contents of the current row to the left of the cursor\textquotesingle{}s position. 
+
+Clears all text starting with the beginning of the current row and ending with and including the current cursor position, filling with the currently set background colour. \mbox{\Hypertarget{classcpen333_1_1console_a36a1cf0fec4bab91d147e294f338c373}\label{classcpen333_1_1console_a36a1cf0fec4bab91d147e294f338c373}} 
+\index{cpen333\+::console@{cpen333\+::console}!clear\+\_\+line\+\_\+right@{clear\+\_\+line\+\_\+right}}
+\index{clear\+\_\+line\+\_\+right@{clear\+\_\+line\+\_\+right}!cpen333\+::console@{cpen333\+::console}}
+\subsubsection{\texorpdfstring{clear\+\_\+line\+\_\+right()}{clear\_line\_right()}}
+{\footnotesize\ttfamily void cpen333\+::console\+::clear\+\_\+line\+\_\+right (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Clears contents of the current row to the right of the cursor\textquotesingle{}s position. 
+
+Clears text in the starting with and including the current cursor position until the end of the row, filling with the currently set background colour. \mbox{\Hypertarget{classcpen333_1_1console_adf76613205b18ce6030ad6d31b089d73}\label{classcpen333_1_1console_adf76613205b18ce6030ad6d31b089d73}} 
+\index{cpen333\+::console@{cpen333\+::console}!reset@{reset}}
+\index{reset@{reset}!cpen333\+::console@{cpen333\+::console}}
+\subsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void cpen333\+::console\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reset colours and cursor visibility. 
+
+Resets the foreground and background colour to their original values, and re-\/enables cursor visibility if it was set to hidden \mbox{\Hypertarget{classcpen333_1_1console_a20094148348d3cbb9e59ec0833fc6d3a}\label{classcpen333_1_1console_a20094148348d3cbb9e59ec0833fc6d3a}} 
+\index{cpen333\+::console@{cpen333\+::console}!reset\+\_\+colors@{reset\+\_\+colors}}
+\index{reset\+\_\+colors@{reset\+\_\+colors}!cpen333\+::console@{cpen333\+::console}}
+\subsubsection{\texorpdfstring{reset\+\_\+colors()}{reset\_colors()}}
+{\footnotesize\ttfamily void cpen333\+::console\+::reset\+\_\+colors (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reset colours to original values. 
+
+Resets the foreground and background colours to those encountered when this console instance was constructed. \mbox{\Hypertarget{classcpen333_1_1console_a2328c0819515e1d3508cd1018f62c674}\label{classcpen333_1_1console_a2328c0819515e1d3508cd1018f62c674}} 
+\index{cpen333\+::console@{cpen333\+::console}!set\+\_\+background\+\_\+color@{set\+\_\+background\+\_\+color}}
+\index{set\+\_\+background\+\_\+color@{set\+\_\+background\+\_\+color}!cpen333\+::console@{cpen333\+::console}}
+\subsubsection{\texorpdfstring{set\+\_\+background\+\_\+color()}{set\_background\_color()}}
+{\footnotesize\ttfamily void cpen333\+::console\+::set\+\_\+background\+\_\+color (\begin{DoxyParamCaption}\item[{const \hyperlink{console_8h_a915749711f4fc63cca8581af0c1106b3}{color} \&}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the background colour. 
+
+Sets the color of the text background, unless colours are set to \char`\"{}reverse\char`\"{}, in which case would set the text foreground color. 
+\begin{DoxyParams}{Parameters}
+{\em color} & color to use for background \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcpen333_1_1console_ae5cd5a356afeedd7f8cf96c2cbac3785}\label{classcpen333_1_1console_ae5cd5a356afeedd7f8cf96c2cbac3785}} 
+\index{cpen333\+::console@{cpen333\+::console}!set\+\_\+colors\+\_\+reverse@{set\+\_\+colors\+\_\+reverse}}
+\index{set\+\_\+colors\+\_\+reverse@{set\+\_\+colors\+\_\+reverse}!cpen333\+::console@{cpen333\+::console}}
+\subsubsection{\texorpdfstring{set\+\_\+colors\+\_\+reverse()}{set\_colors\_reverse()}}
+{\footnotesize\ttfamily void cpen333\+::console\+::set\+\_\+colors\+\_\+reverse (\begin{DoxyParamCaption}\item[{bool}]{set }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reverse role of foreground/background colours. 
+
+If set is {\ttfamily true}, then the foreground colour acts as the background colour, and vice versa. 
+\begin{DoxyParams}{Parameters}
+{\em set} & enable or disable reversing of foreground/background colors \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcpen333_1_1console_ad72d4364021db07a5cd7a8b7e2828182}\label{classcpen333_1_1console_ad72d4364021db07a5cd7a8b7e2828182}} 
+\index{cpen333\+::console@{cpen333\+::console}!set\+\_\+cursor\+\_\+position@{set\+\_\+cursor\+\_\+position}}
+\index{set\+\_\+cursor\+\_\+position@{set\+\_\+cursor\+\_\+position}!cpen333\+::console@{cpen333\+::console}}
+\subsubsection{\texorpdfstring{set\+\_\+cursor\+\_\+position()}{set\_cursor\_position()}}
+{\footnotesize\ttfamily void cpen333\+::console\+::set\+\_\+cursor\+\_\+position (\begin{DoxyParamCaption}\item[{int}]{r,  }\item[{int}]{c }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the cursor position. 
+
+The cursor position is the location relative to the top-\/left corner of the console at which the next printed text is to appear. 
+\begin{DoxyParams}{Parameters}
+{\em r} & row, counted from the top which has index {\ttfamily r=0} \\
+\hline
+{\em c} & column, counted from the left which has index {\ttfamily c=0} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcpen333_1_1console_aa57d406140b94183b74e3b43cf0f73f5}\label{classcpen333_1_1console_aa57d406140b94183b74e3b43cf0f73f5}} 
+\index{cpen333\+::console@{cpen333\+::console}!set\+\_\+cursor\+\_\+visible@{set\+\_\+cursor\+\_\+visible}}
+\index{set\+\_\+cursor\+\_\+visible@{set\+\_\+cursor\+\_\+visible}!cpen333\+::console@{cpen333\+::console}}
+\subsubsection{\texorpdfstring{set\+\_\+cursor\+\_\+visible()}{set\_cursor\_visible()}}
+{\footnotesize\ttfamily void cpen333\+::console\+::set\+\_\+cursor\+\_\+visible (\begin{DoxyParamCaption}\item[{bool}]{visible }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Show or hide the cursor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em visible} & if {\ttfamily true}, the cursor will be set visible, otherwise the cursor will be hidden \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcpen333_1_1console_a0710a0e8e75562c189bcf81837f01fa4}\label{classcpen333_1_1console_a0710a0e8e75562c189bcf81837f01fa4}} 
+\index{cpen333\+::console@{cpen333\+::console}!set\+\_\+foreground\+\_\+color@{set\+\_\+foreground\+\_\+color}}
+\index{set\+\_\+foreground\+\_\+color@{set\+\_\+foreground\+\_\+color}!cpen333\+::console@{cpen333\+::console}}
+\subsubsection{\texorpdfstring{set\+\_\+foreground\+\_\+color()}{set\_foreground\_color()}}
+{\footnotesize\ttfamily void cpen333\+::console\+::set\+\_\+foreground\+\_\+color (\begin{DoxyParamCaption}\item[{const \hyperlink{console_8h_a915749711f4fc63cca8581af0c1106b3}{color} \&}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the foreground colour. 
+
+Sets the color of the foreground text, unless colours are set to \char`\"{}reverse\char`\"{}, in which case would set the text background color.
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & color to use for foreground \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/\hyperlink{console_8h}{console.\+h}\end{DoxyCompactItemize}

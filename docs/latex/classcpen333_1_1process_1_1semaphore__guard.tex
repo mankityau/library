@@ -1,0 +1,68 @@
+\hypertarget{classcpen333_1_1process_1_1semaphore__guard}{}\section{cpen333\+:\+:process\+:\+:semaphore\+\_\+guard$<$ Semaphore $>$ Class Template Reference}
+\label{classcpen333_1_1process_1_1semaphore__guard}\index{cpen333\+::process\+::semaphore\+\_\+guard$<$ Semaphore $>$@{cpen333\+::process\+::semaphore\+\_\+guard$<$ Semaphore $>$}}
+
+
+Semaphore guard, similar to std\+::lock\+\_\+guard.  
+
+
+
+
+{\ttfamily \#include $<$semaphore\+\_\+guard.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcpen333_1_1process_1_1semaphore__guard_aa816ac26e4894b1945724944e7965968}{semaphore\+\_\+guard} (Semaphore \&sem)
+\begin{DoxyCompactList}\small\item\em Constructor, waits on semaphore. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1semaphore__guard_a12dd43fa23381e3a44eabc8e8d1b55a9}\label{classcpen333_1_1process_1_1semaphore__guard_a12dd43fa23381e3a44eabc8e8d1b55a9}} 
+{\bfseries semaphore\+\_\+guard} (const \hyperlink{classcpen333_1_1process_1_1semaphore__guard}{semaphore\+\_\+guard} \&)=delete
+\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1semaphore__guard_a8e970b86d9083bcdfa2ec74950580c41}\label{classcpen333_1_1process_1_1semaphore__guard_a8e970b86d9083bcdfa2ec74950580c41}} 
+{\bfseries semaphore\+\_\+guard} (\hyperlink{classcpen333_1_1process_1_1semaphore__guard}{semaphore\+\_\+guard} \&\&)=delete
+\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1semaphore__guard_aa500d54d3674dedc78b6ba2997244690}\label{classcpen333_1_1process_1_1semaphore__guard_aa500d54d3674dedc78b6ba2997244690}} 
+\hyperlink{classcpen333_1_1process_1_1semaphore__guard}{semaphore\+\_\+guard} \& {\bfseries operator=} (const \hyperlink{classcpen333_1_1process_1_1semaphore__guard}{semaphore\+\_\+guard} \&)=delete
+\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1semaphore__guard_ab7c8a51385102e177d284855c96f7234}\label{classcpen333_1_1process_1_1semaphore__guard_ab7c8a51385102e177d284855c96f7234}} 
+\hyperlink{classcpen333_1_1process_1_1semaphore__guard}{semaphore\+\_\+guard} \& {\bfseries operator=} (\hyperlink{classcpen333_1_1process_1_1semaphore__guard}{semaphore\+\_\+guard} \&\&)=delete
+\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1semaphore__guard_a878eb8302eb619c83dc83d8995987fd1}\label{classcpen333_1_1process_1_1semaphore__guard_a878eb8302eb619c83dc83d8995987fd1}} 
+\hyperlink{classcpen333_1_1process_1_1semaphore__guard_a878eb8302eb619c83dc83d8995987fd1}{$\sim$semaphore\+\_\+guard} ()
+\begin{DoxyCompactList}\small\item\em Destructor, automatically notifies semaphore. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename Semaphore$>$\newline
+class cpen333\+::process\+::semaphore\+\_\+guard$<$ Semaphore $>$}
+
+Semaphore guard, similar to std\+::lock\+\_\+guard. 
+
+Protects a semaphore\textquotesingle{}s wait/notify using R\+A\+II to ensure all resources are returned to the system 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Semaphore} & basic semaphore that supports wait() and notify() \\
+\hline
+\end{DoxyTemplParams}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1semaphore__guard_aa816ac26e4894b1945724944e7965968}\label{classcpen333_1_1process_1_1semaphore__guard_aa816ac26e4894b1945724944e7965968}} 
+\index{cpen333\+::process\+::semaphore\+\_\+guard@{cpen333\+::process\+::semaphore\+\_\+guard}!semaphore\+\_\+guard@{semaphore\+\_\+guard}}
+\index{semaphore\+\_\+guard@{semaphore\+\_\+guard}!cpen333\+::process\+::semaphore\+\_\+guard@{cpen333\+::process\+::semaphore\+\_\+guard}}
+\subsubsection{\texorpdfstring{semaphore\+\_\+guard()}{semaphore\_guard()}}
+{\footnotesize\ttfamily template$<$typename Semaphore$>$ \\
+\hyperlink{classcpen333_1_1process_1_1semaphore__guard}{cpen333\+::process\+::semaphore\+\_\+guard}$<$ Semaphore $>$\+::\hyperlink{classcpen333_1_1process_1_1semaphore__guard}{semaphore\+\_\+guard} (\begin{DoxyParamCaption}\item[{Semaphore \&}]{sem }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor, waits on semaphore. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sem} & semaphore to wait on \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/impl/\hyperlink{semaphore__guard_8h}{semaphore\+\_\+guard.\+h}\end{DoxyCompactItemize}

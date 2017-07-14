@@ -1,0 +1,43 @@
+\hypertarget{process_2impl_2shared__mutex__exclusive_8h}{}\section{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/impl/shared\+\_\+mutex\+\_\+exclusive.h File Reference}
+\label{process_2impl_2shared__mutex__exclusive_8h}\index{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/impl/shared\+\_\+mutex\+\_\+exclusive.\+h@{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/impl/shared\+\_\+mutex\+\_\+exclusive.\+h}}
+
+
+Implementation of an inter-\/process mutex with shared access that gives priority to exclusive use (write-\/priority)  
+
+
+{\ttfamily \#include \char`\"{}cpen333/process/mutex.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cpen333/process/semaphore.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cpen333/process/condition.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cpen333/process/shared\+\_\+memory.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cpen333/process/named\+\_\+resource.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classcpen333_1_1process_1_1impl_1_1shared__mutex__exclusive}{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+exclusive}
+\begin{DoxyCompactList}\small\item\em A write-\/preferring inter-\/process shared mutex implementation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{process_2impl_2shared__mutex__exclusive_8h_a6e2c895c95b9a7f875737e4d3a7d6387}\label{process_2impl_2shared__mutex__exclusive_8h_a6e2c895c95b9a7f875737e4d3a7d6387}} 
+\#define \hyperlink{process_2impl_2shared__mutex__exclusive_8h_a6e2c895c95b9a7f875737e4d3a7d6387}{S\+H\+A\+R\+E\+D\+\_\+\+M\+U\+T\+E\+X\+\_\+\+E\+X\+C\+L\+U\+S\+I\+V\+E\+\_\+\+N\+A\+M\+E\+\_\+\+S\+U\+F\+F\+IX}~\char`\"{}\+\_\+sme\char`\"{}
+\begin{DoxyCompactList}\small\item\em Name suffix for internals to guarantee uniqueness. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{process_2impl_2shared__mutex__exclusive_8h_a248ec5b425d3b2c8e99b550fffa35388}\label{process_2impl_2shared__mutex__exclusive_8h_a248ec5b425d3b2c8e99b550fffa35388}} 
+\#define \hyperlink{process_2impl_2shared__mutex__exclusive_8h_a248ec5b425d3b2c8e99b550fffa35388}{S\+H\+A\+R\+E\+D\+\_\+\+M\+U\+T\+E\+X\+\_\+\+E\+X\+C\+L\+U\+S\+I\+V\+E\+\_\+\+M\+U\+T\+E\+X\+\_\+\+S\+U\+F\+F\+IX}~\char`\"{}\+\_\+smem\char`\"{}
+\begin{DoxyCompactList}\small\item\em Name suffix for internal mutex to guarantee uniqueness. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{process_2impl_2shared__mutex__exclusive_8h_a55b5166d3514b24aaa79f2985c266278}\label{process_2impl_2shared__mutex__exclusive_8h_a55b5166d3514b24aaa79f2985c266278}} 
+\#define \hyperlink{process_2impl_2shared__mutex__exclusive_8h_a55b5166d3514b24aaa79f2985c266278}{S\+H\+A\+R\+E\+D\+\_\+\+M\+U\+T\+E\+X\+\_\+\+E\+X\+C\+L\+U\+S\+I\+V\+E\+\_\+\+I\+N\+I\+T\+I\+A\+L\+I\+Z\+ED}~0x98292338
+\begin{DoxyCompactList}\small\item\em Magic number for checking initialization. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{process_2impl_2shared__mutex__exclusive_8h_ae9605866760bed8a440e6793fab5dad8}\label{process_2impl_2shared__mutex__exclusive_8h_ae9605866760bed8a440e6793fab5dad8}} 
+using \hyperlink{process_2impl_2shared__mutex__exclusive_8h_ae9605866760bed8a440e6793fab5dad8}{cpen333\+::process\+::shared\+\_\+mutex\+\_\+exclusive} = impl\+::shared\+\_\+mutex\+\_\+exclusive
+\begin{DoxyCompactList}\small\item\em Alias for default shared mutex with exclusive (write) priority. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{process_2impl_2shared__mutex__exclusive_8h_aec7fadfebb9605da108974f1a3ed2bd0}\label{process_2impl_2shared__mutex__exclusive_8h_aec7fadfebb9605da108974f1a3ed2bd0}} 
+using \hyperlink{process_2impl_2shared__mutex__exclusive_8h_aec7fadfebb9605da108974f1a3ed2bd0}{cpen333\+::process\+::shared\+\_\+timed\+\_\+mutex\+\_\+exclusive} = impl\+::shared\+\_\+mutex\+\_\+exclusive
+\begin{DoxyCompactList}\small\item\em Alias for default shared timed mutex with exclusive (write) priority. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implementation of an inter-\/process mutex with shared access that gives priority to exclusive use (write-\/priority) 
+

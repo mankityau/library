@@ -1,0 +1,30 @@
+\hypertarget{thread_2shared__mutex_8h}{}\section{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/thread/shared\+\_\+mutex.h File Reference}
+\label{thread_2shared__mutex_8h}\index{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/thread/shared\+\_\+mutex.\+h@{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/thread/shared\+\_\+mutex.\+h}}
+
+
+Shared-\/access mutex implementations, allowing for multi-\/read/write access.  
+
+
+{\ttfamily \#include $<$shared\+\_\+mutex$>$}\newline
+{\ttfamily \#include \char`\"{}cpen333/thread/impl/shared\+\_\+mutex\+\_\+shared.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cpen333/thread/impl/shared\+\_\+mutex\+\_\+exclusive.\+h\char`\"{}}\newline
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{thread_2shared__mutex_8h_ac973f6b77b214925d563a644e2b652e7}\label{thread_2shared__mutex_8h_ac973f6b77b214925d563a644e2b652e7}} 
+using \hyperlink{thread_2shared__mutex_8h_ac973f6b77b214925d563a644e2b652e7}{cpen333\+::thread\+::shared\+\_\+mutex\+\_\+fair} = std\+::shared\+\_\+timed\+\_\+mutex
+\begin{DoxyCompactList}\small\item\em Default shared mutex that uses fair priority. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{thread_2shared__mutex_8h_a893bf9e24b662533bac041f92870bcf6}\label{thread_2shared__mutex_8h_a893bf9e24b662533bac041f92870bcf6}} 
+using \hyperlink{thread_2shared__mutex_8h_a893bf9e24b662533bac041f92870bcf6}{cpen333\+::thread\+::shared\+\_\+timed\+\_\+mutex\+\_\+fair} = std\+::shared\+\_\+timed\+\_\+mutex
+\begin{DoxyCompactList}\small\item\em Default shared timed mutex that uses fair priority. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{thread_2shared__mutex_8h_a337a87e7e394a58536dfe747b9bfb4b8}\label{thread_2shared__mutex_8h_a337a87e7e394a58536dfe747b9bfb4b8}} 
+using \hyperlink{thread_2shared__mutex_8h_a337a87e7e394a58536dfe747b9bfb4b8}{cpen333\+::thread\+::shared\+\_\+mutex} = std\+::shared\+\_\+timed\+\_\+mutex
+\begin{DoxyCompactList}\small\item\em Default shared mutex that uses fair priority. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{thread_2shared__mutex_8h_a84af6ea160c8c2dc2007c218ed6d0d41}\label{thread_2shared__mutex_8h_a84af6ea160c8c2dc2007c218ed6d0d41}} 
+using \hyperlink{thread_2shared__mutex_8h_a84af6ea160c8c2dc2007c218ed6d0d41}{cpen333\+::thread\+::shared\+\_\+timed\+\_\+mutex} = std\+::shared\+\_\+timed\+\_\+mutex
+\begin{DoxyCompactList}\small\item\em Default shared timed mutex that uses fair priority. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Shared-\/access mutex implementations, allowing for multi-\/read/write access. 
+

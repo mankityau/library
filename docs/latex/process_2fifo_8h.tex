@@ -1,0 +1,38 @@
+\hypertarget{process_2fifo_8h}{}\section{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/fifo.h File Reference}
+\label{process_2fifo_8h}\index{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/fifo.\+h@{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/fifo.\+h}}
+
+
+First-\/in-\/first-\/out shared buffer.  
+
+
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include \char`\"{}cpen333/process/named\+\_\+resource.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cpen333/process/shared\+\_\+memory.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cpen333/process/mutex.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cpen333/process/semaphore.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classcpen333_1_1process_1_1fifo}{cpen333\+::process\+::fifo$<$ Value\+Type $>$}
+\begin{DoxyCompactList}\small\item\em Simple thread-\/safe multi-\/process first-\/in-\/first-\/out queue using a circular buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{process_2fifo_8h_af7c04e87b7f6725c161d4d2f4f71143d}\label{process_2fifo_8h_af7c04e87b7f6725c161d4d2f4f71143d}} 
+\#define \hyperlink{process_2fifo_8h_af7c04e87b7f6725c161d4d2f4f71143d}{F\+I\+F\+O\+\_\+\+S\+U\+F\+F\+IX}~\char`\"{}\+\_\+ff\char`\"{}
+\begin{DoxyCompactList}\small\item\em Suffix for shared memory to guarantee uniqueness. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{process_2fifo_8h_a770db790cee1bea61c430ae43ec1ffea}\label{process_2fifo_8h_a770db790cee1bea61c430ae43ec1ffea}} 
+\#define \hyperlink{process_2fifo_8h_a770db790cee1bea61c430ae43ec1ffea}{F\+I\+F\+O\+\_\+\+P\+R\+O\+D\+U\+C\+E\+R\+\_\+\+S\+U\+F\+F\+IX}~\char`\"{}\+\_\+ffp\char`\"{}
+\begin{DoxyCompactList}\small\item\em Suffix for producer-\/related mutex and semaphore to guarantee uniqueness. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{process_2fifo_8h_ad76ddd19d428abed42dcc3f5cea1c582}\label{process_2fifo_8h_ad76ddd19d428abed42dcc3f5cea1c582}} 
+\#define \hyperlink{process_2fifo_8h_ad76ddd19d428abed42dcc3f5cea1c582}{F\+I\+F\+O\+\_\+\+C\+O\+N\+S\+U\+M\+E\+R\+\_\+\+S\+U\+F\+F\+IX}~\char`\"{}\+\_\+ffc\char`\"{}
+\begin{DoxyCompactList}\small\item\em Suffix for consumer-\/related mutex and semaphore to guarantee uniqueness. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{process_2fifo_8h_ad3d505e03bcc42e9a611169181308ed0}\label{process_2fifo_8h_ad3d505e03bcc42e9a611169181308ed0}} 
+\#define \hyperlink{process_2fifo_8h_ad3d505e03bcc42e9a611169181308ed0}{F\+I\+F\+O\+\_\+\+I\+N\+I\+T\+I\+A\+L\+I\+Z\+ED}~0x88372612
+\begin{DoxyCompactList}\small\item\em Magic number to test for shared memory initialization. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+First-\/in-\/first-\/out shared buffer. 
+

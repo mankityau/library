@@ -1,0 +1,50 @@
+\hypertarget{process_2impl_2posix_2semaphore_8h}{}\section{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/impl/posix/semaphore.h File Reference}
+\label{process_2impl_2posix_2semaphore_8h}\index{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/impl/posix/semaphore.\+h@{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/impl/posix/semaphore.\+h}}
+
+
+P\+O\+S\+IX implementation of an inter-\/process named semaphore.  
+
+
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$semaphore.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}cpen333/util.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cpen333/process/impl/named\+\_\+resource\+\_\+base.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classcpen333_1_1process_1_1posix_1_1semaphore}{cpen333\+::process\+::posix\+::semaphore}
+\begin{DoxyCompactList}\small\item\em Inter-\/process named semaphore primitive. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{process_2impl_2posix_2semaphore_8h_a5dec85eeb4a479df781714d473e60d03}\label{process_2impl_2posix_2semaphore_8h_a5dec85eeb4a479df781714d473e60d03}} 
+\#define \hyperlink{process_2impl_2posix_2semaphore_8h_a5dec85eeb4a479df781714d473e60d03}{S\+E\+M\+A\+P\+H\+O\+R\+E\+\_\+\+N\+A\+M\+E\+\_\+\+S\+U\+F\+F\+IX}~\char`\"{}\+\_\+sem\char`\"{}
+\begin{DoxyCompactList}\small\item\em Suffix to append to semaphore names for uniqueness. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \hyperlink{process_2impl_2posix_2semaphore_8h_ac8abd3b1f6f6cbfd3c5c0028740c7bbc}{cpen333\+::process\+::semaphore} = posix\+::semaphore
+\begin{DoxyCompactList}\small\item\em Alias to P\+O\+S\+IX native implementation of inter-\/process semaphore. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+P\+O\+S\+IX implementation of an inter-\/process named semaphore. 
+
+Uses a P\+O\+S\+IX semaphore 
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{process_2impl_2posix_2semaphore_8h_file_ac8abd3b1f6f6cbfd3c5c0028740c7bbc}\label{process_2impl_2posix_2semaphore_8h_file_ac8abd3b1f6f6cbfd3c5c0028740c7bbc}} 
+\index{process/impl/posix/semaphore.\+h@{process/impl/posix/semaphore.\+h}!semaphore@{semaphore}}
+\index{semaphore@{semaphore}!process/impl/posix/semaphore.\+h@{process/impl/posix/semaphore.\+h}}
+\subsubsection{\texorpdfstring{semaphore}{semaphore}}
+{\footnotesize\ttfamily typedef windows\+::semaphore \hyperlink{classcpen333_1_1process_1_1semaphore}{cpen333\+::process\+::semaphore}}
+
+
+
+Alias to P\+O\+S\+IX native implementation of inter-\/process semaphore. 
+
+Alias to a Windows implementation of a semaphore. 

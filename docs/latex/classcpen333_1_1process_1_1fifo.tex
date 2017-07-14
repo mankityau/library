@@ -1,0 +1,515 @@
+\hypertarget{classcpen333_1_1process_1_1fifo}{}\section{cpen333\+:\+:process\+:\+:fifo$<$ Value\+Type $>$ Class Template Reference}
+\label{classcpen333_1_1process_1_1fifo}\index{cpen333\+::process\+::fifo$<$ Value\+Type $>$@{cpen333\+::process\+::fifo$<$ Value\+Type $>$}}
+
+
+Simple thread-\/safe multi-\/process first-\/in-\/first-\/out queue using a circular buffer.  
+
+
+
+
+{\ttfamily \#include $<$fifo.\+h$>$}
+
+Inheritance diagram for cpen333\+:\+:process\+:\+:fifo$<$ Value\+Type $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcpen333_1_1process_1_1fifo}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1fifo_ab49908b45dd14510ffa91c8a7f19ce89}\label{classcpen333_1_1process_1_1fifo_ab49908b45dd14510ffa91c8a7f19ce89}} 
+using \hyperlink{classcpen333_1_1process_1_1fifo_ab49908b45dd14510ffa91c8a7f19ce89}{value\+\_\+type} = Value\+Type
+\begin{DoxyCompactList}\small\item\em data type stored in buffer \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcpen333_1_1process_1_1fifo_abbac3b7b35974927626c0fc96540a5c9}{fifo} (const std\+::string \&name, size\+\_\+t \hyperlink{classcpen333_1_1process_1_1fifo_aeaf7bd6333245fad222fcf088e589ad6}{size}=1024)
+\begin{DoxyCompactList}\small\item\em Creates or connects to an existing named fifo. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1process_1_1fifo_a169331a45d9b30c6303ab8300b7901e8}{push} (const Value\+Type \&val)
+\begin{DoxyCompactList}\small\item\em Add a item to the fifo. \end{DoxyCompactList}\item 
+bool \hyperlink{classcpen333_1_1process_1_1fifo_ad6a7fb652df17c022023fcc805ba61eb}{try\+\_\+push} (const Value\+Type \&val)
+\begin{DoxyCompactList}\small\item\em Tries to add an item to the fifo without blocking. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Rep , typename Period $>$ }\\bool \hyperlink{classcpen333_1_1process_1_1fifo_a2904c1ed9d23f0d7fd034216c5509688}{try\+\_\+push\+\_\+for} (const Value\+Type \&val, std\+::chrono\+::duration$<$ Rep, Period $>$ \&rel\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Tries to add an item to the fifo, will wait for a maximum amount of time before aborting. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Clock , typename Duration $>$ }\\bool \hyperlink{classcpen333_1_1process_1_1fifo_abe9fee85225689f4104f263510814db0}{try\+\_\+push\+\_\+until} (const Value\+Type \&val, const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&timeout)
+\begin{DoxyCompactList}\small\item\em Tries to add an item to the fifo, will wait until a timeout time is reached before aborting. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1process_1_1fifo_af29e5bd6d8b0fe551c4d7532ffcb331e}{pop} (Value\+Type $\ast$out)
+\begin{DoxyCompactList}\small\item\em Removes the next item in the fifo. \end{DoxyCompactList}\item 
+Value\+Type \hyperlink{classcpen333_1_1process_1_1fifo_a40796c0eb39299ff4f8c49a789268386}{pop} ()
+\begin{DoxyCompactList}\small\item\em Removes and returns the next item in the fifo. \end{DoxyCompactList}\item 
+bool \hyperlink{classcpen333_1_1process_1_1fifo_a6f3e1f84d8a72e620f44bc5c018b3a9c}{try\+\_\+pop} (Value\+Type $\ast$out)
+\begin{DoxyCompactList}\small\item\em Tries to remove and return the next item in the fifo without blocking. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Rep , typename Period $>$ }\\bool \hyperlink{classcpen333_1_1process_1_1fifo_a6411f9f377c2be43500bc53883651120}{try\+\_\+pop\+\_\+for} (Value\+Type $\ast$out, std\+::chrono\+::duration$<$ Rep, Period $>$ \&rel\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Tries to remove an item from the fifo, will wait for a maximum amount of time before aborting. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Clock , typename Duration $>$ }\\bool \hyperlink{classcpen333_1_1process_1_1fifo_a7e66a7f6e91c0725ad6a5f3940668e64}{try\+\_\+pop\+\_\+until} (Value\+Type $\ast$out, const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&timeout)
+\begin{DoxyCompactList}\small\item\em Tries to remove an item from the fifo, will wait for a maximum timeout time to be reached before aborting. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1process_1_1fifo_ac501e62c2253097f89d713558d888d16}{peek} (Value\+Type $\ast$out)
+\begin{DoxyCompactList}\small\item\em Peeks at the next item in the fifo without removing it. \end{DoxyCompactList}\item 
+Value\+Type \hyperlink{classcpen333_1_1process_1_1fifo_a785266ee082e1917198bd0d701b25e50}{peek} ()
+\begin{DoxyCompactList}\small\item\em Peeks at the next item in the fifo without removing it. \end{DoxyCompactList}\item 
+bool \hyperlink{classcpen333_1_1process_1_1fifo_a0518230659a2ec8568f05377f4e2e727}{try\+\_\+peek} (Value\+Type $\ast$out)
+\begin{DoxyCompactList}\small\item\em Tries to peek at the next item in the fifo without blocking. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Rep , typename Period $>$ }\\bool \hyperlink{classcpen333_1_1process_1_1fifo_a61d351911485a6cef80404da4aa663ec}{try\+\_\+peek\+\_\+for} (Value\+Type $\ast$out, std\+::chrono\+::duration$<$ Rep, Period $>$ \&rel\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Tries to peek at the next item in the fifo, will wait for a maximum amount of time before aborting. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Clock , typename Duration $>$ }\\bool \hyperlink{classcpen333_1_1process_1_1fifo_ac587ec4df8ae29b25a3e21ac7114e335}{try\+\_\+peek\+\_\+until} (Value\+Type $\ast$out, const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&timeout)
+\begin{DoxyCompactList}\small\item\em Tries to peek at the next item in the fifo, will wait for a maximum timeout time before aborting. \end{DoxyCompactList}\item 
+size\+\_\+t \hyperlink{classcpen333_1_1process_1_1fifo_aeaf7bd6333245fad222fcf088e589ad6}{size} ()
+\begin{DoxyCompactList}\small\item\em Number of items currently in the fifo. \end{DoxyCompactList}\item 
+bool \hyperlink{classcpen333_1_1process_1_1fifo_ae2ce36a0885d0c3ded0997ec2586aabe}{empty} ()
+\begin{DoxyCompactList}\small\item\em Check if fifo queue is currently empty. \end{DoxyCompactList}\item 
+bool \hyperlink{classcpen333_1_1process_1_1fifo_a85f9c252de8044d57568e99b64cbb860}{unlink} ()
+\begin{DoxyCompactList}\small\item\em Detaches the name from the named resource. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \hyperlink{classcpen333_1_1process_1_1fifo_a893a14908a88de202fe2804dd890f958}{unlink} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Unlinks the name without needing to create a resource. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename Value\+Type$>$\newline
+class cpen333\+::process\+::fifo$<$ Value\+Type $>$}
+
+Simple thread-\/safe multi-\/process first-\/in-\/first-\/out queue using a circular buffer. 
+
+The buffer can only contain a single type of object. Push will block until space is available in the queue. Pop will block until there is an item in the queue. 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Value\+Type} & type of data to store in the queue \\
+\hline
+\end{DoxyTemplParams}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1fifo_abbac3b7b35974927626c0fc96540a5c9}\label{classcpen333_1_1process_1_1fifo_abbac3b7b35974927626c0fc96540a5c9}} 
+\index{cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}!fifo@{fifo}}
+\index{fifo@{fifo}!cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}}
+\subsubsection{\texorpdfstring{fifo()}{fifo()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type$>$ \\
+\hyperlink{classcpen333_1_1process_1_1fifo}{cpen333\+::process\+::fifo}$<$ Value\+Type $>$\+::\hyperlink{classcpen333_1_1process_1_1fifo}{fifo} (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{size\+\_\+t}]{size = {\ttfamily 1024} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates or connects to an existing named fifo. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & name identifier for creating or connecting to an existing inter-\/process fifo \\
+\hline
+{\em size} & if creating, the maximum number of elements that can be stored in the queue without blocking \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1fifo_ae2ce36a0885d0c3ded0997ec2586aabe}\label{classcpen333_1_1process_1_1fifo_ae2ce36a0885d0c3ded0997ec2586aabe}} 
+\index{cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}!empty@{empty}}
+\index{empty@{empty}!cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}}
+\subsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type$>$ \\
+bool \hyperlink{classcpen333_1_1process_1_1fifo}{cpen333\+::process\+::fifo}$<$ Value\+Type $>$\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if fifo queue is currently empty. 
+
+This method should be used sparingly, since items could be added/removed during or immediately after the call, making the result potentially unreliable
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if empty, {\ttfamily false} otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1fifo_ac501e62c2253097f89d713558d888d16}\label{classcpen333_1_1process_1_1fifo_ac501e62c2253097f89d713558d888d16}} 
+\index{cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}!peek@{peek}}
+\index{peek@{peek}!cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}}
+\subsubsection{\texorpdfstring{peek()}{peek()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type$>$ \\
+void \hyperlink{classcpen333_1_1process_1_1fifo}{cpen333\+::process\+::fifo}$<$ Value\+Type $>$\+::peek (\begin{DoxyParamCaption}\item[{Value\+Type $\ast$}]{out }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Peeks at the next item in the fifo without removing it. 
+
+Populates memory pointed to by {\ttfamily out} with next item in fifo. If there are currently no items, this method will block until an item becomes available. The item will remain in the fifo for the next {\ttfamily peek} or {\ttfamily pop} operation.
+
+
+\begin{DoxyParams}{Parameters}
+{\em out} & destination. If {\ttfamily nullptr}, nothing happens. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1fifo_a785266ee082e1917198bd0d701b25e50}\label{classcpen333_1_1process_1_1fifo_a785266ee082e1917198bd0d701b25e50}} 
+\index{cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}!peek@{peek}}
+\index{peek@{peek}!cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}}
+\subsubsection{\texorpdfstring{peek()}{peek()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type$>$ \\
+Value\+Type \hyperlink{classcpen333_1_1process_1_1fifo}{cpen333\+::process\+::fifo}$<$ Value\+Type $>$\+::peek (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Peeks at the next item in the fifo without removing it. 
+
+Returns the next item in the fifo. If there are currently no items, this method will block until one becomes available. The item will remain in the fifo for the next {\ttfamily peek} or {\ttfamily pop} operation.
+
+\begin{DoxyReturn}{Returns}
+next item in the fifo. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1fifo_af29e5bd6d8b0fe551c4d7532ffcb331e}\label{classcpen333_1_1process_1_1fifo_af29e5bd6d8b0fe551c4d7532ffcb331e}} 
+\index{cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}!pop@{pop}}
+\index{pop@{pop}!cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}}
+\subsubsection{\texorpdfstring{pop()}{pop()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type$>$ \\
+void \hyperlink{classcpen333_1_1process_1_1fifo}{cpen333\+::process\+::fifo}$<$ Value\+Type $>$\+::pop (\begin{DoxyParamCaption}\item[{Value\+Type $\ast$}]{out }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Removes the next item in the fifo. 
+
+Populates memory pointed to by {\ttfamily out} with next item in the fifo. If there are no items in the fifo, then this will block until one is available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em out} & destination. If {\ttfamily nullptr}, item is removed but not returned. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1fifo_a40796c0eb39299ff4f8c49a789268386}\label{classcpen333_1_1process_1_1fifo_a40796c0eb39299ff4f8c49a789268386}} 
+\index{cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}!pop@{pop}}
+\index{pop@{pop}!cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}}
+\subsubsection{\texorpdfstring{pop()}{pop()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type$>$ \\
+Value\+Type \hyperlink{classcpen333_1_1process_1_1fifo}{cpen333\+::process\+::fifo}$<$ Value\+Type $>$\+::pop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Removes and returns the next item in the fifo. 
+
+If there are no items in the fifo, then this will block until one is available.
+
+\begin{DoxyReturn}{Returns}
+next item in the fifo 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1fifo_a169331a45d9b30c6303ab8300b7901e8}\label{classcpen333_1_1process_1_1fifo_a169331a45d9b30c6303ab8300b7901e8}} 
+\index{cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}!push@{push}}
+\index{push@{push}!cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}}
+\subsubsection{\texorpdfstring{push()}{push()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type$>$ \\
+void \hyperlink{classcpen333_1_1process_1_1fifo}{cpen333\+::process\+::fifo}$<$ Value\+Type $>$\+::push (\begin{DoxyParamCaption}\item[{const Value\+Type \&}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Add a item to the fifo. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & value to add \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1fifo_aeaf7bd6333245fad222fcf088e589ad6}\label{classcpen333_1_1process_1_1fifo_aeaf7bd6333245fad222fcf088e589ad6}} 
+\index{cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}!size@{size}}
+\index{size@{size}!cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}}
+\subsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type$>$ \\
+size\+\_\+t \hyperlink{classcpen333_1_1process_1_1fifo}{cpen333\+::process\+::fifo}$<$ Value\+Type $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of items currently in the fifo. 
+
+This method should be used sparingly, since items could be added/removed during or immediately after the call, making the result potentially unreliable.
+
+\begin{DoxyReturn}{Returns}
+number of items 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1fifo_a0518230659a2ec8568f05377f4e2e727}\label{classcpen333_1_1process_1_1fifo_a0518230659a2ec8568f05377f4e2e727}} 
+\index{cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}!try\+\_\+peek@{try\+\_\+peek}}
+\index{try\+\_\+peek@{try\+\_\+peek}!cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}}
+\subsubsection{\texorpdfstring{try\+\_\+peek()}{try\_peek()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type$>$ \\
+bool \hyperlink{classcpen333_1_1process_1_1fifo}{cpen333\+::process\+::fifo}$<$ Value\+Type $>$\+::try\+\_\+peek (\begin{DoxyParamCaption}\item[{Value\+Type $\ast$}]{out }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to peek at the next item in the fifo without blocking. 
+
+Populates memory pointed to by {\ttfamily out} with the next item in the fifo. If there are no items, then this will return immediately without peeking at the item. The item will remain in the fifo for the next {\ttfamily peek} or {\ttfamily pop} operation.
+
+
+\begin{DoxyParams}{Parameters}
+{\em out} & destination. If {\ttfamily nullptr}, nothing happens. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if item was successfully peeked, {\ttfamily false} otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1fifo_a61d351911485a6cef80404da4aa663ec}\label{classcpen333_1_1process_1_1fifo_a61d351911485a6cef80404da4aa663ec}} 
+\index{cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}!try\+\_\+peek\+\_\+for@{try\+\_\+peek\+\_\+for}}
+\index{try\+\_\+peek\+\_\+for@{try\+\_\+peek\+\_\+for}!cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}}
+\subsubsection{\texorpdfstring{try\+\_\+peek\+\_\+for()}{try\_peek\_for()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type$>$ \\
+template$<$typename Rep , typename Period $>$ \\
+bool \hyperlink{classcpen333_1_1process_1_1fifo}{cpen333\+::process\+::fifo}$<$ Value\+Type $>$\+::try\+\_\+peek\+\_\+for (\begin{DoxyParamCaption}\item[{Value\+Type $\ast$}]{out,  }\item[{std\+::chrono\+::duration$<$ Rep, Period $>$ \&}]{rel\+\_\+time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to peek at the next item in the fifo, will wait for a maximum amount of time before aborting. 
+
+If it is not possible to peek at an item in the fifo immediately, then the current thread will block until either an item becomes available, or a timeout period has elapsed. The item will remain in the fifo for the next {\ttfamily peek} or {\ttfamily pop} operation.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Rep} & duration representation \\
+\hline
+{\em Period} & duration period \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em out} & destination. If {\ttfamily nullptr}, nothing happens \\
+\hline
+{\em rel\+\_\+time} & relative timeout time \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if item successfully peeked, {\ttfamily false} if timeout elapsed 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1fifo_ac587ec4df8ae29b25a3e21ac7114e335}\label{classcpen333_1_1process_1_1fifo_ac587ec4df8ae29b25a3e21ac7114e335}} 
+\index{cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}!try\+\_\+peek\+\_\+until@{try\+\_\+peek\+\_\+until}}
+\index{try\+\_\+peek\+\_\+until@{try\+\_\+peek\+\_\+until}!cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}}
+\subsubsection{\texorpdfstring{try\+\_\+peek\+\_\+until()}{try\_peek\_until()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type$>$ \\
+template$<$typename Clock , typename Duration $>$ \\
+bool \hyperlink{classcpen333_1_1process_1_1fifo}{cpen333\+::process\+::fifo}$<$ Value\+Type $>$\+::try\+\_\+peek\+\_\+until (\begin{DoxyParamCaption}\item[{Value\+Type $\ast$}]{out,  }\item[{const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&}]{timeout }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to peek at the next item in the fifo, will wait for a maximum timeout time before aborting. 
+
+If it is not possible to peek at the next item in the fifo immediately, then the current thread will block until either an item becomes available, or a timeout time has been reached. The item will remain in the fifo for the next {\ttfamily peek} or {\ttfamily pop} operation.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Clock} & clock type \\
+\hline
+{\em Duration} & clock duration type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em out} & destination. If {\ttfamily nullptr}, nothing happens \\
+\hline
+{\em timeout} & absolute timeout time \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if item successfully peeked, {\ttfamily false} if timeout 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1fifo_a6f3e1f84d8a72e620f44bc5c018b3a9c}\label{classcpen333_1_1process_1_1fifo_a6f3e1f84d8a72e620f44bc5c018b3a9c}} 
+\index{cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}!try\+\_\+pop@{try\+\_\+pop}}
+\index{try\+\_\+pop@{try\+\_\+pop}!cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}}
+\subsubsection{\texorpdfstring{try\+\_\+pop()}{try\_pop()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type$>$ \\
+bool \hyperlink{classcpen333_1_1process_1_1fifo}{cpen333\+::process\+::fifo}$<$ Value\+Type $>$\+::try\+\_\+pop (\begin{DoxyParamCaption}\item[{Value\+Type $\ast$}]{out }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to remove and return the next item in the fifo without blocking. 
+
+Populates memory pointed to by {\ttfamily out} with the next item in the fifo. If there are no items, then this will return immediately without popping the item.
+
+
+\begin{DoxyParams}{Parameters}
+{\em out} & destination. If {\ttfamily nullptr}, the item is removed but not returned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if item was successfully popped, {\ttfamily false} otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1fifo_a6411f9f377c2be43500bc53883651120}\label{classcpen333_1_1process_1_1fifo_a6411f9f377c2be43500bc53883651120}} 
+\index{cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}!try\+\_\+pop\+\_\+for@{try\+\_\+pop\+\_\+for}}
+\index{try\+\_\+pop\+\_\+for@{try\+\_\+pop\+\_\+for}!cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}}
+\subsubsection{\texorpdfstring{try\+\_\+pop\+\_\+for()}{try\_pop\_for()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type$>$ \\
+template$<$typename Rep , typename Period $>$ \\
+bool \hyperlink{classcpen333_1_1process_1_1fifo}{cpen333\+::process\+::fifo}$<$ Value\+Type $>$\+::try\+\_\+pop\+\_\+for (\begin{DoxyParamCaption}\item[{Value\+Type $\ast$}]{out,  }\item[{std\+::chrono\+::duration$<$ Rep, Period $>$ \&}]{rel\+\_\+time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to remove an item from the fifo, will wait for a maximum amount of time before aborting. 
+
+If it is not possible to remove an item from the fifo immediately, then the current thread will block until either an item becomes available, or a timeout period has elapsed.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Rep} & duration representation \\
+\hline
+{\em Period} & duration period \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em out} & destination. If {\ttfamily nullptr}, the item is removed but not returned \\
+\hline
+{\em rel\+\_\+time} & relative timeout time \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if item successfully popped, {\ttfamily false} if timeout elapsed 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1fifo_a7e66a7f6e91c0725ad6a5f3940668e64}\label{classcpen333_1_1process_1_1fifo_a7e66a7f6e91c0725ad6a5f3940668e64}} 
+\index{cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}!try\+\_\+pop\+\_\+until@{try\+\_\+pop\+\_\+until}}
+\index{try\+\_\+pop\+\_\+until@{try\+\_\+pop\+\_\+until}!cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}}
+\subsubsection{\texorpdfstring{try\+\_\+pop\+\_\+until()}{try\_pop\_until()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type$>$ \\
+template$<$typename Clock , typename Duration $>$ \\
+bool \hyperlink{classcpen333_1_1process_1_1fifo}{cpen333\+::process\+::fifo}$<$ Value\+Type $>$\+::try\+\_\+pop\+\_\+until (\begin{DoxyParamCaption}\item[{Value\+Type $\ast$}]{out,  }\item[{const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&}]{timeout }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to remove an item from the fifo, will wait for a maximum timeout time to be reached before aborting. 
+
+If it is not possible to remove an item from the fifo immediately, then the current thread will block until either an item becomes available, or a timeout time has been reached.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Clock} & clock type \\
+\hline
+{\em Duration} & clock duration type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em out} & destination. If {\ttfamily nullptr}, the item is removed but not returned \\
+\hline
+{\em timeout} & absolute timeout time \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if item successfully popped, {\ttfamily false} if timeout 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1fifo_ad6a7fb652df17c022023fcc805ba61eb}\label{classcpen333_1_1process_1_1fifo_ad6a7fb652df17c022023fcc805ba61eb}} 
+\index{cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}!try\+\_\+push@{try\+\_\+push}}
+\index{try\+\_\+push@{try\+\_\+push}!cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}}
+\subsubsection{\texorpdfstring{try\+\_\+push()}{try\_push()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type$>$ \\
+bool \hyperlink{classcpen333_1_1process_1_1fifo}{cpen333\+::process\+::fifo}$<$ Value\+Type $>$\+::try\+\_\+push (\begin{DoxyParamCaption}\item[{const Value\+Type \&}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to add an item to the fifo without blocking. 
+
+If it is not possible to add to the fifo without blocking, then will return immediately without adding the item.
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & item to add \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if item is added, {\ttfamily false} if would cause the current thread to block 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1fifo_a2904c1ed9d23f0d7fd034216c5509688}\label{classcpen333_1_1process_1_1fifo_a2904c1ed9d23f0d7fd034216c5509688}} 
+\index{cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}!try\+\_\+push\+\_\+for@{try\+\_\+push\+\_\+for}}
+\index{try\+\_\+push\+\_\+for@{try\+\_\+push\+\_\+for}!cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}}
+\subsubsection{\texorpdfstring{try\+\_\+push\+\_\+for()}{try\_push\_for()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type$>$ \\
+template$<$typename Rep , typename Period $>$ \\
+bool \hyperlink{classcpen333_1_1process_1_1fifo}{cpen333\+::process\+::fifo}$<$ Value\+Type $>$\+::try\+\_\+push\+\_\+for (\begin{DoxyParamCaption}\item[{const Value\+Type \&}]{val,  }\item[{std\+::chrono\+::duration$<$ Rep, Period $>$ \&}]{rel\+\_\+time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to add an item to the fifo, will wait for a maximum amount of time before aborting. 
+
+If it is not possible to add the item to the fifo immediately, then the current thread will block until either the item is added successfully, or a timeout period has elapsed.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Rep} & duration representation \\
+\hline
+{\em Period} & duration period \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em val} & value to add to the fifo \\
+\hline
+{\em rel\+\_\+time} & relative timeout time \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if item added within the timeout time, {\ttfamily false} if not added 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1fifo_abe9fee85225689f4104f263510814db0}\label{classcpen333_1_1process_1_1fifo_abe9fee85225689f4104f263510814db0}} 
+\index{cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}!try\+\_\+push\+\_\+until@{try\+\_\+push\+\_\+until}}
+\index{try\+\_\+push\+\_\+until@{try\+\_\+push\+\_\+until}!cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}}
+\subsubsection{\texorpdfstring{try\+\_\+push\+\_\+until()}{try\_push\_until()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type$>$ \\
+template$<$typename Clock , typename Duration $>$ \\
+bool \hyperlink{classcpen333_1_1process_1_1fifo}{cpen333\+::process\+::fifo}$<$ Value\+Type $>$\+::try\+\_\+push\+\_\+until (\begin{DoxyParamCaption}\item[{const Value\+Type \&}]{val,  }\item[{const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&}]{timeout }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to add an item to the fifo, will wait until a timeout time is reached before aborting. 
+
+If it is not possible to add the item to the fifo immediately, then the current thread will block until either the item is added successfully, or an absolute timeout time has been reached.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Clock} & clock type \\
+\hline
+{\em Duration} & clock duration type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em val} & value to add to the fifo \\
+\hline
+{\em timeout} & absolute timeout time \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if item added before the timeout time, {\ttfamily false} if not added 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1fifo_a85f9c252de8044d57568e99b64cbb860}\label{classcpen333_1_1process_1_1fifo_a85f9c252de8044d57568e99b64cbb860}} 
+\index{cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}!unlink@{unlink}}
+\index{unlink@{unlink}!cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}}
+\subsubsection{\texorpdfstring{unlink()}{unlink()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type$>$ \\
+bool \hyperlink{classcpen333_1_1process_1_1fifo}{cpen333\+::process\+::fifo}$<$ Value\+Type $>$\+::unlink (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Detaches the name from the named resource. 
+
+On P\+O\+S\+IX systems, named resources will persist beyond the lifetime of any process that uses them as long as the name has not been unlinked (or until the system is rebooted). Calling {\ttfamily unlink} will detach the name, allowing the resource to be freed once all current users have exited.
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if unlink is successful, {\ttfamily false} if unlinking is not supported or if an error has occurred. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classcpen333_1_1process_1_1named__resource_a5d33168fee48c9b0c58ab8fd96e230ce}{cpen333\+::process\+::named\+\_\+resource}.
+
+\mbox{\Hypertarget{classcpen333_1_1process_1_1fifo_a893a14908a88de202fe2804dd890f958}\label{classcpen333_1_1process_1_1fifo_a893a14908a88de202fe2804dd890f958}} 
+\index{cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}!unlink@{unlink}}
+\index{unlink@{unlink}!cpen333\+::process\+::fifo@{cpen333\+::process\+::fifo}}
+\subsubsection{\texorpdfstring{unlink()}{unlink()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type$>$ \\
+static bool \hyperlink{classcpen333_1_1process_1_1fifo}{cpen333\+::process\+::fifo}$<$ Value\+Type $>$\+::unlink (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Unlinks the name without needing to create a resource. 
+
+Implementers should also provide a static method for unlinking. The purpose is mainly for clean-\/up of existing resources.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & desired resource name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if unlink successful, {\ttfamily false} if not successful or not supported 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/\hyperlink{process_2fifo_8h}{fifo.\+h}\end{DoxyCompactItemize}

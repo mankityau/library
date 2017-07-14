@@ -1,0 +1,173 @@
+\hypertarget{classcpen333_1_1process_1_1impl_1_1named__resource__base}{}\section{cpen333\+:\+:process\+:\+:impl\+:\+:named\+\_\+resource\+\_\+base Class Reference}
+\label{classcpen333_1_1process_1_1impl_1_1named__resource__base}\index{cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base@{cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base}}
+
+
+Base-\/class for named resources.  
+
+
+
+
+{\ttfamily \#include $<$named\+\_\+resource\+\_\+base.\+h$>$}
+
+Inheritance diagram for cpen333\+:\+:process\+:\+:impl\+:\+:named\+\_\+resource\+\_\+base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.493333cm]{classcpen333_1_1process_1_1impl_1_1named__resource__base}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcpen333_1_1process_1_1impl_1_1named__resource__base_a5f6f8b6daec88189a041de4c60ad4518}{named\+\_\+resource\+\_\+base} (const std\+::string \&\hyperlink{classcpen333_1_1process_1_1impl_1_1named__resource__base_ae0c5fbb1843afe863cece4b51c38f807}{name})
+\begin{DoxyCompactList}\small\item\em Constructor for base named resource. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1impl_1_1named__resource__base_ac0a5865c57b4aefaccc245cc085ca7f3}\label{classcpen333_1_1process_1_1impl_1_1named__resource__base_ac0a5865c57b4aefaccc245cc085ca7f3}} 
+{\bfseries named\+\_\+resource\+\_\+base} (const \hyperlink{classcpen333_1_1process_1_1impl_1_1named__resource__base}{named\+\_\+resource\+\_\+base} \&)=delete
+\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1impl_1_1named__resource__base_a796cb7d29c742f5acc1361ed59493c26}\label{classcpen333_1_1process_1_1impl_1_1named__resource__base_a796cb7d29c742f5acc1361ed59493c26}} 
+{\bfseries named\+\_\+resource\+\_\+base} (\hyperlink{classcpen333_1_1process_1_1impl_1_1named__resource__base}{named\+\_\+resource\+\_\+base} \&\&)=delete
+\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1impl_1_1named__resource__base_a1a72075d25def1f1975c434b2573bcf5}\label{classcpen333_1_1process_1_1impl_1_1named__resource__base_a1a72075d25def1f1975c434b2573bcf5}} 
+\hyperlink{classcpen333_1_1process_1_1impl_1_1named__resource__base}{named\+\_\+resource\+\_\+base} \& {\bfseries operator=} (const \hyperlink{classcpen333_1_1process_1_1impl_1_1named__resource__base}{named\+\_\+resource\+\_\+base} \&)=delete
+\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1impl_1_1named__resource__base_a78156ecc765594b7d17029e69c6b7909}\label{classcpen333_1_1process_1_1impl_1_1named__resource__base_a78156ecc765594b7d17029e69c6b7909}} 
+\hyperlink{classcpen333_1_1process_1_1impl_1_1named__resource__base}{named\+\_\+resource\+\_\+base} \& {\bfseries operator=} (\hyperlink{classcpen333_1_1process_1_1impl_1_1named__resource__base}{named\+\_\+resource\+\_\+base} \&\&)=delete
+\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1impl_1_1named__resource__base_ae53d159d6c0d58a37ce8091aa132e11b}\label{classcpen333_1_1process_1_1impl_1_1named__resource__base_ae53d159d6c0d58a37ce8091aa132e11b}} 
+virtual \hyperlink{classcpen333_1_1process_1_1impl_1_1named__resource__base_ae53d159d6c0d58a37ce8091aa132e11b}{$\sim$named\+\_\+resource\+\_\+base} ()
+\begin{DoxyCompactList}\small\item\em Destructor, does nothing. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{classcpen333_1_1process_1_1impl_1_1named__resource__base_ae4033f82dfd068b917a9bca57d3a0c45}{unlink} ()=0
+\begin{DoxyCompactList}\small\item\em Detaches the name from the named resource. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \hyperlink{classcpen333_1_1process_1_1impl_1_1named__resource__base_a47a1396cf7c8210e76431a4ba4725146}{unlink} (const std\+::string \&\hyperlink{classcpen333_1_1process_1_1impl_1_1named__resource__base_ae0c5fbb1843afe863cece4b51c38f807}{name})
+\begin{DoxyCompactList}\small\item\em Unlinks the name without needing to create a resource. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \hyperlink{classcpen333_1_1process_1_1impl_1_1named__resource__base_ae0c5fbb1843afe863cece4b51c38f807}{name} () const
+\begin{DoxyCompactList}\small\item\em Internal-\/use system name. \end{DoxyCompactList}\item 
+const char $\ast$ \hyperlink{classcpen333_1_1process_1_1impl_1_1named__resource__base_af4f2889b26cf33d0d5ed794b7e4097ab}{name\+\_\+ptr} () const
+\begin{DoxyCompactList}\small\item\em Internal-\/use system name as char pointer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classcpen333_1_1process_1_1impl_1_1named__resource__base_a3a513fc13851a3a72b4cc5ea8aa0e104}{make\+\_\+resource\+\_\+name} (const std\+::string \&\hyperlink{classcpen333_1_1process_1_1impl_1_1named__resource__base_ae0c5fbb1843afe863cece4b51c38f807}{name}, char out\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Creates a valid resource name. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Base-\/class for named resources. 
+
+Stores a unique identifier name 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1impl_1_1named__resource__base_a5f6f8b6daec88189a041de4c60ad4518}\label{classcpen333_1_1process_1_1impl_1_1named__resource__base_a5f6f8b6daec88189a041de4c60ad4518}} 
+\index{cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base@{cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base}!named\+\_\+resource\+\_\+base@{named\+\_\+resource\+\_\+base}}
+\index{named\+\_\+resource\+\_\+base@{named\+\_\+resource\+\_\+base}!cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base@{cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base}}
+\subsubsection{\texorpdfstring{named\+\_\+resource\+\_\+base()}{named\_resource\_base()}}
+{\footnotesize\ttfamily cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base\+::named\+\_\+resource\+\_\+base (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for base named resource. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & unique identifier \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1impl_1_1named__resource__base_a3a513fc13851a3a72b4cc5ea8aa0e104}\label{classcpen333_1_1process_1_1impl_1_1named__resource__base_a3a513fc13851a3a72b4cc5ea8aa0e104}} 
+\index{cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base@{cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base}!make\+\_\+resource\+\_\+name@{make\+\_\+resource\+\_\+name}}
+\index{make\+\_\+resource\+\_\+name@{make\+\_\+resource\+\_\+name}!cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base@{cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base}}
+\subsubsection{\texorpdfstring{make\+\_\+resource\+\_\+name()}{make\_resource\_name()}}
+{\footnotesize\ttfamily static void cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base\+::make\+\_\+resource\+\_\+name (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{char}]{out\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+Creates a valid resource name. 
+
+Creates a valid resource name for the platform, on Linux/\+O\+SX this is a leading \textquotesingle{}/\textquotesingle{} with sha1 base64-\/encoded hash of the string name. We will also replace any other \textquotesingle{}/\textquotesingle{} with \textquotesingle{}\+\_\+\textquotesingle{} 
+\begin{DoxyParams}{Parameters}
+{\em name} & original resource name \\
+\hline
+{\em out} & platform-\/safe resource name \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1impl_1_1named__resource__base_ae0c5fbb1843afe863cece4b51c38f807}\label{classcpen333_1_1process_1_1impl_1_1named__resource__base_ae0c5fbb1843afe863cece4b51c38f807}} 
+\index{cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base@{cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base}!name@{name}}
+\index{name@{name}!cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base@{cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base}}
+\subsubsection{\texorpdfstring{name()}{name()}}
+{\footnotesize\ttfamily std\+::string cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base\+::name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Internal-\/use system name. 
+
+\begin{DoxyReturn}{Returns}
+underlying unique identifier name 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1impl_1_1named__resource__base_af4f2889b26cf33d0d5ed794b7e4097ab}\label{classcpen333_1_1process_1_1impl_1_1named__resource__base_af4f2889b26cf33d0d5ed794b7e4097ab}} 
+\index{cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base@{cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base}!name\+\_\+ptr@{name\+\_\+ptr}}
+\index{name\+\_\+ptr@{name\+\_\+ptr}!cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base@{cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base}}
+\subsubsection{\texorpdfstring{name\+\_\+ptr()}{name\_ptr()}}
+{\footnotesize\ttfamily const char$\ast$ cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base\+::name\+\_\+ptr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Internal-\/use system name as char pointer. 
+
+\begin{DoxyReturn}{Returns}
+pointer to underlying unique identifier name 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1impl_1_1named__resource__base_ae4033f82dfd068b917a9bca57d3a0c45}\label{classcpen333_1_1process_1_1impl_1_1named__resource__base_ae4033f82dfd068b917a9bca57d3a0c45}} 
+\index{cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base@{cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base}!unlink@{unlink}}
+\index{unlink@{unlink}!cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base@{cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base}}
+\subsubsection{\texorpdfstring{unlink()}{unlink()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily virtual bool cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base\+::unlink (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Detaches the name from the named resource. 
+
+On P\+O\+S\+IX systems, named resources will persist beyond the lifetime of any process that uses them as long as the name has not been unlinked (or until the system is rebooted). Calling {\ttfamily unlink} will detach the name, allowing the resource to be freed once all current users have exited.
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if unlink is successful, {\ttfamily false} if unlinking is not supported or if an error has occurred. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classcpen333_1_1process_1_1named__resource_a5d33168fee48c9b0c58ab8fd96e230ce}{cpen333\+::process\+::named\+\_\+resource}.
+
+
+
+Implemented in \hyperlink{classcpen333_1_1process_1_1posix_1_1semaphore_aa6064e2c4b4b7282cc5e6eda877ee1bb}{cpen333\+::process\+::posix\+::semaphore}, \hyperlink{classcpen333_1_1process_1_1windows_1_1semaphore_abc5159f32e61024c6c6a978ac64fe39d}{cpen333\+::process\+::windows\+::semaphore}, \hyperlink{classcpen333_1_1process_1_1windows_1_1shared__memory_aa6efdc9a3e1310ea69ecc48aeb41286c}{cpen333\+::process\+::windows\+::shared\+\_\+memory}, \hyperlink{classcpen333_1_1process_1_1windows_1_1mutex_aa45381a0a226fbefc86eef8971a5431b}{cpen333\+::process\+::windows\+::mutex}, \hyperlink{classcpen333_1_1process_1_1posix_1_1shared__memory_a3b6d67a41cfaca3712d87958682d8bbe}{cpen333\+::process\+::posix\+::shared\+\_\+memory}, \hyperlink{classcpen333_1_1process_1_1shared__object_aa5b43829da5bd2376927e6285745211c}{cpen333\+::process\+::shared\+\_\+object$<$ T $>$}, \hyperlink{classcpen333_1_1process_1_1shared__object_aa5b43829da5bd2376927e6285745211c}{cpen333\+::process\+::shared\+\_\+object$<$ pipe\+\_\+info $>$}, and \hyperlink{classcpen333_1_1process_1_1shared__object_aa5b43829da5bd2376927e6285745211c}{cpen333\+::process\+::shared\+\_\+object$<$ shared\+\_\+data $>$}.
+
+\mbox{\Hypertarget{classcpen333_1_1process_1_1impl_1_1named__resource__base_a47a1396cf7c8210e76431a4ba4725146}\label{classcpen333_1_1process_1_1impl_1_1named__resource__base_a47a1396cf7c8210e76431a4ba4725146}} 
+\index{cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base@{cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base}!unlink@{unlink}}
+\index{unlink@{unlink}!cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base@{cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base}}
+\subsubsection{\texorpdfstring{unlink()}{unlink()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static bool cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base\+::unlink (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Unlinks the name without needing to create a resource. 
+
+Implementers should also provide a static method for unlinking. The purpose is mainly for clean-\/up of existing resources.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & desired resource name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if unlink successful, {\ttfamily false} if not successful or not supported 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/impl/\hyperlink{named__resource__base_8h}{named\+\_\+resource\+\_\+base.\+h}\end{DoxyCompactItemize}

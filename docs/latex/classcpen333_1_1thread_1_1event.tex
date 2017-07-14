@@ -1,0 +1,138 @@
+\hypertarget{classcpen333_1_1thread_1_1event}{}\section{cpen333\+:\+:thread\+:\+:event Class Reference}
+\label{classcpen333_1_1thread_1_1event}\index{cpen333\+::thread\+::event@{cpen333\+::thread\+::event}}
+
+
+Event primitive, acting like a turnstile.  
+
+
+
+
+{\ttfamily \#include $<$event.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1event_a22e507616a649d1b0cfd534c495d3715}\label{classcpen333_1_1thread_1_1event_a22e507616a649d1b0cfd534c495d3715}} 
+\hyperlink{classcpen333_1_1thread_1_1event_a22e507616a649d1b0cfd534c495d3715}{event} ()
+\begin{DoxyCompactList}\small\item\em Creates the event. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1event_ae3fa010e620c5ff4d839d38f06f3baa3}\label{classcpen333_1_1thread_1_1event_ae3fa010e620c5ff4d839d38f06f3baa3}} 
+{\bfseries event} (const \hyperlink{classcpen333_1_1thread_1_1event}{event} \&)=delete
+\item 
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1event_a02c9a05685af5ee510e025cb5ceee71a}\label{classcpen333_1_1thread_1_1event_a02c9a05685af5ee510e025cb5ceee71a}} 
+{\bfseries event} (\hyperlink{classcpen333_1_1thread_1_1event}{event} \&\&)=delete
+\item 
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1event_a9808627c07cfa2a256c5e6b5c4f18254}\label{classcpen333_1_1thread_1_1event_a9808627c07cfa2a256c5e6b5c4f18254}} 
+\hyperlink{classcpen333_1_1thread_1_1event}{event} \& {\bfseries operator=} (const \hyperlink{classcpen333_1_1thread_1_1event}{event} \&)=delete
+\item 
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1event_ac21906f7dff32060a58ed881916663a6}\label{classcpen333_1_1thread_1_1event_ac21906f7dff32060a58ed881916663a6}} 
+\hyperlink{classcpen333_1_1thread_1_1event}{event} \& {\bfseries operator=} (\hyperlink{classcpen333_1_1thread_1_1event}{event} \&\&)=delete
+\item 
+void \hyperlink{classcpen333_1_1thread_1_1event_a041bc99b2749b269ac3853a4b8bba678}{wait} ()
+\begin{DoxyCompactList}\small\item\em Waits for the event to be triggered. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Rep , class Period $>$ }\\bool \hyperlink{classcpen333_1_1thread_1_1event_a200e1b4dff248be78cc1ae9c993dec02}{wait\+\_\+for} (const std\+::chrono\+::duration$<$ Rep, Period $>$ \&rel\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Waits for the event to be triggered or for a timeout period to elapse. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Clock , class Duration $>$ }\\bool \hyperlink{classcpen333_1_1thread_1_1event_aeea6876ad13a451c66868849fa23ec16}{wait\+\_\+until} (const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&timeout\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Waits for the event to be triggered or for a time-\/point to be reached. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1thread_1_1event_a453552a68dff5c45321496e452495364}{notify\+\_\+one} ()
+\begin{DoxyCompactList}\small\item\em Wake a single thread waiting for the event to be triggered. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1thread_1_1event_ac41756fc84760cd537c78de31b3b25fa}{notify\+\_\+all} ()
+\begin{DoxyCompactList}\small\item\em Wake all threads waiting for the event to be triggered. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Event primitive, acting like a turnstile. 
+
+A synchronization primitive that allows multiple threads to wait until the event is notified. The notifier can either {\ttfamily \hyperlink{classcpen333_1_1thread_1_1event_a453552a68dff5c45321496e452495364}{notify\+\_\+one()}} to let a single waiting thread through (if any), or {\ttfamily \hyperlink{classcpen333_1_1thread_1_1event_ac41756fc84760cd537c78de31b3b25fa}{notify\+\_\+all()}} to let all currently waiting threads through.
+
+Implementation is based on boost\textquotesingle{}s boost/interpress/sync/detail/condition\+\_\+algorithm\+\_\+8a.\+hpp Their implementation guarantees not to have spurious wake-\/ups 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1event_ac41756fc84760cd537c78de31b3b25fa}\label{classcpen333_1_1thread_1_1event_ac41756fc84760cd537c78de31b3b25fa}} 
+\index{cpen333\+::thread\+::event@{cpen333\+::thread\+::event}!notify\+\_\+all@{notify\+\_\+all}}
+\index{notify\+\_\+all@{notify\+\_\+all}!cpen333\+::thread\+::event@{cpen333\+::thread\+::event}}
+\subsubsection{\texorpdfstring{notify\+\_\+all()}{notify\_all()}}
+{\footnotesize\ttfamily void cpen333\+::thread\+::event\+::notify\+\_\+all (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Wake all threads waiting for the event to be triggered. 
+
+All threads waiting for the event will be awoken and will continue. \mbox{\Hypertarget{classcpen333_1_1thread_1_1event_a453552a68dff5c45321496e452495364}\label{classcpen333_1_1thread_1_1event_a453552a68dff5c45321496e452495364}} 
+\index{cpen333\+::thread\+::event@{cpen333\+::thread\+::event}!notify\+\_\+one@{notify\+\_\+one}}
+\index{notify\+\_\+one@{notify\+\_\+one}!cpen333\+::thread\+::event@{cpen333\+::thread\+::event}}
+\subsubsection{\texorpdfstring{notify\+\_\+one()}{notify\_one()}}
+{\footnotesize\ttfamily void cpen333\+::thread\+::event\+::notify\+\_\+one (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Wake a single thread waiting for the event to be triggered. 
+
+Note that the choice of thread to be awoken is up to the underlying system. Threads are not necessarily notified in order of arrival. \mbox{\Hypertarget{classcpen333_1_1thread_1_1event_a041bc99b2749b269ac3853a4b8bba678}\label{classcpen333_1_1thread_1_1event_a041bc99b2749b269ac3853a4b8bba678}} 
+\index{cpen333\+::thread\+::event@{cpen333\+::thread\+::event}!wait@{wait}}
+\index{wait@{wait}!cpen333\+::thread\+::event@{cpen333\+::thread\+::event}}
+\subsubsection{\texorpdfstring{wait()}{wait()}}
+{\footnotesize\ttfamily void cpen333\+::thread\+::event\+::wait (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Waits for the event to be triggered. 
+
+Causes the current thread to block until either {\ttfamily \hyperlink{classcpen333_1_1thread_1_1event_ac41756fc84760cd537c78de31b3b25fa}{notify\+\_\+all()}} is called, or {\ttfamily \hyperlink{classcpen333_1_1thread_1_1event_a453552a68dff5c45321496e452495364}{notify\+\_\+one()}} and this thread happens to be the one awoken. Note that order of wakes is system-\/dependent, and not necessarily in order of arrival. This event will {\itshape not} exhibit spurious wake-\/ups. A thread will be forced to wait here indefinitely until the event is triggered. \mbox{\Hypertarget{classcpen333_1_1thread_1_1event_a200e1b4dff248be78cc1ae9c993dec02}\label{classcpen333_1_1thread_1_1event_a200e1b4dff248be78cc1ae9c993dec02}} 
+\index{cpen333\+::thread\+::event@{cpen333\+::thread\+::event}!wait\+\_\+for@{wait\+\_\+for}}
+\index{wait\+\_\+for@{wait\+\_\+for}!cpen333\+::thread\+::event@{cpen333\+::thread\+::event}}
+\subsubsection{\texorpdfstring{wait\+\_\+for()}{wait\_for()}}
+{\footnotesize\ttfamily template$<$class Rep , class Period $>$ \\
+bool cpen333\+::thread\+::event\+::wait\+\_\+for (\begin{DoxyParamCaption}\item[{const std\+::chrono\+::duration$<$ Rep, Period $>$ \&}]{rel\+\_\+time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Waits for the event to be triggered or for a timeout period to elapse. 
+
+Causes the current thread to block until {\ttfamily \hyperlink{classcpen333_1_1thread_1_1event_ac41756fc84760cd537c78de31b3b25fa}{notify\+\_\+all()}} is called, or {\ttfamily \hyperlink{classcpen333_1_1thread_1_1event_a453552a68dff5c45321496e452495364}{notify\+\_\+one()}} and this thread happens to be the one awoken, or until the specified timeout period elapses, whichever comes first. 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Rep} & timeout duration representation \\
+\hline
+{\em Period} & timeout clock period \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em rel\+\_\+time} & maximum relative time to wait for condition to be set \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if event is triggered, {\ttfamily false} if timeout has elapsed without event being triggered 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1event_aeea6876ad13a451c66868849fa23ec16}\label{classcpen333_1_1thread_1_1event_aeea6876ad13a451c66868849fa23ec16}} 
+\index{cpen333\+::thread\+::event@{cpen333\+::thread\+::event}!wait\+\_\+until@{wait\+\_\+until}}
+\index{wait\+\_\+until@{wait\+\_\+until}!cpen333\+::thread\+::event@{cpen333\+::thread\+::event}}
+\subsubsection{\texorpdfstring{wait\+\_\+until()}{wait\_until()}}
+{\footnotesize\ttfamily template$<$class Clock , class Duration $>$ \\
+bool cpen333\+::thread\+::event\+::wait\+\_\+until (\begin{DoxyParamCaption}\item[{const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&}]{timeout\+\_\+time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Waits for the event to be triggered or for a time-\/point to be reached. 
+
+Causes the current thread to block until {\ttfamily \hyperlink{classcpen333_1_1thread_1_1event_ac41756fc84760cd537c78de31b3b25fa}{notify\+\_\+all()}} is called, or {\ttfamily \hyperlink{classcpen333_1_1thread_1_1event_a453552a68dff5c45321496e452495364}{notify\+\_\+one()}} and this thread happens to be the one awoken, or until the specified timeout time has been reached, whichever comes first.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Clock} & clock type \\
+\hline
+{\em Duration} & clock duration type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em timeout\+\_\+time} & absolute timeout time \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if event is triggered, {\ttfamily false} if timeout time has been reached without event 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/thread/\hyperlink{thread_2event_8h}{event.\+h}\end{DoxyCompactItemize}

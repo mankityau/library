@@ -1,0 +1,44 @@
+\hypertarget{condition__base_8h}{}\section{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/impl/condition\+\_\+base.h File Reference}
+\label{condition__base_8h}\index{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/impl/condition\+\_\+base.\+h@{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/impl/condition\+\_\+base.\+h}}
+
+
+Base class for condition, condition\+\_\+variable, and event classes.  
+
+
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$condition\+\_\+variable$>$}\newline
+{\ttfamily \#include \char`\"{}cpen333/process/named\+\_\+resource.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cpen333/process/mutex.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cpen333/process/semaphore.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cpen333/process/shared\+\_\+memory.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classcpen333_1_1process_1_1lock__inverter}{cpen333\+::process\+::lock\+\_\+inverter$<$ Basic\+Lock $>$}
+\begin{DoxyCompactList}\small\item\em Lock inverter. \end{DoxyCompactList}\item 
+class \hyperlink{classcpen333_1_1process_1_1condition__base}{cpen333\+::process\+::condition\+\_\+base}
+\begin{DoxyCompactList}\small\item\em Base-\/class for conditions, condition variables, and events. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{condition__base_8h_ac768360e106cbc7e171aa007656edd50}\label{condition__base_8h_ac768360e106cbc7e171aa007656edd50}} 
+\#define \hyperlink{condition__base_8h_ac768360e106cbc7e171aa007656edd50}{C\+O\+N\+D\+I\+T\+I\+O\+N\+\_\+\+B\+A\+S\+E\+\_\+\+S\+T\+O\+R\+A\+G\+E\+\_\+\+S\+U\+F\+F\+IX}~\char`\"{}\+\_\+cbs\char`\"{}
+\begin{DoxyCompactList}\small\item\em Suffix to append to shared storage identifier for uniqueness. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{condition__base_8h_af4308f74dde8bfc71b0c9f2401cb84d4}\label{condition__base_8h_af4308f74dde8bfc71b0c9f2401cb84d4}} 
+\#define \hyperlink{condition__base_8h_af4308f74dde8bfc71b0c9f2401cb84d4}{C\+O\+N\+D\+I\+T\+I\+O\+N\+\_\+\+B\+A\+S\+E\+\_\+\+B\+L\+O\+C\+K\+\_\+\+L\+O\+C\+K\+\_\+\+S\+U\+F\+F\+IX}~\char`\"{}\+\_\+cbl\char`\"{}
+\begin{DoxyCompactList}\small\item\em Suffix to append to lock semaphore identifier. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{condition__base_8h_a13285b4208a290d8a43c3922b767e9d1}\label{condition__base_8h_a13285b4208a290d8a43c3922b767e9d1}} 
+\#define \hyperlink{condition__base_8h_a13285b4208a290d8a43c3922b767e9d1}{C\+O\+N\+D\+I\+T\+I\+O\+N\+\_\+\+B\+A\+S\+E\+\_\+\+B\+L\+O\+C\+K\+\_\+\+Q\+U\+E\+U\+E\+\_\+\+S\+U\+F\+F\+IX}~\char`\"{}\+\_\+cbq\char`\"{}
+\begin{DoxyCompactList}\small\item\em Suffix to append to queue semaphore identifier. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{condition__base_8h_ab57f9e031d3d08fd30249d33fee5147f}\label{condition__base_8h_ab57f9e031d3d08fd30249d33fee5147f}} 
+\#define \hyperlink{condition__base_8h_ab57f9e031d3d08fd30249d33fee5147f}{C\+O\+N\+D\+I\+T\+I\+O\+N\+\_\+\+B\+A\+S\+E\+\_\+\+U\+N\+B\+L\+O\+C\+K\+\_\+\+L\+O\+C\+K\+\_\+\+S\+U\+F\+F\+IX}~\char`\"{}\+\_\+cbu\char`\"{}
+\begin{DoxyCompactList}\small\item\em Suffix to append to unblock mutex identifier. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{condition__base_8h_af4344efad3a87683dec004448f964cd4}\label{condition__base_8h_af4344efad3a87683dec004448f964cd4}} 
+\#define \hyperlink{condition__base_8h_af4344efad3a87683dec004448f964cd4}{C\+O\+N\+D\+I\+T\+I\+O\+N\+\_\+\+B\+A\+S\+E\+\_\+\+I\+N\+I\+T\+I\+A\+L\+I\+Z\+ED}~0x09812312
+\begin{DoxyCompactList}\small\item\em Magic number for testing initialization. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Base class for condition, condition\+\_\+variable, and event classes. 
+

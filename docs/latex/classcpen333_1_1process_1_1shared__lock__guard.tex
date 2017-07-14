@@ -1,0 +1,68 @@
+\hypertarget{classcpen333_1_1process_1_1shared__lock__guard}{}\section{cpen333\+:\+:process\+:\+:shared\+\_\+lock\+\_\+guard$<$ Shared\+Mutex $>$ Class Template Reference}
+\label{classcpen333_1_1process_1_1shared__lock__guard}\index{cpen333\+::process\+::shared\+\_\+lock\+\_\+guard$<$ Shared\+Mutex $>$@{cpen333\+::process\+::shared\+\_\+lock\+\_\+guard$<$ Shared\+Mutex $>$}}
+
+
+Shared lock guard, similar to std\+::lock\+\_\+guard but for shared locks.  
+
+
+
+
+{\ttfamily \#include $<$shared\+\_\+mutex.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcpen333_1_1process_1_1shared__lock__guard_a263fb59ac82aea8a400239ec7c238a14}{shared\+\_\+lock\+\_\+guard} (Shared\+Mutex \&\hyperlink{classcpen333_1_1process_1_1mutex}{mutex})
+\begin{DoxyCompactList}\small\item\em Construct the shared lock guard. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1shared__lock__guard_ae6c65a188ca7c6816e0aca02b7f1da9c}\label{classcpen333_1_1process_1_1shared__lock__guard_ae6c65a188ca7c6816e0aca02b7f1da9c}} 
+{\bfseries shared\+\_\+lock\+\_\+guard} (const \hyperlink{classcpen333_1_1process_1_1shared__lock__guard}{shared\+\_\+lock\+\_\+guard} \&)=delete
+\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1shared__lock__guard_a7cf99434f2fcf855153968a00ec9d8f9}\label{classcpen333_1_1process_1_1shared__lock__guard_a7cf99434f2fcf855153968a00ec9d8f9}} 
+{\bfseries shared\+\_\+lock\+\_\+guard} (\hyperlink{classcpen333_1_1process_1_1shared__lock__guard}{shared\+\_\+lock\+\_\+guard} \&\&)=delete
+\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1shared__lock__guard_a7c611ab58320671b781a500cff2e6989}\label{classcpen333_1_1process_1_1shared__lock__guard_a7c611ab58320671b781a500cff2e6989}} 
+\hyperlink{classcpen333_1_1process_1_1shared__lock__guard}{shared\+\_\+lock\+\_\+guard} \& {\bfseries operator=} (const \hyperlink{classcpen333_1_1process_1_1shared__lock__guard}{shared\+\_\+lock\+\_\+guard} \&)=delete
+\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1shared__lock__guard_a06012ba762fe1e7cd8077d938c68fa8a}\label{classcpen333_1_1process_1_1shared__lock__guard_a06012ba762fe1e7cd8077d938c68fa8a}} 
+\hyperlink{classcpen333_1_1process_1_1shared__lock__guard}{shared\+\_\+lock\+\_\+guard} \& {\bfseries operator=} (\hyperlink{classcpen333_1_1process_1_1shared__lock__guard}{shared\+\_\+lock\+\_\+guard} \&\&)=delete
+\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1shared__lock__guard_a1099368d682a5cc3e2dbf553ec0e0dad}\label{classcpen333_1_1process_1_1shared__lock__guard_a1099368d682a5cc3e2dbf553ec0e0dad}} 
+\hyperlink{classcpen333_1_1process_1_1shared__lock__guard_a1099368d682a5cc3e2dbf553ec0e0dad}{$\sim$shared\+\_\+lock\+\_\+guard} ()
+\begin{DoxyCompactList}\small\item\em Destructor, unlock shared mutex. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename Shared\+Mutex$>$\newline
+class cpen333\+::process\+::shared\+\_\+lock\+\_\+guard$<$ Shared\+Mutex $>$}
+
+Shared lock guard, similar to std\+::lock\+\_\+guard but for shared locks. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Shared\+Mutex} & shared mutex type \\
+\hline
+\end{DoxyTemplParams}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1shared__lock__guard_a263fb59ac82aea8a400239ec7c238a14}\label{classcpen333_1_1process_1_1shared__lock__guard_a263fb59ac82aea8a400239ec7c238a14}} 
+\index{cpen333\+::process\+::shared\+\_\+lock\+\_\+guard@{cpen333\+::process\+::shared\+\_\+lock\+\_\+guard}!shared\+\_\+lock\+\_\+guard@{shared\+\_\+lock\+\_\+guard}}
+\index{shared\+\_\+lock\+\_\+guard@{shared\+\_\+lock\+\_\+guard}!cpen333\+::process\+::shared\+\_\+lock\+\_\+guard@{cpen333\+::process\+::shared\+\_\+lock\+\_\+guard}}
+\subsubsection{\texorpdfstring{shared\+\_\+lock\+\_\+guard()}{shared\_lock\_guard()}}
+{\footnotesize\ttfamily template$<$typename Shared\+Mutex $>$ \\
+\hyperlink{classcpen333_1_1process_1_1shared__lock__guard}{cpen333\+::process\+::shared\+\_\+lock\+\_\+guard}$<$ Shared\+Mutex $>$\+::\hyperlink{classcpen333_1_1process_1_1shared__lock__guard}{shared\+\_\+lock\+\_\+guard} (\begin{DoxyParamCaption}\item[{Shared\+Mutex \&}]{mutex }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct the shared lock guard. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mutex} & mutex to lock on constructions \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/\hyperlink{process_2shared__mutex_8h}{shared\+\_\+mutex.\+h}\end{DoxyCompactItemize}

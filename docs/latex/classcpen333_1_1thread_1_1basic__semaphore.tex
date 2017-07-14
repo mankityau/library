@@ -1,0 +1,206 @@
+\hypertarget{classcpen333_1_1thread_1_1basic__semaphore}{}\section{cpen333\+:\+:thread\+:\+:basic\+\_\+semaphore$<$ Mutex, Cond\+Var $>$ Class Template Reference}
+\label{classcpen333_1_1thread_1_1basic__semaphore}\index{cpen333\+::thread\+::basic\+\_\+semaphore$<$ Mutex, Cond\+Var $>$@{cpen333\+::thread\+::basic\+\_\+semaphore$<$ Mutex, Cond\+Var $>$}}
+
+
+A local semaphore synchronization primitive.  
+
+
+
+
+{\ttfamily \#include $<$semaphore.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1basic__semaphore_a22e2293b6882f2bf4312aeb167a0b409}\label{classcpen333_1_1thread_1_1basic__semaphore_a22e2293b6882f2bf4312aeb167a0b409}} 
+using \hyperlink{classcpen333_1_1thread_1_1basic__semaphore_a22e2293b6882f2bf4312aeb167a0b409}{native\+\_\+handle\+\_\+type} = typename Cond\+Var\+::native\+\_\+handle\+\_\+type
+\begin{DoxyCompactList}\small\item\em Alias to condition variable native handle type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcpen333_1_1thread_1_1basic__semaphore_adfcd90a6776f9bdbb580bff6d9fa2a3e}{basic\+\_\+semaphore} (size\+\_\+t count=1)
+\begin{DoxyCompactList}\small\item\em Simple constructor that allows setting the initial count. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1basic__semaphore_aa09fc45f7f9689046175fbdd3ee0a19d}\label{classcpen333_1_1thread_1_1basic__semaphore_aa09fc45f7f9689046175fbdd3ee0a19d}} 
+{\bfseries basic\+\_\+semaphore} (const \hyperlink{classcpen333_1_1thread_1_1basic__semaphore}{basic\+\_\+semaphore} \&)=delete
+\item 
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1basic__semaphore_adb6c92c4f7ba870dc20b96e4fd655ee7}\label{classcpen333_1_1thread_1_1basic__semaphore_adb6c92c4f7ba870dc20b96e4fd655ee7}} 
+{\bfseries basic\+\_\+semaphore} (\hyperlink{classcpen333_1_1thread_1_1basic__semaphore}{basic\+\_\+semaphore} \&\&)=delete
+\item 
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1basic__semaphore_aaefa267aafa84e5baf759c38769d50d1}\label{classcpen333_1_1thread_1_1basic__semaphore_aaefa267aafa84e5baf759c38769d50d1}} 
+\hyperlink{classcpen333_1_1thread_1_1basic__semaphore}{basic\+\_\+semaphore} \& {\bfseries operator=} (const \hyperlink{classcpen333_1_1thread_1_1basic__semaphore}{basic\+\_\+semaphore} \&)=delete
+\item 
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1basic__semaphore_aa1e893a6e7c37d4d3d48086bbac79235}\label{classcpen333_1_1thread_1_1basic__semaphore_aa1e893a6e7c37d4d3d48086bbac79235}} 
+\hyperlink{classcpen333_1_1thread_1_1basic__semaphore}{basic\+\_\+semaphore} \& {\bfseries operator=} (\hyperlink{classcpen333_1_1thread_1_1basic__semaphore}{basic\+\_\+semaphore} \&\&)=delete
+\item 
+void \hyperlink{classcpen333_1_1thread_1_1basic__semaphore_a0b5032fc8df915cb51276411b1153b84}{notify} ()
+\begin{DoxyCompactList}\small\item\em Increments the semaphore value. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1thread_1_1basic__semaphore_ac5cacef970643d393429ff87c0c6d6bf}{wait} ()
+\begin{DoxyCompactList}\small\item\em Waits for and decrements the semaphore value. \end{DoxyCompactList}\item 
+bool \hyperlink{classcpen333_1_1thread_1_1basic__semaphore_a72eb19243d4c55013f7fca9e5aa059f5}{try\+\_\+wait} ()
+\begin{DoxyCompactList}\small\item\em Tries to wait for the semaphore, returning immediately. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Rep , class Period $>$ }\\bool \hyperlink{classcpen333_1_1thread_1_1basic__semaphore_a500ae89545ae6b639ad347d50a53e2a8}{wait\+\_\+for} (const std\+::chrono\+::duration$<$ Rep, Period $>$ \&timeout\+\_\+duration)
+\begin{DoxyCompactList}\small\item\em Tries to wait for the semaphore for up to a maximum timeout duration. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Clock , class Duration $>$ }\\bool \hyperlink{classcpen333_1_1thread_1_1basic__semaphore_a19d3b188f86c565acbf83ec4872d9773}{wait\+\_\+until} (const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&timeout\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Tries to wait for the semaphore for up to a maximum absolute time. \end{DoxyCompactList}\item 
+\hyperlink{classcpen333_1_1thread_1_1basic__semaphore_a22e2293b6882f2bf4312aeb167a0b409}{native\+\_\+handle\+\_\+type} \hyperlink{classcpen333_1_1thread_1_1basic__semaphore_a3c3cd804e1aaa10f414820867f2e3798}{native\+\_\+handle} ()
+\begin{DoxyCompactList}\small\item\em Returns a native handle to the semaphore. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename Mutex, typename Cond\+Var$>$\newline
+class cpen333\+::thread\+::basic\+\_\+semaphore$<$ Mutex, Cond\+Var $>$}
+
+A local semaphore synchronization primitive. 
+
+Used to protect access to a counted resource shared by multiple threads. Contains an integer whose value is never allowed to fall below zero. There are two main supported actions\+: \hyperlink{classcpen333_1_1thread_1_1basic__semaphore_ac5cacef970643d393429ff87c0c6d6bf}{wait()}, which decrements the internal value, and \hyperlink{classcpen333_1_1thread_1_1basic__semaphore_a0b5032fc8df915cb51276411b1153b84}{notify()} which increments the value. If the value of the semaphore is zero, then \hyperlink{classcpen333_1_1thread_1_1basic__semaphore_ac5cacef970643d393429ff87c0c6d6bf}{wait()} will cause the thread to block until the value becomes greater than zero.
+
+This implementation has no explicit maximum value.
+
+Adapted from \href{http://stackoverflow.com/questions/4792449/c0x-has-no-semaphores-how-to-synchronize-threads}{\tt http\+://stackoverflow.\+com/questions/4792449/c0x-\/has-\/no-\/semaphores-\/how-\/to-\/synchronize-\/threads}
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Mutex} & mutex type \\
+\hline
+{\em Cond\+Var} & condition variable type \\
+\hline
+\end{DoxyTemplParams}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1basic__semaphore_adfcd90a6776f9bdbb580bff6d9fa2a3e}\label{classcpen333_1_1thread_1_1basic__semaphore_adfcd90a6776f9bdbb580bff6d9fa2a3e}} 
+\index{cpen333\+::thread\+::basic\+\_\+semaphore@{cpen333\+::thread\+::basic\+\_\+semaphore}!basic\+\_\+semaphore@{basic\+\_\+semaphore}}
+\index{basic\+\_\+semaphore@{basic\+\_\+semaphore}!cpen333\+::thread\+::basic\+\_\+semaphore@{cpen333\+::thread\+::basic\+\_\+semaphore}}
+\subsubsection{\texorpdfstring{basic\+\_\+semaphore()}{basic\_semaphore()}}
+{\footnotesize\ttfamily template$<$typename Mutex, typename Cond\+Var$>$ \\
+\hyperlink{classcpen333_1_1thread_1_1basic__semaphore}{cpen333\+::thread\+::basic\+\_\+semaphore}$<$ Mutex, Cond\+Var $>$\+::\hyperlink{classcpen333_1_1thread_1_1basic__semaphore}{basic\+\_\+semaphore} (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{count = {\ttfamily 1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Simple constructor that allows setting the initial count. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em count} & resource count (default 1) \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1basic__semaphore_a3c3cd804e1aaa10f414820867f2e3798}\label{classcpen333_1_1thread_1_1basic__semaphore_a3c3cd804e1aaa10f414820867f2e3798}} 
+\index{cpen333\+::thread\+::basic\+\_\+semaphore@{cpen333\+::thread\+::basic\+\_\+semaphore}!native\+\_\+handle@{native\+\_\+handle}}
+\index{native\+\_\+handle@{native\+\_\+handle}!cpen333\+::thread\+::basic\+\_\+semaphore@{cpen333\+::thread\+::basic\+\_\+semaphore}}
+\subsubsection{\texorpdfstring{native\+\_\+handle()}{native\_handle()}}
+{\footnotesize\ttfamily template$<$typename Mutex, typename Cond\+Var$>$ \\
+\hyperlink{classcpen333_1_1thread_1_1basic__semaphore_a22e2293b6882f2bf4312aeb167a0b409}{native\+\_\+handle\+\_\+type} \hyperlink{classcpen333_1_1thread_1_1basic__semaphore}{cpen333\+::thread\+::basic\+\_\+semaphore}$<$ Mutex, Cond\+Var $>$\+::native\+\_\+handle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a native handle to the semaphore. 
+
+The native handle has a type aliased to \hyperlink{classcpen333_1_1thread_1_1basic__semaphore_a22e2293b6882f2bf4312aeb167a0b409}{semaphore\+::native\+\_\+handle\+\_\+type}.
+
+\begin{DoxyReturn}{Returns}
+native semaphore handle 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1basic__semaphore_a0b5032fc8df915cb51276411b1153b84}\label{classcpen333_1_1thread_1_1basic__semaphore_a0b5032fc8df915cb51276411b1153b84}} 
+\index{cpen333\+::thread\+::basic\+\_\+semaphore@{cpen333\+::thread\+::basic\+\_\+semaphore}!notify@{notify}}
+\index{notify@{notify}!cpen333\+::thread\+::basic\+\_\+semaphore@{cpen333\+::thread\+::basic\+\_\+semaphore}}
+\subsubsection{\texorpdfstring{notify()}{notify()}}
+{\footnotesize\ttfamily template$<$typename Mutex, typename Cond\+Var$>$ \\
+void \hyperlink{classcpen333_1_1thread_1_1basic__semaphore}{cpen333\+::thread\+::basic\+\_\+semaphore}$<$ Mutex, Cond\+Var $>$\+::notify (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Increments the semaphore value. 
+
+If the semaphore\textquotesingle{}s value consequently becomes greater than zero, then one process or thread that is currently blocked in a \hyperlink{classcpen333_1_1thread_1_1basic__semaphore_ac5cacef970643d393429ff87c0c6d6bf}{wait()} operation will be woken up and will proceed. \mbox{\Hypertarget{classcpen333_1_1thread_1_1basic__semaphore_a72eb19243d4c55013f7fca9e5aa059f5}\label{classcpen333_1_1thread_1_1basic__semaphore_a72eb19243d4c55013f7fca9e5aa059f5}} 
+\index{cpen333\+::thread\+::basic\+\_\+semaphore@{cpen333\+::thread\+::basic\+\_\+semaphore}!try\+\_\+wait@{try\+\_\+wait}}
+\index{try\+\_\+wait@{try\+\_\+wait}!cpen333\+::thread\+::basic\+\_\+semaphore@{cpen333\+::thread\+::basic\+\_\+semaphore}}
+\subsubsection{\texorpdfstring{try\+\_\+wait()}{try\_wait()}}
+{\footnotesize\ttfamily template$<$typename Mutex, typename Cond\+Var$>$ \\
+bool \hyperlink{classcpen333_1_1thread_1_1basic__semaphore}{cpen333\+::thread\+::basic\+\_\+semaphore}$<$ Mutex, Cond\+Var $>$\+::try\+\_\+wait (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to wait for the semaphore, returning immediately. 
+
+If the value is greater than zero, will decrement the semaphore and return true. Otherwise, will return false.
+
+\begin{DoxyReturn}{Returns}
+true if decrement successful, false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1basic__semaphore_ac5cacef970643d393429ff87c0c6d6bf}\label{classcpen333_1_1thread_1_1basic__semaphore_ac5cacef970643d393429ff87c0c6d6bf}} 
+\index{cpen333\+::thread\+::basic\+\_\+semaphore@{cpen333\+::thread\+::basic\+\_\+semaphore}!wait@{wait}}
+\index{wait@{wait}!cpen333\+::thread\+::basic\+\_\+semaphore@{cpen333\+::thread\+::basic\+\_\+semaphore}}
+\subsubsection{\texorpdfstring{wait()}{wait()}}
+{\footnotesize\ttfamily template$<$typename Mutex, typename Cond\+Var$>$ \\
+void \hyperlink{classcpen333_1_1thread_1_1basic__semaphore}{cpen333\+::thread\+::basic\+\_\+semaphore}$<$ Mutex, Cond\+Var $>$\+::wait (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Waits for and decrements the semaphore value. 
+
+If the value is greater than zero, will decrement it and return immediately. Otherwise, the thread will block until it becomes possible to perform the decrement. \mbox{\Hypertarget{classcpen333_1_1thread_1_1basic__semaphore_a500ae89545ae6b639ad347d50a53e2a8}\label{classcpen333_1_1thread_1_1basic__semaphore_a500ae89545ae6b639ad347d50a53e2a8}} 
+\index{cpen333\+::thread\+::basic\+\_\+semaphore@{cpen333\+::thread\+::basic\+\_\+semaphore}!wait\+\_\+for@{wait\+\_\+for}}
+\index{wait\+\_\+for@{wait\+\_\+for}!cpen333\+::thread\+::basic\+\_\+semaphore@{cpen333\+::thread\+::basic\+\_\+semaphore}}
+\subsubsection{\texorpdfstring{wait\+\_\+for()}{wait\_for()}}
+{\footnotesize\ttfamily template$<$typename Mutex, typename Cond\+Var$>$ \\
+template$<$class Rep , class Period $>$ \\
+bool \hyperlink{classcpen333_1_1thread_1_1basic__semaphore}{cpen333\+::thread\+::basic\+\_\+semaphore}$<$ Mutex, Cond\+Var $>$\+::wait\+\_\+for (\begin{DoxyParamCaption}\item[{const std\+::chrono\+::duration$<$ Rep, Period $>$ \&}]{timeout\+\_\+duration }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to wait for the semaphore for up to a maximum timeout duration. 
+
+If the semaphore\textquotesingle{}s value is greater than zero, will decrement it and return true immediately. Otherwise, will wait (blocking) up to a maximum relative timeout period.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Rep} & time representation \\
+\hline
+{\em Period} & timeout period type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em timeout\+\_\+duration} & maximum relative duration for waiting \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if semaphore successfully decremented, false if timed-\/out 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1basic__semaphore_a19d3b188f86c565acbf83ec4872d9773}\label{classcpen333_1_1thread_1_1basic__semaphore_a19d3b188f86c565acbf83ec4872d9773}} 
+\index{cpen333\+::thread\+::basic\+\_\+semaphore@{cpen333\+::thread\+::basic\+\_\+semaphore}!wait\+\_\+until@{wait\+\_\+until}}
+\index{wait\+\_\+until@{wait\+\_\+until}!cpen333\+::thread\+::basic\+\_\+semaphore@{cpen333\+::thread\+::basic\+\_\+semaphore}}
+\subsubsection{\texorpdfstring{wait\+\_\+until()}{wait\_until()}}
+{\footnotesize\ttfamily template$<$typename Mutex, typename Cond\+Var$>$ \\
+template$<$class Clock , class Duration $>$ \\
+bool \hyperlink{classcpen333_1_1thread_1_1basic__semaphore}{cpen333\+::thread\+::basic\+\_\+semaphore}$<$ Mutex, Cond\+Var $>$\+::wait\+\_\+until (\begin{DoxyParamCaption}\item[{const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&}]{timeout\+\_\+time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to wait for the semaphore for up to a maximum absolute time. 
+
+If the semaphore\textquotesingle{}s value is greater than zero, will decrement it and return true immediately. Otherwise, will wait (blocking) up to a maximum relative timeout period.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Clock} & timeout clock type \\
+\hline
+{\em Duration} & timeout duration type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em timeout\+\_\+time} & maximum absolute time for waiting \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if semaphore successfully decremented, false if timed-\/out 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/thread/\hyperlink{thread_2semaphore_8h}{semaphore.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,102 @@
+\hypertarget{classcpen333_1_1thread_1_1thread__object}{}\section{cpen333\+:\+:thread\+:\+:thread\+\_\+object Class Reference}
+\label{classcpen333_1_1thread_1_1thread__object}\index{cpen333\+::thread\+::thread\+\_\+object@{cpen333\+::thread\+::thread\+\_\+object}}
+
+
+Base object-\/oriented thread object.  
+
+
+
+
+{\ttfamily \#include $<$thread\+\_\+object.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1thread__object_a1e15fda903a0e1bbc0c06fc7d870d0d9}\label{classcpen333_1_1thread_1_1thread__object_a1e15fda903a0e1bbc0c06fc7d870d0d9}} 
+\hyperlink{classcpen333_1_1thread_1_1thread__object_a1e15fda903a0e1bbc0c06fc7d870d0d9}{thread\+\_\+object} ()
+\begin{DoxyCompactList}\small\item\em Constructs the thread base. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1thread__object_addcca372aa82c04d454ade7fd60d1e75}\label{classcpen333_1_1thread_1_1thread__object_addcca372aa82c04d454ade7fd60d1e75}} 
+\hyperlink{classcpen333_1_1thread_1_1thread__object_addcca372aa82c04d454ade7fd60d1e75}{$\sim$thread\+\_\+object} ()
+\begin{DoxyCompactList}\small\item\em Destructor, frees the thread. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1thread_1_1thread__object_ae4484909a3f4418c0c0db318d615bde1}{start} ()
+\begin{DoxyCompactList}\small\item\em Start thread execution. \end{DoxyCompactList}\item 
+int \hyperlink{classcpen333_1_1thread_1_1thread__object_ac7334918eabfcf855cec00ed2a68a039}{join} ()
+\begin{DoxyCompactList}\small\item\em Waits for thread to finish executing. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1thread__object_a6e6fd163c5f5f72dcd6385a74ad316b6}\label{classcpen333_1_1thread_1_1thread__object_a6e6fd163c5f5f72dcd6385a74ad316b6}} 
+void \hyperlink{classcpen333_1_1thread_1_1thread__object_a6e6fd163c5f5f72dcd6385a74ad316b6}{detach} ()
+\begin{DoxyCompactList}\small\item\em Allows the thread to execute independently from the thread\textquotesingle{}s handle. \end{DoxyCompactList}\item 
+bool \hyperlink{classcpen333_1_1thread_1_1thread__object_a374e31ea56accc37a3468012a411da5d}{joinable} ()
+\begin{DoxyCompactList}\small\item\em Checks whether the thread is joinable. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual int \hyperlink{classcpen333_1_1thread_1_1thread__object_adbd74f6f7461d90a1c12e8078aa5f3af}{main} ()=0
+\begin{DoxyCompactList}\small\item\em Main execution method of thread. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Base object-\/oriented thread object. 
+
+Virtual object with a \hyperlink{classcpen333_1_1thread_1_1thread__object_adbd74f6f7461d90a1c12e8078aa5f3af}{main()} method that must be overridden which will execute once the thread is started. Also has functionality to return the returned value of \hyperlink{classcpen333_1_1thread_1_1thread__object_adbd74f6f7461d90a1c12e8078aa5f3af}{main()}.
+
+The thread is N\+OT started automatically (nor should it be due to memory access concerns). 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1thread__object_ac7334918eabfcf855cec00ed2a68a039}\label{classcpen333_1_1thread_1_1thread__object_ac7334918eabfcf855cec00ed2a68a039}} 
+\index{cpen333\+::thread\+::thread\+\_\+object@{cpen333\+::thread\+::thread\+\_\+object}!join@{join}}
+\index{join@{join}!cpen333\+::thread\+::thread\+\_\+object@{cpen333\+::thread\+::thread\+\_\+object}}
+\subsubsection{\texorpdfstring{join()}{join()}}
+{\footnotesize\ttfamily int cpen333\+::thread\+::thread\+\_\+object\+::join (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Waits for thread to finish executing. 
+
+If thread hasn\textquotesingle{}t been started yet, then it is started here.
+
+\begin{DoxyReturn}{Returns}
+the result of \hyperlink{classcpen333_1_1thread_1_1thread__object_adbd74f6f7461d90a1c12e8078aa5f3af}{main()} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1thread__object_a374e31ea56accc37a3468012a411da5d}\label{classcpen333_1_1thread_1_1thread__object_a374e31ea56accc37a3468012a411da5d}} 
+\index{cpen333\+::thread\+::thread\+\_\+object@{cpen333\+::thread\+::thread\+\_\+object}!joinable@{joinable}}
+\index{joinable@{joinable}!cpen333\+::thread\+::thread\+\_\+object@{cpen333\+::thread\+::thread\+\_\+object}}
+\subsubsection{\texorpdfstring{joinable()}{joinable()}}
+{\footnotesize\ttfamily bool cpen333\+::thread\+::thread\+\_\+object\+::joinable (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks whether the thread is joinable. 
+
+i.\+e. the thread has not already been joined, and is not detached
+
+\begin{DoxyReturn}{Returns}
+true if thread is running and joinable, false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1thread__object_adbd74f6f7461d90a1c12e8078aa5f3af}\label{classcpen333_1_1thread_1_1thread__object_adbd74f6f7461d90a1c12e8078aa5f3af}} 
+\index{cpen333\+::thread\+::thread\+\_\+object@{cpen333\+::thread\+::thread\+\_\+object}!main@{main}}
+\index{main@{main}!cpen333\+::thread\+::thread\+\_\+object@{cpen333\+::thread\+::thread\+\_\+object}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily virtual int cpen333\+::thread\+::thread\+\_\+object\+::main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Main execution method of thread. 
+
+\begin{DoxyReturn}{Returns}
+main return value 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1thread__object_ae4484909a3f4418c0c0db318d615bde1}\label{classcpen333_1_1thread_1_1thread__object_ae4484909a3f4418c0c0db318d615bde1}} 
+\index{cpen333\+::thread\+::thread\+\_\+object@{cpen333\+::thread\+::thread\+\_\+object}!start@{start}}
+\index{start@{start}!cpen333\+::thread\+::thread\+\_\+object@{cpen333\+::thread\+::thread\+\_\+object}}
+\subsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily void cpen333\+::thread\+::thread\+\_\+object\+::start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Start thread execution. 
+
+Runs the \hyperlink{classcpen333_1_1thread_1_1thread__object_adbd74f6f7461d90a1c12e8078aa5f3af}{main()} method of this thread object 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/thread/\hyperlink{thread__object_8h}{thread\+\_\+object.\+h}\end{DoxyCompactItemize}

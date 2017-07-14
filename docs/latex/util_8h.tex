@@ -1,0 +1,118 @@
+\hypertarget{util_8h}{}\section{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/util.h File Reference}
+\label{util_8h}\index{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/util.\+h@{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/util.\+h}}
+
+
+Utility functions.  
+
+
+{\ttfamily \#include \char`\"{}cpen333/os.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$sys/select.\+h$>$}\newline
+{\ttfamily \#include $<$sys/ioctl.\+h$>$}\newline
+{\ttfamily \#include $<$termios.\+h$>$}\newline
+{\ttfamily \#include $<$cstdio$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename ... Args$>$ }\\std\+::string \hyperlink{util_8h_a5e83cd2baae9bd0faaa60db2eed9525a}{cpen333\+::string\+\_\+format} (const std\+::string \&format, Args ... args)
+\begin{DoxyCompactList}\small\item\em Formats a string according to standard C printf rules. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Dummy $>$ }\\int \hyperlink{util_8h_aadd4070521219770731241a37ed1ae07}{cpen333\+::detail\+::\+\_\+kbhit} ()
+\item 
+int \hyperlink{util_8h_a68b5b8834128fc802ed44d31064c0416}{cpen333\+::test\+\_\+stdin} ()
+\begin{DoxyCompactList}\small\item\em Tests for keyboard input. \end{DoxyCompactList}\item 
+void \hyperlink{util_8h_a03bbd76906ff61c8fa8efcc3422ff416}{cpen333\+::perror} (const std\+::string \&msg)
+\begin{DoxyCompactList}\small\item\em Print error message. \end{DoxyCompactList}\item 
+void \hyperlink{util_8h_aa29e8379d38f9a9ddcf1df0ce13c6a42}{cpen333\+::pause} ()
+\begin{DoxyCompactList}\small\item\em Pause for input. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Utility functions. 
+
+Contains functions for formatting strings, testing for data on standard input, and printing system library errors. 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{util_8h_file_aadd4070521219770731241a37ed1ae07}\label{util_8h_file_aadd4070521219770731241a37ed1ae07}} 
+\index{util.\+h@{util.\+h}!\+\_\+kbhit@{\+\_\+kbhit}}
+\index{\+\_\+kbhit@{\+\_\+kbhit}!util.\+h@{util.\+h}}
+\subsubsection{\texorpdfstring{\+\_\+kbhit()}{\_kbhit()}}
+{\footnotesize\ttfamily template$<$typename Dummy $>$ \\
+int cpen333\+::detail\+::\+\_\+kbhit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Linux (P\+O\+S\+IX) implementation of \hyperlink{util_8h_aadd4070521219770731241a37ed1ae07}{\+\_\+kbhit()}. Morgan Mc\+Guire, \href{mailto:morgan@cs.brown.edu}{\tt morgan@cs.\+brown.\+edu} \mbox{\Hypertarget{util_8h_file_aa29e8379d38f9a9ddcf1df0ce13c6a42}\label{util_8h_file_aa29e8379d38f9a9ddcf1df0ce13c6a42}} 
+\index{util.\+h@{util.\+h}!pause@{pause}}
+\index{pause@{pause}!util.\+h@{util.\+h}}
+\subsubsection{\texorpdfstring{pause()}{pause()}}
+{\footnotesize\ttfamily void cpen333\+::pause (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Pause for input. 
+
+Mirrors the Windows system(\char`\"{}pause\char`\"{}) command in a cross-\/platform way, waiting for keyboard input. \mbox{\Hypertarget{util_8h_file_a03bbd76906ff61c8fa8efcc3422ff416}\label{util_8h_file_a03bbd76906ff61c8fa8efcc3422ff416}} 
+\index{util.\+h@{util.\+h}!perror@{perror}}
+\index{perror@{perror}!util.\+h@{util.\+h}}
+\subsubsection{\texorpdfstring{perror()}{perror()}}
+{\footnotesize\ttfamily void cpen333\+::perror (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Print error message. 
+
+Attempts to detect the last system error that occured, interprets the corresponding error message, and prints it to sterr (the standard error output stream, usually the console), preceding it with the custom message specified in msg.
+
+On Windows, the error corresponds to that obtained by Get\+Last\+Error(). On Linux and O\+SX, it is the build-\/in {\ttfamily errno}. The error message produced by perror is platform-\/depend.
+
+perror should be called right after the error was produced, otherwise it may be overwritten by calls to other system functions.
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & custom message \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{util_8h_file_a5e83cd2baae9bd0faaa60db2eed9525a}\label{util_8h_file_a5e83cd2baae9bd0faaa60db2eed9525a}} 
+\index{util.\+h@{util.\+h}!string\+\_\+format@{string\+\_\+format}}
+\index{string\+\_\+format@{string\+\_\+format}!util.\+h@{util.\+h}}
+\subsubsection{\texorpdfstring{string\+\_\+format()}{string\_format()}}
+{\footnotesize\ttfamily template$<$typename ... Args$>$ \\
+std\+::string cpen333\+::string\+\_\+format (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{format,  }\item[{Args ...}]{args }\end{DoxyParamCaption})}
+
+
+
+Formats a string according to standard C printf rules. 
+
+Writes the string described by {\ttfamily format} to a new output string. If {\ttfamily format} includes format specifiers (subsequences beginning with \%), the additional arguments following {\ttfamily format} are formatted and inserted in the resulting string replacing their respective specifiers.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Args} & variadic template types of additional arguments \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em format} & format specifier string \\
+\hline
+{\em args} & additional arguments \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+new formatted string 
+\end{DoxyReturn}
+\mbox{\Hypertarget{util_8h_file_a68b5b8834128fc802ed44d31064c0416}\label{util_8h_file_a68b5b8834128fc802ed44d31064c0416}} 
+\index{util.\+h@{util.\+h}!test\+\_\+stdin@{test\+\_\+stdin}}
+\index{test\+\_\+stdin@{test\+\_\+stdin}!util.\+h@{util.\+h}}
+\subsubsection{\texorpdfstring{test\+\_\+stdin()}{test\_stdin()}}
+{\footnotesize\ttfamily int cpen333\+::test\+\_\+stdin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tests for keyboard input. 
+
+Wrapper around platform-\/specific code for detecting the presence of data available on the standard input stream {\ttfamily stdin}. This call returns immediately, without blocking.
+
+\begin{DoxyReturn}{Returns}
+non-\/zero value if there is content 
+\end{DoxyReturn}

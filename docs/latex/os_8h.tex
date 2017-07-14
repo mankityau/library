@@ -1,0 +1,51 @@
+\hypertarget{os_8h}{}\section{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/os.h File Reference}
+\label{os_8h}\index{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/os.\+h@{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/os.\+h}}
+
+
+detects OS and sets appropriate macros  
+
+
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{os_8h_a157a956e14c5c44b3f73ef23a4776f64}{L\+I\+N\+UX}
+\item 
+\#define \hyperlink{os_8h_a1c3d85ae80df5590fa314acffd8bf840}{P\+O\+S\+IX}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+detects OS and sets appropriate macros 
+
+By checking various macros defined by common compilers, this file tries to detect the current OS and sets unified macros to be used in other platform-\/specific code. 
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{2}{|X[-1]}|}
+\caption{Platform-\/specific Macros}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ Operating System}&\textbf{ Macros }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ Operating System}&\textbf{ Macros }\\\cline{1-2}
+\endhead
+Windows&{\ttfamily W\+I\+N\+D\+O\+WS} \\\cline{1-2}
+Linux&{\ttfamily L\+I\+N\+UX}, {\ttfamily P\+O\+S\+IX} \\\cline{1-2}
+O\+SX&{\ttfamily A\+P\+P\+LE}, {\ttfamily P\+O\+S\+IX} \\\cline{1-2}
+\end{longtabu}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{os_8h_a157a956e14c5c44b3f73ef23a4776f64}\label{os_8h_a157a956e14c5c44b3f73ef23a4776f64}} 
+\index{os.\+h@{os.\+h}!L\+I\+N\+UX@{L\+I\+N\+UX}}
+\index{L\+I\+N\+UX@{L\+I\+N\+UX}!os.\+h@{os.\+h}}
+\subsubsection{\texorpdfstring{L\+I\+N\+UX}{LINUX}}
+{\footnotesize\ttfamily \#define L\+I\+N\+UX}
+
+Defined on Linux platforms \mbox{\Hypertarget{os_8h_a1c3d85ae80df5590fa314acffd8bf840}\label{os_8h_a1c3d85ae80df5590fa314acffd8bf840}} 
+\index{os.\+h@{os.\+h}!P\+O\+S\+IX@{P\+O\+S\+IX}}
+\index{P\+O\+S\+IX@{P\+O\+S\+IX}!os.\+h@{os.\+h}}
+\subsubsection{\texorpdfstring{P\+O\+S\+IX}{POSIX}}
+{\footnotesize\ttfamily \#define P\+O\+S\+IX}
+
+Defined on P\+O\+S\+I\+X-\/compliant platforms 

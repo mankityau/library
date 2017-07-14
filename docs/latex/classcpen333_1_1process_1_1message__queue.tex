@@ -1,0 +1,517 @@
+\hypertarget{classcpen333_1_1process_1_1message__queue}{}\section{cpen333\+:\+:process\+:\+:message\+\_\+queue$<$ Message\+Type $>$ Class Template Reference}
+\label{classcpen333_1_1process_1_1message__queue}\index{cpen333\+::process\+::message\+\_\+queue$<$ Message\+Type $>$@{cpen333\+::process\+::message\+\_\+queue$<$ Message\+Type $>$}}
+
+
+Basic inter-\/process named message queue based on a F\+I\+FO.  
+
+
+
+
+{\ttfamily \#include $<$message\+\_\+queue.\+h$>$}
+
+Inheritance diagram for cpen333\+:\+:process\+:\+:message\+\_\+queue$<$ Message\+Type $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcpen333_1_1process_1_1message__queue}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1message__queue_af5c7db435edf1cda9fced975f04705ff}\label{classcpen333_1_1process_1_1message__queue_af5c7db435edf1cda9fced975f04705ff}} 
+using \hyperlink{classcpen333_1_1process_1_1message__queue_af5c7db435edf1cda9fced975f04705ff}{message\+\_\+type} = Message\+Type
+\begin{DoxyCompactList}\small\item\em Message type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcpen333_1_1process_1_1message__queue_a3312decb9ec69e323ba97f321125d348}{message\+\_\+queue} (const std\+::string \&name, size\+\_\+t \hyperlink{classcpen333_1_1process_1_1message__queue_aab604a8c153f7f918762abc7f2380396}{size}=1024)
+\begin{DoxyCompactList}\small\item\em Constructs a named message queue. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1process_1_1message__queue_a1f50c208f75ad2937d11d7eca8fdb6f0}{send} (const Message\+Type \&msg)
+\begin{DoxyCompactList}\small\item\em Sends a message to the queue. \end{DoxyCompactList}\item 
+bool \hyperlink{classcpen333_1_1process_1_1message__queue_ae632a2b200bdac5bc93039b9bcb3d7f5}{try\+\_\+send} (const Message\+Type \&msg)
+\begin{DoxyCompactList}\small\item\em Tries to send a message without blocking. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Rep , typename Period $>$ }\\bool \hyperlink{classcpen333_1_1process_1_1message__queue_a5242a6193a42e68e36634846f09c5e3b}{try\+\_\+send\+\_\+for} (const Message\+Type \&msg, std\+::chrono\+::duration$<$ Rep, Period $>$ \&rel\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Tries to send a message, will wait for a maximum amount of time before aborting. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Clock , typename Duration $>$ }\\bool \hyperlink{classcpen333_1_1process_1_1message__queue_ab13d8f1c89ca9022e5446b3fc5432072}{try\+\_\+send\+\_\+until} (const Message\+Type \&msg, const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&timeout)
+\begin{DoxyCompactList}\small\item\em Tries to send a message, will wait until a timeout time has been reached before aborting. \end{DoxyCompactList}\item 
+Message\+Type \hyperlink{classcpen333_1_1process_1_1message__queue_a39d2e54480fba6a441e70cb1362d3900}{receive} ()
+\begin{DoxyCompactList}\small\item\em Retrieves and removes the next message from the message queue. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1process_1_1message__queue_a63eccb93a61129e6e6dec2db5f5b1f2b}{receive} (Message\+Type $\ast$out)
+\begin{DoxyCompactList}\small\item\em Retrieves and removes the next message from the message queue. \end{DoxyCompactList}\item 
+bool \hyperlink{classcpen333_1_1process_1_1message__queue_ae42a9bd9edc9753a38fa63f20a34cc60}{try\+\_\+receive} (Message\+Type $\ast$out)
+\begin{DoxyCompactList}\small\item\em Tries to receive a message without blocking. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Rep , typename Period $>$ }\\bool \hyperlink{classcpen333_1_1process_1_1message__queue_a4264047863208a01109569f62d093885}{try\+\_\+receive\+\_\+for} (Message\+Type $\ast$out, std\+::chrono\+::duration$<$ Rep, Period $>$ \&rel\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Tries to receive a message, will wait for a maximum amount of time before aborting. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Clock , typename Duration $>$ }\\bool \hyperlink{classcpen333_1_1process_1_1message__queue_abf193426822dfbb27fc1ce972db42da0}{try\+\_\+receive\+\_\+until} (Message\+Type $\ast$out, const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&timeout)
+\begin{DoxyCompactList}\small\item\em Tries to receive a message, will wait for a maximum timeout time to be reached before aborting. \end{DoxyCompactList}\item 
+Message\+Type \hyperlink{classcpen333_1_1process_1_1message__queue_a22e2c27bc1fe660b573129f7518ecec7}{peek} ()
+\begin{DoxyCompactList}\small\item\em Peeks at the next message without removing it. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1process_1_1message__queue_a0d6f0bb9911b01f601bb67551007be3d}{peek} (Message\+Type $\ast$out)
+\begin{DoxyCompactList}\small\item\em Peeks at the next message without removing it. \end{DoxyCompactList}\item 
+bool \hyperlink{classcpen333_1_1process_1_1message__queue_a344d81de71e73ab318d2bf4a4a852a1b}{try\+\_\+peek} (Message\+Type $\ast$out)
+\begin{DoxyCompactList}\small\item\em Tries to peek at the message without blocking. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Rep , typename Period $>$ }\\bool \hyperlink{classcpen333_1_1process_1_1message__queue_a62077115caee87a6eccd527924015748}{try\+\_\+peek\+\_\+for} (Message\+Type $\ast$out, std\+::chrono\+::duration$<$ Rep, Period $>$ \&rel\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Tries to peek at the next message, will wait for a maximum amount of time before aborting. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Clock , typename Duration $>$ }\\bool \hyperlink{classcpen333_1_1process_1_1message__queue_ae518346095033df725270dfeb866cdb4}{try\+\_\+peek\+\_\+until} (Message\+Type $\ast$out, const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&timeout)
+\begin{DoxyCompactList}\small\item\em Tries to peek at the next message, will wait for a maximum timeout time before aborting. \end{DoxyCompactList}\item 
+size\+\_\+t \hyperlink{classcpen333_1_1process_1_1message__queue_aab604a8c153f7f918762abc7f2380396}{size} ()
+\begin{DoxyCompactList}\small\item\em Number of messages currently in the queue. \end{DoxyCompactList}\item 
+bool \hyperlink{classcpen333_1_1process_1_1message__queue_a321bee9b732f97362172c6c4ee8226a4}{empty} ()
+\begin{DoxyCompactList}\small\item\em Check if the message queue is currently empty. \end{DoxyCompactList}\item 
+bool \hyperlink{classcpen333_1_1process_1_1message__queue_ae94a6503dff948dfc2533f7786839dca}{unlink} ()
+\begin{DoxyCompactList}\small\item\em Detaches the name from the named resource. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \hyperlink{classcpen333_1_1process_1_1message__queue_aca172436d5b30c250c301d3c224598b6}{unlink} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Unlinks the name without needing to create a resource. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename Message\+Type$>$\newline
+class cpen333\+::process\+::message\+\_\+queue$<$ Message\+Type $>$}
+
+Basic inter-\/process named message queue based on a F\+I\+FO. 
+
+Allows sending/receiving of messages with a fixed type. Unlike Windows messages, does not require you to know the thread ID of the receiver, but also does not allow filtering on the receiving end. Unlike a P\+O\+S\+IX message queue, does not allow variable length messages or message priorities.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Message\+Type} & fixed type of messages. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1message__queue_a3312decb9ec69e323ba97f321125d348}\label{classcpen333_1_1process_1_1message__queue_a3312decb9ec69e323ba97f321125d348}} 
+\index{cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}!message\+\_\+queue@{message\+\_\+queue}}
+\index{message\+\_\+queue@{message\+\_\+queue}!cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}}
+\subsubsection{\texorpdfstring{message\+\_\+queue()}{message\_queue()}}
+{\footnotesize\ttfamily template$<$typename Message\+Type $>$ \\
+\hyperlink{classcpen333_1_1process_1_1message__queue}{cpen333\+::process\+::message\+\_\+queue}$<$ Message\+Type $>$\+::\hyperlink{classcpen333_1_1process_1_1message__queue}{message\+\_\+queue} (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{size\+\_\+t}]{size = {\ttfamily 1024} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a named message queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & name identifier for creating or connecting to an existing inter-\/process message-\/queue \\
+\hline
+{\em size} & if creating, the maximum number of elements that can be stored in the queue without blocking \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1message__queue_a321bee9b732f97362172c6c4ee8226a4}\label{classcpen333_1_1process_1_1message__queue_a321bee9b732f97362172c6c4ee8226a4}} 
+\index{cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}!empty@{empty}}
+\index{empty@{empty}!cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}}
+\subsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily template$<$typename Message\+Type $>$ \\
+bool \hyperlink{classcpen333_1_1process_1_1message__queue}{cpen333\+::process\+::message\+\_\+queue}$<$ Message\+Type $>$\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if the message queue is currently empty. 
+
+This method should be used sparingly, since messages could be added/removed during or immediately after the call, making the result potentially unreliable
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if empty, {\ttfamily false} otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1message__queue_a22e2c27bc1fe660b573129f7518ecec7}\label{classcpen333_1_1process_1_1message__queue_a22e2c27bc1fe660b573129f7518ecec7}} 
+\index{cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}!peek@{peek}}
+\index{peek@{peek}!cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}}
+\subsubsection{\texorpdfstring{peek()}{peek()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Message\+Type $>$ \\
+Message\+Type \hyperlink{classcpen333_1_1process_1_1message__queue}{cpen333\+::process\+::message\+\_\+queue}$<$ Message\+Type $>$\+::peek (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Peeks at the next message without removing it. 
+
+Returns the next message in the queue. If there are currently no messages, this method will block until one becomes available. The message will remain in the queue for the next {\ttfamily peek} or {\ttfamily receive} operation.
+
+\begin{DoxyReturn}{Returns}
+next message in the queue 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1message__queue_a0d6f0bb9911b01f601bb67551007be3d}\label{classcpen333_1_1process_1_1message__queue_a0d6f0bb9911b01f601bb67551007be3d}} 
+\index{cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}!peek@{peek}}
+\index{peek@{peek}!cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}}
+\subsubsection{\texorpdfstring{peek()}{peek()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Message\+Type $>$ \\
+void \hyperlink{classcpen333_1_1process_1_1message__queue}{cpen333\+::process\+::message\+\_\+queue}$<$ Message\+Type $>$\+::peek (\begin{DoxyParamCaption}\item[{Message\+Type $\ast$}]{out }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Peeks at the next message without removing it. 
+
+Populates memory pointed to by {\ttfamily out} with next message in the queue. If there are currently no messages, this method will block until a message becomes available. The message will remain in the queue for the next {\ttfamily peek} or {\ttfamily receive} operation.
+
+
+\begin{DoxyParams}{Parameters}
+{\em out} & destination. If {\ttfamily nullptr}, nothing happens. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1message__queue_a39d2e54480fba6a441e70cb1362d3900}\label{classcpen333_1_1process_1_1message__queue_a39d2e54480fba6a441e70cb1362d3900}} 
+\index{cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}!receive@{receive}}
+\index{receive@{receive}!cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}}
+\subsubsection{\texorpdfstring{receive()}{receive()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Message\+Type $>$ \\
+Message\+Type \hyperlink{classcpen333_1_1process_1_1message__queue}{cpen333\+::process\+::message\+\_\+queue}$<$ Message\+Type $>$\+::receive (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retrieves and removes the next message from the message queue. 
+
+If there are currently no messages in the queue, then the current thread will block until a message becomes available.
+
+\begin{DoxyReturn}{Returns}
+the next message in the queue 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1message__queue_a63eccb93a61129e6e6dec2db5f5b1f2b}\label{classcpen333_1_1process_1_1message__queue_a63eccb93a61129e6e6dec2db5f5b1f2b}} 
+\index{cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}!receive@{receive}}
+\index{receive@{receive}!cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}}
+\subsubsection{\texorpdfstring{receive()}{receive()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Message\+Type $>$ \\
+void \hyperlink{classcpen333_1_1process_1_1message__queue}{cpen333\+::process\+::message\+\_\+queue}$<$ Message\+Type $>$\+::receive (\begin{DoxyParamCaption}\item[{Message\+Type $\ast$}]{out }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retrieves and removes the next message from the message queue. 
+
+If there are currently no messages in the queue, then the current thread will block until a message becomes available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em out} & destination. If {\ttfamily nullptr}, the message is removed from the queue but not returned \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1message__queue_a1f50c208f75ad2937d11d7eca8fdb6f0}\label{classcpen333_1_1process_1_1message__queue_a1f50c208f75ad2937d11d7eca8fdb6f0}} 
+\index{cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}!send@{send}}
+\index{send@{send}!cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}}
+\subsubsection{\texorpdfstring{send()}{send()}}
+{\footnotesize\ttfamily template$<$typename Message\+Type $>$ \\
+void \hyperlink{classcpen333_1_1process_1_1message__queue}{cpen333\+::process\+::message\+\_\+queue}$<$ Message\+Type $>$\+::send (\begin{DoxyParamCaption}\item[{const Message\+Type \&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sends a message to the queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & message to send \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1message__queue_aab604a8c153f7f918762abc7f2380396}\label{classcpen333_1_1process_1_1message__queue_aab604a8c153f7f918762abc7f2380396}} 
+\index{cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}!size@{size}}
+\index{size@{size}!cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}}
+\subsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$typename Message\+Type $>$ \\
+size\+\_\+t \hyperlink{classcpen333_1_1process_1_1message__queue}{cpen333\+::process\+::message\+\_\+queue}$<$ Message\+Type $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of messages currently in the queue. 
+
+This method should be used sparingly, since messages could be added/removed during or immediately after the call, making the result potentially unreliable.
+
+\begin{DoxyReturn}{Returns}
+number of messages 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1message__queue_a344d81de71e73ab318d2bf4a4a852a1b}\label{classcpen333_1_1process_1_1message__queue_a344d81de71e73ab318d2bf4a4a852a1b}} 
+\index{cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}!try\+\_\+peek@{try\+\_\+peek}}
+\index{try\+\_\+peek@{try\+\_\+peek}!cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}}
+\subsubsection{\texorpdfstring{try\+\_\+peek()}{try\_peek()}}
+{\footnotesize\ttfamily template$<$typename Message\+Type $>$ \\
+bool \hyperlink{classcpen333_1_1process_1_1message__queue}{cpen333\+::process\+::message\+\_\+queue}$<$ Message\+Type $>$\+::try\+\_\+peek (\begin{DoxyParamCaption}\item[{Message\+Type $\ast$}]{out }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to peek at the message without blocking. 
+
+Populates memory pointed to by {\ttfamily out} with the next message in the queue. If there are no messages, then this will return immediately without peeking. The message will remain in the queue for the next {\ttfamily peek} or {\ttfamily receive} operation.
+
+
+\begin{DoxyParams}{Parameters}
+{\em out} & destination. If {\ttfamily nullptr}, nothing happens. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if message was successfully peeked, {\ttfamily false} otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1message__queue_a62077115caee87a6eccd527924015748}\label{classcpen333_1_1process_1_1message__queue_a62077115caee87a6eccd527924015748}} 
+\index{cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}!try\+\_\+peek\+\_\+for@{try\+\_\+peek\+\_\+for}}
+\index{try\+\_\+peek\+\_\+for@{try\+\_\+peek\+\_\+for}!cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}}
+\subsubsection{\texorpdfstring{try\+\_\+peek\+\_\+for()}{try\_peek\_for()}}
+{\footnotesize\ttfamily template$<$typename Message\+Type $>$ \\
+template$<$typename Rep , typename Period $>$ \\
+bool \hyperlink{classcpen333_1_1process_1_1message__queue}{cpen333\+::process\+::message\+\_\+queue}$<$ Message\+Type $>$\+::try\+\_\+peek\+\_\+for (\begin{DoxyParamCaption}\item[{Message\+Type $\ast$}]{out,  }\item[{std\+::chrono\+::duration$<$ Rep, Period $>$ \&}]{rel\+\_\+time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to peek at the next message, will wait for a maximum amount of time before aborting. 
+
+If it is not possible to peek at the next message immediately, then the current thread will block until either a message becomes available, or a timeout period has elapsed. The message will remain in the queue for the next {\ttfamily peek} or {\ttfamily receive} operation.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Rep} & duration representation \\
+\hline
+{\em Period} & duration period \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em out} & destination. If {\ttfamily nullptr}, nothing happens \\
+\hline
+{\em rel\+\_\+time} & relative timeout time \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if message successfully peeked, {\ttfamily false} if timeout elapsed 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1message__queue_ae518346095033df725270dfeb866cdb4}\label{classcpen333_1_1process_1_1message__queue_ae518346095033df725270dfeb866cdb4}} 
+\index{cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}!try\+\_\+peek\+\_\+until@{try\+\_\+peek\+\_\+until}}
+\index{try\+\_\+peek\+\_\+until@{try\+\_\+peek\+\_\+until}!cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}}
+\subsubsection{\texorpdfstring{try\+\_\+peek\+\_\+until()}{try\_peek\_until()}}
+{\footnotesize\ttfamily template$<$typename Message\+Type $>$ \\
+template$<$typename Clock , typename Duration $>$ \\
+bool \hyperlink{classcpen333_1_1process_1_1message__queue}{cpen333\+::process\+::message\+\_\+queue}$<$ Message\+Type $>$\+::try\+\_\+peek\+\_\+until (\begin{DoxyParamCaption}\item[{Message\+Type $\ast$}]{out,  }\item[{const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&}]{timeout }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to peek at the next message, will wait for a maximum timeout time before aborting. 
+
+If it is not possible to peek at the next message immediately, then the current thread will block until either a message becomes available, or a timeout time has been reached. The message will remain in the queue for the next {\ttfamily peek} or {\ttfamily receive} operation.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Clock} & clock type \\
+\hline
+{\em Duration} & clock duration type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em out} & destination. If {\ttfamily nullptr}, nothing happens \\
+\hline
+{\em timeout} & absolute timeout time \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if message successfully peeked, {\ttfamily false} if timeout 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1message__queue_ae42a9bd9edc9753a38fa63f20a34cc60}\label{classcpen333_1_1process_1_1message__queue_ae42a9bd9edc9753a38fa63f20a34cc60}} 
+\index{cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}!try\+\_\+receive@{try\+\_\+receive}}
+\index{try\+\_\+receive@{try\+\_\+receive}!cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}}
+\subsubsection{\texorpdfstring{try\+\_\+receive()}{try\_receive()}}
+{\footnotesize\ttfamily template$<$typename Message\+Type $>$ \\
+bool \hyperlink{classcpen333_1_1process_1_1message__queue}{cpen333\+::process\+::message\+\_\+queue}$<$ Message\+Type $>$\+::try\+\_\+receive (\begin{DoxyParamCaption}\item[{Message\+Type $\ast$}]{out }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to receive a message without blocking. 
+
+Populates memory pointed to by {\ttfamily out} with the next message, and removes the message from the queue. If there are no messages, then this will return immediately.
+
+
+\begin{DoxyParams}{Parameters}
+{\em out} & destination. If {\ttfamily nullptr}, the message is removed but not returned. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if a message is returned, {\ttfamily false} otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1message__queue_a4264047863208a01109569f62d093885}\label{classcpen333_1_1process_1_1message__queue_a4264047863208a01109569f62d093885}} 
+\index{cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}!try\+\_\+receive\+\_\+for@{try\+\_\+receive\+\_\+for}}
+\index{try\+\_\+receive\+\_\+for@{try\+\_\+receive\+\_\+for}!cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}}
+\subsubsection{\texorpdfstring{try\+\_\+receive\+\_\+for()}{try\_receive\_for()}}
+{\footnotesize\ttfamily template$<$typename Message\+Type $>$ \\
+template$<$typename Rep , typename Period $>$ \\
+bool \hyperlink{classcpen333_1_1process_1_1message__queue}{cpen333\+::process\+::message\+\_\+queue}$<$ Message\+Type $>$\+::try\+\_\+receive\+\_\+for (\begin{DoxyParamCaption}\item[{Message\+Type $\ast$}]{out,  }\item[{std\+::chrono\+::duration$<$ Rep, Period $>$ \&}]{rel\+\_\+time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to receive a message, will wait for a maximum amount of time before aborting. 
+
+If it is not possible to receive a message immediately, then the current thread will block until either a message becomes available, or a timeout period has elapsed.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Rep} & duration representation \\
+\hline
+{\em Period} & duration period \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em out} & destination. If {\ttfamily nullptr}, the next message is removed but not returned \\
+\hline
+{\em rel\+\_\+time} & relative timeout time \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if message successfully returned, {\ttfamily false} if timeout elapsed 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1message__queue_abf193426822dfbb27fc1ce972db42da0}\label{classcpen333_1_1process_1_1message__queue_abf193426822dfbb27fc1ce972db42da0}} 
+\index{cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}!try\+\_\+receive\+\_\+until@{try\+\_\+receive\+\_\+until}}
+\index{try\+\_\+receive\+\_\+until@{try\+\_\+receive\+\_\+until}!cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}}
+\subsubsection{\texorpdfstring{try\+\_\+receive\+\_\+until()}{try\_receive\_until()}}
+{\footnotesize\ttfamily template$<$typename Message\+Type $>$ \\
+template$<$typename Clock , typename Duration $>$ \\
+bool \hyperlink{classcpen333_1_1process_1_1message__queue}{cpen333\+::process\+::message\+\_\+queue}$<$ Message\+Type $>$\+::try\+\_\+receive\+\_\+until (\begin{DoxyParamCaption}\item[{Message\+Type $\ast$}]{out,  }\item[{const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&}]{timeout }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to receive a message, will wait for a maximum timeout time to be reached before aborting. 
+
+If it is not possible to receive a message immediately, then the current thread will block until either a message becomes available, or a timeout time has been reached.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Clock} & clock type \\
+\hline
+{\em Duration} & clock duration type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em out} & destination. If {\ttfamily nullptr}, the next message is removed but not returned \\
+\hline
+{\em timeout} & absolute timeout time \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if message successfully returned, {\ttfamily false} if timeout 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1message__queue_ae632a2b200bdac5bc93039b9bcb3d7f5}\label{classcpen333_1_1process_1_1message__queue_ae632a2b200bdac5bc93039b9bcb3d7f5}} 
+\index{cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}!try\+\_\+send@{try\+\_\+send}}
+\index{try\+\_\+send@{try\+\_\+send}!cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}}
+\subsubsection{\texorpdfstring{try\+\_\+send()}{try\_send()}}
+{\footnotesize\ttfamily template$<$typename Message\+Type $>$ \\
+bool \hyperlink{classcpen333_1_1process_1_1message__queue}{cpen333\+::process\+::message\+\_\+queue}$<$ Message\+Type $>$\+::try\+\_\+send (\begin{DoxyParamCaption}\item[{const Message\+Type \&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to send a message without blocking. 
+
+If it is not possible to send the message without blocking, then will return immediately without sending.
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & message to send \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if message sent successfully, {\ttfamily false} if not sent 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1message__queue_a5242a6193a42e68e36634846f09c5e3b}\label{classcpen333_1_1process_1_1message__queue_a5242a6193a42e68e36634846f09c5e3b}} 
+\index{cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}!try\+\_\+send\+\_\+for@{try\+\_\+send\+\_\+for}}
+\index{try\+\_\+send\+\_\+for@{try\+\_\+send\+\_\+for}!cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}}
+\subsubsection{\texorpdfstring{try\+\_\+send\+\_\+for()}{try\_send\_for()}}
+{\footnotesize\ttfamily template$<$typename Message\+Type $>$ \\
+template$<$typename Rep , typename Period $>$ \\
+bool \hyperlink{classcpen333_1_1process_1_1message__queue}{cpen333\+::process\+::message\+\_\+queue}$<$ Message\+Type $>$\+::try\+\_\+send\+\_\+for (\begin{DoxyParamCaption}\item[{const Message\+Type \&}]{msg,  }\item[{std\+::chrono\+::duration$<$ Rep, Period $>$ \&}]{rel\+\_\+time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to send a message, will wait for a maximum amount of time before aborting. 
+
+If it is not possible to send the message immediately, then the current thread will block until either the message is sent successfully, or a timeout period has elapsed.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Rep} & timeout duration representation \\
+\hline
+{\em Period} & timeout duration period \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & message to send \\
+\hline
+{\em rel\+\_\+time} & relative timeout time \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if the message is sent successfully within the timeout period, {\ttfamily false} if not sent 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1message__queue_ab13d8f1c89ca9022e5446b3fc5432072}\label{classcpen333_1_1process_1_1message__queue_ab13d8f1c89ca9022e5446b3fc5432072}} 
+\index{cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}!try\+\_\+send\+\_\+until@{try\+\_\+send\+\_\+until}}
+\index{try\+\_\+send\+\_\+until@{try\+\_\+send\+\_\+until}!cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}}
+\subsubsection{\texorpdfstring{try\+\_\+send\+\_\+until()}{try\_send\_until()}}
+{\footnotesize\ttfamily template$<$typename Message\+Type $>$ \\
+template$<$typename Clock , typename Duration $>$ \\
+bool \hyperlink{classcpen333_1_1process_1_1message__queue}{cpen333\+::process\+::message\+\_\+queue}$<$ Message\+Type $>$\+::try\+\_\+send\+\_\+until (\begin{DoxyParamCaption}\item[{const Message\+Type \&}]{msg,  }\item[{const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&}]{timeout }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to send a message, will wait until a timeout time has been reached before aborting. 
+
+If it is not possible to send the message immediately, then the current thread will block until either the message is sent successfully, or an absolute timeout time has been reached.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Clock} & timeout clock type \\
+\hline
+{\em Duration} & timeout duration type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & message to send \\
+\hline
+{\em timeout} & absolute timeout time \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if message sent successfully before timeout time has passed, {\ttfamily false} if message not sent 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1message__queue_ae94a6503dff948dfc2533f7786839dca}\label{classcpen333_1_1process_1_1message__queue_ae94a6503dff948dfc2533f7786839dca}} 
+\index{cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}!unlink@{unlink}}
+\index{unlink@{unlink}!cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}}
+\subsubsection{\texorpdfstring{unlink()}{unlink()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Message\+Type $>$ \\
+bool \hyperlink{classcpen333_1_1process_1_1message__queue}{cpen333\+::process\+::message\+\_\+queue}$<$ Message\+Type $>$\+::unlink (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Detaches the name from the named resource. 
+
+On P\+O\+S\+IX systems, named resources will persist beyond the lifetime of any process that uses them as long as the name has not been unlinked (or until the system is rebooted). Calling {\ttfamily unlink} will detach the name, allowing the resource to be freed once all current users have exited.
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if unlink is successful, {\ttfamily false} if unlinking is not supported or if an error has occurred. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classcpen333_1_1process_1_1named__resource_a5d33168fee48c9b0c58ab8fd96e230ce}{cpen333\+::process\+::named\+\_\+resource}.
+
+\mbox{\Hypertarget{classcpen333_1_1process_1_1message__queue_aca172436d5b30c250c301d3c224598b6}\label{classcpen333_1_1process_1_1message__queue_aca172436d5b30c250c301d3c224598b6}} 
+\index{cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}!unlink@{unlink}}
+\index{unlink@{unlink}!cpen333\+::process\+::message\+\_\+queue@{cpen333\+::process\+::message\+\_\+queue}}
+\subsubsection{\texorpdfstring{unlink()}{unlink()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Message\+Type $>$ \\
+static bool \hyperlink{classcpen333_1_1process_1_1message__queue}{cpen333\+::process\+::message\+\_\+queue}$<$ Message\+Type $>$\+::unlink (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Unlinks the name without needing to create a resource. 
+
+Implementers should also provide a static method for unlinking. The purpose is mainly for clean-\/up of existing resources.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & desired resource name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if unlink successful, {\ttfamily false} if not successful or not supported 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/\hyperlink{message__queue_8h}{message\+\_\+queue.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,32 @@
+\hypertarget{process_2impl_2windows_2semaphore_8h}{}\section{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/impl/windows/semaphore.h File Reference}
+\label{process_2impl_2windows_2semaphore_8h}\index{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/impl/windows/semaphore.\+h@{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/impl/windows/semaphore.\+h}}
+
+
+Windows implementation of an inter-\/process named semaphore.  
+
+
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$windows.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}cpen333/util.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cpen333/process/impl/named\+\_\+resource\+\_\+base.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classcpen333_1_1process_1_1windows_1_1semaphore}{cpen333\+::process\+::windows\+::semaphore}
+\begin{DoxyCompactList}\small\item\em Inter-\/process named semaphore primitive. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{process_2impl_2windows_2semaphore_8h_ae0da9797c84aacec4e7ed6888f084a2e}\label{process_2impl_2windows_2semaphore_8h_ae0da9797c84aacec4e7ed6888f084a2e}} 
+\#define \hyperlink{process_2impl_2windows_2semaphore_8h_ae0da9797c84aacec4e7ed6888f084a2e}{M\+A\+X\+\_\+\+S\+E\+M\+A\+P\+H\+O\+R\+E\+\_\+\+S\+I\+ZE}~L\+O\+N\+G\+\_\+\+M\+AX
+\begin{DoxyCompactList}\small\item\em Maximum possible size of a semaphore. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{process_2impl_2windows_2semaphore_8h_a5dec85eeb4a479df781714d473e60d03}\label{process_2impl_2windows_2semaphore_8h_a5dec85eeb4a479df781714d473e60d03}} 
+\#define \hyperlink{process_2impl_2windows_2semaphore_8h_a5dec85eeb4a479df781714d473e60d03}{S\+E\+M\+A\+P\+H\+O\+R\+E\+\_\+\+N\+A\+M\+E\+\_\+\+S\+U\+F\+F\+IX}~\char`\"{}\+\_\+sem\char`\"{}
+\begin{DoxyCompactList}\small\item\em Suffix appended to semaphore names for uniqueness. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Windows implementation of an inter-\/process named semaphore. 
+
+Uses a Windows Semaphore 

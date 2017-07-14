@@ -1,0 +1,177 @@
+\hypertarget{classcpen333_1_1process_1_1posix_1_1subprocess}{}\section{cpen333\+:\+:process\+:\+:posix\+:\+:subprocess Class Reference}
+\label{classcpen333_1_1process_1_1posix_1_1subprocess}\index{cpen333\+::process\+::posix\+::subprocess@{cpen333\+::process\+::posix\+::subprocess}}
+
+
+A child process.  
+
+
+
+
+{\ttfamily \#include $<$subprocess.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1posix_1_1subprocess_a84a93cb8471fd6314591abc6e747fcf4}\label{classcpen333_1_1process_1_1posix_1_1subprocess_a84a93cb8471fd6314591abc6e747fcf4}} 
+using \hyperlink{classcpen333_1_1process_1_1posix_1_1subprocess_a84a93cb8471fd6314591abc6e747fcf4}{native\+\_\+handle\+\_\+type} = pid\+\_\+t
+\begin{DoxyCompactList}\small\item\em Alias to native handle type, on P\+O\+S\+IX is pid\+\_\+t. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcpen333_1_1process_1_1posix_1_1subprocess_a427822d8d77afa1014a0d10a5f50aa14}{subprocess} (const std\+::vector$<$ std\+::string $>$ \&exec, bool \hyperlink{classcpen333_1_1process_1_1posix_1_1subprocess_a8738add1094b2dda57b9ffb8ec6828c1}{start}=true, bool detached=false)
+\begin{DoxyCompactList}\small\item\em Constructs a new subprocess. \end{DoxyCompactList}\item 
+bool \hyperlink{classcpen333_1_1process_1_1posix_1_1subprocess_a8738add1094b2dda57b9ffb8ec6828c1}{start} ()
+\begin{DoxyCompactList}\small\item\em Starts the subprocess. \end{DoxyCompactList}\item 
+bool \hyperlink{classcpen333_1_1process_1_1posix_1_1subprocess_af711962e3b6649476bd8cbbd6c59ea8b}{join} ()
+\begin{DoxyCompactList}\small\item\em Waits for the subprocess to complete execution. \end{DoxyCompactList}\item 
+bool \hyperlink{classcpen333_1_1process_1_1posix_1_1subprocess_a8928b9937577c0ec288318b2176156a0}{wait} ()
+\begin{DoxyCompactList}\small\item\em Waits for the subprocess to complete execution. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Rep , typename Period $>$ }\\bool \hyperlink{classcpen333_1_1process_1_1posix_1_1subprocess_a1543488d24eaf0f819e81f31d9d388cb}{wait\+\_\+for} (const std\+::chrono\+::duration$<$ Rep, Period $>$ \&duration)
+\begin{DoxyCompactList}\small\item\em Waits for the process to terminate up to a maximum amount of time. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Clock , class Duration $>$ }\\bool \hyperlink{classcpen333_1_1process_1_1posix_1_1subprocess_a10ea54174a30dd26c0d1ff289b88cd42}{wait\+\_\+until} (const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&timeout\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Waits for the process to terminate up to a maximum absolute time. \end{DoxyCompactList}\item 
+bool \hyperlink{classcpen333_1_1process_1_1posix_1_1subprocess_aabc5ed98ead25bc40663e586a83e62bb}{terminated} ()
+\begin{DoxyCompactList}\small\item\em Checks if the process has already been terminated. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A child process. 
+
+Allows launching of a child process, with environment inherited from the current process. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1posix_1_1subprocess_a427822d8d77afa1014a0d10a5f50aa14}\label{classcpen333_1_1process_1_1posix_1_1subprocess_a427822d8d77afa1014a0d10a5f50aa14}} 
+\index{cpen333\+::process\+::posix\+::subprocess@{cpen333\+::process\+::posix\+::subprocess}!subprocess@{subprocess}}
+\index{subprocess@{subprocess}!cpen333\+::process\+::posix\+::subprocess@{cpen333\+::process\+::posix\+::subprocess}}
+\subsubsection{\texorpdfstring{subprocess()}{subprocess()}}
+{\footnotesize\ttfamily cpen333\+::process\+::posix\+::subprocess\+::subprocess (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{exec,  }\item[{bool}]{start = {\ttfamily true},  }\item[{bool}]{detached = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a new subprocess. 
+
+The new process will run the command exec\mbox{[}0\mbox{]} with argv parameters \{exec\mbox{[}1\mbox{]}, exec\mbox{[}2\mbox{]}, ...\}. A detached child process will run in a separate thread, concurrently with the parent process. If not detached, the parent will wait for a running child to complete.
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & command and arguments to execute \\
+\hline
+{\em start} & whether to start the subprocess immediately \\
+\hline
+{\em detached} & run the subprocess in `detached\textquotesingle{} mode \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1posix_1_1subprocess_af711962e3b6649476bd8cbbd6c59ea8b}\label{classcpen333_1_1process_1_1posix_1_1subprocess_af711962e3b6649476bd8cbbd6c59ea8b}} 
+\index{cpen333\+::process\+::posix\+::subprocess@{cpen333\+::process\+::posix\+::subprocess}!join@{join}}
+\index{join@{join}!cpen333\+::process\+::posix\+::subprocess@{cpen333\+::process\+::posix\+::subprocess}}
+\subsubsection{\texorpdfstring{join()}{join()}}
+{\footnotesize\ttfamily bool cpen333\+::process\+::posix\+::subprocess\+::join (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Waits for the subprocess to complete execution. 
+
+\begin{DoxyReturn}{Returns}
+true if joined successfully, false if the process has already been joined or if an error occurs 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1posix_1_1subprocess_a8738add1094b2dda57b9ffb8ec6828c1}\label{classcpen333_1_1process_1_1posix_1_1subprocess_a8738add1094b2dda57b9ffb8ec6828c1}} 
+\index{cpen333\+::process\+::posix\+::subprocess@{cpen333\+::process\+::posix\+::subprocess}!start@{start}}
+\index{start@{start}!cpen333\+::process\+::posix\+::subprocess@{cpen333\+::process\+::posix\+::subprocess}}
+\subsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily bool cpen333\+::process\+::posix\+::subprocess\+::start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Starts the subprocess. 
+
+\begin{DoxyReturn}{Returns}
+true if started, false if process already started or an error occurs 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1posix_1_1subprocess_aabc5ed98ead25bc40663e586a83e62bb}\label{classcpen333_1_1process_1_1posix_1_1subprocess_aabc5ed98ead25bc40663e586a83e62bb}} 
+\index{cpen333\+::process\+::posix\+::subprocess@{cpen333\+::process\+::posix\+::subprocess}!terminated@{terminated}}
+\index{terminated@{terminated}!cpen333\+::process\+::posix\+::subprocess@{cpen333\+::process\+::posix\+::subprocess}}
+\subsubsection{\texorpdfstring{terminated()}{terminated()}}
+{\footnotesize\ttfamily bool cpen333\+::process\+::posix\+::subprocess\+::terminated (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if the process has already been terminated. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1posix_1_1subprocess_a8928b9937577c0ec288318b2176156a0}\label{classcpen333_1_1process_1_1posix_1_1subprocess_a8928b9937577c0ec288318b2176156a0}} 
+\index{cpen333\+::process\+::posix\+::subprocess@{cpen333\+::process\+::posix\+::subprocess}!wait@{wait}}
+\index{wait@{wait}!cpen333\+::process\+::posix\+::subprocess@{cpen333\+::process\+::posix\+::subprocess}}
+\subsubsection{\texorpdfstring{wait()}{wait()}}
+{\footnotesize\ttfamily bool cpen333\+::process\+::posix\+::subprocess\+::wait (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Waits for the subprocess to complete execution. 
+
+Similar to \hyperlink{classcpen333_1_1process_1_1posix_1_1subprocess_af711962e3b6649476bd8cbbd6c59ea8b}{join()}, but will return true if the process has already been joined
+
+\begin{DoxyReturn}{Returns}
+true if process terminates or is already terminated 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1posix_1_1subprocess_a1543488d24eaf0f819e81f31d9d388cb}\label{classcpen333_1_1process_1_1posix_1_1subprocess_a1543488d24eaf0f819e81f31d9d388cb}} 
+\index{cpen333\+::process\+::posix\+::subprocess@{cpen333\+::process\+::posix\+::subprocess}!wait\+\_\+for@{wait\+\_\+for}}
+\index{wait\+\_\+for@{wait\+\_\+for}!cpen333\+::process\+::posix\+::subprocess@{cpen333\+::process\+::posix\+::subprocess}}
+\subsubsection{\texorpdfstring{wait\+\_\+for()}{wait\_for()}}
+{\footnotesize\ttfamily template$<$typename Rep , typename Period $>$ \\
+bool cpen333\+::process\+::posix\+::subprocess\+::wait\+\_\+for (\begin{DoxyParamCaption}\item[{const std\+::chrono\+::duration$<$ Rep, Period $>$ \&}]{duration }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Waits for the process to terminate up to a maximum amount of time. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Rep} & duration representation \\
+\hline
+{\em Period} & duration tick period \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em duration} & maximum relative time to wait for \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if process terminates or is already terminated 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1posix_1_1subprocess_a10ea54174a30dd26c0d1ff289b88cd42}\label{classcpen333_1_1process_1_1posix_1_1subprocess_a10ea54174a30dd26c0d1ff289b88cd42}} 
+\index{cpen333\+::process\+::posix\+::subprocess@{cpen333\+::process\+::posix\+::subprocess}!wait\+\_\+until@{wait\+\_\+until}}
+\index{wait\+\_\+until@{wait\+\_\+until}!cpen333\+::process\+::posix\+::subprocess@{cpen333\+::process\+::posix\+::subprocess}}
+\subsubsection{\texorpdfstring{wait\+\_\+until()}{wait\_until()}}
+{\footnotesize\ttfamily template$<$class Clock , class Duration $>$ \\
+bool cpen333\+::process\+::posix\+::subprocess\+::wait\+\_\+until (\begin{DoxyParamCaption}\item[{const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&}]{timeout\+\_\+time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Waits for the process to terminate up to a maximum absolute time. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Clock} & timeout clock type \\
+\hline
+{\em Duration} & timeout clock duration type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em timeout\+\_\+time} & absolute timeout time \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if process terminates or is already terminated 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/impl/posix/\hyperlink{impl_2posix_2subprocess_8h}{subprocess.\+h}\end{DoxyCompactItemize}

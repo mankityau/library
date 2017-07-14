@@ -1,0 +1,264 @@
+\hypertarget{classcpen333_1_1process_1_1posix_1_1semaphore}{}\section{cpen333\+:\+:process\+:\+:posix\+:\+:semaphore Class Reference}
+\label{classcpen333_1_1process_1_1posix_1_1semaphore}\index{cpen333\+::process\+::posix\+::semaphore@{cpen333\+::process\+::posix\+::semaphore}}
+
+
+Inter-\/process named semaphore primitive.  
+
+
+
+
+{\ttfamily \#include $<$semaphore.\+h$>$}
+
+Inheritance diagram for cpen333\+:\+:process\+:\+:posix\+:\+:semaphore\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classcpen333_1_1process_1_1posix_1_1semaphore}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \hyperlink{classcpen333_1_1process_1_1posix_1_1semaphore_ad63150e5c8c196a84a7b214462756f1a}{native\+\_\+handle\+\_\+type} = sem\+\_\+t $\ast$
+\begin{DoxyCompactList}\small\item\em Alias to native handle type for semaphore. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcpen333_1_1process_1_1posix_1_1semaphore_aee6d65abd5bbfcfd1629140cb20c8ad1}{semaphore} (const std\+::string \&\hyperlink{classcpen333_1_1process_1_1impl_1_1named__resource__base_ae0c5fbb1843afe863cece4b51c38f807}{name}, size\+\_\+t \hyperlink{classcpen333_1_1process_1_1posix_1_1semaphore_a336211ff42ee9da6315c76104840fa98}{value}=1)
+\begin{DoxyCompactList}\small\item\em Constructs or connects to a named semaphore. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1posix_1_1semaphore_a9c32f8d2192cca78b7415f9e3af056a6}\label{classcpen333_1_1process_1_1posix_1_1semaphore_a9c32f8d2192cca78b7415f9e3af056a6}} 
+\hyperlink{classcpen333_1_1process_1_1posix_1_1semaphore_a9c32f8d2192cca78b7415f9e3af056a6}{$\sim$semaphore} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+size\+\_\+t \hyperlink{classcpen333_1_1process_1_1posix_1_1semaphore_a336211ff42ee9da6315c76104840fa98}{value} ()
+\begin{DoxyCompactList}\small\item\em Determines the current stored value of the semaphore. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1process_1_1posix_1_1semaphore_a1cf2d5f5922ab6358061dd3ac7121cf9}{wait} ()
+\begin{DoxyCompactList}\small\item\em Waits for and decrements the semaphore value. \end{DoxyCompactList}\item 
+bool \hyperlink{classcpen333_1_1process_1_1posix_1_1semaphore_ac0e2bd6495113c0699c5e2511f345edb}{try\+\_\+wait} ()
+\begin{DoxyCompactList}\small\item\em Tries to wait for the semaphore, returning immediately. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1process_1_1posix_1_1semaphore_a1b9043106c5da18ad152bc83e3de1750}{notify} ()
+\begin{DoxyCompactList}\small\item\em Increments the semaphore value. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Rep , class Period $>$ }\\bool \hyperlink{classcpen333_1_1process_1_1posix_1_1semaphore_a8015c878067c3d93748d03c58bb1b233}{wait\+\_\+for} (const std\+::chrono\+::duration$<$ Rep, Period $>$ \&timeout\+\_\+duration)
+\begin{DoxyCompactList}\small\item\em Tries to wait for the semaphore for up to a maximum timeout duration. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Clock , class Duration $>$ }\\bool \hyperlink{classcpen333_1_1process_1_1posix_1_1semaphore_a83443f24c1b7b11e5384975e9abc77dc}{wait\+\_\+until} (const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&timeout\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Tries to wait for the semaphore for up to a maximum absolute time. \end{DoxyCompactList}\item 
+\hyperlink{classcpen333_1_1process_1_1posix_1_1semaphore_ad63150e5c8c196a84a7b214462756f1a}{native\+\_\+handle\+\_\+type} \hyperlink{classcpen333_1_1process_1_1posix_1_1semaphore_a1e4a2d5a032a71fc06a5065f0e83a94c}{native\+\_\+handle} () const
+\begin{DoxyCompactList}\small\item\em Returns a native handle to the semaphore. \end{DoxyCompactList}\item 
+bool \hyperlink{classcpen333_1_1process_1_1posix_1_1semaphore_aa6064e2c4b4b7282cc5e6eda877ee1bb}{unlink} ()
+\begin{DoxyCompactList}\small\item\em Detaches the name from the named resource. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \hyperlink{classcpen333_1_1process_1_1posix_1_1semaphore_ab1399175014f674484217be6d465e878}{unlink} (const std\+::string \&\hyperlink{classcpen333_1_1process_1_1impl_1_1named__resource__base_ae0c5fbb1843afe863cece4b51c38f807}{name})
+\begin{DoxyCompactList}\small\item\em Unlinks the name without needing to create a resource. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Inter-\/process named semaphore primitive. 
+
+Used to limit access to a number of resources. Contains an integer whose value is never allowed to fall below zero. There are two main supported actions\+: \hyperlink{classcpen333_1_1process_1_1posix_1_1semaphore_a1cf2d5f5922ab6358061dd3ac7121cf9}{wait()}, which decrements the internal value, and \hyperlink{classcpen333_1_1process_1_1posix_1_1semaphore_a1b9043106c5da18ad152bc83e3de1750}{notify()} which increments the value. If the value of the semaphore is zero, then \hyperlink{classcpen333_1_1process_1_1posix_1_1semaphore_a1cf2d5f5922ab6358061dd3ac7121cf9}{wait()} will cause the thread to block until the value becomes greater than zero.
+
+This implementation has no explicit maximum value
+
+This semaphore has K\+E\+R\+N\+EL P\+E\+R\+S\+I\+S\+T\+E\+N\+CE, meaning if not \hyperlink{classcpen333_1_1process_1_1posix_1_1semaphore_aa6064e2c4b4b7282cc5e6eda877ee1bb}{unlink()}-\/ed, will continue to exist in its current state until the system is shut down (persisting beyond the life of the initiating program) 
+
+\subsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1posix_1_1semaphore_ad63150e5c8c196a84a7b214462756f1a}\label{classcpen333_1_1process_1_1posix_1_1semaphore_ad63150e5c8c196a84a7b214462756f1a}} 
+\index{cpen333\+::process\+::posix\+::semaphore@{cpen333\+::process\+::posix\+::semaphore}!native\+\_\+handle\+\_\+type@{native\+\_\+handle\+\_\+type}}
+\index{native\+\_\+handle\+\_\+type@{native\+\_\+handle\+\_\+type}!cpen333\+::process\+::posix\+::semaphore@{cpen333\+::process\+::posix\+::semaphore}}
+\subsubsection{\texorpdfstring{native\+\_\+handle\+\_\+type}{native\_handle\_type}}
+{\footnotesize\ttfamily using \hyperlink{classcpen333_1_1process_1_1posix_1_1semaphore_ad63150e5c8c196a84a7b214462756f1a}{cpen333\+::process\+::posix\+::semaphore\+::native\+\_\+handle\+\_\+type} =  sem\+\_\+t$\ast$}
+
+
+
+Alias to native handle type for semaphore. 
+
+In this case, a P\+O\+S\+IX sem\+\_\+t$\ast$ 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1posix_1_1semaphore_aee6d65abd5bbfcfd1629140cb20c8ad1}\label{classcpen333_1_1process_1_1posix_1_1semaphore_aee6d65abd5bbfcfd1629140cb20c8ad1}} 
+\index{cpen333\+::process\+::posix\+::semaphore@{cpen333\+::process\+::posix\+::semaphore}!semaphore@{semaphore}}
+\index{semaphore@{semaphore}!cpen333\+::process\+::posix\+::semaphore@{cpen333\+::process\+::posix\+::semaphore}}
+\subsubsection{\texorpdfstring{semaphore()}{semaphore()}}
+{\footnotesize\ttfamily cpen333\+::process\+::posix\+::semaphore\+::semaphore (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{size\+\_\+t}]{value = {\ttfamily 1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs or connects to a named semaphore. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & identifier for creating or connecting to an existing inter-\/process semaphore \\
+\hline
+{\em value} & initial value (defaults to 1) \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1posix_1_1semaphore_a1e4a2d5a032a71fc06a5065f0e83a94c}\label{classcpen333_1_1process_1_1posix_1_1semaphore_a1e4a2d5a032a71fc06a5065f0e83a94c}} 
+\index{cpen333\+::process\+::posix\+::semaphore@{cpen333\+::process\+::posix\+::semaphore}!native\+\_\+handle@{native\+\_\+handle}}
+\index{native\+\_\+handle@{native\+\_\+handle}!cpen333\+::process\+::posix\+::semaphore@{cpen333\+::process\+::posix\+::semaphore}}
+\subsubsection{\texorpdfstring{native\+\_\+handle()}{native\_handle()}}
+{\footnotesize\ttfamily \hyperlink{classcpen333_1_1process_1_1posix_1_1semaphore_ad63150e5c8c196a84a7b214462756f1a}{native\+\_\+handle\+\_\+type} cpen333\+::process\+::posix\+::semaphore\+::native\+\_\+handle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a native handle to the semaphore. 
+
+The native handle has a type aliased to \hyperlink{classcpen333_1_1process_1_1posix_1_1semaphore_ad63150e5c8c196a84a7b214462756f1a}{semaphore\+::native\+\_\+handle\+\_\+type}
+
+On P\+O\+S\+IX systems, is of type sem\+\_\+t$\ast$.
+
+\begin{DoxyReturn}{Returns}
+native semaphore handle 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1posix_1_1semaphore_a1b9043106c5da18ad152bc83e3de1750}\label{classcpen333_1_1process_1_1posix_1_1semaphore_a1b9043106c5da18ad152bc83e3de1750}} 
+\index{cpen333\+::process\+::posix\+::semaphore@{cpen333\+::process\+::posix\+::semaphore}!notify@{notify}}
+\index{notify@{notify}!cpen333\+::process\+::posix\+::semaphore@{cpen333\+::process\+::posix\+::semaphore}}
+\subsubsection{\texorpdfstring{notify()}{notify()}}
+{\footnotesize\ttfamily void cpen333\+::process\+::posix\+::semaphore\+::notify (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Increments the semaphore value. 
+
+If the semaphore\textquotesingle{}s value consequently becomes greater than zero, then one process or thread that is currently blocked in a \hyperlink{classcpen333_1_1process_1_1posix_1_1semaphore_a1cf2d5f5922ab6358061dd3ac7121cf9}{wait()} operation will be woken up and will proceed. \mbox{\Hypertarget{classcpen333_1_1process_1_1posix_1_1semaphore_ac0e2bd6495113c0699c5e2511f345edb}\label{classcpen333_1_1process_1_1posix_1_1semaphore_ac0e2bd6495113c0699c5e2511f345edb}} 
+\index{cpen333\+::process\+::posix\+::semaphore@{cpen333\+::process\+::posix\+::semaphore}!try\+\_\+wait@{try\+\_\+wait}}
+\index{try\+\_\+wait@{try\+\_\+wait}!cpen333\+::process\+::posix\+::semaphore@{cpen333\+::process\+::posix\+::semaphore}}
+\subsubsection{\texorpdfstring{try\+\_\+wait()}{try\_wait()}}
+{\footnotesize\ttfamily bool cpen333\+::process\+::posix\+::semaphore\+::try\+\_\+wait (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to wait for the semaphore, returning immediately. 
+
+If the value is greater than zero, will decrement the semaphore and return true. Otherwise, will return false.
+
+\begin{DoxyReturn}{Returns}
+true if decrement successful, false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1posix_1_1semaphore_aa6064e2c4b4b7282cc5e6eda877ee1bb}\label{classcpen333_1_1process_1_1posix_1_1semaphore_aa6064e2c4b4b7282cc5e6eda877ee1bb}} 
+\index{cpen333\+::process\+::posix\+::semaphore@{cpen333\+::process\+::posix\+::semaphore}!unlink@{unlink}}
+\index{unlink@{unlink}!cpen333\+::process\+::posix\+::semaphore@{cpen333\+::process\+::posix\+::semaphore}}
+\subsubsection{\texorpdfstring{unlink()}{unlink()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool cpen333\+::process\+::posix\+::semaphore\+::unlink (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Detaches the name from the named resource. 
+
+On P\+O\+S\+IX systems, named resources will persist beyond the lifetime of any process that uses them as long as the name has not been unlinked (or until the system is rebooted). Calling {\ttfamily unlink} will detach the name, allowing the resource to be freed once all current users have exited.
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if unlink is successful, {\ttfamily false} if unlinking is not supported or if an error has occurred. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classcpen333_1_1process_1_1impl_1_1named__resource__base_ae4033f82dfd068b917a9bca57d3a0c45}{cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base}.
+
+\mbox{\Hypertarget{classcpen333_1_1process_1_1posix_1_1semaphore_ab1399175014f674484217be6d465e878}\label{classcpen333_1_1process_1_1posix_1_1semaphore_ab1399175014f674484217be6d465e878}} 
+\index{cpen333\+::process\+::posix\+::semaphore@{cpen333\+::process\+::posix\+::semaphore}!unlink@{unlink}}
+\index{unlink@{unlink}!cpen333\+::process\+::posix\+::semaphore@{cpen333\+::process\+::posix\+::semaphore}}
+\subsubsection{\texorpdfstring{unlink()}{unlink()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static bool cpen333\+::process\+::posix\+::semaphore\+::unlink (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Unlinks the name without needing to create a resource. 
+
+Implementers should also provide a static method for unlinking. The purpose is mainly for clean-\/up of existing resources.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & desired resource name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if unlink successful, {\ttfamily false} if not successful or not supported 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1posix_1_1semaphore_a336211ff42ee9da6315c76104840fa98}\label{classcpen333_1_1process_1_1posix_1_1semaphore_a336211ff42ee9da6315c76104840fa98}} 
+\index{cpen333\+::process\+::posix\+::semaphore@{cpen333\+::process\+::posix\+::semaphore}!value@{value}}
+\index{value@{value}!cpen333\+::process\+::posix\+::semaphore@{cpen333\+::process\+::posix\+::semaphore}}
+\subsubsection{\texorpdfstring{value()}{value()}}
+{\footnotesize\ttfamily size\+\_\+t cpen333\+::process\+::posix\+::semaphore\+::value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Determines the current stored value of the semaphore. 
+
+This should never be used, except for possibly debugging, as the value may change without notice from other threads. This method will cause an error on O\+SX.
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1posix_1_1semaphore_a1cf2d5f5922ab6358061dd3ac7121cf9}\label{classcpen333_1_1process_1_1posix_1_1semaphore_a1cf2d5f5922ab6358061dd3ac7121cf9}} 
+\index{cpen333\+::process\+::posix\+::semaphore@{cpen333\+::process\+::posix\+::semaphore}!wait@{wait}}
+\index{wait@{wait}!cpen333\+::process\+::posix\+::semaphore@{cpen333\+::process\+::posix\+::semaphore}}
+\subsubsection{\texorpdfstring{wait()}{wait()}}
+{\footnotesize\ttfamily void cpen333\+::process\+::posix\+::semaphore\+::wait (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Waits for and decrements the semaphore value. 
+
+If the value is greater than zero, will decrement it and return immediately. Otherwise, the thread will block until it becomes possible to perform the decrement. \mbox{\Hypertarget{classcpen333_1_1process_1_1posix_1_1semaphore_a8015c878067c3d93748d03c58bb1b233}\label{classcpen333_1_1process_1_1posix_1_1semaphore_a8015c878067c3d93748d03c58bb1b233}} 
+\index{cpen333\+::process\+::posix\+::semaphore@{cpen333\+::process\+::posix\+::semaphore}!wait\+\_\+for@{wait\+\_\+for}}
+\index{wait\+\_\+for@{wait\+\_\+for}!cpen333\+::process\+::posix\+::semaphore@{cpen333\+::process\+::posix\+::semaphore}}
+\subsubsection{\texorpdfstring{wait\+\_\+for()}{wait\_for()}}
+{\footnotesize\ttfamily template$<$class Rep , class Period $>$ \\
+bool cpen333\+::process\+::posix\+::semaphore\+::wait\+\_\+for (\begin{DoxyParamCaption}\item[{const std\+::chrono\+::duration$<$ Rep, Period $>$ \&}]{timeout\+\_\+duration }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to wait for the semaphore for up to a maximum timeout duration. 
+
+If the semaphore\textquotesingle{}s value is greater than zero, will decrement it and return true immediately. Otherwise, will wait (blocking) up to a maximum relative timeout period.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Rep} & time representation \\
+\hline
+{\em Period} & timeout period type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em timeout\+\_\+duration} & maximum relative duration for waiting \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if semaphore successfully decremented, false if timed-\/out 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1posix_1_1semaphore_a83443f24c1b7b11e5384975e9abc77dc}\label{classcpen333_1_1process_1_1posix_1_1semaphore_a83443f24c1b7b11e5384975e9abc77dc}} 
+\index{cpen333\+::process\+::posix\+::semaphore@{cpen333\+::process\+::posix\+::semaphore}!wait\+\_\+until@{wait\+\_\+until}}
+\index{wait\+\_\+until@{wait\+\_\+until}!cpen333\+::process\+::posix\+::semaphore@{cpen333\+::process\+::posix\+::semaphore}}
+\subsubsection{\texorpdfstring{wait\+\_\+until()}{wait\_until()}}
+{\footnotesize\ttfamily template$<$class Clock , class Duration $>$ \\
+bool cpen333\+::process\+::posix\+::semaphore\+::wait\+\_\+until (\begin{DoxyParamCaption}\item[{const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&}]{timeout\+\_\+time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to wait for the semaphore for up to a maximum absolute time. 
+
+If the semaphore\textquotesingle{}s value is greater than zero, will decrement it and return true immediately. Otherwise, will wait (blocking) up to a maximum relative timeout period.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Clock} & timeout clock type \\
+\hline
+{\em Duration} & timeout duration type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em timeout\+\_\+time} & maximum absolute time for waiting \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if semaphore successfully decremented, false if timed-\/out 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/impl/posix/\hyperlink{process_2impl_2posix_2semaphore_8h}{semaphore.\+h}\end{DoxyCompactItemize}

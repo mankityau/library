@@ -1,0 +1,195 @@
+\hypertarget{classcpen333_1_1process_1_1condition}{}\section{cpen333\+:\+:process\+:\+:condition Class Reference}
+\label{classcpen333_1_1process_1_1condition}\index{cpen333\+::process\+::condition@{cpen333\+::process\+::condition}}
+
+
+Allows multiple processes to wait until the condition is set, acting like a gate.  
+
+
+
+
+{\ttfamily \#include $<$condition.\+h$>$}
+
+Inheritance diagram for cpen333\+:\+:process\+:\+:condition\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcpen333_1_1process_1_1condition}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcpen333_1_1process_1_1condition_a584deae08b94a2f6a49abca119183571}{condition} (const std\+::string \&name, bool value=false)
+\begin{DoxyCompactList}\small\item\em Creates or connects to the named condition. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1process_1_1condition_a24b3c16a8fdd333e95bf93dc07a65742}{wait} ()
+\begin{DoxyCompactList}\small\item\em Waits until the condition is set. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Rep , class Period $>$ }\\bool \hyperlink{classcpen333_1_1process_1_1condition_ac14bac38a3fd158af7ecf1fe5a993a40}{wait\+\_\+for} (const std\+::chrono\+::duration$<$ Rep, Period $>$ \&rel\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Waits for the condition to be set or for a timeout period to elapse. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Clock , class Duration $>$ }\\bool \hyperlink{classcpen333_1_1process_1_1condition_a07cd864a2e089b9e1c9d468e8cd8ea62}{wait\+\_\+until} (const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&timeout\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Waits for the condition to be set or for a time-\/point to be reached. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1process_1_1condition_a7819f5c1e213863214a4935b0157fd8c}{notify} ()
+\begin{DoxyCompactList}\small\item\em Sets the condition to {\ttfamily true} and wakes up threads. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1process_1_1condition_a6b3f2a59fa85ddc3d53b60bd1a6a8556}{reset} ()
+\begin{DoxyCompactList}\small\item\em Resets the condition. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{classcpen333_1_1process_1_1condition_a7c646204b2c4912185ba6055c9afa3f6}{unlink} ()
+\begin{DoxyCompactList}\small\item\em Detaches the name from the named resource. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \hyperlink{classcpen333_1_1process_1_1condition_aaffc8df542fb4e2aecdc1056217a4284}{unlink} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Unlinks any condition with the provided name. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Allows multiple processes to wait until the condition is set, acting like a gate. 
+
+A named synchronization primitive that allows multiple threads and processes to wait until the condition is notified as being set. As long as the condition remains set, any threads that wait on the condition will immediately proceed. The condition must manually be reset in order to cause threads/processes to wait until the next time the condition is set. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1condition_a584deae08b94a2f6a49abca119183571}\label{classcpen333_1_1process_1_1condition_a584deae08b94a2f6a49abca119183571}} 
+\index{cpen333\+::process\+::condition@{cpen333\+::process\+::condition}!condition@{condition}}
+\index{condition@{condition}!cpen333\+::process\+::condition@{cpen333\+::process\+::condition}}
+\subsubsection{\texorpdfstring{condition()}{condition()}}
+{\footnotesize\ttfamily cpen333\+::process\+::condition\+::condition (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{bool}]{value = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates or connects to the named condition. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & name identifier for creating or connecting to an existing inter-\/process condition \\
+\hline
+{\em value} & initial state, as either set ({\ttfamily true}) or reset ({\ttfamily false}) \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1condition_a7819f5c1e213863214a4935b0157fd8c}\label{classcpen333_1_1process_1_1condition_a7819f5c1e213863214a4935b0157fd8c}} 
+\index{cpen333\+::process\+::condition@{cpen333\+::process\+::condition}!notify@{notify}}
+\index{notify@{notify}!cpen333\+::process\+::condition@{cpen333\+::process\+::condition}}
+\subsubsection{\texorpdfstring{notify()}{notify()}}
+{\footnotesize\ttfamily void cpen333\+::process\+::condition\+::notify (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the condition to {\ttfamily true} and wakes up threads. 
+
+Sets the condition\textquotesingle{}s internal state to {\ttfamily true} and wakes up any threads waiting on the condition. The condition will remain in the {\ttfamily set} state until it is manually reset. \mbox{\Hypertarget{classcpen333_1_1process_1_1condition_a6b3f2a59fa85ddc3d53b60bd1a6a8556}\label{classcpen333_1_1process_1_1condition_a6b3f2a59fa85ddc3d53b60bd1a6a8556}} 
+\index{cpen333\+::process\+::condition@{cpen333\+::process\+::condition}!reset@{reset}}
+\index{reset@{reset}!cpen333\+::process\+::condition@{cpen333\+::process\+::condition}}
+\subsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void cpen333\+::process\+::condition\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Resets the condition. 
+
+Sets the condition\textquotesingle{}s internal state to {\ttfamily false}. This will call any future {\ttfamily wait} calls to block until the condition is again notified. \mbox{\Hypertarget{classcpen333_1_1process_1_1condition_a7c646204b2c4912185ba6055c9afa3f6}\label{classcpen333_1_1process_1_1condition_a7c646204b2c4912185ba6055c9afa3f6}} 
+\index{cpen333\+::process\+::condition@{cpen333\+::process\+::condition}!unlink@{unlink}}
+\index{unlink@{unlink}!cpen333\+::process\+::condition@{cpen333\+::process\+::condition}}
+\subsubsection{\texorpdfstring{unlink()}{unlink()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily virtual bool cpen333\+::process\+::condition\+::unlink (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Detaches the name from the named resource. 
+
+On P\+O\+S\+IX systems, named resources will persist beyond the lifetime of any process that uses them as long as the name has not been unlinked (or until the system is rebooted). Calling {\ttfamily unlink} will detach the name, allowing the resource to be freed once all current users have exited.
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if unlink is successful, {\ttfamily false} if unlinking is not supported or if an error has occurred. 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classcpen333_1_1process_1_1condition__base_acd6d0b53a828aa161ccad06885eaa15c}{cpen333\+::process\+::condition\+\_\+base}.
+
+\mbox{\Hypertarget{classcpen333_1_1process_1_1condition_aaffc8df542fb4e2aecdc1056217a4284}\label{classcpen333_1_1process_1_1condition_aaffc8df542fb4e2aecdc1056217a4284}} 
+\index{cpen333\+::process\+::condition@{cpen333\+::process\+::condition}!unlink@{unlink}}
+\index{unlink@{unlink}!cpen333\+::process\+::condition@{cpen333\+::process\+::condition}}
+\subsubsection{\texorpdfstring{unlink()}{unlink()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static bool cpen333\+::process\+::condition\+::unlink (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Unlinks any condition with the provided name. 
+
+Allows a name to be freed without needing to create a new condition resource. This is useful for clean-\/up of previously terminated processes that failed to release the resource properly.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & name of condition resource \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if unlink successful, {\ttfamily false} if an error occurred or if not supported 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1condition_a24b3c16a8fdd333e95bf93dc07a65742}\label{classcpen333_1_1process_1_1condition_a24b3c16a8fdd333e95bf93dc07a65742}} 
+\index{cpen333\+::process\+::condition@{cpen333\+::process\+::condition}!wait@{wait}}
+\index{wait@{wait}!cpen333\+::process\+::condition@{cpen333\+::process\+::condition}}
+\subsubsection{\texorpdfstring{wait()}{wait()}}
+{\footnotesize\ttfamily void cpen333\+::process\+::condition\+::wait (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Waits until the condition is set. 
+
+Causes the current thread to block until the condition is set. This condition will {\itshape not} exhibit spurious wake-\/ups. A thread will be forced to wait here indefinitely until the condition is set. \mbox{\Hypertarget{classcpen333_1_1process_1_1condition_ac14bac38a3fd158af7ecf1fe5a993a40}\label{classcpen333_1_1process_1_1condition_ac14bac38a3fd158af7ecf1fe5a993a40}} 
+\index{cpen333\+::process\+::condition@{cpen333\+::process\+::condition}!wait\+\_\+for@{wait\+\_\+for}}
+\index{wait\+\_\+for@{wait\+\_\+for}!cpen333\+::process\+::condition@{cpen333\+::process\+::condition}}
+\subsubsection{\texorpdfstring{wait\+\_\+for()}{wait\_for()}}
+{\footnotesize\ttfamily template$<$class Rep , class Period $>$ \\
+bool cpen333\+::process\+::condition\+::wait\+\_\+for (\begin{DoxyParamCaption}\item[{const std\+::chrono\+::duration$<$ Rep, Period $>$ \&}]{rel\+\_\+time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Waits for the condition to be set or for a timeout period to elapse. 
+
+Causes the current thread to block until the condition is set, or until the specified timeout period elapses, whichever comes first. 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Rep} & timeout duration representation \\
+\hline
+{\em Period} & timeout clock period \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em rel\+\_\+time} & maximum relative time to wait for condition to be set \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if condition is set, {\ttfamily false} if timeout has elapsed without condition being set 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1condition_a07cd864a2e089b9e1c9d468e8cd8ea62}\label{classcpen333_1_1process_1_1condition_a07cd864a2e089b9e1c9d468e8cd8ea62}} 
+\index{cpen333\+::process\+::condition@{cpen333\+::process\+::condition}!wait\+\_\+until@{wait\+\_\+until}}
+\index{wait\+\_\+until@{wait\+\_\+until}!cpen333\+::process\+::condition@{cpen333\+::process\+::condition}}
+\subsubsection{\texorpdfstring{wait\+\_\+until()}{wait\_until()}}
+{\footnotesize\ttfamily template$<$class Clock , class Duration $>$ \\
+bool cpen333\+::process\+::condition\+::wait\+\_\+until (\begin{DoxyParamCaption}\item[{const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&}]{timeout\+\_\+time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Waits for the condition to be set or for a time-\/point to be reached. 
+
+Causes the current thread to block until the condition is set, or until the specified timeout time has been reached, whichever comes first.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Clock} & clock type \\
+\hline
+{\em Duration} & clock duration type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em timeout\+\_\+time} & absolute timeout time \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if condition is set, {\ttfamily false} if timeout time has been reached without condition being set 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/\hyperlink{process_2condition_8h}{condition.\+h}\end{DoxyCompactItemize}

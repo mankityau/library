@@ -1,0 +1,30 @@
+\hypertarget{process_2condition_8h}{}\section{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/condition.h File Reference}
+\label{process_2condition_8h}\index{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/condition.\+h@{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/condition.\+h}}
+
+
+Condition synchronization primitive.  
+
+
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include \char`\"{}cpen333/process/named\+\_\+resource.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cpen333/process/impl/condition\+\_\+base.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classcpen333_1_1process_1_1condition}{cpen333\+::process\+::condition}
+\begin{DoxyCompactList}\small\item\em Allows multiple processes to wait until the condition is set, acting like a gate. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{process_2condition_8h_af2748c7b5be4a3b92b4a049701d24339}\label{process_2condition_8h_af2748c7b5be4a3b92b4a049701d24339}} 
+\#define \hyperlink{process_2condition_8h_af2748c7b5be4a3b92b4a049701d24339}{C\+O\+N\+D\+I\+T\+I\+O\+N\+\_\+\+N\+A\+M\+E\+\_\+\+S\+U\+F\+F\+IX}~\char`\"{}\+\_\+con\char`\"{}
+\begin{DoxyCompactList}\small\item\em Suffix to append to mutex names for uniqueness. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{process_2condition_8h_a117f1f9a952bef2d51b434cfb141a885}\label{process_2condition_8h_a117f1f9a952bef2d51b434cfb141a885}} 
+\#define \hyperlink{process_2condition_8h_a117f1f9a952bef2d51b434cfb141a885}{C\+O\+N\+D\+I\+T\+I\+O\+N\+\_\+\+I\+N\+I\+T\+I\+A\+L\+I\+Z\+ED}~0x87621232
+\begin{DoxyCompactList}\small\item\em Magic number of testing initialization. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Condition synchronization primitive. 
+

@@ -1,0 +1,59 @@
+\hypertarget{classcpen333_1_1thread_1_1rendezvous}{}\section{cpen333\+:\+:thread\+:\+:rendezvous Class Reference}
+\label{classcpen333_1_1thread_1_1rendezvous}\index{cpen333\+::thread\+::rendezvous@{cpen333\+::thread\+::rendezvous}}
+
+
+Rendezvous synchronization primitive implementation.  
+
+
+
+
+{\ttfamily \#include $<$rendezvous.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcpen333_1_1thread_1_1rendezvous_afcc51be93c14299ec2037ed0bf301be5}{rendezvous} (size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Constructs a rendezvous primitive. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1thread_1_1rendezvous_ad712b180014e24f3b33707726984c365}{wait} ()
+\begin{DoxyCompactList}\small\item\em Waits until all other threads are also waiting. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Rendezvous synchronization primitive implementation. 
+
+A synchronization primitive that allows a certain number of threads to wait for others to arrive, then proceed together. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1rendezvous_afcc51be93c14299ec2037ed0bf301be5}\label{classcpen333_1_1thread_1_1rendezvous_afcc51be93c14299ec2037ed0bf301be5}} 
+\index{cpen333\+::thread\+::rendezvous@{cpen333\+::thread\+::rendezvous}!rendezvous@{rendezvous}}
+\index{rendezvous@{rendezvous}!cpen333\+::thread\+::rendezvous@{cpen333\+::thread\+::rendezvous}}
+\subsubsection{\texorpdfstring{rendezvous()}{rendezvous()}}
+{\footnotesize\ttfamily cpen333\+::thread\+::rendezvous\+::rendezvous (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a rendezvous primitive. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & number of threads in group \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1rendezvous_ad712b180014e24f3b33707726984c365}\label{classcpen333_1_1thread_1_1rendezvous_ad712b180014e24f3b33707726984c365}} 
+\index{cpen333\+::thread\+::rendezvous@{cpen333\+::thread\+::rendezvous}!wait@{wait}}
+\index{wait@{wait}!cpen333\+::thread\+::rendezvous@{cpen333\+::thread\+::rendezvous}}
+\subsubsection{\texorpdfstring{wait()}{wait()}}
+{\footnotesize\ttfamily void cpen333\+::thread\+::rendezvous\+::wait (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Waits until all other threads are also waiting. 
+
+Will cause the current thread to block until all (\# size) threads are waiting, then will release so that the threads are synchronized. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/thread/\hyperlink{thread_2rendezvous_8h}{rendezvous.\+h}\end{DoxyCompactItemize}

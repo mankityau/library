@@ -1,0 +1,28 @@
+\hypertarget{thread_2impl_2shared__mutex__shared_8h}{}\section{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/thread/impl/shared\+\_\+mutex\+\_\+shared.h File Reference}
+\label{thread_2impl_2shared__mutex__shared_8h}\index{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/thread/impl/shared\+\_\+mutex\+\_\+shared.\+h@{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/thread/impl/shared\+\_\+mutex\+\_\+shared.\+h}}
+
+
+Implementation of a mutex with shared access that gives priority to shared use (read-\/priority)  
+
+
+{\ttfamily \#include $<$mutex$>$}\newline
+{\ttfamily \#include \char`\"{}cpen333/thread/semaphore.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classcpen333_1_1thread_1_1impl_1_1shared__mutex__shared}{cpen333\+::thread\+::impl\+::shared\+\_\+mutex\+\_\+shared}
+\begin{DoxyCompactList}\small\item\em A read-\/preferring shared mutex implementation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{thread_2impl_2shared__mutex__shared_8h_a583f01f64c6fbb2096c5a3c50ece2f06}\label{thread_2impl_2shared__mutex__shared_8h_a583f01f64c6fbb2096c5a3c50ece2f06}} 
+using \hyperlink{thread_2impl_2shared__mutex__shared_8h_a583f01f64c6fbb2096c5a3c50ece2f06}{cpen333\+::thread\+::shared\+\_\+mutex\+\_\+shared} = impl\+::shared\+\_\+mutex\+\_\+shared
+\begin{DoxyCompactList}\small\item\em Alias for default shared mutex with shared (read) priority. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{thread_2impl_2shared__mutex__shared_8h_a83b87085d3d98e3ed81d522e79fa2bb0}\label{thread_2impl_2shared__mutex__shared_8h_a83b87085d3d98e3ed81d522e79fa2bb0}} 
+using \hyperlink{thread_2impl_2shared__mutex__shared_8h_a83b87085d3d98e3ed81d522e79fa2bb0}{cpen333\+::thread\+::shared\+\_\+timed\+\_\+mutex\+\_\+shared} = impl\+::shared\+\_\+mutex\+\_\+shared
+\begin{DoxyCompactList}\small\item\em Alias for default shared timed mutex with shared (read) priority. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implementation of a mutex with shared access that gives priority to shared use (read-\/priority) 
+

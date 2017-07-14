@@ -1,0 +1,30 @@
+\hypertarget{thread_2impl_2shared__mutex__exclusive_8h}{}\section{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/thread/impl/shared\+\_\+mutex\+\_\+exclusive.h File Reference}
+\label{thread_2impl_2shared__mutex__exclusive_8h}\index{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/thread/impl/shared\+\_\+mutex\+\_\+exclusive.\+h@{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/thread/impl/shared\+\_\+mutex\+\_\+exclusive.\+h}}
+
+
+Implementation of a mutex with shared access that gives priority to exclusive use (write-\/priority)  
+
+
+{\ttfamily \#include $<$mutex$>$}\newline
+{\ttfamily \#include $<$condition\+\_\+variable$>$}\newline
+{\ttfamily \#include \char`\"{}cpen333/thread/semaphore.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cpen333/thread/condition.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classcpen333_1_1thread_1_1impl_1_1shared__mutex__exclusive}{cpen333\+::thread\+::impl\+::shared\+\_\+mutex\+\_\+exclusive}
+\begin{DoxyCompactList}\small\item\em A write-\/preferring inter-\/process shared mutex implementation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{thread_2impl_2shared__mutex__exclusive_8h_a65aec586b76e30058cb3d6954873eca5}\label{thread_2impl_2shared__mutex__exclusive_8h_a65aec586b76e30058cb3d6954873eca5}} 
+using \hyperlink{thread_2impl_2shared__mutex__exclusive_8h_a65aec586b76e30058cb3d6954873eca5}{cpen333\+::thread\+::shared\+\_\+mutex\+\_\+exclusive} = impl\+::shared\+\_\+mutex\+\_\+exclusive
+\begin{DoxyCompactList}\small\item\em Alias for default shared mutex with exclusive (write) priority. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{thread_2impl_2shared__mutex__exclusive_8h_ad9d4746c0c75c425f8a652d114b5d6dc}\label{thread_2impl_2shared__mutex__exclusive_8h_ad9d4746c0c75c425f8a652d114b5d6dc}} 
+using \hyperlink{thread_2impl_2shared__mutex__exclusive_8h_ad9d4746c0c75c425f8a652d114b5d6dc}{cpen333\+::thread\+::shared\+\_\+timed\+\_\+mutex\+\_\+exclusive} = impl\+::shared\+\_\+mutex\+\_\+exclusive
+\begin{DoxyCompactList}\small\item\em Alias for default shared timed mutex with exclusive (write) priority. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implementation of a mutex with shared access that gives priority to exclusive use (write-\/priority) 
+

@@ -1,0 +1,51 @@
+\hypertarget{impl_2posix_2shared__memory_8h}{}\section{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/impl/posix/shared\+\_\+memory.h File Reference}
+\label{impl_2posix_2shared__memory_8h}\index{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/impl/posix/shared\+\_\+memory.\+h@{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/impl/posix/shared\+\_\+memory.\+h}}
+
+
+P\+O\+S\+IX implementation of an inter-\/process named shared memory (i.\+e. datapool)  
+
+
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$cstring$>$}\newline
+{\ttfamily \#include \char`\"{}cpen333/util.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cpen333/process/impl/named\+\_\+resource\+\_\+base.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/mman.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classcpen333_1_1process_1_1posix_1_1shared__memory}{cpen333\+::process\+::posix\+::shared\+\_\+memory}
+\begin{DoxyCompactList}\small\item\em Inter-\/process shared memory implementation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{impl_2posix_2shared__memory_8h_a06d3f7d14d2f5732a38780a27eadeeb6}\label{impl_2posix_2shared__memory_8h_a06d3f7d14d2f5732a38780a27eadeeb6}} 
+\#define \hyperlink{impl_2posix_2shared__memory_8h_a06d3f7d14d2f5732a38780a27eadeeb6}{S\+H\+A\+R\+E\+D\+\_\+\+M\+E\+M\+O\+R\+Y\+\_\+\+N\+A\+M\+E\+\_\+\+S\+U\+F\+F\+IX}~\char`\"{}\+\_\+shm\char`\"{}
+\begin{DoxyCompactList}\small\item\em Suffix to append to shared memory names for uniqueness. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \hyperlink{impl_2posix_2shared__memory_8h_a6f5b2c87e05ba7839f7c01a828df8cc1}{cpen333\+::process\+::shared\+\_\+memory} = posix\+::shared\+\_\+memory
+\begin{DoxyCompactList}\small\item\em Alias to P\+O\+S\+IX native implementation of inter=process shared memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+P\+O\+S\+IX implementation of an inter-\/process named shared memory (i.\+e. datapool) 
+
+Uses a P\+O\+S\+IX shared memory object (shm\+\_\+open) 
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{impl_2posix_2shared__memory_8h_file_a6f5b2c87e05ba7839f7c01a828df8cc1}\label{impl_2posix_2shared__memory_8h_file_a6f5b2c87e05ba7839f7c01a828df8cc1}} 
+\index{impl/posix/shared\+\_\+memory.\+h@{impl/posix/shared\+\_\+memory.\+h}!shared\+\_\+memory@{shared\+\_\+memory}}
+\index{shared\+\_\+memory@{shared\+\_\+memory}!impl/posix/shared\+\_\+memory.\+h@{impl/posix/shared\+\_\+memory.\+h}}
+\subsubsection{\texorpdfstring{shared\+\_\+memory}{shared\_memory}}
+{\footnotesize\ttfamily typedef windows\+::shared\+\_\+memory \hyperlink{impl_2posix_2shared__memory_8h_a6f5b2c87e05ba7839f7c01a828df8cc1}{cpen333\+::process\+::shared\+\_\+memory}}
+
+
+
+Alias to P\+O\+S\+IX native implementation of inter=process shared memory. 
+
+Alias to Windows native implementation of inter=process shared memory. 

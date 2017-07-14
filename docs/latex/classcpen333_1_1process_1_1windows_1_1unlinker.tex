@@ -1,0 +1,100 @@
+\hypertarget{classcpen333_1_1process_1_1windows_1_1unlinker}{}\section{cpen333\+:\+:process\+:\+:windows\+:\+:unlinker$<$ T $>$ Class Template Reference}
+\label{classcpen333_1_1process_1_1windows_1_1unlinker}\index{cpen333\+::process\+::windows\+::unlinker$<$ T $>$@{cpen333\+::process\+::windows\+::unlinker$<$ T $>$}}
+
+
+A named-\/resource wrapper that provides a convenient R\+A\+I\+I-\/style unlinking of the resource name.  
+
+
+
+
+{\ttfamily \#include $<$unlinker.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \hyperlink{classcpen333_1_1process_1_1windows_1_1unlinker_a8fc5b25e2201aa44cf2323b46a98654b}{type} = T
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcpen333_1_1process_1_1windows_1_1unlinker_aea3673b83a0810f21f537f503c8db271}{unlinker} (T \&resource)
+\begin{DoxyCompactList}\small\item\em Constructs the object, wrapping the provided resource. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1windows_1_1unlinker_ab9039eb91dc37275a58e61e4adbc5765}\label{classcpen333_1_1process_1_1windows_1_1unlinker_ab9039eb91dc37275a58e61e4adbc5765}} 
+\hyperlink{classcpen333_1_1process_1_1windows_1_1unlinker_ab9039eb91dc37275a58e61e4adbc5765}{$\sim$unlinker} ()
+\begin{DoxyCompactList}\small\item\em Destructor, calls the {\ttfamily \hyperlink{classcpen333_1_1process_1_1windows_1_1unlinker_a178646833bce209b221bd3262ab012bb}{unlink()}} function of the wrapped resource. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \hyperlink{classcpen333_1_1process_1_1windows_1_1unlinker_a178646833bce209b221bd3262ab012bb}{unlink} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Statically calls the {\ttfamily unlink(name)} function for the underlying type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class cpen333\+::process\+::windows\+::unlinker$<$ T $>$}
+
+A named-\/resource wrapper that provides a convenient R\+A\+I\+I-\/style unlinking of the resource name. 
+
+Used to ensure that a resource\textquotesingle{}s name is unlinked when the unlinker object drops out of scope. On Windows, this doesn\textquotesingle{}t really do anything, since unlinking of resource names is not a supported operation.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & named-\/resource type, should extend \hyperlink{classcpen333_1_1process_1_1named__resource}{cpen333\+::process\+::named\+\_\+resource}, must support {\ttfamily bool \hyperlink{classcpen333_1_1process_1_1windows_1_1unlinker_a178646833bce209b221bd3262ab012bb}{unlink()}} and {\ttfamily static bool unlink(std\+::string\&)} \\
+\hline
+\end{DoxyTemplParams}
+
+
+\subsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1windows_1_1unlinker_a8fc5b25e2201aa44cf2323b46a98654b}\label{classcpen333_1_1process_1_1windows_1_1unlinker_a8fc5b25e2201aa44cf2323b46a98654b}} 
+\index{cpen333\+::process\+::windows\+::unlinker@{cpen333\+::process\+::windows\+::unlinker}!type@{type}}
+\index{type@{type}!cpen333\+::process\+::windows\+::unlinker@{cpen333\+::process\+::windows\+::unlinker}}
+\subsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+using \hyperlink{classcpen333_1_1process_1_1windows_1_1unlinker}{cpen333\+::process\+::windows\+::unlinker}$<$ T $>$\+::\hyperlink{classcpen333_1_1process_1_1windows_1_1unlinker_a8fc5b25e2201aa44cf2323b46a98654b}{type} =  T}
+
+Alias to the named-\/resource type 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1windows_1_1unlinker_aea3673b83a0810f21f537f503c8db271}\label{classcpen333_1_1process_1_1windows_1_1unlinker_aea3673b83a0810f21f537f503c8db271}} 
+\index{cpen333\+::process\+::windows\+::unlinker@{cpen333\+::process\+::windows\+::unlinker}!unlinker@{unlinker}}
+\index{unlinker@{unlinker}!cpen333\+::process\+::windows\+::unlinker@{cpen333\+::process\+::windows\+::unlinker}}
+\subsubsection{\texorpdfstring{unlinker()}{unlinker()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\hyperlink{classcpen333_1_1process_1_1windows_1_1unlinker}{cpen333\+::process\+::windows\+::unlinker}$<$ T $>$\+::\hyperlink{classcpen333_1_1process_1_1windows_1_1unlinker}{unlinker} (\begin{DoxyParamCaption}\item[{T \&}]{resource }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs the object, wrapping the provided resource. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em resource} & resource to unlink when unlinker drops out of scope \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1windows_1_1unlinker_a178646833bce209b221bd3262ab012bb}\label{classcpen333_1_1process_1_1windows_1_1unlinker_a178646833bce209b221bd3262ab012bb}} 
+\index{cpen333\+::process\+::windows\+::unlinker@{cpen333\+::process\+::windows\+::unlinker}!unlink@{unlink}}
+\index{unlink@{unlink}!cpen333\+::process\+::windows\+::unlinker@{cpen333\+::process\+::windows\+::unlinker}}
+\subsubsection{\texorpdfstring{unlink()}{unlink()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+static bool \hyperlink{classcpen333_1_1process_1_1windows_1_1unlinker}{cpen333\+::process\+::windows\+::unlinker}$<$ T $>$\+::unlink (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Statically calls the {\ttfamily unlink(name)} function for the underlying type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & name of resource to unlink \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+always {\ttfamily false}, since unlinking is not supported on Windows 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/impl/windows/\hyperlink{impl_2windows_2unlinker_8h}{unlinker.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,287 @@
+\hypertarget{classcpen333_1_1process_1_1condition__variable}{}\section{cpen333\+:\+:process\+:\+:condition\+\_\+variable Class Reference}
+\label{classcpen333_1_1process_1_1condition__variable}\index{cpen333\+::process\+::condition\+\_\+variable@{cpen333\+::process\+::condition\+\_\+variable}}
+
+
+Allows multiple process to wait for a condition to become {\ttfamily true} depending on a shared variable.  
+
+
+
+
+{\ttfamily \#include $<$condition\+\_\+variable.\+h$>$}
+
+Inheritance diagram for cpen333\+:\+:process\+:\+:condition\+\_\+variable\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classcpen333_1_1process_1_1condition__variable}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcpen333_1_1process_1_1condition__variable_a7f43a5fdf856a56f1e992117fc4e45c3}{condition\+\_\+variable} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Creates or connects to a named condition variable. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1process_1_1condition__variable_ae5b7ef264d9618986be69d5c0c488925}{wait} (std\+::unique\+\_\+lock$<$ \hyperlink{classcpen333_1_1process_1_1mutex}{cpen333\+::process\+::mutex} $>$ \&lock)
+\begin{DoxyCompactList}\small\item\em Waits until the \hyperlink{classcpen333_1_1process_1_1condition__variable}{condition\+\_\+variable} is notified. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Rep , class Period $>$ }\\std\+::cv\+\_\+status \hyperlink{classcpen333_1_1process_1_1condition__variable_a6c6f153853d2c8d455781f0c35fdcb3b}{wait\+\_\+for} (std\+::unique\+\_\+lock$<$ \hyperlink{classcpen333_1_1process_1_1mutex}{cpen333\+::process\+::mutex} $>$ \&lock, const std\+::chrono\+::duration$<$ Rep, Period $>$ \&rel\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Waits for the \hyperlink{classcpen333_1_1process_1_1condition__variable}{condition\+\_\+variable} to be notified or for a timeout period to elapse. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Clock , class Duration $>$ }\\bool \hyperlink{classcpen333_1_1process_1_1condition__variable_a20affb59c611bd2577e940ba5193d801}{wait\+\_\+until} (std\+::unique\+\_\+lock$<$ \hyperlink{classcpen333_1_1process_1_1mutex}{cpen333\+::process\+::mutex} $>$ \&lock, const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&timeout\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Waits for the \hyperlink{classcpen333_1_1process_1_1condition__variable}{condition\+\_\+variable} to be notified or for a time-\/point to be reached. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Predicate $>$ }\\void \hyperlink{classcpen333_1_1process_1_1condition__variable_a17c52558451f262f411da1944319eb46}{wait} (std\+::unique\+\_\+lock$<$ \hyperlink{classcpen333_1_1process_1_1mutex}{cpen333\+::process\+::mutex} $>$ \&lock, Predicate pred)
+\begin{DoxyCompactList}\small\item\em Waits for the \hyperlink{classcpen333_1_1process_1_1condition__variable}{condition\+\_\+variable} to be notified and the predicate {\ttfamily pred()} to evaluate to {\ttfamily true}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Rep , class Period , class Predicate $>$ }\\bool \hyperlink{classcpen333_1_1process_1_1condition__variable_af610e3f28f9c5ea4c24b35cca125ff45}{wait\+\_\+for} (std\+::unique\+\_\+lock$<$ \hyperlink{classcpen333_1_1process_1_1mutex}{cpen333\+::process\+::mutex} $>$ \&lock, const std\+::chrono\+::duration$<$ Rep, Period $>$ \&rel\+\_\+time, Predicate pred)
+\begin{DoxyCompactList}\small\item\em Waits for the \hyperlink{classcpen333_1_1process_1_1condition__variable}{condition\+\_\+variable} to be notified and the predicate {\ttfamily pred()} to evaluate to {\ttfamily true}, or for a timeout to elapse. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Clock , class Duration , class Predicate $>$ }\\bool \hyperlink{classcpen333_1_1process_1_1condition__variable_adc559f5d5dd4af9505975c7e64d62d6e}{wait\+\_\+until} (std\+::unique\+\_\+lock$<$ \hyperlink{classcpen333_1_1process_1_1mutex}{cpen333\+::process\+::mutex} $>$ \&lock, const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&timeout\+\_\+time, Predicate pred)
+\begin{DoxyCompactList}\small\item\em Waits for the \hyperlink{classcpen333_1_1process_1_1condition__variable}{condition\+\_\+variable} to be notified and the predicate {\ttfamily pred()} to evaluate to {\ttfamily true}, or for a timeout time to be reached. \end{DoxyCompactList}\item 
+bool \hyperlink{classcpen333_1_1process_1_1condition__variable_a2861ec071acc52be7ca5790edd062ee8}{unlink} ()
+\begin{DoxyCompactList}\small\item\em Detaches the name from the named resource. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \hyperlink{classcpen333_1_1process_1_1condition__variable_aa9c5da7417ff6c6f79d8b58333e309f8}{unlink} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Unlinks any condition variable with the provided name. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Allows multiple process to wait for a condition to become {\ttfamily true} depending on a shared variable. 
+
+The \hyperlink{classcpen333_1_1process_1_1condition__variable}{condition\+\_\+variable} is a named synchronization primitive that can be used to block a thread, or multiple threads, until some thread or process both modifies a shared variable (the condition), and notifies the \hyperlink{classcpen333_1_1process_1_1condition__variable}{condition\+\_\+variable}.
+
+The thread that modifies the variable needs to 
+\begin{DoxyItemize}
+\item acquire a \hyperlink{classcpen333_1_1process_1_1mutex}{cpen333\+::process\+::mutex} (typically via std\+::lock\+\_\+guard) 
+\item perform the modification while the lock is held 
+\item execute notify\+\_\+one or notify\+\_\+all on the \hyperlink{classcpen333_1_1process_1_1condition__variable}{condition\+\_\+variable} (does not need to be under lock) 
+\end{DoxyItemize}Any thread waiting under the variable needs to 
+\begin{DoxyItemize}
+\item acquire a std\+::unique\+\_\+lock$<$cpen333\+::process\+::mutex$>$ on the same mutex that protects the shared variable 
+\item execute wait, wait\+\_\+for, or wait\+\_\+until 
+\end{DoxyItemize}The wait operations atomically release the mutex and suspend the execution of the thread. When the condition variable is notified, or a timeout expires, the thread is awakened and the mutex is atomically reacquired. Unlike std\+::condition\+\_\+variable, this implementation is not prone to spurious wake-\/ups. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1condition__variable_a7f43a5fdf856a56f1e992117fc4e45c3}\label{classcpen333_1_1process_1_1condition__variable_a7f43a5fdf856a56f1e992117fc4e45c3}} 
+\index{cpen333\+::process\+::condition\+\_\+variable@{cpen333\+::process\+::condition\+\_\+variable}!condition\+\_\+variable@{condition\+\_\+variable}}
+\index{condition\+\_\+variable@{condition\+\_\+variable}!cpen333\+::process\+::condition\+\_\+variable@{cpen333\+::process\+::condition\+\_\+variable}}
+\subsubsection{\texorpdfstring{condition\+\_\+variable()}{condition\_variable()}}
+{\footnotesize\ttfamily cpen333\+::process\+::condition\+\_\+variable\+::condition\+\_\+variable (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates or connects to a named condition variable. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & name identifier for creating or connecting to an existing inter-\/process \hyperlink{classcpen333_1_1process_1_1condition__variable}{condition\+\_\+variable} \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1condition__variable_a2861ec071acc52be7ca5790edd062ee8}\label{classcpen333_1_1process_1_1condition__variable_a2861ec071acc52be7ca5790edd062ee8}} 
+\index{cpen333\+::process\+::condition\+\_\+variable@{cpen333\+::process\+::condition\+\_\+variable}!unlink@{unlink}}
+\index{unlink@{unlink}!cpen333\+::process\+::condition\+\_\+variable@{cpen333\+::process\+::condition\+\_\+variable}}
+\subsubsection{\texorpdfstring{unlink()}{unlink()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool cpen333\+::process\+::condition\+\_\+variable\+::unlink (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Detaches the name from the named resource. 
+
+On P\+O\+S\+IX systems, named resources will persist beyond the lifetime of any process that uses them as long as the name has not been unlinked (or until the system is rebooted). Calling {\ttfamily unlink} will detach the name, allowing the resource to be freed once all current users have exited.
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if unlink is successful, {\ttfamily false} if unlinking is not supported or if an error has occurred. 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classcpen333_1_1process_1_1condition__base_acd6d0b53a828aa161ccad06885eaa15c}{cpen333\+::process\+::condition\+\_\+base}.
+
+\mbox{\Hypertarget{classcpen333_1_1process_1_1condition__variable_aa9c5da7417ff6c6f79d8b58333e309f8}\label{classcpen333_1_1process_1_1condition__variable_aa9c5da7417ff6c6f79d8b58333e309f8}} 
+\index{cpen333\+::process\+::condition\+\_\+variable@{cpen333\+::process\+::condition\+\_\+variable}!unlink@{unlink}}
+\index{unlink@{unlink}!cpen333\+::process\+::condition\+\_\+variable@{cpen333\+::process\+::condition\+\_\+variable}}
+\subsubsection{\texorpdfstring{unlink()}{unlink()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static bool cpen333\+::process\+::condition\+\_\+variable\+::unlink (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Unlinks any condition variable with the provided name. 
+
+Allows a name to be freed without needing to create a new \hyperlink{classcpen333_1_1process_1_1condition__variable}{condition\+\_\+variable} resource. This is useful for clean-\/up of previously terminated processes that failed to release the resource properly.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & name of \hyperlink{classcpen333_1_1process_1_1condition__variable}{condition\+\_\+variable} resource \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if unlink successful, {\ttfamily false} if an error occurred or if not supported 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1condition__variable_ae5b7ef264d9618986be69d5c0c488925}\label{classcpen333_1_1process_1_1condition__variable_ae5b7ef264d9618986be69d5c0c488925}} 
+\index{cpen333\+::process\+::condition\+\_\+variable@{cpen333\+::process\+::condition\+\_\+variable}!wait@{wait}}
+\index{wait@{wait}!cpen333\+::process\+::condition\+\_\+variable@{cpen333\+::process\+::condition\+\_\+variable}}
+\subsubsection{\texorpdfstring{wait()}{wait()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void cpen333\+::process\+::condition\+\_\+variable\+::wait (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+lock$<$ \hyperlink{classcpen333_1_1process_1_1mutex}{cpen333\+::process\+::mutex} $>$ \&}]{lock }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Waits until the \hyperlink{classcpen333_1_1process_1_1condition__variable}{condition\+\_\+variable} is notified. 
+
+The current thread will block until the shared \hyperlink{classcpen333_1_1process_1_1condition__variable}{condition\+\_\+variable} is explicitly notified. The lock must be acquired before the wait command. As the thread is suspended, it will atomically release the lock. When it is awoken, the thread will atomically re-\/acquire the lock.
+
+
+\begin{DoxyParams}{Parameters}
+{\em lock} & lock that protects the shared condition information. All waiting threads must lock the same shared mutex. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1condition__variable_a17c52558451f262f411da1944319eb46}\label{classcpen333_1_1process_1_1condition__variable_a17c52558451f262f411da1944319eb46}} 
+\index{cpen333\+::process\+::condition\+\_\+variable@{cpen333\+::process\+::condition\+\_\+variable}!wait@{wait}}
+\index{wait@{wait}!cpen333\+::process\+::condition\+\_\+variable@{cpen333\+::process\+::condition\+\_\+variable}}
+\subsubsection{\texorpdfstring{wait()}{wait()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Predicate $>$ \\
+void cpen333\+::process\+::condition\+\_\+variable\+::wait (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+lock$<$ \hyperlink{classcpen333_1_1process_1_1mutex}{cpen333\+::process\+::mutex} $>$ \&}]{lock,  }\item[{Predicate}]{pred }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Waits for the \hyperlink{classcpen333_1_1process_1_1condition__variable}{condition\+\_\+variable} to be notified and the predicate {\ttfamily pred()} to evaluate to {\ttfamily true}. 
+
+Causes the current thread to block until the \hyperlink{classcpen333_1_1process_1_1condition__variable}{condition\+\_\+variable} is notified and the predicate {\ttfamily pred()} evaluates to true. As the thread is suspended, it will atomically release the lock. When it is awoken, the thread will atomically re-\/acquire the lock and check the predicate. If the predicate still evaluates to {\ttfamily false}, the thread will again atomically release the lock and suspend.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Predicate} & predicate type, which should have signature {\ttfamily bool operator()} \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em lock} & lock that protects the shared condition information used in {\ttfamily pred}. All waiting threads must lock the same shared mutex. \\
+\hline
+{\em pred} & predicate to evaluate. If {\ttfamily pred()} returns {\ttfamily false}, waiting will continue. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1condition__variable_a6c6f153853d2c8d455781f0c35fdcb3b}\label{classcpen333_1_1process_1_1condition__variable_a6c6f153853d2c8d455781f0c35fdcb3b}} 
+\index{cpen333\+::process\+::condition\+\_\+variable@{cpen333\+::process\+::condition\+\_\+variable}!wait\+\_\+for@{wait\+\_\+for}}
+\index{wait\+\_\+for@{wait\+\_\+for}!cpen333\+::process\+::condition\+\_\+variable@{cpen333\+::process\+::condition\+\_\+variable}}
+\subsubsection{\texorpdfstring{wait\+\_\+for()}{wait\_for()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class Rep , class Period $>$ \\
+std\+::cv\+\_\+status cpen333\+::process\+::condition\+\_\+variable\+::wait\+\_\+for (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+lock$<$ \hyperlink{classcpen333_1_1process_1_1mutex}{cpen333\+::process\+::mutex} $>$ \&}]{lock,  }\item[{const std\+::chrono\+::duration$<$ Rep, Period $>$ \&}]{rel\+\_\+time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Waits for the \hyperlink{classcpen333_1_1process_1_1condition__variable}{condition\+\_\+variable} to be notified or for a timeout period to elapse. 
+
+Causes the current thread to block until the \hyperlink{classcpen333_1_1process_1_1condition__variable}{condition\+\_\+variable} is notified, or until the specified timeout period elapses, whichever comes first. As the thread is suspended, it will atomically release the lock. When it is awoken, the thread will atomically re-\/acquire the lock.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Rep} & timeout duration representation \\
+\hline
+{\em Period} & timeout clock period \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em lock} & lock that protects the shared condition information. All waiting threads must lock the same shared mutex. \\
+\hline
+{\em rel\+\_\+time} & maximum relative time to wait for condition to be set \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::cv\+\_\+status\+::timeout if a timeout has elapsed, std\+::cv\+\_\+status\+::no\+\_\+timeout otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1condition__variable_af610e3f28f9c5ea4c24b35cca125ff45}\label{classcpen333_1_1process_1_1condition__variable_af610e3f28f9c5ea4c24b35cca125ff45}} 
+\index{cpen333\+::process\+::condition\+\_\+variable@{cpen333\+::process\+::condition\+\_\+variable}!wait\+\_\+for@{wait\+\_\+for}}
+\index{wait\+\_\+for@{wait\+\_\+for}!cpen333\+::process\+::condition\+\_\+variable@{cpen333\+::process\+::condition\+\_\+variable}}
+\subsubsection{\texorpdfstring{wait\+\_\+for()}{wait\_for()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class Rep , class Period , class Predicate $>$ \\
+bool cpen333\+::process\+::condition\+\_\+variable\+::wait\+\_\+for (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+lock$<$ \hyperlink{classcpen333_1_1process_1_1mutex}{cpen333\+::process\+::mutex} $>$ \&}]{lock,  }\item[{const std\+::chrono\+::duration$<$ Rep, Period $>$ \&}]{rel\+\_\+time,  }\item[{Predicate}]{pred }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Waits for the \hyperlink{classcpen333_1_1process_1_1condition__variable}{condition\+\_\+variable} to be notified and the predicate {\ttfamily pred()} to evaluate to {\ttfamily true}, or for a timeout to elapse. 
+
+Causes the current thread to block until the \hyperlink{classcpen333_1_1process_1_1condition__variable}{condition\+\_\+variable} is notified and the predicate {\ttfamily pred()} evaluates to {\ttfamily true}, or until the specified time elapses, whichever happens first. As the thread is suspended, it will atomically release the lock. When it is awoken, the thread will atomically re-\/acquire the lock and check the predicate. If the predicate still evaluates to {\ttfamily false} and if the timeout has not yet elapsed, the thread will again atomically release the lock and suspend.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Rep} & duration representation \\
+\hline
+{\em Period} & duration\textquotesingle{}s clock period \\
+\hline
+{\em Predicate} & predicate type, which should have signature {\ttfamily bool operator()} \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em lock} & lock that protects the shared condition information used in {\ttfamily pred}. All waiting threads must lock the same shared mutex. \\
+\hline
+{\em rel\+\_\+time} & maximum relative time to wait for condition variable \\
+\hline
+{\em pred} & predicate to evaluate. If {\ttfamily pred()} returns {\ttfamily false}, waiting will continue. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1condition__variable_a20affb59c611bd2577e940ba5193d801}\label{classcpen333_1_1process_1_1condition__variable_a20affb59c611bd2577e940ba5193d801}} 
+\index{cpen333\+::process\+::condition\+\_\+variable@{cpen333\+::process\+::condition\+\_\+variable}!wait\+\_\+until@{wait\+\_\+until}}
+\index{wait\+\_\+until@{wait\+\_\+until}!cpen333\+::process\+::condition\+\_\+variable@{cpen333\+::process\+::condition\+\_\+variable}}
+\subsubsection{\texorpdfstring{wait\+\_\+until()}{wait\_until()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class Clock , class Duration $>$ \\
+bool cpen333\+::process\+::condition\+\_\+variable\+::wait\+\_\+until (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+lock$<$ \hyperlink{classcpen333_1_1process_1_1mutex}{cpen333\+::process\+::mutex} $>$ \&}]{lock,  }\item[{const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&}]{timeout\+\_\+time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Waits for the \hyperlink{classcpen333_1_1process_1_1condition__variable}{condition\+\_\+variable} to be notified or for a time-\/point to be reached. 
+
+Causes the current thread to block until the \hyperlink{classcpen333_1_1process_1_1condition__variable}{condition\+\_\+variable} is notified, or until the specified timeout time has been reached, whichever comes first. As the thread is suspended, it will atomically release the lock. When it is awoken, the thread will atomically re-\/acquire the lock.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Clock} & clock type \\
+\hline
+{\em Duration} & duration type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em lock} & lock that protects the shared condition information. All waiting threads must lock the same shared mutex. \\
+\hline
+{\em timeout\+\_\+time} & absolute timeout time \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if \hyperlink{classcpen333_1_1process_1_1condition__variable}{condition\+\_\+variable} is notified, {\ttfamily false} if timeout time has been reached without \hyperlink{classcpen333_1_1process_1_1condition__variable}{condition\+\_\+variable} being notified 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1condition__variable_adc559f5d5dd4af9505975c7e64d62d6e}\label{classcpen333_1_1process_1_1condition__variable_adc559f5d5dd4af9505975c7e64d62d6e}} 
+\index{cpen333\+::process\+::condition\+\_\+variable@{cpen333\+::process\+::condition\+\_\+variable}!wait\+\_\+until@{wait\+\_\+until}}
+\index{wait\+\_\+until@{wait\+\_\+until}!cpen333\+::process\+::condition\+\_\+variable@{cpen333\+::process\+::condition\+\_\+variable}}
+\subsubsection{\texorpdfstring{wait\+\_\+until()}{wait\_until()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class Clock , class Duration , class Predicate $>$ \\
+bool cpen333\+::process\+::condition\+\_\+variable\+::wait\+\_\+until (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+lock$<$ \hyperlink{classcpen333_1_1process_1_1mutex}{cpen333\+::process\+::mutex} $>$ \&}]{lock,  }\item[{const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&}]{timeout\+\_\+time,  }\item[{Predicate}]{pred }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Waits for the \hyperlink{classcpen333_1_1process_1_1condition__variable}{condition\+\_\+variable} to be notified and the predicate {\ttfamily pred()} to evaluate to {\ttfamily true}, or for a timeout time to be reached. 
+
+Causes the current thread to block until the \hyperlink{classcpen333_1_1process_1_1condition__variable}{condition\+\_\+variable} is notified and the predicate {\ttfamily pred()} evaluates to {\ttfamily true}, or until the specified timeout time has been reached. As the thread is suspended, it will atomically release the lock. When it is awoken, the thread will atomically re-\/acquire the lock and check the predicate. If the predicate still evaluates to {\ttfamily false} and if the timeout time has not yet been reached, the thread will again atomically release the lock and suspend.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Clock} & timeout clock type \\
+\hline
+{\em Duration} & timeout clock duration \\
+\hline
+{\em Predicate} & predicate type, which should have signature {\ttfamily bool operator()} \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em lock} & lock that protects the shared condition information used in {\ttfamily pred}. All waiting threads must lock the same shared mutex. \\
+\hline
+{\em timeout\+\_\+time} & absolute timeout time \\
+\hline
+{\em pred} & predicate to evaluate. If {\ttfamily pred()} returns {\ttfamily false}, waiting will continue. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/\hyperlink{condition__variable_8h}{condition\+\_\+variable.\+h}\end{DoxyCompactItemize}

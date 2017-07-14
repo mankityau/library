@@ -1,0 +1,238 @@
+\hypertarget{classcpen333_1_1process_1_1windows_1_1shared__memory}{}\section{cpen333\+:\+:process\+:\+:windows\+:\+:shared\+\_\+memory Class Reference}
+\label{classcpen333_1_1process_1_1windows_1_1shared__memory}\index{cpen333\+::process\+::windows\+::shared\+\_\+memory@{cpen333\+::process\+::windows\+::shared\+\_\+memory}}
+
+
+Inter-\/process shared memory implementation.  
+
+
+
+
+{\ttfamily \#include $<$shared\+\_\+memory.\+h$>$}
+
+Inheritance diagram for cpen333\+:\+:process\+:\+:windows\+:\+:shared\+\_\+memory\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classcpen333_1_1process_1_1windows_1_1shared__memory}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1windows_1_1shared__memory_a92d977097375f7b87d5702b7da666267}\label{classcpen333_1_1process_1_1windows_1_1shared__memory_a92d977097375f7b87d5702b7da666267}} 
+using \hyperlink{classcpen333_1_1process_1_1windows_1_1shared__memory_a92d977097375f7b87d5702b7da666267}{native\+\_\+handle\+\_\+type} = H\+A\+N\+D\+LE
+\begin{DoxyCompactList}\small\item\em Alias to native handle for shared memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcpen333_1_1process_1_1windows_1_1shared__memory_a3a2044ba961f9fc394e166273a3efa20}{shared\+\_\+memory} (const std\+::string \&\hyperlink{classcpen333_1_1process_1_1impl_1_1named__resource__base_ae0c5fbb1843afe863cece4b51c38f807}{name}, size\+\_\+t size, bool readonly=false)
+\begin{DoxyCompactList}\small\item\em Constructs or connects to a block of shared memory. \end{DoxyCompactList}\item 
+\hyperlink{classcpen333_1_1process_1_1windows_1_1shared__memory_a6355690147ae22f25d4bceed8ad63011}{$\sim$shared\+\_\+memory} ()
+\begin{DoxyCompactList}\small\item\em Destructor, unmaps this instance of the shared memory block (but does not unmap memory from other users) \end{DoxyCompactList}\item 
+void $\ast$ \hyperlink{classcpen333_1_1process_1_1windows_1_1shared__memory_a2afcb6ba09ba1039c2e03efb471d3b28}{operator-\/$>$} ()
+\begin{DoxyCompactList}\small\item\em Pointer operator for accessing underlying data. \end{DoxyCompactList}\item 
+void $\ast$ \hyperlink{classcpen333_1_1process_1_1windows_1_1shared__memory_a3bbd718728dc2fa2fbe4058b8a207594}{get} (size\+\_\+t offset=0)
+\begin{DoxyCompactList}\small\item\em Pointer to memory at a particular offset from the block. \end{DoxyCompactList}\item 
+uint8\+\_\+t \& \hyperlink{classcpen333_1_1process_1_1windows_1_1shared__memory_a931719bdcc1558973d6fcb7a79f52f22}{operator\mbox{[}$\,$\mbox{]}} (size\+\_\+t offset)
+\begin{DoxyCompactList}\small\item\em Byte access, by reference. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\T $\ast$ \hyperlink{classcpen333_1_1process_1_1windows_1_1shared__memory_a2f2fa53c705df531b6126ed2da84c347}{get} (size\+\_\+t offset)
+\begin{DoxyCompactList}\small\item\em Pointer to memory at a particular offset from the block. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\T $\ast$ \hyperlink{classcpen333_1_1process_1_1windows_1_1shared__memory_a3986cdc917b26ab1ab608f59270a47c5}{get} ()
+\begin{DoxyCompactList}\small\item\em Retrieves a pointer to the underlying memory, cast to a specified type. \end{DoxyCompactList}\item 
+\hyperlink{classcpen333_1_1process_1_1windows_1_1shared__memory_a92d977097375f7b87d5702b7da666267}{native\+\_\+handle\+\_\+type} \hyperlink{classcpen333_1_1process_1_1windows_1_1shared__memory_a1827dd03341d7c6afcc02cf078f54e32}{native\+\_\+handle} ()
+\begin{DoxyCompactList}\small\item\em Native handle to underlying shared memory block. \end{DoxyCompactList}\item 
+bool \hyperlink{classcpen333_1_1process_1_1windows_1_1shared__memory_aa6efdc9a3e1310ea69ecc48aeb41286c}{unlink} ()
+\begin{DoxyCompactList}\small\item\em Detaches the name from the named resource. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \hyperlink{classcpen333_1_1process_1_1windows_1_1shared__memory_a99c4766a9995a97595bba1550256f1c9}{unlink} (const std\+::string \&\hyperlink{classcpen333_1_1process_1_1impl_1_1named__resource__base_ae0c5fbb1843afe863cece4b51c38f807}{name})
+\begin{DoxyCompactList}\small\item\em Unlinks the name without needing to create a resource. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Inter-\/process shared memory implementation. 
+
+Creates and shares a block of memory between threads/processes, accessible using a unique name. The block of memory is mapped to D\+I\+F\+F\+E\+R\+E\+NT address spaces on each process. This is essentially a memory-\/mapped file.
+
+This shared memory has U\+S\+A\+GE P\+E\+R\+S\+I\+S\+T\+E\+N\+CE, meaning the mutex will continue to exist as long as at least one process/thread is holding a reference to it. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1windows_1_1shared__memory_a3a2044ba961f9fc394e166273a3efa20}\label{classcpen333_1_1process_1_1windows_1_1shared__memory_a3a2044ba961f9fc394e166273a3efa20}} 
+\index{cpen333\+::process\+::windows\+::shared\+\_\+memory@{cpen333\+::process\+::windows\+::shared\+\_\+memory}!shared\+\_\+memory@{shared\+\_\+memory}}
+\index{shared\+\_\+memory@{shared\+\_\+memory}!cpen333\+::process\+::windows\+::shared\+\_\+memory@{cpen333\+::process\+::windows\+::shared\+\_\+memory}}
+\subsubsection{\texorpdfstring{shared\+\_\+memory()}{shared\_memory()}}
+{\footnotesize\ttfamily cpen333\+::process\+::windows\+::shared\+\_\+memory\+::shared\+\_\+memory (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{size\+\_\+t}]{size,  }\item[{bool}]{readonly = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs or connects to a block of shared memory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & identifier for creating or connecting to an existing inter-\/process shared memory block \\
+\hline
+{\em size} & if creating, the size of the memory block. This size should be consistent between users \\
+\hline
+{\em readonly} & whether or not to map the memory as read-\/only \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1windows_1_1shared__memory_a6355690147ae22f25d4bceed8ad63011}\label{classcpen333_1_1process_1_1windows_1_1shared__memory_a6355690147ae22f25d4bceed8ad63011}} 
+\index{cpen333\+::process\+::windows\+::shared\+\_\+memory@{cpen333\+::process\+::windows\+::shared\+\_\+memory}!````~shared\+\_\+memory@{$\sim$shared\+\_\+memory}}
+\index{````~shared\+\_\+memory@{$\sim$shared\+\_\+memory}!cpen333\+::process\+::windows\+::shared\+\_\+memory@{cpen333\+::process\+::windows\+::shared\+\_\+memory}}
+\subsubsection{\texorpdfstring{$\sim$shared\+\_\+memory()}{~shared\_memory()}}
+{\footnotesize\ttfamily cpen333\+::process\+::windows\+::shared\+\_\+memory\+::$\sim$shared\+\_\+memory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor, unmaps this instance of the shared memory block (but does not unmap memory from other users) 
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1windows_1_1shared__memory_a3bbd718728dc2fa2fbe4058b8a207594}\label{classcpen333_1_1process_1_1windows_1_1shared__memory_a3bbd718728dc2fa2fbe4058b8a207594}} 
+\index{cpen333\+::process\+::windows\+::shared\+\_\+memory@{cpen333\+::process\+::windows\+::shared\+\_\+memory}!get@{get}}
+\index{get@{get}!cpen333\+::process\+::windows\+::shared\+\_\+memory@{cpen333\+::process\+::windows\+::shared\+\_\+memory}}
+\subsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily void$\ast$ cpen333\+::process\+::windows\+::shared\+\_\+memory\+::get (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{offset = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pointer to memory at a particular offset from the block. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em offset} & memory offset (in bytes) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pointer to memory offset 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1windows_1_1shared__memory_a2f2fa53c705df531b6126ed2da84c347}\label{classcpen333_1_1process_1_1windows_1_1shared__memory_a2f2fa53c705df531b6126ed2da84c347}} 
+\index{cpen333\+::process\+::windows\+::shared\+\_\+memory@{cpen333\+::process\+::windows\+::shared\+\_\+memory}!get@{get}}
+\index{get@{get}!cpen333\+::process\+::windows\+::shared\+\_\+memory@{cpen333\+::process\+::windows\+::shared\+\_\+memory}}
+\subsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T$\ast$ cpen333\+::process\+::windows\+::shared\+\_\+memory\+::get (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{offset }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pointer to memory at a particular offset from the block. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em offset} & memory offset (in bytes) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pointer to memory offset 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1windows_1_1shared__memory_a3986cdc917b26ab1ab608f59270a47c5}\label{classcpen333_1_1process_1_1windows_1_1shared__memory_a3986cdc917b26ab1ab608f59270a47c5}} 
+\index{cpen333\+::process\+::windows\+::shared\+\_\+memory@{cpen333\+::process\+::windows\+::shared\+\_\+memory}!get@{get}}
+\index{get@{get}!cpen333\+::process\+::windows\+::shared\+\_\+memory@{cpen333\+::process\+::windows\+::shared\+\_\+memory}}
+\subsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T$\ast$ cpen333\+::process\+::windows\+::shared\+\_\+memory\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retrieves a pointer to the underlying memory, cast to a specified type. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & type of pointer to return \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+pointer to object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1windows_1_1shared__memory_a1827dd03341d7c6afcc02cf078f54e32}\label{classcpen333_1_1process_1_1windows_1_1shared__memory_a1827dd03341d7c6afcc02cf078f54e32}} 
+\index{cpen333\+::process\+::windows\+::shared\+\_\+memory@{cpen333\+::process\+::windows\+::shared\+\_\+memory}!native\+\_\+handle@{native\+\_\+handle}}
+\index{native\+\_\+handle@{native\+\_\+handle}!cpen333\+::process\+::windows\+::shared\+\_\+memory@{cpen333\+::process\+::windows\+::shared\+\_\+memory}}
+\subsubsection{\texorpdfstring{native\+\_\+handle()}{native\_handle()}}
+{\footnotesize\ttfamily \hyperlink{classcpen333_1_1process_1_1windows_1_1shared__memory_a92d977097375f7b87d5702b7da666267}{native\+\_\+handle\+\_\+type} cpen333\+::process\+::windows\+::shared\+\_\+memory\+::native\+\_\+handle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Native handle to underlying shared memory block. 
+
+On Windows systems, this is a Windows H\+A\+N\+D\+LE to the memory-\/mapped file mapping
+
+\begin{DoxyReturn}{Returns}
+native handle to shared memory block 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1windows_1_1shared__memory_a2afcb6ba09ba1039c2e03efb471d3b28}\label{classcpen333_1_1process_1_1windows_1_1shared__memory_a2afcb6ba09ba1039c2e03efb471d3b28}} 
+\index{cpen333\+::process\+::windows\+::shared\+\_\+memory@{cpen333\+::process\+::windows\+::shared\+\_\+memory}!operator-\/$>$@{operator-\/$>$}}
+\index{operator-\/$>$@{operator-\/$>$}!cpen333\+::process\+::windows\+::shared\+\_\+memory@{cpen333\+::process\+::windows\+::shared\+\_\+memory}}
+\subsubsection{\texorpdfstring{operator-\/$>$()}{operator->()}}
+{\footnotesize\ttfamily void$\ast$ cpen333\+::process\+::windows\+::shared\+\_\+memory\+::operator-\/$>$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pointer operator for accessing underlying data. 
+
+\begin{DoxyReturn}{Returns}
+pointer to underlying data 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1windows_1_1shared__memory_a931719bdcc1558973d6fcb7a79f52f22}\label{classcpen333_1_1process_1_1windows_1_1shared__memory_a931719bdcc1558973d6fcb7a79f52f22}} 
+\index{cpen333\+::process\+::windows\+::shared\+\_\+memory@{cpen333\+::process\+::windows\+::shared\+\_\+memory}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!cpen333\+::process\+::windows\+::shared\+\_\+memory@{cpen333\+::process\+::windows\+::shared\+\_\+memory}}
+\subsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily uint8\+\_\+t\& cpen333\+::process\+::windows\+::shared\+\_\+memory\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{offset }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Byte access, by reference. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em offset} & memory offset (in bytes) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+byte at particular offset 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1windows_1_1shared__memory_aa6efdc9a3e1310ea69ecc48aeb41286c}\label{classcpen333_1_1process_1_1windows_1_1shared__memory_aa6efdc9a3e1310ea69ecc48aeb41286c}} 
+\index{cpen333\+::process\+::windows\+::shared\+\_\+memory@{cpen333\+::process\+::windows\+::shared\+\_\+memory}!unlink@{unlink}}
+\index{unlink@{unlink}!cpen333\+::process\+::windows\+::shared\+\_\+memory@{cpen333\+::process\+::windows\+::shared\+\_\+memory}}
+\subsubsection{\texorpdfstring{unlink()}{unlink()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool cpen333\+::process\+::windows\+::shared\+\_\+memory\+::unlink (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Detaches the name from the named resource. 
+
+On P\+O\+S\+IX systems, named resources will persist beyond the lifetime of any process that uses them as long as the name has not been unlinked (or until the system is rebooted). Calling {\ttfamily unlink} will detach the name, allowing the resource to be freed once all current users have exited.
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if unlink is successful, {\ttfamily false} if unlinking is not supported or if an error has occurred. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classcpen333_1_1process_1_1impl_1_1named__resource__base_ae4033f82dfd068b917a9bca57d3a0c45}{cpen333\+::process\+::impl\+::named\+\_\+resource\+\_\+base}.
+
+\mbox{\Hypertarget{classcpen333_1_1process_1_1windows_1_1shared__memory_a99c4766a9995a97595bba1550256f1c9}\label{classcpen333_1_1process_1_1windows_1_1shared__memory_a99c4766a9995a97595bba1550256f1c9}} 
+\index{cpen333\+::process\+::windows\+::shared\+\_\+memory@{cpen333\+::process\+::windows\+::shared\+\_\+memory}!unlink@{unlink}}
+\index{unlink@{unlink}!cpen333\+::process\+::windows\+::shared\+\_\+memory@{cpen333\+::process\+::windows\+::shared\+\_\+memory}}
+\subsubsection{\texorpdfstring{unlink()}{unlink()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static bool cpen333\+::process\+::windows\+::shared\+\_\+memory\+::unlink (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Unlinks the name without needing to create a resource. 
+
+Implementers should also provide a static method for unlinking. The purpose is mainly for clean-\/up of existing resources.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & desired resource name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if unlink successful, {\ttfamily false} if not successful or not supported 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/impl/windows/\hyperlink{impl_2windows_2shared__memory_8h}{shared\+\_\+memory.\+h}\end{DoxyCompactItemize}

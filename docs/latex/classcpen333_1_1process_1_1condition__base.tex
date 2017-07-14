@@ -1,0 +1,268 @@
+\hypertarget{classcpen333_1_1process_1_1condition__base}{}\section{cpen333\+:\+:process\+:\+:condition\+\_\+base Class Reference}
+\label{classcpen333_1_1process_1_1condition__base}\index{cpen333\+::process\+::condition\+\_\+base@{cpen333\+::process\+::condition\+\_\+base}}
+
+
+Base-\/class for conditions, condition variables, and events.  
+
+
+
+
+{\ttfamily \#include $<$condition\+\_\+base.\+h$>$}
+
+Inheritance diagram for cpen333\+:\+:process\+:\+:condition\+\_\+base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.434783cm]{classcpen333_1_1process_1_1condition__base}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcpen333_1_1process_1_1condition__base_a23384ba303cc2111cc4272830ae9f72b}{condition\+\_\+base} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1condition__base_a9e0b0c4673dbf0a671384e2cbb052eb5}\label{classcpen333_1_1process_1_1condition__base_a9e0b0c4673dbf0a671384e2cbb052eb5}} 
+{\bfseries condition\+\_\+base} (const \hyperlink{classcpen333_1_1process_1_1condition__base}{condition\+\_\+base} \&)=delete
+\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1condition__base_a548a4d624fb76931bfecbdf94f5c0071}\label{classcpen333_1_1process_1_1condition__base_a548a4d624fb76931bfecbdf94f5c0071}} 
+{\bfseries condition\+\_\+base} (\hyperlink{classcpen333_1_1process_1_1condition__base}{condition\+\_\+base} \&\&)=delete
+\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1condition__base_a6db93cee4800ed14ed56e9029cdd0bd4}\label{classcpen333_1_1process_1_1condition__base_a6db93cee4800ed14ed56e9029cdd0bd4}} 
+\hyperlink{classcpen333_1_1process_1_1condition__base}{condition\+\_\+base} \& {\bfseries operator=} (const \hyperlink{classcpen333_1_1process_1_1condition__base}{condition\+\_\+base} \&)=delete
+\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1condition__base_a5cc13eb5e8317a05ed3130cdd8c1a4bf}\label{classcpen333_1_1process_1_1condition__base_a5cc13eb5e8317a05ed3130cdd8c1a4bf}} 
+\hyperlink{classcpen333_1_1process_1_1condition__base}{condition\+\_\+base} \& {\bfseries operator=} (\hyperlink{classcpen333_1_1process_1_1condition__base}{condition\+\_\+base} \&\&)=delete
+\item 
+void \hyperlink{classcpen333_1_1process_1_1condition__base_a29b67e4579cef831f709ea4c3a32ffe5}{wait} (std\+::unique\+\_\+lock$<$ \hyperlink{classcpen333_1_1process_1_1mutex}{cpen333\+::process\+::mutex} $>$ \&lock)
+\begin{DoxyCompactList}\small\item\em Wait until the thread is notified. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Rep , class Period $>$ }\\std\+::cv\+\_\+status \hyperlink{classcpen333_1_1process_1_1condition__base_a2243e72e2205c31851d2c16eddb9b54f}{wait\+\_\+for} (std\+::unique\+\_\+lock$<$ \hyperlink{classcpen333_1_1process_1_1mutex}{cpen333\+::process\+::mutex} $>$ \&lock, const std\+::chrono\+::duration$<$ Rep, Period $>$ \&rel\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Wait until the thread is notified, or until a timeout period has elapsed. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Clock , class Duration $>$ }\\bool \hyperlink{classcpen333_1_1process_1_1condition__base_a6af33a75565bf4177cb6616a08acaac0}{wait\+\_\+until} (std\+::unique\+\_\+lock$<$ \hyperlink{classcpen333_1_1process_1_1mutex}{cpen333\+::process\+::mutex} $>$ \&lock, const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&timeout\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Wait until the thread is notified, or until a timeout time has been reached. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1process_1_1condition__base_a990220c8ee064b3d494cdbf238ceb73e}{notify\+\_\+one} ()
+\begin{DoxyCompactList}\small\item\em Notify one waiting thread. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1process_1_1condition__base_a37b38d480898c0cc13b0ea1eb2b24127}{notify\+\_\+all} ()
+\begin{DoxyCompactList}\small\item\em Notify all waiting threads. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{classcpen333_1_1process_1_1condition__base_acd6d0b53a828aa161ccad06885eaa15c}{unlink} ()
+\begin{DoxyCompactList}\small\item\em Detaches the name from the named resource. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \hyperlink{classcpen333_1_1process_1_1condition__base_a01ed2d247732584166613527ea8e1aff}{unlink} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Unlinks the name without needing to create a resource. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classcpen333_1_1process_1_1condition__base_af6f7110f5be9935ac2fbea2b303a2903}{notify} (bool broadcast)
+\begin{DoxyCompactList}\small\item\em Notify (wake-\/up) waiting threads. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Clock , class Duration $>$ }\\bool \hyperlink{classcpen333_1_1process_1_1condition__base_a3132db3bcedcddf3a8e5ac24df8d9efa}{wait} (std\+::unique\+\_\+lock$<$ \hyperlink{classcpen333_1_1process_1_1mutex}{cpen333\+::process\+::mutex} $>$ \&lock, bool timeout, const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&abs\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Waits for condition to be notified. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Base-\/class for conditions, condition variables, and events. 
+
+Like an event, has the ability to wait for ownership of a lock, and for notifying waiting threads. This condition base D\+O\+ES N\+OT suffer from spurious wake-\/ups. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1condition__base_a23384ba303cc2111cc4272830ae9f72b}\label{classcpen333_1_1process_1_1condition__base_a23384ba303cc2111cc4272830ae9f72b}} 
+\index{cpen333\+::process\+::condition\+\_\+base@{cpen333\+::process\+::condition\+\_\+base}!condition\+\_\+base@{condition\+\_\+base}}
+\index{condition\+\_\+base@{condition\+\_\+base}!cpen333\+::process\+::condition\+\_\+base@{cpen333\+::process\+::condition\+\_\+base}}
+\subsubsection{\texorpdfstring{condition\+\_\+base()}{condition\_base()}}
+{\footnotesize\ttfamily cpen333\+::process\+::condition\+\_\+base\+::condition\+\_\+base (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & unique identifier \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1condition__base_af6f7110f5be9935ac2fbea2b303a2903}\label{classcpen333_1_1process_1_1condition__base_af6f7110f5be9935ac2fbea2b303a2903}} 
+\index{cpen333\+::process\+::condition\+\_\+base@{cpen333\+::process\+::condition\+\_\+base}!notify@{notify}}
+\index{notify@{notify}!cpen333\+::process\+::condition\+\_\+base@{cpen333\+::process\+::condition\+\_\+base}}
+\subsubsection{\texorpdfstring{notify()}{notify()}}
+{\footnotesize\ttfamily void cpen333\+::process\+::condition\+\_\+base\+::notify (\begin{DoxyParamCaption}\item[{bool}]{broadcast }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Notify (wake-\/up) waiting threads. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em broadcast} & if true, wakes up all threads \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1condition__base_a37b38d480898c0cc13b0ea1eb2b24127}\label{classcpen333_1_1process_1_1condition__base_a37b38d480898c0cc13b0ea1eb2b24127}} 
+\index{cpen333\+::process\+::condition\+\_\+base@{cpen333\+::process\+::condition\+\_\+base}!notify\+\_\+all@{notify\+\_\+all}}
+\index{notify\+\_\+all@{notify\+\_\+all}!cpen333\+::process\+::condition\+\_\+base@{cpen333\+::process\+::condition\+\_\+base}}
+\subsubsection{\texorpdfstring{notify\+\_\+all()}{notify\_all()}}
+{\footnotesize\ttfamily void cpen333\+::process\+::condition\+\_\+base\+::notify\+\_\+all (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Notify all waiting threads. 
+
+Wake up all waiting threads and notify them of a potential change \mbox{\Hypertarget{classcpen333_1_1process_1_1condition__base_a990220c8ee064b3d494cdbf238ceb73e}\label{classcpen333_1_1process_1_1condition__base_a990220c8ee064b3d494cdbf238ceb73e}} 
+\index{cpen333\+::process\+::condition\+\_\+base@{cpen333\+::process\+::condition\+\_\+base}!notify\+\_\+one@{notify\+\_\+one}}
+\index{notify\+\_\+one@{notify\+\_\+one}!cpen333\+::process\+::condition\+\_\+base@{cpen333\+::process\+::condition\+\_\+base}}
+\subsubsection{\texorpdfstring{notify\+\_\+one()}{notify\_one()}}
+{\footnotesize\ttfamily void cpen333\+::process\+::condition\+\_\+base\+::notify\+\_\+one (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Notify one waiting thread. 
+
+Wake up a single waiting thread and notify them of a potential change \mbox{\Hypertarget{classcpen333_1_1process_1_1condition__base_acd6d0b53a828aa161ccad06885eaa15c}\label{classcpen333_1_1process_1_1condition__base_acd6d0b53a828aa161ccad06885eaa15c}} 
+\index{cpen333\+::process\+::condition\+\_\+base@{cpen333\+::process\+::condition\+\_\+base}!unlink@{unlink}}
+\index{unlink@{unlink}!cpen333\+::process\+::condition\+\_\+base@{cpen333\+::process\+::condition\+\_\+base}}
+\subsubsection{\texorpdfstring{unlink()}{unlink()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily virtual bool cpen333\+::process\+::condition\+\_\+base\+::unlink (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Detaches the name from the named resource. 
+
+On P\+O\+S\+IX systems, named resources will persist beyond the lifetime of any process that uses them as long as the name has not been unlinked (or until the system is rebooted). Calling {\ttfamily unlink} will detach the name, allowing the resource to be freed once all current users have exited.
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if unlink is successful, {\ttfamily false} if unlinking is not supported or if an error has occurred. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classcpen333_1_1process_1_1named__resource_a5d33168fee48c9b0c58ab8fd96e230ce}{cpen333\+::process\+::named\+\_\+resource}.
+
+
+
+Reimplemented in \hyperlink{classcpen333_1_1process_1_1condition__variable_a2861ec071acc52be7ca5790edd062ee8}{cpen333\+::process\+::condition\+\_\+variable}, \hyperlink{classcpen333_1_1process_1_1condition_a7c646204b2c4912185ba6055c9afa3f6}{cpen333\+::process\+::condition}, and \hyperlink{classcpen333_1_1process_1_1event_a37a2d53cbf4a90da6b4dbd5853f23b32}{cpen333\+::process\+::event}.
+
+\mbox{\Hypertarget{classcpen333_1_1process_1_1condition__base_a01ed2d247732584166613527ea8e1aff}\label{classcpen333_1_1process_1_1condition__base_a01ed2d247732584166613527ea8e1aff}} 
+\index{cpen333\+::process\+::condition\+\_\+base@{cpen333\+::process\+::condition\+\_\+base}!unlink@{unlink}}
+\index{unlink@{unlink}!cpen333\+::process\+::condition\+\_\+base@{cpen333\+::process\+::condition\+\_\+base}}
+\subsubsection{\texorpdfstring{unlink()}{unlink()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static bool cpen333\+::process\+::condition\+\_\+base\+::unlink (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Unlinks the name without needing to create a resource. 
+
+Implementers should also provide a static method for unlinking. The purpose is mainly for clean-\/up of existing resources.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & desired resource name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if unlink successful, {\ttfamily false} if not successful or not supported 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1condition__base_a29b67e4579cef831f709ea4c3a32ffe5}\label{classcpen333_1_1process_1_1condition__base_a29b67e4579cef831f709ea4c3a32ffe5}} 
+\index{cpen333\+::process\+::condition\+\_\+base@{cpen333\+::process\+::condition\+\_\+base}!wait@{wait}}
+\index{wait@{wait}!cpen333\+::process\+::condition\+\_\+base@{cpen333\+::process\+::condition\+\_\+base}}
+\subsubsection{\texorpdfstring{wait()}{wait()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void cpen333\+::process\+::condition\+\_\+base\+::wait (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+lock$<$ \hyperlink{classcpen333_1_1process_1_1mutex}{cpen333\+::process\+::mutex} $>$ \&}]{lock }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Wait until the thread is notified. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em lock} & external lock \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1condition__base_a3132db3bcedcddf3a8e5ac24df8d9efa}\label{classcpen333_1_1process_1_1condition__base_a3132db3bcedcddf3a8e5ac24df8d9efa}} 
+\index{cpen333\+::process\+::condition\+\_\+base@{cpen333\+::process\+::condition\+\_\+base}!wait@{wait}}
+\index{wait@{wait}!cpen333\+::process\+::condition\+\_\+base@{cpen333\+::process\+::condition\+\_\+base}}
+\subsubsection{\texorpdfstring{wait()}{wait()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class Clock , class Duration $>$ \\
+bool cpen333\+::process\+::condition\+\_\+base\+::wait (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+lock$<$ \hyperlink{classcpen333_1_1process_1_1mutex}{cpen333\+::process\+::mutex} $>$ \&}]{lock,  }\item[{bool}]{timeout,  }\item[{const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&}]{abs\+\_\+time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Waits for condition to be notified. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Clock} & clock type \\
+\hline
+{\em Duration} & duration type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em lock} & external lock to ensure no simultaneous waits/notifies \\
+\hline
+{\em timeout} & whether or not to wait with a timeout \\
+\hline
+{\em abs\+\_\+time} & absolute timeout time \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if wait was successful, false if timeout occurred 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1condition__base_a2243e72e2205c31851d2c16eddb9b54f}\label{classcpen333_1_1process_1_1condition__base_a2243e72e2205c31851d2c16eddb9b54f}} 
+\index{cpen333\+::process\+::condition\+\_\+base@{cpen333\+::process\+::condition\+\_\+base}!wait\+\_\+for@{wait\+\_\+for}}
+\index{wait\+\_\+for@{wait\+\_\+for}!cpen333\+::process\+::condition\+\_\+base@{cpen333\+::process\+::condition\+\_\+base}}
+\subsubsection{\texorpdfstring{wait\+\_\+for()}{wait\_for()}}
+{\footnotesize\ttfamily template$<$class Rep , class Period $>$ \\
+std\+::cv\+\_\+status cpen333\+::process\+::condition\+\_\+base\+::wait\+\_\+for (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+lock$<$ \hyperlink{classcpen333_1_1process_1_1mutex}{cpen333\+::process\+::mutex} $>$ \&}]{lock,  }\item[{const std\+::chrono\+::duration$<$ Rep, Period $>$ \&}]{rel\+\_\+time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Wait until the thread is notified, or until a timeout period has elapsed. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Rep} & duration clock representation \\
+\hline
+{\em Period} & duration clock period \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em lock} & external lock \\
+\hline
+{\em rel\+\_\+time} & relative time to wait \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::cv\+\_\+status to indicate whether or not a timeout has occured 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1condition__base_a6af33a75565bf4177cb6616a08acaac0}\label{classcpen333_1_1process_1_1condition__base_a6af33a75565bf4177cb6616a08acaac0}} 
+\index{cpen333\+::process\+::condition\+\_\+base@{cpen333\+::process\+::condition\+\_\+base}!wait\+\_\+until@{wait\+\_\+until}}
+\index{wait\+\_\+until@{wait\+\_\+until}!cpen333\+::process\+::condition\+\_\+base@{cpen333\+::process\+::condition\+\_\+base}}
+\subsubsection{\texorpdfstring{wait\+\_\+until()}{wait\_until()}}
+{\footnotesize\ttfamily template$<$class Clock , class Duration $>$ \\
+bool cpen333\+::process\+::condition\+\_\+base\+::wait\+\_\+until (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+lock$<$ \hyperlink{classcpen333_1_1process_1_1mutex}{cpen333\+::process\+::mutex} $>$ \&}]{lock,  }\item[{const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&}]{timeout\+\_\+time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Wait until the thread is notified, or until a timeout time has been reached. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Clock} & timeout clock representation \\
+\hline
+{\em Duration} & timeout duration \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em lock} & external lock \\
+\hline
+{\em timeout\+\_\+time} & absolute timeout time \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if wait is successful, false if timeout has been reached 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/impl/\hyperlink{condition__base_8h}{condition\+\_\+base.\+h}\end{DoxyCompactItemize}

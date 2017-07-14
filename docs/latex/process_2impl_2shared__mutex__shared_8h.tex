@@ -1,0 +1,39 @@
+\hypertarget{process_2impl_2shared__mutex__shared_8h}{}\section{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/impl/shared\+\_\+mutex\+\_\+shared.h File Reference}
+\label{process_2impl_2shared__mutex__shared_8h}\index{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/impl/shared\+\_\+mutex\+\_\+shared.\+h@{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/impl/shared\+\_\+mutex\+\_\+shared.\+h}}
+
+
+Implementation of an inter-\/process mutex with shared access that gives priority to shared use (read-\/priority)  
+
+
+{\ttfamily \#include \char`\"{}cpen333/process/mutex.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cpen333/process/semaphore.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cpen333/process/shared\+\_\+memory.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cpen333/process/named\+\_\+resource.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classcpen333_1_1process_1_1impl_1_1shared__mutex__shared}{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+shared}
+\begin{DoxyCompactList}\small\item\em A read-\/preferring inter-\/process shared mutex implementation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{process_2impl_2shared__mutex__shared_8h_ae22712696b73ba6f8c3adeb6cf469efd}\label{process_2impl_2shared__mutex__shared_8h_ae22712696b73ba6f8c3adeb6cf469efd}} 
+\#define \hyperlink{process_2impl_2shared__mutex__shared_8h_ae22712696b73ba6f8c3adeb6cf469efd}{S\+H\+A\+R\+E\+D\+\_\+\+M\+U\+T\+E\+X\+\_\+\+S\+H\+A\+R\+E\+D\+\_\+\+N\+A\+M\+E\+\_\+\+S\+U\+F\+F\+IX}~\char`\"{}\+\_\+sms\char`\"{}
+\begin{DoxyCompactList}\small\item\em Name suffix for internals to guarantee uniqueness. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{process_2impl_2shared__mutex__shared_8h_a1e86f93169981063fcfb5c06c60fa96e}\label{process_2impl_2shared__mutex__shared_8h_a1e86f93169981063fcfb5c06c60fa96e}} 
+\#define \hyperlink{process_2impl_2shared__mutex__shared_8h_a1e86f93169981063fcfb5c06c60fa96e}{S\+H\+A\+R\+E\+D\+\_\+\+M\+U\+T\+E\+X\+\_\+\+S\+H\+A\+R\+E\+D\+\_\+\+I\+N\+I\+T\+I\+A\+L\+I\+Z\+ED}~0x98271238
+\begin{DoxyCompactList}\small\item\em Magic number for testing initialization. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{process_2impl_2shared__mutex__shared_8h_a1a6663f3b22d2630f0ffef792603ae9a}\label{process_2impl_2shared__mutex__shared_8h_a1a6663f3b22d2630f0ffef792603ae9a}} 
+using \hyperlink{process_2impl_2shared__mutex__shared_8h_a1a6663f3b22d2630f0ffef792603ae9a}{cpen333\+::process\+::shared\+\_\+mutex\+\_\+shared} = impl\+::shared\+\_\+mutex\+\_\+shared
+\begin{DoxyCompactList}\small\item\em Alias for default shared mutex with shared (read) priority. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{process_2impl_2shared__mutex__shared_8h_af36a6b6b5c27e2abe70b70dd3565d310}\label{process_2impl_2shared__mutex__shared_8h_af36a6b6b5c27e2abe70b70dd3565d310}} 
+using \hyperlink{process_2impl_2shared__mutex__shared_8h_af36a6b6b5c27e2abe70b70dd3565d310}{cpen333\+::process\+::shared\+\_\+timed\+\_\+mutex\+\_\+shared} = impl\+::shared\+\_\+mutex\+\_\+shared
+\begin{DoxyCompactList}\small\item\em Alias for default shared timed mutex with shared (read) priority. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implementation of an inter-\/process mutex with shared access that gives priority to shared use (read-\/priority) 
+

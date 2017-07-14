@@ -1,0 +1,28 @@
+\hypertarget{thread_2semaphore_8h}{}\section{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/thread/semaphore.h File Reference}
+\label{thread_2semaphore_8h}\index{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/thread/semaphore.\+h@{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/thread/semaphore.\+h}}
+
+
+Semaphore synchronization primitive implementation.  
+
+
+{\ttfamily \#include $<$mutex$>$}\newline
+{\ttfamily \#include $<$condition\+\_\+variable$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classcpen333_1_1thread_1_1basic__semaphore}{cpen333\+::thread\+::basic\+\_\+semaphore$<$ Mutex, Cond\+Var $>$}
+\begin{DoxyCompactList}\small\item\em A local semaphore synchronization primitive. \end{DoxyCompactList}\item 
+class \hyperlink{classcpen333_1_1thread_1_1semaphore__guard}{cpen333\+::thread\+::semaphore\+\_\+guard$<$ Semaphore\+Type $>$}
+\begin{DoxyCompactList}\small\item\em Semaphore guard, similar to std\+::lock\+\_\+guard. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{thread_2semaphore_8h_a18e8932a5a5670bf3c472f16105e1060}\label{thread_2semaphore_8h_a18e8932a5a5670bf3c472f16105e1060}} 
+using \hyperlink{thread_2semaphore_8h_a18e8932a5a5670bf3c472f16105e1060}{cpen333\+::thread\+::semaphore} = basic\+\_\+semaphore$<$ std\+::mutex, std\+::condition\+\_\+variable $>$
+\begin{DoxyCompactList}\small\item\em Alias to default semaphore implementation with std\+::mutex and std\+::condition\+\_\+variable. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Semaphore synchronization primitive implementation. 
+

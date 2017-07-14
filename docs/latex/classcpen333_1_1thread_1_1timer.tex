@@ -1,0 +1,196 @@
+\hypertarget{classcpen333_1_1thread_1_1timer}{}\section{cpen333\+:\+:thread\+:\+:timer$<$ Duration $>$ Class Template Reference}
+\label{classcpen333_1_1thread_1_1timer}\index{cpen333\+::thread\+::timer$<$ Duration $>$@{cpen333\+::thread\+::timer$<$ Duration $>$}}
+
+
+Timer implementation.  
+
+
+
+
+{\ttfamily \#include $<$timer.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcpen333_1_1thread_1_1timer_adf189ddfc276e7efa2c49ac9413627b9}{timer} (const Duration \&period)
+\begin{DoxyCompactList}\small\item\em Creates a basic timer. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Func , typename... Args$>$ }\\\hyperlink{classcpen333_1_1thread_1_1timer_a850ad7eb401f54c5dc53ec0b01765135}{timer} (const Duration \&period, Func \&\&func, Args \&\&... args)
+\begin{DoxyCompactList}\small\item\em Creates a timer with a callback function. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1thread_1_1timer_a0d1be90402f46912966ec5fc13707bce}{start} ()
+\begin{DoxyCompactList}\small\item\em Start timer running. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1thread_1_1timer_afa3811e04ef58d3040935c49aca19948}{stop} ()
+\begin{DoxyCompactList}\small\item\em Stops timer running. \end{DoxyCompactList}\item 
+bool \hyperlink{classcpen333_1_1thread_1_1timer_a339ef2ea452a86d83a0f41c7d4e255b0}{running} ()
+\begin{DoxyCompactList}\small\item\em Checks if timer is running. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1thread_1_1timer_aecbb193d8d58a41488881fd795aac9e1}{wait} ()
+\begin{DoxyCompactList}\small\item\em Waits until the next tick event. \end{DoxyCompactList}\item 
+bool \hyperlink{classcpen333_1_1thread_1_1timer_af81a4656b66d8bebd7497ffe826f4373}{test} ()
+\begin{DoxyCompactList}\small\item\em Tests if timer has gone off since last reset. \end{DoxyCompactList}\item 
+bool \hyperlink{classcpen333_1_1thread_1_1timer_a6fc134f093e0ff35ef1baebefd62ed8b}{test\+\_\+and\+\_\+reset} ()
+\begin{DoxyCompactList}\small\item\em Test if timer has gone off since last call, and resets flag. \end{DoxyCompactList}\item 
+\hyperlink{classcpen333_1_1thread_1_1timer_a4c25e491b57438c7a60fe54b45b369b8}{$\sim$timer} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename Duration$>$\newline
+class cpen333\+::thread\+::timer$<$ Duration $>$}
+
+Timer implementation. 
+
+Allows tracking of timer ticks or running a callback functor at a regular tick interval.
+
+The timer is N\+OT started automatically. It must be started by calling \hyperlink{classcpen333_1_1thread_1_1timer_a0d1be90402f46912966ec5fc13707bce}{start()}.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Duration} & tick duration type \\
+\hline
+\end{DoxyTemplParams}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1timer_adf189ddfc276e7efa2c49ac9413627b9}\label{classcpen333_1_1thread_1_1timer_adf189ddfc276e7efa2c49ac9413627b9}} 
+\index{cpen333\+::thread\+::timer@{cpen333\+::thread\+::timer}!timer@{timer}}
+\index{timer@{timer}!cpen333\+::thread\+::timer@{cpen333\+::thread\+::timer}}
+\subsubsection{\texorpdfstring{timer()}{timer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Duration $>$ \\
+\hyperlink{classcpen333_1_1thread_1_1timer}{cpen333\+::thread\+::timer}$<$ Duration $>$\+::\hyperlink{classcpen333_1_1thread_1_1timer}{timer} (\begin{DoxyParamCaption}\item[{const Duration \&}]{period }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a basic timer. 
+
+The timer is N\+OT started automatically. It must be started by calling \hyperlink{classcpen333_1_1thread_1_1timer_a0d1be90402f46912966ec5fc13707bce}{start()}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em period} & tick interval \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1timer_a850ad7eb401f54c5dc53ec0b01765135}\label{classcpen333_1_1thread_1_1timer_a850ad7eb401f54c5dc53ec0b01765135}} 
+\index{cpen333\+::thread\+::timer@{cpen333\+::thread\+::timer}!timer@{timer}}
+\index{timer@{timer}!cpen333\+::thread\+::timer@{cpen333\+::thread\+::timer}}
+\subsubsection{\texorpdfstring{timer()}{timer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Duration $>$ \\
+template$<$typename Func , typename... Args$>$ \\
+\hyperlink{classcpen333_1_1thread_1_1timer}{cpen333\+::thread\+::timer}$<$ Duration $>$\+::\hyperlink{classcpen333_1_1thread_1_1timer}{timer} (\begin{DoxyParamCaption}\item[{const Duration \&}]{period,  }\item[{Func \&\&}]{func,  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a timer with a callback function. 
+
+The callback function func(args...) is executed on every tick. The function execution time should be well within a single tick period. Callbacks are executed in a single thread, meaning that if one execution does not finish before the next tick, calls will be accumulated and run sequentially.
+
+The timer is N\+OT started automatically. It must be started by calling \hyperlink{classcpen333_1_1thread_1_1timer_a0d1be90402f46912966ec5fc13707bce}{start()}.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Func} & callback function type \\
+\hline
+{\em Args} & callback argument types \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em period} & tick interval \\
+\hline
+{\em func} & callback function \\
+\hline
+{\em args} & callback arguments \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1timer_a4c25e491b57438c7a60fe54b45b369b8}\label{classcpen333_1_1thread_1_1timer_a4c25e491b57438c7a60fe54b45b369b8}} 
+\index{cpen333\+::thread\+::timer@{cpen333\+::thread\+::timer}!````~timer@{$\sim$timer}}
+\index{````~timer@{$\sim$timer}!cpen333\+::thread\+::timer@{cpen333\+::thread\+::timer}}
+\subsubsection{\texorpdfstring{$\sim$timer()}{~timer()}}
+{\footnotesize\ttfamily template$<$typename Duration $>$ \\
+\hyperlink{classcpen333_1_1thread_1_1timer}{cpen333\+::thread\+::timer}$<$ Duration $>$\+::$\sim$\hyperlink{classcpen333_1_1thread_1_1timer}{timer} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor. 
+
+Runs any pending callbacks and terminates the timer 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1timer_a339ef2ea452a86d83a0f41c7d4e255b0}\label{classcpen333_1_1thread_1_1timer_a339ef2ea452a86d83a0f41c7d4e255b0}} 
+\index{cpen333\+::thread\+::timer@{cpen333\+::thread\+::timer}!running@{running}}
+\index{running@{running}!cpen333\+::thread\+::timer@{cpen333\+::thread\+::timer}}
+\subsubsection{\texorpdfstring{running()}{running()}}
+{\footnotesize\ttfamily template$<$typename Duration $>$ \\
+bool \hyperlink{classcpen333_1_1thread_1_1timer}{cpen333\+::thread\+::timer}$<$ Duration $>$\+::running (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if timer is running. 
+
+\begin{DoxyReturn}{Returns}
+true if running, false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1timer_a0d1be90402f46912966ec5fc13707bce}\label{classcpen333_1_1thread_1_1timer_a0d1be90402f46912966ec5fc13707bce}} 
+\index{cpen333\+::thread\+::timer@{cpen333\+::thread\+::timer}!start@{start}}
+\index{start@{start}!cpen333\+::thread\+::timer@{cpen333\+::thread\+::timer}}
+\subsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily template$<$typename Duration $>$ \\
+void \hyperlink{classcpen333_1_1thread_1_1timer}{cpen333\+::thread\+::timer}$<$ Duration $>$\+::start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Start timer running. 
+
+Resets clock to zero and \char`\"{}test\char`\"{} flag \mbox{\Hypertarget{classcpen333_1_1thread_1_1timer_afa3811e04ef58d3040935c49aca19948}\label{classcpen333_1_1thread_1_1timer_afa3811e04ef58d3040935c49aca19948}} 
+\index{cpen333\+::thread\+::timer@{cpen333\+::thread\+::timer}!stop@{stop}}
+\index{stop@{stop}!cpen333\+::thread\+::timer@{cpen333\+::thread\+::timer}}
+\subsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily template$<$typename Duration $>$ \\
+void \hyperlink{classcpen333_1_1thread_1_1timer}{cpen333\+::thread\+::timer}$<$ Duration $>$\+::stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Stops timer running. 
+
+Leaves \char`\"{}test\char`\"{} flag intact to see if timer has gone off \mbox{\Hypertarget{classcpen333_1_1thread_1_1timer_af81a4656b66d8bebd7497ffe826f4373}\label{classcpen333_1_1thread_1_1timer_af81a4656b66d8bebd7497ffe826f4373}} 
+\index{cpen333\+::thread\+::timer@{cpen333\+::thread\+::timer}!test@{test}}
+\index{test@{test}!cpen333\+::thread\+::timer@{cpen333\+::thread\+::timer}}
+\subsubsection{\texorpdfstring{test()}{test()}}
+{\footnotesize\ttfamily template$<$typename Duration $>$ \\
+bool \hyperlink{classcpen333_1_1thread_1_1timer}{cpen333\+::thread\+::timer}$<$ Duration $>$\+::test (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tests if timer has gone off since last reset. 
+
+\begin{DoxyReturn}{Returns}
+true if timer has gone off 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1timer_a6fc134f093e0ff35ef1baebefd62ed8b}\label{classcpen333_1_1thread_1_1timer_a6fc134f093e0ff35ef1baebefd62ed8b}} 
+\index{cpen333\+::thread\+::timer@{cpen333\+::thread\+::timer}!test\+\_\+and\+\_\+reset@{test\+\_\+and\+\_\+reset}}
+\index{test\+\_\+and\+\_\+reset@{test\+\_\+and\+\_\+reset}!cpen333\+::thread\+::timer@{cpen333\+::thread\+::timer}}
+\subsubsection{\texorpdfstring{test\+\_\+and\+\_\+reset()}{test\_and\_reset()}}
+{\footnotesize\ttfamily template$<$typename Duration $>$ \\
+bool \hyperlink{classcpen333_1_1thread_1_1timer}{cpen333\+::thread\+::timer}$<$ Duration $>$\+::test\+\_\+and\+\_\+reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Test if timer has gone off since last call, and resets flag. 
+
+\begin{DoxyReturn}{Returns}
+true if timer has gone off since last call 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1timer_aecbb193d8d58a41488881fd795aac9e1}\label{classcpen333_1_1thread_1_1timer_aecbb193d8d58a41488881fd795aac9e1}} 
+\index{cpen333\+::thread\+::timer@{cpen333\+::thread\+::timer}!wait@{wait}}
+\index{wait@{wait}!cpen333\+::thread\+::timer@{cpen333\+::thread\+::timer}}
+\subsubsection{\texorpdfstring{wait()}{wait()}}
+{\footnotesize\ttfamily template$<$typename Duration $>$ \\
+void \hyperlink{classcpen333_1_1thread_1_1timer}{cpen333\+::thread\+::timer}$<$ Duration $>$\+::wait (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Waits until the next tick event. 
+
+Blocks the current thread until the next tick event, or the timer is stopped. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/thread/timer.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,313 @@
+\hypertarget{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair}{}\section{cpen333\+:\+:process\+:\+:impl\+:\+:shared\+\_\+mutex\+\_\+fair Class Reference}
+\label{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair}\index{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair@{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair}}
+
+
+An inter-\/process shared mutex implementation with balanced priorities.  
+
+
+
+
+{\ttfamily \#include $<$shared\+\_\+mutex\+\_\+fair.\+h$>$}
+
+Inheritance diagram for cpen333\+:\+:process\+:\+:impl\+:\+:shared\+\_\+mutex\+\_\+fair\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a4a46bce7595b9f2a29067723f3b72b5e}{shared\+\_\+mutex\+\_\+fair} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Constructor, creates a fair shared mutex. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a9660ca9c813290ded68578cf5175d966}\label{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a9660ca9c813290ded68578cf5175d966}} 
+{\bfseries shared\+\_\+mutex\+\_\+fair} (const \hyperlink{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair}{shared\+\_\+mutex\+\_\+fair} \&)=delete
+\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a9b61874654e45ccff9ee06c841e6e0a4}\label{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a9b61874654e45ccff9ee06c841e6e0a4}} 
+{\bfseries shared\+\_\+mutex\+\_\+fair} (\hyperlink{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair}{shared\+\_\+mutex\+\_\+fair} \&\&)=delete
+\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a68d7923baa7fe01d8109d61cb4fec8d9}\label{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a68d7923baa7fe01d8109d61cb4fec8d9}} 
+\hyperlink{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair}{shared\+\_\+mutex\+\_\+fair} \& {\bfseries operator=} (const \hyperlink{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair}{shared\+\_\+mutex\+\_\+fair} \&)=delete
+\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a282afc005f687935cb75f9cea0dbbb81}\label{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a282afc005f687935cb75f9cea0dbbb81}} 
+\hyperlink{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair}{shared\+\_\+mutex\+\_\+fair} \& {\bfseries operator=} (\hyperlink{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair}{shared\+\_\+mutex\+\_\+fair} \&\&)=delete
+\item 
+void \hyperlink{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a11641159a61a83eda9713891f9f29159}{lock\+\_\+shared} ()
+\begin{DoxyCompactList}\small\item\em Lock the mutex in shared access mode. \end{DoxyCompactList}\item 
+bool \hyperlink{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a1d1a77e135745777f6476fe0abcca078}{try\+\_\+lock\+\_\+shared} ()
+\begin{DoxyCompactList}\small\item\em Tries to lock the mutex in shared access mode. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_afa970da78252148b1ff049be3c239155}{unlock\+\_\+shared} ()
+\begin{DoxyCompactList}\small\item\em Unlocks one instance of shared access. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a85de84ee97bdf015411169a02935dc4d}{lock} ()
+\begin{DoxyCompactList}\small\item\em Locks the mutex in exclusive access mode. \end{DoxyCompactList}\item 
+bool \hyperlink{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_aaac6ea293ec760cb35eefeb004503e9a}{try\+\_\+lock} ()
+\begin{DoxyCompactList}\small\item\em Tries to lock the mutex in exclusive access mode. \end{DoxyCompactList}\item 
+void \hyperlink{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a52f1959d5dfe0c08b911e0c4b06ce61c}{unlock} ()
+\begin{DoxyCompactList}\small\item\em Unlocks the exclusively-\/locked mutex. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Rep , class Period $>$ }\\bool \hyperlink{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a949f9ed2c12c14bd2cade7ec96dd3adb}{try\+\_\+lock\+\_\+for} (const std\+::chrono\+::duration$<$ Rep, Period $>$ \&timeout\+\_\+duration)
+\begin{DoxyCompactList}\small\item\em Try to exclusively lock the mutex, with a relative timeout. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Clock , class Duration $>$ }\\bool \hyperlink{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_ab8acef917db5784868e439a26a72343b}{try\+\_\+lock\+\_\+until} (const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&timeout\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Try to exclusively lock the mutex, within an absolute timeout period. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Rep , class Period $>$ }\\bool \hyperlink{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a0927a5897a261f5eb992eb442145fdf5}{try\+\_\+lock\+\_\+shared\+\_\+for} (const std\+::chrono\+::duration$<$ Rep, Period $>$ \&timeout\+\_\+duration)
+\begin{DoxyCompactList}\small\item\em Try to lock the mutex in shared mode, with a relative timeout. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Clock , class Duration $>$ }\\bool \hyperlink{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_af45bf5f8271a18b7cf3e737288d38025}{try\+\_\+lock\+\_\+shared\+\_\+until} (const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&timeout\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Try to lock the mutex in shared mode, with absolute timeout. \end{DoxyCompactList}\item 
+bool \hyperlink{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a40e20137e0c27f4a742ab6c5388eb61b}{unlink} ()
+\begin{DoxyCompactList}\small\item\em Detaches the name from the named resource. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \hyperlink{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a956a4efec20df5852fef56bfd2a22ea2}{unlink} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Unlinks the name without needing to create a resource. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+An inter-\/process shared mutex implementation with balanced priorities. 
+
+A more fair shared mutex, access is granted in batches\+: 1 writer, batch of readers, 1 writer, batch of readers Based on the alternating method described here\+: \href{http://www.tools-of-computing.com/tc/CS/Monitors/AlternatingRW.htm}{\tt http\+://www.\+tools-\/of-\/computing.\+com/tc/\+C\+S/\+Monitors/\+Alternating\+R\+W.\+htm} 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a4a46bce7595b9f2a29067723f3b72b5e}\label{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a4a46bce7595b9f2a29067723f3b72b5e}} 
+\index{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair@{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair}!shared\+\_\+mutex\+\_\+fair@{shared\+\_\+mutex\+\_\+fair}}
+\index{shared\+\_\+mutex\+\_\+fair@{shared\+\_\+mutex\+\_\+fair}!cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair@{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair}}
+\subsubsection{\texorpdfstring{shared\+\_\+mutex\+\_\+fair()}{shared\_mutex\_fair()}}
+{\footnotesize\ttfamily cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair\+::shared\+\_\+mutex\+\_\+fair (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor, creates a fair shared mutex. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & identifier for creating or connecting to an existing inter-\/process shared mutex \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a85de84ee97bdf015411169a02935dc4d}\label{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a85de84ee97bdf015411169a02935dc4d}} 
+\index{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair@{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair}!lock@{lock}}
+\index{lock@{lock}!cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair@{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair}}
+\subsubsection{\texorpdfstring{lock()}{lock()}}
+{\footnotesize\ttfamily void cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair\+::lock (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Locks the mutex in exclusive access mode. 
+
+Only one thread can lock in exclusive access mode. This method will block if the mutex is currently locked in either shared or exclusive mode. \mbox{\Hypertarget{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a11641159a61a83eda9713891f9f29159}\label{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a11641159a61a83eda9713891f9f29159}} 
+\index{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair@{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair}!lock\+\_\+shared@{lock\+\_\+shared}}
+\index{lock\+\_\+shared@{lock\+\_\+shared}!cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair@{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair}}
+\subsubsection{\texorpdfstring{lock\+\_\+shared()}{lock\_shared()}}
+{\footnotesize\ttfamily void cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair\+::lock\+\_\+shared (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Lock the mutex in shared access mode. 
+
+Multiple threads can lock in shared mode concurrently, allowing simultaneous access. This method will block if the mutex is currently locked in exclusive mode. \mbox{\Hypertarget{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_aaac6ea293ec760cb35eefeb004503e9a}\label{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_aaac6ea293ec760cb35eefeb004503e9a}} 
+\index{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair@{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair}!try\+\_\+lock@{try\+\_\+lock}}
+\index{try\+\_\+lock@{try\+\_\+lock}!cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair@{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair}}
+\subsubsection{\texorpdfstring{try\+\_\+lock()}{try\_lock()}}
+{\footnotesize\ttfamily bool cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair\+::try\+\_\+lock (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to lock the mutex in exclusive access mode. 
+
+Only one thread can lock in exclusive access mode. This method returns immediately.
+
+\begin{DoxyReturn}{Returns}
+true if successfully locked, false if already locked in either shared or exclusive access mode 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a949f9ed2c12c14bd2cade7ec96dd3adb}\label{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a949f9ed2c12c14bd2cade7ec96dd3adb}} 
+\index{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair@{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair}!try\+\_\+lock\+\_\+for@{try\+\_\+lock\+\_\+for}}
+\index{try\+\_\+lock\+\_\+for@{try\+\_\+lock\+\_\+for}!cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair@{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair}}
+\subsubsection{\texorpdfstring{try\+\_\+lock\+\_\+for()}{try\_lock\_for()}}
+{\footnotesize\ttfamily template$<$class Rep , class Period $>$ \\
+bool cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair\+::try\+\_\+lock\+\_\+for (\begin{DoxyParamCaption}\item[{const std\+::chrono\+::duration$<$ Rep, Period $>$ \&}]{timeout\+\_\+duration }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Try to exclusively lock the mutex, with a relative timeout. 
+
+Tries to lock the mutex in exclusive-\/access (write) mode, returns if the mutex has been unavailable for the specified timeout duration
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Rep} & duration representation \\
+\hline
+{\em Period} & duration period \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em timeout\+\_\+duration} & timeout duration \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if locked successfully 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a1d1a77e135745777f6476fe0abcca078}\label{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a1d1a77e135745777f6476fe0abcca078}} 
+\index{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair@{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair}!try\+\_\+lock\+\_\+shared@{try\+\_\+lock\+\_\+shared}}
+\index{try\+\_\+lock\+\_\+shared@{try\+\_\+lock\+\_\+shared}!cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair@{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair}}
+\subsubsection{\texorpdfstring{try\+\_\+lock\+\_\+shared()}{try\_lock\_shared()}}
+{\footnotesize\ttfamily bool cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair\+::try\+\_\+lock\+\_\+shared (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to lock the mutex in shared access mode. 
+
+Multiple threads can lock in shared mode concurrently, allowing simultaneous access. This method returns immediately.
+
+\begin{DoxyReturn}{Returns}
+true if successfully locked, false if mutex is currently locked in exclusive access mode 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a0927a5897a261f5eb992eb442145fdf5}\label{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a0927a5897a261f5eb992eb442145fdf5}} 
+\index{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair@{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair}!try\+\_\+lock\+\_\+shared\+\_\+for@{try\+\_\+lock\+\_\+shared\+\_\+for}}
+\index{try\+\_\+lock\+\_\+shared\+\_\+for@{try\+\_\+lock\+\_\+shared\+\_\+for}!cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair@{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair}}
+\subsubsection{\texorpdfstring{try\+\_\+lock\+\_\+shared\+\_\+for()}{try\_lock\_shared\_for()}}
+{\footnotesize\ttfamily template$<$class Rep , class Period $>$ \\
+bool cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair\+::try\+\_\+lock\+\_\+shared\+\_\+for (\begin{DoxyParamCaption}\item[{const std\+::chrono\+::duration$<$ Rep, Period $>$ \&}]{timeout\+\_\+duration }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Try to lock the mutex in shared mode, with a relative timeout. 
+
+Tries to lock the mutex in shared-\/access (read) mode, returns if the mutex has been unavailable for the specified timeout duration
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Rep} & duration representation \\
+\hline
+{\em Period} & duration period \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em timeout\+\_\+duration} & timeout duration \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if locked successfully 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_af45bf5f8271a18b7cf3e737288d38025}\label{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_af45bf5f8271a18b7cf3e737288d38025}} 
+\index{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair@{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair}!try\+\_\+lock\+\_\+shared\+\_\+until@{try\+\_\+lock\+\_\+shared\+\_\+until}}
+\index{try\+\_\+lock\+\_\+shared\+\_\+until@{try\+\_\+lock\+\_\+shared\+\_\+until}!cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair@{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair}}
+\subsubsection{\texorpdfstring{try\+\_\+lock\+\_\+shared\+\_\+until()}{try\_lock\_shared\_until()}}
+{\footnotesize\ttfamily template$<$class Clock , class Duration $>$ \\
+bool cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair\+::try\+\_\+lock\+\_\+shared\+\_\+until (\begin{DoxyParamCaption}\item[{const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&}]{timeout\+\_\+time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Try to lock the mutex in shared mode, with absolute timeout. 
+
+Tries to lock the mutex in shared-\/access (read) mode, returns if the mutex has been unavailable until specified time point has been reached
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Clock} & clock representation \\
+\hline
+{\em Duration} & time \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em timeout\+\_\+time} & time of timeout \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if locked successfully 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_ab8acef917db5784868e439a26a72343b}\label{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_ab8acef917db5784868e439a26a72343b}} 
+\index{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair@{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair}!try\+\_\+lock\+\_\+until@{try\+\_\+lock\+\_\+until}}
+\index{try\+\_\+lock\+\_\+until@{try\+\_\+lock\+\_\+until}!cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair@{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair}}
+\subsubsection{\texorpdfstring{try\+\_\+lock\+\_\+until()}{try\_lock\_until()}}
+{\footnotesize\ttfamily template$<$class Clock , class Duration $>$ \\
+bool cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair\+::try\+\_\+lock\+\_\+until (\begin{DoxyParamCaption}\item[{const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&}]{timeout\+\_\+time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Try to exclusively lock the mutex, within an absolute timeout period. 
+
+Tries to lock the mutex in exclusive-\/access (write) mode, returns if the mutex has been unavailable until specified time point has been reached
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Clock} & clock representation \\
+\hline
+{\em Duration} & time \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em timeout\+\_\+time} & time of timeout \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if locked successfully 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a40e20137e0c27f4a742ab6c5388eb61b}\label{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a40e20137e0c27f4a742ab6c5388eb61b}} 
+\index{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair@{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair}!unlink@{unlink}}
+\index{unlink@{unlink}!cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair@{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair}}
+\subsubsection{\texorpdfstring{unlink()}{unlink()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair\+::unlink (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Detaches the name from the named resource. 
+
+On P\+O\+S\+IX systems, named resources will persist beyond the lifetime of any process that uses them as long as the name has not been unlinked (or until the system is rebooted). Calling {\ttfamily unlink} will detach the name, allowing the resource to be freed once all current users have exited.
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if unlink is successful, {\ttfamily false} if unlinking is not supported or if an error has occurred. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classcpen333_1_1process_1_1named__resource_a5d33168fee48c9b0c58ab8fd96e230ce}{cpen333\+::process\+::named\+\_\+resource}.
+
+\mbox{\Hypertarget{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a956a4efec20df5852fef56bfd2a22ea2}\label{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a956a4efec20df5852fef56bfd2a22ea2}} 
+\index{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair@{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair}!unlink@{unlink}}
+\index{unlink@{unlink}!cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair@{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair}}
+\subsubsection{\texorpdfstring{unlink()}{unlink()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static bool cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair\+::unlink (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Unlinks the name without needing to create a resource. 
+
+Implementers should also provide a static method for unlinking. The purpose is mainly for clean-\/up of existing resources.
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & desired resource name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if unlink successful, {\ttfamily false} if not successful or not supported 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a52f1959d5dfe0c08b911e0c4b06ce61c}\label{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_a52f1959d5dfe0c08b911e0c4b06ce61c}} 
+\index{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair@{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair}!unlock@{unlock}}
+\index{unlock@{unlock}!cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair@{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair}}
+\subsubsection{\texorpdfstring{unlock()}{unlock()}}
+{\footnotesize\ttfamily void cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair\+::unlock (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Unlocks the exclusively-\/locked mutex. 
+
+\mbox{\Hypertarget{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_afa970da78252148b1ff049be3c239155}\label{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair_afa970da78252148b1ff049be3c239155}} 
+\index{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair@{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair}!unlock\+\_\+shared@{unlock\+\_\+shared}}
+\index{unlock\+\_\+shared@{unlock\+\_\+shared}!cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair@{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair}}
+\subsubsection{\texorpdfstring{unlock\+\_\+shared()}{unlock\_shared()}}
+{\footnotesize\ttfamily void cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair\+::unlock\+\_\+shared (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Unlocks one instance of shared access. 
+
+The mutex will continue to remain locked in shared access mode until all shared locks are unlocked. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/impl/\hyperlink{shared__mutex__fair_8h}{shared\+\_\+mutex\+\_\+fair.\+h}\end{DoxyCompactItemize}
