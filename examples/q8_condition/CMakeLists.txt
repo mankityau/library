@@ -15,9 +15,9 @@ include(../../Macros.cmake)
 include_directories(../../include)
 
 #==============  Condition Process ===============================
-add_rt_executable(${PROJECT}_process_car car process src/process/car.cpp)
-add_rt_executable(${PROJECT}_process_pedestrian pedestrian process src/process/pedestrian.cpp)
-add_rt_executable(${PROJECT}_process_intersection intersection process src/process/intersection.cpp)
+add_process_executable(${PROJECT}_process_car car process src/process/car.cpp)
+add_process_executable(${PROJECT}_process_pedestrian pedestrian process src/process/pedestrian.cpp)
+add_process_executable(${PROJECT}_process_intersection intersection process src/process/intersection.cpp)
 add_dependencies(${PROJECT}_process_intersection ${PROJECT}_process_car ${PROJECT}_process_pedestrian)
 install(TARGETS ${PROJECT}_process_intersection ${PROJECT}_process_car ${PROJECT}_process_pedestrian
         DESTINATION bin/${MY_OUTPUT_DIR}/process)

@@ -15,8 +15,8 @@ include(../../Macros.cmake)
 include_directories(../../include)
 
 #==============  Process Monitor ===============================
-add_rt_executable(${PROJECT}_process_child child process src/process/child.cpp)
-add_rt_executable(${PROJECT}_process_mom mom process src/process/mom.cpp)
+add_process_executable(${PROJECT}_process_child child process src/process/child.cpp)
+add_process_executable(${PROJECT}_process_mom mom process src/process/mom.cpp)
 add_dependencies(${PROJECT}_process_mom ${PROJECT}_process_child)
 install(TARGETS ${PROJECT}_process_mom ${PROJECT}_process_child
         DESTINATION bin/${MY_OUTPUT_DIR}/process)

@@ -15,8 +15,8 @@ include(../../Macros.cmake)
 include_directories(../../include)
 
 #==============  Rendezvous Process ===============================
-add_rt_executable(${PROJECT}_process_person person process src/process/person.cpp)
-add_rt_executable(${PROJECT}_process_roller_coaster roller_coaster process src/process/roller_coaster.cpp)
+add_process_executable(${PROJECT}_process_person person process src/process/person.cpp)
+add_process_executable(${PROJECT}_process_roller_coaster roller_coaster process src/process/roller_coaster.cpp)
 add_dependencies(${PROJECT}_process_roller_coaster ${PROJECT}_process_person)
 install(TARGETS ${PROJECT}_process_roller_coaster ${PROJECT}_process_person
         DESTINATION bin/${MY_OUTPUT_DIR}/process)

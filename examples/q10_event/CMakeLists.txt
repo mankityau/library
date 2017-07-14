@@ -15,9 +15,9 @@ include(../../Macros.cmake)
 include_directories(../../include)
 
 #==============  Event Process ===============================
-add_rt_executable(${PROJECT}_process_robot robot process src/process/robot.cpp)
-add_rt_executable(${PROJECT}_process_production_line production_line process src/process/production_line.cpp)
-add_rt_executable(${PROJECT}_process_factory factory process src/process/factory.cpp)
+add_process_executable(${PROJECT}_process_robot robot process src/process/robot.cpp)
+add_process_executable(${PROJECT}_process_production_line production_line process src/process/production_line.cpp)
+add_process_executable(${PROJECT}_process_factory factory process src/process/factory.cpp)
 
 # factory depends on both robot and production_line
 add_dependencies(${PROJECT}_process_factory ${PROJECT}_process_robot ${PROJECT}_process_production_line)

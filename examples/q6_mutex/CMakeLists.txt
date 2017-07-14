@@ -16,9 +16,9 @@ include_directories(../../include)
 
 #==============  Process  ===============================
 
-add_rt_executable(${PROJECT}_process_child_unsafe child_unsafe process src/process/child_unsafe.cpp)
-add_rt_executable(${PROJECT}_process_child_safe child_safe process src/process/child_safe.cpp)
-add_rt_executable(${PROJECT}_process_parent parent process src/process/parent.cpp)
+add_process_executable(${PROJECT}_process_child_unsafe child_unsafe process src/process/child_unsafe.cpp)
+add_process_executable(${PROJECT}_process_child_safe child_safe process src/process/child_safe.cpp)
+add_process_executable(${PROJECT}_process_parent parent process src/process/parent.cpp)
 add_dependencies(${PROJECT}_process_parent ${PROJECT}_process_child_unsafe ${PROJECT}_process_child_safe)
 install(TARGETS ${PROJECT}_process_parent ${PROJECT}_process_child_unsafe ${PROJECT}_process_child_safe
         DESTINATION bin/${MY_OUTPUT_DIR}/process)

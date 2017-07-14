@@ -15,10 +15,10 @@ include(../../Macros.cmake)
 include_directories(../../include)
 
 #==============  Barbershop ===============================
-add_rt_executable(${PROJECT}_barber barber . src/barber.cpp)
-add_rt_executable(${PROJECT}_customer customer . src/customer.cpp)
-add_rt_executable(${PROJECT}_barber_shop barber_shop . src/barber_shop.cpp)
-add_rt_executable(${PROJECT}_sleeping_barbers sleeping_barbers . src/sleeping_barbers.cpp)
+add_process_executable(${PROJECT}_barber barber . src/barber.cpp)
+add_process_executable(${PROJECT}_customer customer . src/customer.cpp)
+add_process_executable(${PROJECT}_barber_shop barber_shop . src/barber_shop.cpp)
+add_process_executable(${PROJECT}_sleeping_barbers sleeping_barbers . src/sleeping_barbers.cpp)
 add_dependencies(${PROJECT}_sleeping_barbers ${PROJECT}_barber ${PROJECT}_customer ${PROJECT}_barber_shop)
 install(TARGETS ${PROJECT}_sleeping_barbers ${PROJECT}_barber ${PROJECT}_customer ${PROJECT}_barber_shop
         DESTINATION bin/${MY_OUTPUT_DIR$})

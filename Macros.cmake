@@ -17,7 +17,7 @@ macro (warnall)
 endmacro (warnall)
 
 # Add an executable linking to the threads and RT library
-macro(add_rt_executable target output_name output_directory sources)
+macro(add_process_executable target output_name output_directory sources)
     add_executable(${target} ${sources})
     target_link_libraries(${target} Threads::Threads)    # link with threads library
     # shared_memory requires linking with the rt library
@@ -27,7 +27,14 @@ macro(add_rt_executable target output_name output_directory sources)
     set_target_properties(${target} PROPERTIES
             OUTPUT_NAME ${output_name}
             RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${output_directory}")
-endmacro(add_rt_executable)
+
+    # auto-set working directory for process executables
+    if (${CMAKE_VERSION} VERSION_GREATER "3.8.0" OR ${CMAKE_VERSION} VERSION_EQUAL "3.8.0")
+        message(STATUS "Setting working directory: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${output_directory}/\$(Configuration)")
+        set_target_properties(${target} PROPERTIES
+                VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${output_directory}/\$(Configuration)")
+    endif()
+endmacro(add_process_executable)
 
 # Add an executable linking to the threads library
 macro(add_thread_executable target output_name output_directory sources)
@@ -36,4 +43,11 @@ macro(add_thread_executable target output_name output_directory sources)
     set_target_properties(${target} PROPERTIES
             OUTPUT_NAME ${output_name}
             RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${output_directory}")
+
+    # auto-set working directory for thread executables
+    if (${CMAKE_VERSION} VERSION_GREATER "3.8.0" OR ${CMAKE_VERSION} VERSION_EQUAL "3.8.0")
+        message(STATUS "Setting working directory: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${output_directory}/\$(Configuration)")
+        set_target_properties(${target} PROPERTIES
+                VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${output_directory}/\$(Configuration)")
+    endif()
 endmacro(add_thread_executable)

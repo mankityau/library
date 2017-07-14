@@ -16,11 +16,11 @@ include_directories(../../include src)
 
 #==============  Process Child ===============================
 
-add_rt_executable(${PROJECT}_process_car car process src/process/car.cpp)
+add_process_executable(${PROJECT}_process_car car process src/process/car.cpp)
 target_include_directories(${PROJECT}_process_car PRIVATE src/process)  # local headers
 
 #==============  Process Parent ===============================
-add_rt_executable(${PROJECT}_process_gas_station gas_station process src/process/gas_station.cpp)
+add_process_executable(${PROJECT}_process_gas_station gas_station process src/process/gas_station.cpp)
 target_include_directories(${PROJECT}_process_gas_station PRIVATE src/process)  # local headers
 
 # gas_station depends on car

@@ -15,9 +15,9 @@ include(../../Macros.cmake)
 include_directories(../../include)
 
 #==============  Process Reader/Writer ===============================
-add_rt_executable(${PROJECT}_process_read read_priority process src/process/read_priority.cpp)
-add_rt_executable(${PROJECT}_process_write write_priority process src/process/write_priority.cpp)
-add_rt_executable(${PROJECT}_process_fair fair_priority process src/process/fair_priority.cpp)
+add_process_executable(${PROJECT}_process_read read_priority process src/process/read_priority.cpp)
+add_process_executable(${PROJECT}_process_write write_priority process src/process/write_priority.cpp)
+add_process_executable(${PROJECT}_process_fair fair_priority process src/process/fair_priority.cpp)
 install(TARGETS ${PROJECT}_process_read ${PROJECT}_process_write ${PROJECT}_process_fair
         DESTINATION bin/${MY_OUTPUT_DIR}/process)
 

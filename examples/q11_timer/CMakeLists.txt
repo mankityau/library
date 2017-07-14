@@ -22,14 +22,11 @@ install(TARGETS ${PROJECT}_simple_timer DESTINATION bin/${MY_OUTPUT_DIR}/simple)
 set(TIMER_ASSET_SRC "${CMAKE_CURRENT_SOURCE_DIR}/src/simple/timer.dat")
 set(TIMER_ASSET_DST "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/simple/timer.dat")
 configure_file(${TIMER_ASSET_SRC} ${TIMER_ASSET_DST} COPYONLY)
-#add_custom_command(TARGET ${PROJECT}_simple_timer
-#        POST_BUILD
-#        COMMAND ${CMAKE_COMMAND} --verbose -E copy ${TIMER_ASSET_SRC} ${TIMER_ASSET_DST})
 install(FILES src/simple/timer.dat DESTINATION bin/${MY_OUTPUT_DIR}/simple)
 
 #==============  Process Faucet ===============================
-add_rt_executable(${PROJECT}_process_faucet faucet process src/process/faucet.cpp)
-add_rt_executable(${PROJECT}_process_house house process src/process/house.cpp)
+add_process_executable(${PROJECT}_process_faucet faucet process src/process/faucet.cpp)
+add_process_executable(${PROJECT}_process_house house process src/process/house.cpp)
 add_dependencies(${PROJECT}_process_house ${PROJECT}_process_faucet)
 install(TARGETS ${PROJECT}_process_house ${PROJECT}_process_faucet
         DESTINATION bin/${MY_OUTPUT_DIR}/process)

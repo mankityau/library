@@ -80,7 +80,7 @@ class sha1 {
 
     uint32_t w[16];
 
-    for (int i = 0; i < 16; i++) w[i] = make_word(ptr + i*4);
+    for (int j = 0; j < 16; j++) w[j] = make_word(ptr + j*4);
 
 #define SHA1_LOAD(i) w[i&15] = rol32(w[(i+13)&15] ^ w[(i+8)&15] ^ w[(i+2)&15] ^ w[i&15], 1);
 #define SHA1_ROUND_0(v,u,x,y,z,i)              z += ((u & (x ^ y)) ^ y) + w[i&15] + c0 + rol32(v, 5); u = rol32(u, 30);
@@ -251,9 +251,9 @@ class sha1 {
   ) const {
     // print hex
     int k = 0;
-    for (int i = 0; i < 5; i++){
+    for (int m = 0; m < 5; m++){
       for (int j = 7; j >= 0; j--){
-        hex[k++] = alphabet[(state[i] >> j * 4) & 0xf];
+        hex[k++] = alphabet[(state[m] >> j * 4) & 0xf];
       }
     }
     if (zero_terminate) hex[k] = '\0';
@@ -277,12 +277,12 @@ class sha1 {
         ((state[4] & 0x0000ffff) << 1*8),
     };
 
-    for (int i = 0; i < 7; i++){
-      uint32_t x = triples[i];
-      base64[i*4 + 0] = table[(x >> 3*6) % 64];
-      base64[i*4 + 1] = table[(x >> 2*6) % 64];
-      base64[i*4 + 2] = table[(x >> 1*6) % 64];
-      base64[i*4 + 3] = table[(x >> 0*6) % 64];
+    for (int j = 0; j < 7; j++){
+      uint32_t x = triples[j];
+      base64[j*4 + 0] = table[(x >> 3*6) % 64];
+      base64[j*4 + 1] = table[(x >> 2*6) % 64];
+      base64[j*4 + 2] = table[(x >> 1*6) % 64];
+      base64[j*4 + 3] = table[(x >> 0*6) % 64];
     }
 
     base64[SHA1_BASE64_SIZE - 2] = '=';

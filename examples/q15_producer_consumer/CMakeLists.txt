@@ -15,9 +15,9 @@ include(../../Macros.cmake)
 include_directories(../../include)
 
 #==============  Bakery ===============================
-add_rt_executable(${PROJECT}_baker baker . src/baker.cpp)
-add_rt_executable(${PROJECT}_cookie_monster cookie_monster . src/cookie_monster.cpp)
-add_rt_executable(${PROJECT}_bakery baker . src/bakery.cpp)
+add_process_executable(${PROJECT}_baker baker . src/baker.cpp)
+add_process_executable(${PROJECT}_cookie_monster cookie_monster . src/cookie_monster.cpp)
+add_process_executable(${PROJECT}_bakery baker . src/bakery.cpp)
 add_dependencies(${PROJECT}_bakery ${PROJECT}_baker ${PROJECT}_cookie_monster)
 install(TARGETS ${PROJECT}_bakery ${PROJECT}_baker ${PROJECT}_cookie_monster
         DESTINATION bin/${MY_OUTPUT_DIR})

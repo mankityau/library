@@ -19,5 +19,5 @@ add_thread_executable(${PROJECT}_sem_unlink sem_unlink . src/sem_unlink.cpp)
 install(TARGETS ${PROJECT}_sem_unlink DESTINATION bin/${MY_OUTPUT_DIR})
 
 #==============  SHM UNLINK ===============================
-add_rt_executable(${PROJECT}_shm_unlink shm_unlink . src/shm_unlink.cpp)
+add_process_executable(${PROJECT}_shm_unlink shm_unlink . src/shm_unlink.cpp)
 install(TARGETS ${PROJECT}_shm_unlink DESTINATION bin/${MY_OUTPUT_DIR})

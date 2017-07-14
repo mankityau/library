@@ -15,9 +15,9 @@ include(../../Macros.cmake)
 include_directories(../../include)
 
 #==============  Condition Variable Process ===============================
-add_rt_executable(${PROJECT}_process_dishwasher dishwasher process src/process/dishwasher.cpp)
-add_rt_executable(${PROJECT}_process_customer customer process src/process/customer.cpp)
-add_rt_executable(${PROJECT}_process_restaurant restaurant process src/process/restaurant.cpp)
+add_process_executable(${PROJECT}_process_dishwasher dishwasher process src/process/dishwasher.cpp)
+add_process_executable(${PROJECT}_process_customer customer process src/process/customer.cpp)
+add_process_executable(${PROJECT}_process_restaurant restaurant process src/process/restaurant.cpp)
 add_dependencies(${PROJECT}_process_restaurant ${PROJECT}_process_dishwasher ${PROJECT}_process_customer)
 install(TARGETS ${PROJECT}_process_restaurant ${PROJECT}_process_dishwasher ${PROJECT}_process_customer
         DESTINATION bin/${MY_OUTPUT_DIR}/process)
