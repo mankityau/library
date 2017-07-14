@@ -1,6 +1,6 @@
 # CPEN333 - Processes and Threads Library and Labs
 
-Course library and labs for CPEN333 - Software Systems Engineering
+Course library and labs for CPEN333 - Software Systems Engineering (University of British Columbia)
 
 Includes a cross-platform header-only library for
 - Process/thread synchronization
