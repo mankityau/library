@@ -7,3 +7,7 @@ Includes a cross-platform header-only library for
 - Inter-process communication
 
 Also contains usage examples that will be valuable for the labs.
+
+Usage:
+- Add the `include` directory to the list of "Include directories" for your compiler
+- Include the desired headers

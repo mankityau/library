@@ -22,6 +22,7 @@ if (DOXYGEN_FOUND)
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
             COMMENT "Generating API documentation with Doxygen"
             VERBATIM )
+    set_target_properties(docs PROPERTIES EXCLUDE_FROM_ALL 1 EXCLUDE_FROM_DEFAULT_BUILD 1)
 else (DOXYGEN_FOUND)
     if (BUILD_DOC)
         message("Doxygen need to be installed to generate the doxygen documentation")
