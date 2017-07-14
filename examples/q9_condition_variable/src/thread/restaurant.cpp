@@ -4,6 +4,8 @@
 #include <mutex>
 #include <condition_variable>
 
+#include "cpen333/util.h"
+
 //
 // Condition variables allow you to wait for a certain condition, as defined by predicate, to hold true.  It is more
 // general than a basic condition.  The predicate evaluation needs to be done under a lock (since it will inevitably
@@ -135,6 +137,8 @@ int main() {
   for (auto& c : customers) {
     c.join();
   }
+
+  cpen333::pause();
 
   return 0;
 }

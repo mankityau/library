@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include "cpen333/util.h"
 
 //
 // Templates allow us to write code more generically, independent of any particular type.
@@ -77,5 +78,6 @@ int main() {
   print_this("JULIET", "O Romeo, Romeo! Wherefore art thou Romeo?");
   print_this("ROMEO", "I'm over here, under the balcony.");
 
+  cpen333::pause();
   return 0;
 }

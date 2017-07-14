@@ -10,6 +10,7 @@
 
 // custom subprocess library
 #include "cpen333/process/subprocess.h"
+#include "cpen333/util.h"
 
 int main(int argc, char* argv[]) {
 
@@ -52,6 +53,8 @@ int main(int argc, char* argv[]) {
   p3.start();
   std::cout << "Waiting For Child3 to Terminate....." << std::endl;
   p3.join();
+
+  cpen333::pause();
 
   return 0;
 }

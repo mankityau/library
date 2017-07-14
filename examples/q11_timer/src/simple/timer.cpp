@@ -3,6 +3,7 @@
 #include <iostream>
 #include <thread>
 #include <string>
+#include "cpen333/util.h"
 #include "cpen333/thread/timer.h"
 
 //
@@ -82,6 +83,8 @@ int main() {
   timer.stop();
 
   std::cout << std::endl << "Done." << std::endl;
+
+  cpen333::pause();
 
   return 0;
 }

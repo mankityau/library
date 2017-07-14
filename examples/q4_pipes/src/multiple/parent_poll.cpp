@@ -71,5 +71,7 @@ int main() {
     delete processes[i];
   }
 
+  cpen333::pause();
+
   return 0;
 }

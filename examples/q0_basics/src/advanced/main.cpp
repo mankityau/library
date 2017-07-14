@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "cpen333/util.h"
 
 int main() {
 
@@ -86,6 +87,8 @@ int main() {
   printfun("I'll be back!");
   printfun("Get to the chopper!");
   printfun("Hasta la vista, baby!");
+
+  cpen333::pause();
 
   return 0;
 }

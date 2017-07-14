@@ -2,6 +2,7 @@
 #include <thread>
 
 #include "common.h"  // include common information (pipe name, data type)
+#include "cpen333/util.h"
 #include "cpen333/process/pipe.h"
 #include "cpen333/process/unlinker.h"
 #include "cpen333/process/subprocess.h"
@@ -75,6 +76,8 @@ int main() {
   p1.join();
 
   std::cout << "Done." << std::endl;
+
+  cpen333::pause();
 
   return 0;
 }

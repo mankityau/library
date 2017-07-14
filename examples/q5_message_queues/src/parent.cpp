@@ -4,6 +4,7 @@
 #include <thread>
 
 #include "common.h"
+#include "cpen333/util.h"
 #include "cpen333/process/subprocess.h"
 #include "cpen333/process/message_queue.h"
 #include "cpen333/process/unlinker.h"
@@ -106,6 +107,9 @@ int main() {
   read_thread.join();
 
   std::cout << "Goodbye." << std::endl;
+
+  cpen333::pause();
+
   return 0;
 
 }

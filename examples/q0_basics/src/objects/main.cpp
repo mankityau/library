@@ -1,4 +1,5 @@
 #include <iostream>  // for printing stuff
+#include "cpen333/util.h"
 #include "Animal.h"  // to reference an Animal
 #include "Cat.h"     // to create a Cat
 #include "Dog.h"     // to create a Dog
@@ -34,5 +35,6 @@ int main() {
   delete wishbone;
   delete garfield;
 
+  cpen333::pause();
   return 0;
 }

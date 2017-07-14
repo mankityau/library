@@ -1,7 +1,8 @@
-#include "BarberShop.h"
-#include "cpen333/process/subprocess.h"
 #include <string>
 #include <thread>
+
+#include "BarberShop.h"
+#include "cpen333/process/subprocess.h"
 #include "cpen333/process/condition.h"
 
 int main() {

@@ -1,5 +1,7 @@
 #include <iostream>
 #include <thread>
+
+#include "cpen333/util.h"
 #include "cpen333/process/subprocess.h"
 #include "cpen333/process/condition_variable.h"
 #include "cpen333/process/mutex.h"
@@ -70,6 +72,8 @@ int main() {
   for (auto& c : customers) {
     c.join();
   }
+
+  cpen333::pause();
 
   return 0;
 }

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <thread>
 #include "BankAccount.h"
+#include "cpen333/util.h"
 #include "cpen333/process/subprocess.h"
 
 
@@ -32,5 +33,6 @@ int main() {
   forschool.Unlink();
 
   std::cout << "Done." << std::endl;
+  cpen333::pause();
 
 }

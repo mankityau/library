@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "cpen333/console.h"
+#include "cpen333/util.h"
 
 
 //
@@ -87,8 +88,8 @@ int main() {
   console.reset();
 
   console.set_cursor_position(28, 4);
-  std::cout << "Press ENTER to exit" << std::endl;
-  std::cin.get();
+
+  cpen333::pause();
 
   console.clear_all();
   return 0;

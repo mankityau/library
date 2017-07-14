@@ -1,4 +1,5 @@
 #include <iostream>
+#include "cpen333/util.h"
 #include "cpen333/process/shared_memory.h"
 #include "cpen333/process/subprocess.h"
 
@@ -91,6 +92,8 @@ int main() {
   datapool.unlink();  // release datapool name so memory can be freed when process terminates
 
   std::cout << "Done." << std::endl;
+
+  cpen333::pause();
 
   return 0;
 }

@@ -8,6 +8,7 @@
 #include <map>
 
 #include <string>
+#include "cpen333/util.h"
 
 int main() {
 
@@ -118,5 +119,6 @@ int main() {
   }
   std::cout << " }" << std::endl;
 
+  cpen333::pause();
   return 0;
 }

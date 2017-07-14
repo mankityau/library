@@ -1,6 +1,7 @@
 #include <iostream>
 #include <thread>
 #include <vector>
+#include "cpen333/util.h"
 #include "cpen333/thread/shared_mutex.h"
 
 //
@@ -76,5 +77,7 @@ int main() {
 
 
   std::cout << std::endl << "Done." << std::endl;
+  cpen333::pause();
+
   return 0;
 }

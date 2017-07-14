@@ -2,6 +2,7 @@
 #include <vector>
 #include <thread>
 
+#include "cpen333/util.h"
 #include "cpen333/thread/semaphore.h"
 
 //
@@ -42,6 +43,8 @@ int main() {
   for (std::thread& car : cars) {
     car.join();
   }
+
+  cpen333::pause();
 
   return 0;
 }

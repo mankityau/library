@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <thread>    // for spawning threads
+#include "cpen333/util.h"
 
 //
 //  Datapools (a.k.a Shared Memory, or Mapped Memory) are simply blocks of shared memory accessible by multiple
@@ -77,5 +78,7 @@ int main() {
   // lambda has only one argument now
   std::thread t2(lambda, "Thread2");
   t2.join();
+
+  cpen333::pause();
 
 }

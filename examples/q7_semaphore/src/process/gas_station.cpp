@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include "cpen333/util.h"
 #include "cpen333/process/subprocess.h"
 #include "cpen333/process/semaphore.h"
 #include "cpen333/process/unlinker.h"
@@ -36,6 +37,8 @@ int main() {
   for (auto& car : cars) {
     car.join();
   }
+
+  cpen333::pause();
 
   return 0;
 }

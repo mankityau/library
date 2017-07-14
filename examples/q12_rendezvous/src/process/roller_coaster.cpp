@@ -1,6 +1,7 @@
 #include <iostream> // for io
 #include <thread>   // for sleep
 
+#include "cpen333/util.h"
 #include "cpen333/process/subprocess.h"
 #include "cpen333/process/rendezvous.h"
 #include "cpen333/process/unlinker.h"  // for unlinking shared resource
@@ -42,6 +43,8 @@ int main() {
   }
 
   std::cout << "Done." << std::endl;
+
+  cpen333::pause();
 
   return 0;
 }

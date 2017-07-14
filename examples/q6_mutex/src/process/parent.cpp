@@ -2,6 +2,7 @@
 #include <string>
 
 #include "common.h"
+#include "cpen333/util.h"
 #include "cpen333/process/shared_memory.h"
 #include "cpen333/process/mutex.h"
 #include "cpen333/process/unlinker.h"
@@ -62,6 +63,8 @@ int main() {
   end = std::chrono::steady_clock::now();
   time = std::chrono::duration_cast<std::chrono::milliseconds>(end-start);
   std::cout << "   Value of a: " << data->a << " , time: " << time.count() << "ms" << std::endl;
+
+  cpen333::pause();
 
   return 0;
 }

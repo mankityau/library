@@ -1,6 +1,7 @@
 #include <iostream>
 #include <thread>
 
+#include "cpen333/util.h"
 #include "cpen333/thread/condition.h"
 
 //
@@ -84,6 +85,8 @@ int main() {
   }
 
   std::cout << "Done." << std::endl;
+
+  cpen333::pause();
 
   return 0;
 }

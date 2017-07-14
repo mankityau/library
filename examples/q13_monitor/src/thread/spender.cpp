@@ -1,6 +1,7 @@
 #include <iostream>
 #include <thread>
 #include "BankAccount.h"
+#include "cpen333/util.h"
 
 //
 // A "Monitor" is an object that ensures safe concurrent access, providing mutual exclusion internally when needed.
@@ -54,5 +55,7 @@ int main() {
   }
 
   std::cout << "Done." << std::endl;
+  cpen333::pause();
+
   return 0;
 }

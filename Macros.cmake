@@ -30,7 +30,6 @@ macro(add_process_executable target output_name output_directory sources)
 
     # auto-set working directory for process executables
     if (${CMAKE_VERSION} VERSION_GREATER "3.8.0" OR ${CMAKE_VERSION} VERSION_EQUAL "3.8.0")
-        message(STATUS "Setting working directory: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${output_directory}/\$(Configuration)")
         set_target_properties(${target} PROPERTIES
                 VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${output_directory}/\$(Configuration)")
     endif()
@@ -46,7 +45,6 @@ macro(add_thread_executable target output_name output_directory sources)
 
     # auto-set working directory for thread executables
     if (${CMAKE_VERSION} VERSION_GREATER "3.8.0" OR ${CMAKE_VERSION} VERSION_EQUAL "3.8.0")
-        message(STATUS "Setting working directory: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${output_directory}/\$(Configuration)")
         set_target_properties(${target} PROPERTIES
                 VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${output_directory}/\$(Configuration)")
     endif()

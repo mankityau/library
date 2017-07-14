@@ -2,6 +2,7 @@
 #include <thread>
 
 #include "CookieQueue.h"
+#include "cpen333/util.h"
 #include "cpen333/process/subprocess.h"
 
 //
@@ -44,5 +45,7 @@ int main() {
   queue.Unlink(); // unlink names to free them on POSIX systems
 
   std::cout << "Goodbye." << std::endl;
+  cpen333::pause();
+
   return 0;
 }

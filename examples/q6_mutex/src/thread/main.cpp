@@ -2,6 +2,8 @@
 #include <thread>
 #include <mutex>
 
+#include "cpen333/util.h"
+
 // shared global variable
 size_t a = 0;
 std::mutex mutex;   // mut(ual)ex(lusion)
@@ -75,6 +77,8 @@ int main() {
   end = std::chrono::steady_clock::now();
   time = std::chrono::duration_cast<std::chrono::milliseconds>(end-start);
   std::cout << "   Value of a: " << a << " , time: " << time.count() << " ms" << std::endl;
+
+  cpen333::pause();
 
   return 0;
 }

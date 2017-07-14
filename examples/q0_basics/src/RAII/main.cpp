@@ -1,4 +1,5 @@
 #include <iostream>
+#include "cpen333/util.h"
 
 //
 // "Resource acquisition is initialization" (RAII) is an important design pattern we will make heavy use of.
@@ -96,5 +97,6 @@ int main() {
   }
   std::cout << "state of lock: " << lock.is_locked() << std::endl;
 
+  cpen333::pause();
   return 0;
 }

@@ -1,3 +1,4 @@
+#include "cpen333/util.h"
 #include "cpen333/process/event.h"
 #include "cpen333/thread/timer.h"
 #include "cpen333/process/subprocess.h"
@@ -30,6 +31,8 @@ int main() {
   for (auto& faucet : faucets) {
     faucet.join();
   }
+
+  cpen333::pause();
 
   return 0;
 }

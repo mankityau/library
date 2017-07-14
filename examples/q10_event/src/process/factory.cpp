@@ -3,6 +3,7 @@
 #include "cpen333/process/subprocess.h"
 
 #include "factory.h"
+#include "cpen333/util.h"
 #include "cpen333/process/event.h"
 #include "cpen333/process/unlinker.h"
 
@@ -36,6 +37,8 @@ int main() {
   robot.join();
 
   std::cout << "Done." << std::endl;
+
+  cpen333::pause();
 
   return 0;
 

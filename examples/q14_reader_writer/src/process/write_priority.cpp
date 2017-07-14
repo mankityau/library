@@ -1,6 +1,7 @@
 #include <iostream>
 #include <thread>
 #include <vector>
+#include "cpen333/util.h"
 #include "cpen333/process/shared_mutex.h"
 #include "cpen333/process/unlinker.h"
 
@@ -83,5 +84,7 @@ int main() {
   }
 
   std::cout << std::endl << "Done." << std::endl;
+  cpen333::pause();
+
   return 0;
 }

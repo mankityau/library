@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <thread>
+
+#include "cpen333/util.h"
 #include "cpen333/thread/event.h"
 #include "cpen333/thread/timer.h"
 
@@ -34,6 +36,8 @@ int main() {
   for (auto& faucet : faucets) {
     faucet.join();
   }
+
+  cpen333::pause();
 
   return 0;
 }

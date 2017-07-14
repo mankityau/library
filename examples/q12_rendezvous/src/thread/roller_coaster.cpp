@@ -2,6 +2,8 @@
 #include <thread>
 #include <vector>
 #include <string>
+
+#include "cpen333/util.h"
 #include "cpen333/thread/rendezvous.h"
 
 //
@@ -46,6 +48,8 @@ int main() {
   }
 
   std::cout << "Done." << std::endl;
+
+  cpen333::pause();
 
   return 0;
 }

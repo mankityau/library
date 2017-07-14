@@ -74,5 +74,7 @@ int main() {
 
   std::cout << "Done." << std::endl;
 
+  cpen333::pause();
+
   return 0;
 }

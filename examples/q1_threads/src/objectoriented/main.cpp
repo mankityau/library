@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include "cpen333/util.h"
 #include "cpen333/thread/thread_object.h"  // custom thread-based objects
 
 //
@@ -86,6 +87,8 @@ int main() {
   std::cout << "object 6 finished with: " << o6 << std::endl;
 
   std::cout << "Finished." << std::endl;
+
+  cpen333::pause();
 
   return 0;
 }

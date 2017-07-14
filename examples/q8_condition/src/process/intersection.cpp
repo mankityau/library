@@ -1,5 +1,6 @@
 #include <iostream>
 #include <thread>
+#include "cpen333/util.h"
 #include "cpen333/process/subprocess.h"
 #include "cpen333/process/condition.h"
 #include "cpen333/process/unlinker.h"
@@ -68,4 +69,6 @@ int main() {
   }
 
   std::cout << "Done." << std::endl;
+
+  cpen333::pause();
 }

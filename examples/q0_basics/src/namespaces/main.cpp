@@ -1,4 +1,5 @@
 #include <iostream> // for cout
+#include "cpen333/util.h"
 #include "foo.h"    // foo's stuff
 #include "bar.h"    // bar's stuff
 
@@ -49,6 +50,8 @@ int main() {
   using Bar = bar::FooBar;      // after c++11
   Bar bar;
   std::cout << bar.Hello() << std::endl;
+
+  cpen333::pause();
 
   return 0;
 }

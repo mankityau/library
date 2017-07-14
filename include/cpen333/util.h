@@ -121,6 +121,23 @@ inline void perror(const std::string& msg) {
 #endif
 }
 
+/**
+ * @brief Pause for input
+ *
+ * Mirrors the Windows system("pause") command in a cross-platform way, waiting for
+ * keyboard input.
+ */
+void pause() {
+#ifdef WINDOWS
+  system("pause");
+#else
+  std::cin.clear();  // flush input
+  std::cout << "Press ENTER to continue . . .";
+  std::string line;
+  std::getline(std::cin, line);
+#endif
+}
+
 }// cpen333
 
 #endif //CPEN333_UTIL_H
