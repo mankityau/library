@@ -13,6 +13,11 @@ Usage:
 - Include the desired headers in your program (see `examples` folder for examples)
 
 
+## Documentation
+
+The main library is heavily documented in-code using Doxygen (http://www.stack.nl/~dimitri/doxygen/download.html).  A compiled version can be viewed here:
+- https://cantonios.github.io/cpen333/docs/html/index.html
+
 ## Building the Examples
 
 The examples *should* compile and run on most platforms and with most IDEs.  I have provided `cmake` files to automate compilation.  On Windows, I prefer to use the MinGW compiler suite.
