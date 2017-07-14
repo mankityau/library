@@ -1,0 +1,10 @@
+#CLion
+/.idea
+
+#cmake builds
+/cmake-build-debug
+build
+bin
+
+#OSX
+.DS_Store
