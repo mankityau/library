@@ -5,7 +5,7 @@ get_filename_component(PROJECT ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 project(${PROJECT})
 
 set(CMAKE_CXX_STANDARD 11)
-include(../../Macros.cmake)          # add_process_executable and add_thread_executable
+include(../../config/Macros.cmake)          # add_process_executable and add_thread_executable
 
 # customize output directory
 set(MY_OUTPUT_DIR ${MY_OUTPUT_DIR}/${PROJECT})

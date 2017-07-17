@@ -3,7 +3,7 @@
 #==========================================================
 
 cmake_minimum_required(VERSION 3.1.3)
-project(labs)
+project(library)
 
 # customize binary directory
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin) # separate binaries from build files
@@ -13,32 +13,40 @@ if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
     set (CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}" CACHE PATH "default install path" FORCE )
 endif()
 
-set(MY_OUTPUT_DIR "")      # blank output directory
+# blank output directory, will be recursively set as we include files
+set(MY_OUTPUT_DIR "")
 
-# include Doxygen documentation support
-include(Doxygen.cmake)
-
-# custom macros
-include(Macros.cmake)
+# Custom CMake Modules: FindMinGW, FindCatch
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/config/")
+# include Doxygen documentation support and custom macros
+include(config/Doxygen.cmake)
+include(config/Macros.cmake)
 warnall()  # enable all warnings
 
 add_subdirectory("examples")
 add_subdirectory("tools")
 
 #==========================================================
-#  Actual Labs
+#  Testing
 #==========================================================
 
+# Allow libraries to be found on MinGW's path
+if (${MINGW})
+    find_package(MinGW)
+    add_mingw_search_dirs()
+endif()
 
-#==========================================================
-#  Testing and Install
-#==========================================================
-
-# Tests
 # Enable top-level testing
-# include (CTest)
 enable_testing()
+
+# Catch tester
+find_package(Catch)
+
 add_subdirectory("test")
+
+#==========================================================
+#  Testing
+#==========================================================
 
 # install header library if not current install directory
 if (NOT ${CMAKE_INSTALL_PREFIX} EQUAL ${CMAKE_SOURCE_DIR} )

@@ -9,7 +9,7 @@ set(MY_OUTPUT_DIR ${MY_OUTPUT_DIR}/${PROJECT})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/${MY_OUTPUT_DIR})
 
 set(CMAKE_CXX_STANDARD 14)        # We need C++14 for shared_mutex!!
-include(../../Macros.cmake)
+include(../../config/Macros.cmake)
 
 # directories to search for header files
 include_directories(../../include)
