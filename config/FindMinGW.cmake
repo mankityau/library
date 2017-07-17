@@ -5,6 +5,8 @@
 #  MINGW_SEARCH_DIRS  - potential root directories
 #  MINGW_ROOT         - main root directory
 #  MINGW_FOUND
+#  add_mingw_search_dirs() - add MinGW directories to search directories for headers/libraries
+
 
 # find MinGW parent path using the executable
 find_program(MINGW_EXE_PATH mingw32-make)
