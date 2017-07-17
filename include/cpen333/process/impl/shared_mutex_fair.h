@@ -16,10 +16,10 @@
  */
 #define SHARED_MUTEX_FAIR_INITIALIZED 0x91271238
 
-#include "cpen333/process/mutex.h"
-#include "cpen333/process/condition_variable.h"
-#include "cpen333/process/shared_memory.h"
-#include "cpen333/process/named_resource.h"
+#include "../mutex.h"
+#include "../condition_variable.h"
+#include "../shared_memory.h"
+#include "../named_resource.h"
 
 namespace cpen333 {
 namespace process {

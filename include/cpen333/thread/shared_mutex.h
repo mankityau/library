@@ -6,8 +6,8 @@
 #define CPEN333_THREAD_SHARED_MUTEX_H
 
 #include <shared_mutex>
-#include "cpen333/thread/impl/shared_mutex_shared.h"
-#include "cpen333/thread/impl/shared_mutex_exclusive.h"
+#include "impl/shared_mutex_shared.h"
+#include "impl/shared_mutex_exclusive.h"
 
 namespace cpen333 {
 namespace thread {

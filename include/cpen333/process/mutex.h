@@ -8,11 +8,11 @@
 
 #include <mutex>  // for locks
 
-#include "cpen333/os.h"
+#include "../os.h"
 #ifdef WINDOWS
-#include "cpen333/process/impl/windows/mutex.h"
+#include "impl/windows/mutex.h"
 #else
-#include "cpen333/process/impl/posix/mutex.h"
+#include "impl/posix/mutex.h"
 #endif
 
 /**

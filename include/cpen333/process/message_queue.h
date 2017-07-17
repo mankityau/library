@@ -13,8 +13,8 @@
 
 #include <string>
 #include <chrono>
-#include "cpen333/process/fifo.h"
-#include "cpen333/process/named_resource.h"
+#include "fifo.h"
+#include "named_resource.h"
 
 namespace cpen333 {
 namespace process {

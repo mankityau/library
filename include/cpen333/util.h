@@ -9,7 +9,7 @@
 #ifndef CPEN333_UTIL_H
 #define CPEN333_UTIL_H
 
-#include "cpen333/os.h"
+#include "os.h"
 #ifdef WINDOWS
 #include <windows.h>
 #include <conio.h>

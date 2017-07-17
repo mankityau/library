@@ -5,15 +5,15 @@
 #ifndef CPEN333_PROCESS_SEMAPHORE_H
 #define CPEN333_PROCESS_SEMAPHORE_H
 
-#include "cpen333/os.h" // identify OS
+#include "../os.h" // identify OS
 
 #ifdef WINDOWS
-#include "cpen333/process/impl/windows/semaphore.h"
+#include "impl/windows/semaphore.h"
 #else
 #ifdef APPLE
-#include "cpen333/process/impl/osx/sem_timedwait.h" // missing sem_timedwait functionality
+#include "impl/osx/sem_timedwait.h" // missing sem_timedwait functionality
 #endif
-#include "cpen333/process/impl/posix/semaphore.h"
+#include "impl/posix/semaphore.h"
 #endif
 
 /**
@@ -24,6 +24,6 @@
  * cpen333::process::posix::semaphore or cpen333::process::windows::semaphore depending on your platform.
  */
 
-#include "cpen333/process/impl/semaphore_guard.h"
+#include "impl/semaphore_guard.h"
 
 #endif //CPEN333_PROCESS_SEMAPHORE_H

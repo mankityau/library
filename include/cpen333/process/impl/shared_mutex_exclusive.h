@@ -19,11 +19,11 @@
  */
 #define SHARED_MUTEX_EXCLUSIVE_INITIALIZED 0x98292338
 
-#include "cpen333/process/mutex.h"
-#include "cpen333/process/semaphore.h"
-#include "cpen333/process/condition.h"
-#include "cpen333/process/shared_memory.h"
-#include "cpen333/process/named_resource.h"
+#include "../mutex.h"
+#include "../semaphore.h"
+#include "../condition.h"
+#include "../shared_memory.h"
+#include "../named_resource.h"
 
 namespace cpen333 {
 namespace process {

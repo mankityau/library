@@ -14,10 +14,10 @@
  */
 #define RENDEZVOUS_INITIALIZED 0x38973823
 
-#include "cpen333/process/named_resource.h"
-#include "cpen333/process/shared_memory.h"
-#include "cpen333/process/semaphore.h"
-#include "cpen333/process/mutex.h"
+#include "named_resource.h"
+#include "shared_memory.h"
+#include "semaphore.h"
+#include "mutex.h"
 
 namespace cpen333 {
 namespace process {

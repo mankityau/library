@@ -13,10 +13,9 @@
 #define SHARED_MEMORY_NAME_SUFFIX "_shm"
 
 #include <string>
-#include <cstring>  // for memcpy
 
-#include "cpen333/util.h"
-#include "cpen333/process/impl/named_resource_base.h"
+#include "../../../util.h"
+#include "../named_resource_base.h"
 
 #include <unistd.h>
 #include <sys/types.h>

@@ -7,7 +7,7 @@
 #define CPEN333_THREAD_SHARED_MUTEX_SHARED_H
 
 #include <mutex>
-#include "cpen333/thread/semaphore.h"
+#include "../semaphore.h"
 
 namespace cpen333 {
 namespace thread {

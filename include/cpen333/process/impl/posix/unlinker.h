@@ -11,7 +11,7 @@
 #include <mutex>
 #include <signal.h>
 
-#include "cpen333/process/named_resource.h"
+#include "../../named_resource.h"
 
 namespace cpen333 {
 namespace process {

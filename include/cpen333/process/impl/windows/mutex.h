@@ -17,8 +17,8 @@
 
 #include <windows.h>
 
-#include "cpen333/util.h"
-#include "cpen333/process/impl/named_resource_base.h"
+#include "../../../util.h"
+#include "../named_resource_base.h"
 
 namespace cpen333 {
 namespace process {

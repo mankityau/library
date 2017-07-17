@@ -30,10 +30,10 @@
  */
 #define PIPE_INITIALIZED 0x18763023
 
-#include "cpen333/process/named_resource.h"
-#include "cpen333/process/mutex.h"
-#include "cpen333/process/semaphore.h"
-#include "cpen333/process/shared_memory.h"
+#include "named_resource.h"
+#include "mutex.h"
+#include "semaphore.h"
+#include "shared_memory.h"
 
 // simulated pipe using shared memory and semaphores
 namespace cpen333 {

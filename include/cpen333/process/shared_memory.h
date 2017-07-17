@@ -5,12 +5,12 @@
 #ifndef CPEN333_PROCESS_SHARED_MEMORY_H
 #define CPEN333_PROCESS_SHARED_MEMORY_H
 
-#include "cpen333/os.h"           // identify OS
+#include "../os.h"           // identify OS
 
 #ifdef WINDOWS
-#include "cpen333/process/impl/windows/shared_memory.h"
+#include "impl/windows/shared_memory.h"
 #else
-#include "cpen333/process/impl/posix/shared_memory.h"
+#include "impl/posix/shared_memory.h"
 #endif
 
 namespace cpen333 {

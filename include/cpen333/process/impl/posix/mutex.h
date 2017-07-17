@@ -17,9 +17,9 @@
 #include <chrono>
 #include <thread>
 
-#include "cpen333/util.h"
-#include "cpen333/process/semaphore.h"
-#include "cpen333/process/named_resource.h"
+#include "../../../util.h"
+#include "../../semaphore.h"
+#include "../../named_resource.h"
 
 namespace cpen333 {
 namespace process {

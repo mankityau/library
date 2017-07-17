@@ -6,9 +6,9 @@
 #define CPEN333_PROCESS_IMPL_NAMED_RESOURCE_H
 
 #include <string>
-#include "cpen333/os.h"
-#include "cpen333/process/named_resource.h"
-#include "cpen333/process/impl/sha1.h"
+#include "../../os.h"
+#include "../named_resource.h"
+#include "sha1.h"
 
 // limit maximum resource name length to this
 // Windows limit is 260, POSIX limit is 251, though OSX limit seems to be 30 :S

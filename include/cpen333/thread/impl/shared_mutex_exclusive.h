@@ -8,8 +8,8 @@
 
 #include <mutex>
 #include <condition_variable>
-#include "cpen333/thread/semaphore.h"
-#include "cpen333/thread/condition.h"
+#include "../semaphore.h"
+#include "../condition.h"
 
 namespace cpen333 {
 namespace thread {

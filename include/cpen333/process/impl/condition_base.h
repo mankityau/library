@@ -31,10 +31,10 @@
 #include <chrono>
 #include <condition_variable>
 
-#include "cpen333/process/named_resource.h"
-#include "cpen333/process/mutex.h"
-#include "cpen333/process/semaphore.h"
-#include "cpen333/process/shared_memory.h"  // for keeping a "waiters" count needed for notify_all()
+#include "../named_resource.h"
+#include "../mutex.h"
+#include "../semaphore.h"
+#include "../shared_memory.h"  // for keeping a "waiters" count needed for notify_all()
 
 namespace cpen333 {
 namespace process {

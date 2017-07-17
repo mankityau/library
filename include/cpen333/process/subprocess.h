@@ -6,12 +6,12 @@
 #define CPEN333_PROCESS_SUBPROCESS_H
 
 // Platform-dependent includes
-#include "cpen333/os.h"
+#include "../os.h"
 
 #ifdef WINDOWS
-#include "cpen333/process/impl/windows/subprocess.h"
+#include "impl/windows/subprocess.h"
 #else
-#include "cpen333/process/impl/posix/subprocess.h"
+#include "impl/posix/subprocess.h"
 #endif
 
 /**

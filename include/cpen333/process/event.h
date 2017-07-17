@@ -14,9 +14,9 @@
 #include <chrono>
 #include <condition_variable>
 
-#include "cpen333/process/named_resource.h"
-#include "cpen333/process/impl/condition_base.h"
-#include "cpen333/process/mutex.h"
+#include "named_resource.h"
+#include "impl/condition_base.h"
+#include "mutex.h"
 
 namespace cpen333 {
 namespace process {

@@ -25,10 +25,10 @@
 #include <string>
 #include <chrono>
 
-#include "cpen333/process/named_resource.h"
-#include "cpen333/process/shared_memory.h"
-#include "cpen333/process/mutex.h"
-#include "cpen333/process/semaphore.h"
+#include "named_resource.h"
+#include "shared_memory.h"
+#include "mutex.h"
+#include "semaphore.h"
 
 namespace cpen333 {
 namespace process {

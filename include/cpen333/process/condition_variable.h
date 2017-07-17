@@ -13,8 +13,8 @@
 #include <string>
 #include <chrono>
 
-#include "cpen333/process/impl/condition_base.h"
-#include "cpen333/process/named_resource.h"
+#include "impl/condition_base.h"
+#include "named_resource.h"
 
 namespace cpen333 {
 namespace process {

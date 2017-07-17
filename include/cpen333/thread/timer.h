@@ -6,7 +6,7 @@
 #include <thread>
 #include <mutex>
 #include <condition_variable>
-#include "cpen333/thread/semaphore.h"
+#include "semaphore.h"
 
 namespace cpen333 {
 namespace thread {

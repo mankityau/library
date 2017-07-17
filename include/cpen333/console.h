@@ -10,8 +10,8 @@
 
 #include <iostream>
 
-#include "cpen333/os.h"
-#include "cpen333/util.h"
+#include "os.h"
+#include "util.h"
 
 #ifdef WINDOWS
 #include <windows.h>

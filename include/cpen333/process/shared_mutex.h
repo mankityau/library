@@ -6,12 +6,12 @@
 #define CPEN333_PROCESS_SHARED_MUTEX_H
 
 #include <shared_mutex>
-#include "cpen333/process/mutex.h"
-#include "cpen333/process/semaphore.h"
-#include "cpen333/process/shared_memory.h"
-#include "cpen333/process/impl/shared_mutex_exclusive.h"
-#include "cpen333/process/impl/shared_mutex_fair.h"
-#include "cpen333/process/impl/shared_mutex_shared.h"
+#include "mutex.h"
+#include "semaphore.h"
+#include "shared_memory.h"
+#include "impl/shared_mutex_exclusive.h"
+#include "impl/shared_mutex_fair.h"
+#include "impl/shared_mutex_shared.h"
 
 namespace cpen333 {
 namespace process {
