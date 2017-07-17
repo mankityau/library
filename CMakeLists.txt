@@ -30,12 +30,6 @@ add_subdirectory("tools")
 #  Testing
 #==========================================================
 
-# Allow libraries to be found on MinGW's path
-#if (${MINGW})
-#    find_package(MinGW)
-#    add_mingw_search_dirs()
-#endif()
-
 # Enable top-level testing
 enable_testing()
 
