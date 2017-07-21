@@ -13,7 +13,11 @@
 #include <windows.h>
 
 #include "../../../util.h"
-#include "../named_resource_base.h"
+
+/**
+ * @brief Special code to indicate subprocess was manually terminated
+ */
+#define SUBPROCESS_TERMINATED 0xFFFFEEEE
 
 namespace cpen333 {
 namespace process {
@@ -37,7 +41,7 @@ class subprocess {
   /**
    * @brief Alias to native handle type, on Windows is a PROCESS_INFORMATION structure
    */
-  using native_handle_type = PROCESS_INFORMATION;
+  using native_handle_type = HANDLE;
 
   /**
    * @brief Constructs a new subprocess
@@ -175,6 +179,15 @@ class subprocess {
     }
     // check wait
     return wait_for(std::chrono::milliseconds(0));
+  }
+
+  /**
+   * @brief Force the process to terminate
+   * @return true if successful
+   */
+  bool terminate() {
+    auto success = TerminateProcess(process_info_.hProcess, SUBPROCESS_TERMINATED);
+    return success;
   }
 
  private:

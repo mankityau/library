@@ -17,7 +17,6 @@
 #include <sys/wait.h>
 
 #include "../../../util.h"
-#include "../named_resource_base.h"
 
 namespace cpen333 {
 namespace process {
@@ -224,6 +223,17 @@ class subprocess {
     }
     // check wait
     return wait_for(std::chrono::milliseconds(0));
+  }
+
+  /**
+   * @brief Force the process to terminate
+   * @return true if successful
+   */
+  bool terminate() {
+    int status = kill(pid_, SIGKILL);
+    if (status != 0) {
+      cpen333::perror("Failed to terminate process.");
+    }
   }
 
 };

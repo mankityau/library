@@ -1,3 +1,7 @@
+/**
+ * @file
+ * @brief Timer implementation with callback function capability
+ */
 #ifndef CPEN333_THREAD_TIMER_H
 #define CPEN333_THREAD_TIMER_H
 
