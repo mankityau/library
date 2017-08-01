@@ -1,11 +1,20 @@
 #CLion
 /.idea
 
-#cmake builds
+#Eclipse
+/.project
+/.cproject
+
+#CMake
 /cmake-build-debug
 build
 bin
 /docs/
+CMakeFiles
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+Makefile
 
 #OSX
 .DS_Store
