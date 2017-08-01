@@ -23,13 +23,22 @@ int main() {
   cpen333::process::unlinker<decltype(safetocross)> crossunlinker(safetocross);
   cpen333::process::unlinker<decltype(safetodrive)> driveunlinker(safetodrive);
 
-  using process = cpen333::process::subprocess ;  // make it easier for us to refer to processes
+  typedef cpen333::process::subprocess process;  // make it easier for us to refer to processes
   process *pedestrians[10]; // 10 pedestrians
   process *cars[10];       // 10 cars
 
   for(int i = 0; i < 10; i++) {
-    pedestrians[i] = new process({"./pedestrian", "safe_to_walk", std::to_string(i + 1)}, true, false);
-    cars[i]  = new process({"./car", "safe_to_drive", std::to_string(i+1)}, true, false);
+    std::vector<std::string> pargs;
+    pargs.push_back("./pedestrian");
+    pargs.push_back("safe_to_walk");
+    pargs.push_back(std::to_string(i+1));
+    pedestrians[i] = new process(pargs, true, false);
+
+    std::vector<std::string> cargs;
+    cargs.push_back("./car");
+    cargs.push_back("safe_to_drive");
+    cargs.push_back(std::to_string(i+1));
+    cars[i]  = new process(cargs, true, false);
   }
 
   // loop while the intersection is not empty

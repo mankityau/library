@@ -22,6 +22,9 @@ struct Cookie {
   CookieType type;
   int baker_id;
   int cookie_id;
+
+  Cookie(CookieType type, int baker_id, int cookie_id) :
+    type(type), baker_id(baker_id), cookie_id(cookie_id) {}
 };
 
 // Circular buffer with semaphores to control access
@@ -100,7 +103,7 @@ class CookieQueue {
     // wait until cookie available
     csem_.wait();
 
-    int loc = 0;  // will store location of cookie to take
+    size_t loc = 0;  // will store location of cookie to take
     {
       // look at index, protect memory from multiple simultaneous pops
       std::lock_guard<cpen333::process::mutex> lock(cmutex_);

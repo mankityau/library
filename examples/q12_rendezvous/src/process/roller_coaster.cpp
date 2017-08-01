@@ -20,20 +20,31 @@ int main() {
   // we want the rendezvous to be unlinked when it goes out of scope
   cpen333::process::unlinker<cpen333::process::rendezvous> unlinker(rendezvous);
 
-  std::vector<std::string> names = {"Heather", "Samantha", "Colleen", "Sophia",
-                                    "Jen", "Joan",};
-
+  std::vector<std::string> names;
+  names.push_back("Heather");
+  names.push_back("Samantha");
+  names.push_back("Colleen");
+  names.push_back("Sophia");
+  names.push_back("Jen");
+  names.push_back("Joan");
 
   // create 6 child process
   std::vector<cpen333::process::subprocess> people;
 
   int wait_time=500;
   for (const auto& name : names) {
+    std::vector<std::string> args;
+    args.push_back("./person");
+    args.push_back("roller_coaster_rendezvous");
+    args.push_back(name);
+    args.push_back(std::to_string(wait_time));
+
     people.push_back(cpen333::process::subprocess(
-        {"./person", "roller_coaster_rendezvous", name, std::to_string(wait_time)},
+        args,
         true,
         true
     ));
+
     wait_time += 500;
   }
 

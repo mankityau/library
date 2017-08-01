@@ -12,8 +12,13 @@ int main() {
   // create a bunch of threads waiting on the tic event
   std::vector<cpen333::process::subprocess> faucets;
   for (int i=0; i<3; ++i) {
+    std::vector<std::string> args;
+    args.push_back("./faucet");
+    args.push_back("clock_tick_event");
+	args.push_back(std::to_string(i+1));
+	args.push_back(std::to_string(15));
     faucets.push_back(cpen333::process::subprocess(
-        {"./faucet", "clock_tic_event", std::to_string(i+1), std::to_string(15)},
+        args,
         true,  // start immediately
         true   // run independently
     ));

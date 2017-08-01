@@ -15,7 +15,7 @@
 // pedestrian thread function
 void pedestrian(int id, cpen333::thread::condition& safetowalk) {
   // record current time for termination condition
-  using clock = std::chrono::steady_clock;
+  typedef std::chrono::steady_clock clock;
   auto start_time = clock::now();
 
   // loop for 60 seconds
@@ -31,7 +31,7 @@ void pedestrian(int id, cpen333::thread::condition& safetowalk) {
 void car(int id, cpen333::thread::condition& safetodrive) {
 
   // record current time for termination condition
-  using clock = std::chrono::steady_clock;
+  typedef std::chrono::steady_clock clock;
   auto start_time = clock::now();
 
   // loop for 60 seconds
@@ -58,7 +58,7 @@ int main() {
   }
 
   // loop for about a minute
-  using clock = std::chrono::steady_clock;
+  typedef std::chrono::steady_clock clock;
   auto start_time = clock::now();
   while(std::chrono::duration_cast<std::chrono::seconds>(clock::now()-start_time).count() < 60)	{
     std::cout << std::endl << "Green Light" << std::endl;

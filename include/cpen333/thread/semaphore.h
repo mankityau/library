@@ -84,7 +84,7 @@ class basic_semaphore {
    * @return true if decrement successful, false otherwise
    */
   bool try_wait() {
-    std::lock_guard<Mutex> lock{mutex_};
+    std::lock_guard<Mutex> lock(mutex_);
     if (count_ > 0) {
       --count_;
       return true;
@@ -127,7 +127,7 @@ class basic_semaphore {
    */
   template<class Clock, class Duration>
   bool wait_until(const std::chrono::time_point<Clock, Duration>& timeout_time) {
-    std::unique_lock<Mutex> lock{mutex_};
+    std::unique_lock<Mutex> lock(mutex_);
     auto finished = cv_.wait_until(lock, timeout_time, [&]{ return count_ > 0; });
     if (finished) {
       --count_;

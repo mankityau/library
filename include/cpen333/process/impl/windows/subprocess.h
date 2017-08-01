@@ -63,14 +63,24 @@ class subprocess {
     }
   }
 
-  // XXX results in ambiguity for common use-cases
-  //  subprocess(const std::string &cmd, bool start = true, bool detached = false) :
-  //      process_info_{}, cmd_{cmd}, detached_{detached},
-  //      started_{false}, terminated_{false} {
-  //    if (start) {
-  //      this->start();
-  //    }
-  //  }
+  /**
+  * @brief Constructs a new subprocess from a command string
+  *
+  * The new process will run the command cmd with argv parameters parsed from the string.  A detached child
+  * process will run in a separate thread, (and on Windows, a separate window) concurrently with the parent process.
+  * If not detached, the parent will wait for a running child to complete.
+  *
+  * @param cmd command and arguments to execute
+  * @param start whether to start the subprocess immediately
+  * @param detached run the subprocess in `detached' mode
+  */
+  subprocess(const std::string &cmd, bool start = true, bool detached = false) :
+      process_info_{}, cmd_{cmd}, detached_{detached},
+      started_{false}, terminated_{false} {
+    if (start) {
+      this->start();
+    }
+  }
 
   /**
    * @copydoc cpen333::process::posix::subprocess::start()

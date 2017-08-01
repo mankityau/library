@@ -128,15 +128,15 @@ class condition_base : public virtual named_resource {
    * @tparam Period duration clock period
    * @param lock external lock
    * @param rel_time relative time to wait
-   * @return std::cv_status to indicate whether or not a timeout has occured
+   * @return true if successful, false iftimeout has occured
    */
   template<class Rep, class Period>
-  std::cv_status wait_for( std::unique_lock<cpen333::process::mutex>& lock,
+  bool wait_for( std::unique_lock<cpen333::process::mutex>& lock,
                            const std::chrono::duration<Rep, Period>& rel_time) {
     if (wait(lock, true, std::chrono::steady_clock::now()+rel_time)) {
-      return std::cv_status::no_timeout;
+      return true;
     }
-    return std::cv_status::timeout;
+    return false;
   }
 
   /**

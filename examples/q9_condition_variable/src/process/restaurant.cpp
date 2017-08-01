@@ -48,11 +48,18 @@ int main() {
   // 2 washers, 20 customers
   for (int i=0; i<2; ++i) {
     // dishwashers in their own separate window
-    washers.push_back(cpen333::process::subprocess({"./dishwasher",std::to_string(i+1)}, true, true));
+    std::vector<std::string> args;
+    args.push_back("./dishwasher");
+    args.push_back(std::to_string(i+1));
+    washers.push_back(cpen333::process::subprocess(args, true, true));
   }
+
   for (int i=0; i<20; ++i) {
     // customers are within same window
-    customers.push_back(cpen333::process::subprocess({"./customer",std::to_string(i+1)}, true, false));
+    std::vector<std::string> args;
+    args.push_back("./customer");
+    args.push_back(std::to_string(i+1)); 
+    customers.push_back(cpen333::process::subprocess(args, true, false));
   }
 
   // wait for some time

@@ -14,7 +14,10 @@ class Philosopher {
   Fork* forks_[2];  // pointer to forks
 
  public:
-  Philosopher(size_t id) : id_{id}, nforks_{0}, forks_{nullptr, nullptr}{}
+  Philosopher(size_t id) : id_(id), nforks_(0), forks_() {
+    forks_[0] = nullptr;
+	forks_[1] = nullptr;
+  }
 
   /**
    * BE SURE TO RELEASE ANY FORKS!!!  We can't do it here because they are mutexes, which

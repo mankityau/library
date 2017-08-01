@@ -79,10 +79,10 @@ class condition_variable : public condition_base, public virtual named_resource 
    * @param lock lock that protects the shared condition information.  All waiting threads
    * must lock the same shared mutex.
    * @param rel_time maximum relative time to wait for condition to be set
-   * @return std::cv_status::timeout if a timeout has elapsed, std::cv_status::no_timeout otherwise
+   * @return true if successful, false if timed out
    */
   template<class Rep, class Period>
-  std::cv_status wait_for( std::unique_lock<cpen333::process::mutex>& lock,
+  bool wait_for( std::unique_lock<cpen333::process::mutex>& lock,
                            const std::chrono::duration<Rep, Period>& rel_time) {
     return condition_base::wait_for(lock, rel_time);
   }

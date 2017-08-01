@@ -75,11 +75,14 @@ class shared_mutex_exclusive : public virtual named_resource {
     }
   }
 
+ private:
   // disable copy/move constructors
-  shared_mutex_exclusive(const shared_mutex_exclusive &) = delete;
-  shared_mutex_exclusive(shared_mutex_exclusive &&) = delete;
-  shared_mutex_exclusive &operator=(const shared_mutex_exclusive &) = delete;
-  shared_mutex_exclusive &operator=(shared_mutex_exclusive &&) = delete;
+  shared_mutex_exclusive(const shared_mutex_exclusive &);
+  shared_mutex_exclusive(shared_mutex_exclusive &&);
+  shared_mutex_exclusive &operator=(const shared_mutex_exclusive &);
+  shared_mutex_exclusive &operator=(shared_mutex_exclusive &&);
+
+ public:
 
   /**
    * @brief Lock the mutex in shared access mode
@@ -338,11 +341,11 @@ class shared_mutex_exclusive : public virtual named_resource {
 /**
  * @brief Alias for default shared mutex with exclusive (write) priority
  */
-using shared_mutex_exclusive = impl::shared_mutex_exclusive;
+typedef impl::shared_mutex_exclusive shared_mutex_exclusive;
 /**
  * @brief Alias for default shared timed mutex with exclusive (write) priority
  */
-using shared_timed_mutex_exclusive = impl::shared_mutex_exclusive;
+typedef impl::shared_mutex_exclusive shared_timed_mutex_exclusive;
 
 } // process
 } // cpen333

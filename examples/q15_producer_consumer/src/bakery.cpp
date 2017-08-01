@@ -18,14 +18,14 @@ int main() {
   CookieQueue queue(COOKIE_QUEUE_NAME, 32);
 
   // start 3 bakers
-  cpen333::process::subprocess baker1({"./baker", "1", "CHOCOLATE_CHIP"}, true, false);
-  cpen333::process::subprocess baker2({"./baker", "2", "OATMEAL_RAISIN"}, true, false);
-  cpen333::process::subprocess baker3({"./baker", "3", "GINGER_SNAP"}, true, false);
+  cpen333::process::subprocess baker1("./baker 1 CHOCOLATE_CHIP", true, false);
+  cpen333::process::subprocess baker2("./baker 2 OATMEAL_RAISIN", true, false);
+  cpen333::process::subprocess baker3("./baker 3 GINGER_SNAP", true, false);
 
   // start 3 cookie monsters
-  cpen333::process::subprocess monster1({"./cookie_monster", "1"}, true, true);
-  cpen333::process::subprocess monster2({"./cookie_monster", "2"}, true, true);
-  cpen333::process::subprocess monster3({"./cookie_monster", "3"}, true, true);
+  cpen333::process::subprocess monster1("./cookie_monster 1", true, true);
+  cpen333::process::subprocess monster2("./cookie_monster 2", true, true);
+  cpen333::process::subprocess monster3("./cookie_monster 3", true, true);
 
   // wait for bakers to finish
   baker1.join();

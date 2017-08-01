@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
   cpen333::process::condition drive(event_name);
 
   // record current time for termination condition
-  using clock = std::chrono::steady_clock;
+  typedef std::chrono::steady_clock clock;
   auto start_time = clock::now();
 
   // loop for 45 seconds

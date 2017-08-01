@@ -30,8 +30,13 @@ int main() {
   // create a shared rendezvous, allowing 6 people
   cpen333::thread::rendezvous rendezvous(6);
 
-  std::vector<std::string> names = {"Heather", "Samantha", "Colleen", "Sophia",
-                                    "Jen", "Joan",};
+  std::vector<std::string> names;
+  names.push_back("Heather");
+  names.push_back("Samantha");
+  names.push_back("Colleen");
+  names.push_back("Sophia");
+  names.push_back("Jen");
+  names.push_back("Joan");
 
   // create 6 child threads
   std::vector<std::thread> people;

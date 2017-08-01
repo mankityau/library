@@ -5,7 +5,7 @@
 #ifndef CPEN333_PROCESS_SHARED_MUTEX_H
 #define CPEN333_PROCESS_SHARED_MUTEX_H
 
-#include <shared_mutex>
+// #include <shared_timed_mutex>
 #include "mutex.h"
 #include "semaphore.h"
 #include "shared_memory.h"
@@ -13,18 +13,20 @@
 #include "impl/shared_mutex_fair.h"
 #include "impl/shared_mutex_shared.h"
 
+#include "impl/shared_lock.h"
+
 namespace cpen333 {
 namespace process {
 
 /**
  * @brief Default shared mutex that uses fair priority
  */
-using shared_mutex = impl::shared_mutex_fair;
+typedef impl::shared_mutex_fair shared_mutex;
 
 /**
  * @brief Default shared timed mutex uses fair priority
  */
-using shared_timed_mutex = impl::shared_mutex_fair;
+typedef impl::shared_mutex_fair shared_timed_mutex;
 
 /**
  * @class cpen333::process::shared_mutex
@@ -57,16 +59,18 @@ class shared_lock_guard {
    * @brief Construct the shared lock guard
    * @param mutex  mutex to lock on constructions
    */
-  shared_lock_guard(SharedMutex& mutex) : mutex_{mutex} {
+  shared_lock_guard(SharedMutex& mutex) : mutex_(mutex) {
     mutex_.lock_shared();
   }
 
+ private:
   // disable copy/move constructors
-  shared_lock_guard(const shared_lock_guard&) = delete;
-  shared_lock_guard(shared_lock_guard&&) = delete;
-  shared_lock_guard& operator=(const shared_lock_guard&) = delete;
-  shared_lock_guard& operator=(shared_lock_guard&&) = delete;
+  shared_lock_guard(const shared_lock_guard&);
+  shared_lock_guard(shared_lock_guard&&);
+  shared_lock_guard& operator=(const shared_lock_guard&);
+  shared_lock_guard& operator=(shared_lock_guard&&);
 
+ public:
   /**
    * @brief Destructor, unlock shared mutex
    */

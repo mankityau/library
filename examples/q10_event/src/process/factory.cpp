@@ -28,9 +28,15 @@ int main() {
   std::cout << "Factory started..." << std::endl;
 
   // create a production line and robot, wait for them to finish
-  cpen333::process::subprocess robot({"./robot"});
+  std::vector<std::string> rargs;
+  rargs.push_back("./robot");
+  cpen333::process::subprocess robot(rargs);
+  
   std::this_thread::sleep_for(std::chrono::seconds(1));  // robot must start waiting first
-  cpen333::process::subprocess production_line({"./production_line"});
+
+  std::vector<std::string> pargs;
+  pargs.push_back("./production_line");
+  cpen333::process::subprocess production_line(pargs);
 
   // wait for production line and robot to finish
   production_line.join();

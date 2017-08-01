@@ -34,14 +34,16 @@ class shared_mutex_shared {
   /**
    * Constructor, creates a read-preferring shared mutex
    */
-  shared_mutex_shared() :  mutex_{}, global_{1}, shared_{0} { }
+  shared_mutex_shared() :  mutex_(), global_(1), shared_(0) { }
 
   // disable copy/move constructors
-  shared_mutex_shared(const shared_mutex_shared &) = delete;
-  shared_mutex_shared(shared_mutex_shared &&) = delete;
-  shared_mutex_shared &operator=(const shared_mutex_shared &) = delete;
-  shared_mutex_shared &operator=(shared_mutex_shared &&) = delete;
+ private:
+  shared_mutex_shared(const shared_mutex_shared &);
+  shared_mutex_shared(shared_mutex_shared &&);
+  shared_mutex_shared &operator=(const shared_mutex_shared &);
+  shared_mutex_shared &operator=(shared_mutex_shared &&);
 
+ public:
 
   /**
    * @copydoc cpen333::thread::impl::shared_mutex_exclusive::lock_shared()
@@ -160,12 +162,12 @@ class shared_mutex_shared {
 /**
  * @brief Alias for default shared mutex with shared (read) priority
  */
-using shared_mutex_shared = impl::shared_mutex_shared;
+typedef impl::shared_mutex_shared shared_mutex_shared;
 
 /**
  * @brief Alias for default shared timed mutex with shared (read) priority
  */
-using shared_timed_mutex_shared = impl::shared_mutex_shared;
+typedef impl::shared_mutex_shared shared_timed_mutex_shared;
 
 } // thread
 } // cpen333

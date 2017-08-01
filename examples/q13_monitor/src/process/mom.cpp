@@ -16,9 +16,12 @@ int main() {
   // BankAccount is a monitor class that provides safe access for depositing/withdrawing funds, and checking balances.
   BankAccount forschool("Jamie");
 
+  std::vector<std::string> child_args;
+  child_args.push_back("./child");
+
   // every week put 200 in
   for (int i=0; i<52; ++i) {
-    cpen333::process::subprocess bigspender({"./child"}, true, false);
+    cpen333::process::subprocess bigspender(child_args, true, false);
 
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
     std::cout << "Giving child $300 for school" << std::endl;

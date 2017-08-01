@@ -59,26 +59,39 @@ class subprocess {
     }
   }
 
-  // XXX results in ambiguity for common use-cases
-  //  subprocess(const std::string &cmd, bool start = true, bool detached = false) :
-  //      pid_{-1}, exec_{}, detached_{detached}, started_{false}, terminated_{false} {
-  //
-  //    wordexp_t p;
-  //    char **w;
-  //    int i;
-  //
-  //    wordexp("[a-c]*.c", &p, 0);
-  //    w = p.we_wordv;
-  //    for (i = 0; i < p.we_wordc; i++) {
-  //      printf("%s\n", w[i]);
-  //      exec_.push_back(w[i]);
-  //    }
-  //    wordfree(&p);
-  //
-  //    if (start) {
-  //      this->start();
-  //    }
-  //  }
+  /**
+   * @brief Constructs a new subprocess from a command string
+   *
+   * The new process will run the command cmd with argv parameters parsed from the string.  A detached child
+   * process will run in a separate thread, concurrently with the parent process.  If not detached, the parent will wait
+   * for a running child to complete.
+   *
+   * NOTE: this is much less safe than subprocess(const std::vector<std::string>,bool,bool), which should
+   * be preferred when there are multiple arguments or if string parsing might be ambiguous
+   *
+   * @param cmd command, potentially containing arguments to parse
+   * @param start whether to start the subprocess immediately
+   * @param detached run the process in `detached' mode
+   */
+  subprocess(const std::string &cmd, bool start = true, bool detached = false) :
+      pid_{-1}, exec_{}, detached_{detached}, started_{false}, terminated_{false} {
+
+    wordexp_t p;
+    char **w;
+    int i;
+
+    wordexp(cmd, &p, 0);
+    w = p.we_wordv;
+    for (i = 0; i < p.we_wordc; i++) {
+      printf("%s\n", w[i]);
+      exec_.push_back(w[i]);
+    }
+    wordfree(&p);
+
+    if (start) {
+      this->start();
+    }
+  }
 
   /**
    * @brief Starts the subprocess

@@ -9,6 +9,7 @@ class BankAccount   {
  private:
   struct BankData {
     double balance ;	// the data to be protected
+	BankData(double balance) : balance(balance) {}
   };
 
   BankData data_;
@@ -76,9 +77,7 @@ class BankAccount   {
 
   // constructor and destructor
   BankAccount () :
-      data_{0}, mutex_{}, cv_{} {
-
-
+      data_(0), mutex_(), cv_() {
   }
 
   ~BankAccount () {}

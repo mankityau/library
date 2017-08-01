@@ -74,10 +74,13 @@ class shared_mutex_fair : public virtual named_resource {
   }
 
   // disable copy/move constructors
-  shared_mutex_fair(const shared_mutex_fair &) = delete;
-  shared_mutex_fair(shared_mutex_fair &&) = delete;
-  shared_mutex_fair &operator=(const shared_mutex_fair &) = delete;
-  shared_mutex_fair &operator=(shared_mutex_fair &&) = delete;
+ private:
+  shared_mutex_fair(const shared_mutex_fair &);
+  shared_mutex_fair(shared_mutex_fair &&);
+  shared_mutex_fair &operator=(const shared_mutex_fair &);
+  shared_mutex_fair &operator=(shared_mutex_fair &&);
+
+ public:
 
   /**
    * @copydoc cpen333::process::impl::shared_mutex_exclusive::lock_shared()
@@ -256,11 +259,11 @@ class shared_mutex_fair : public virtual named_resource {
 /**
  * @brief Alias for default shared mutex with fair priority
  */
-using shared_mutex_fair = impl::shared_mutex_fair;
+typedef impl::shared_mutex_fair shared_mutex_fair;
 /**
  * @brief Alias for default shared timed mutex with fair priority
  */
-using shared_timed_mutex_fair = impl::shared_mutex_fair;
+typedef impl::shared_mutex_fair shared_timed_mutex_fair;
 
 } // process
 } // cpen333

@@ -65,11 +65,14 @@ class shared_mutex_shared : public virtual named_resource {
     }
   }
 
+ private:
   // disable copy/move constructors
-  shared_mutex_shared(const shared_mutex_shared &) = delete;
-  shared_mutex_shared(shared_mutex_shared &&) = delete;
-  shared_mutex_shared &operator=(const shared_mutex_shared &) = delete;
-  shared_mutex_shared &operator=(shared_mutex_shared &&) = delete;
+  shared_mutex_shared(const shared_mutex_shared &);
+  shared_mutex_shared(shared_mutex_shared &&);
+  shared_mutex_shared &operator=(const shared_mutex_shared &);
+  shared_mutex_shared &operator=(shared_mutex_shared &&);
+
+ public:
 
   /**
    * @copydoc cpen333::process::impl::shared_mutex_exclusive::lock_shared()
@@ -207,12 +210,12 @@ class shared_mutex_shared : public virtual named_resource {
 /**
  * @brief Alias for default shared mutex with shared (read) priority
  */
-using shared_mutex_shared = impl::shared_mutex_shared;
+typedef impl::shared_mutex_shared shared_mutex_shared;
 
 /**
  * @brief Alias for default shared timed mutex with shared (read) priority
  */
-using shared_timed_mutex_shared = impl::shared_mutex_shared;
+typedef impl::shared_mutex_shared shared_timed_mutex_shared;
 
 } // process
 } // cpen333
