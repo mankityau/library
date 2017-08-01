@@ -34,7 +34,7 @@ int main(int argc, char* argv[]) {
     std::string pal = message.sender;
     // send message back to sender
     cpen333::process::message_queue<MessageType> tomail(pal);
-    tomail.send({MessageCode::NOTE, std::string("Hello ") + pal + std::string("!"), name});
+    tomail.send(MessageType(MessageCode::NOTE, std::string("Hello ") + pal + std::string("!"), name));
 
   }
 

@@ -49,11 +49,13 @@ class named_resource_base : public virtual named_resource {
   }
 
   // do not allow copying or moving
-  named_resource_base(const named_resource_base &) = delete;
-  named_resource_base(named_resource_base &&) = delete;
-  named_resource_base &operator=(const named_resource_base &) = delete;
-  named_resource_base &operator=(named_resource_base &&) = delete;
+ private:
+  named_resource_base(const named_resource_base &);
+  named_resource_base(named_resource_base &&);
+  named_resource_base &operator=(const named_resource_base &);
+  named_resource_base &operator=(named_resource_base &&);
 
+ public:
   /**
    * @brief Destructor, does nothing
    */

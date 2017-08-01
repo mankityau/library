@@ -42,8 +42,12 @@ int main() {
   auto start = std::chrono::steady_clock::now();
   data->a = 0;
   // run child processes
-  cpen333::process::subprocess p1({"./child_unsafe", "1000000"});
-  cpen333::process::subprocess p2({"./child_unsafe", "1000000"});
+  std::vector<std::string> pargs;
+  pargs.push_back("./child_unsafe");
+  pargs.push_back("1000000");
+
+  cpen333::process::subprocess p1(pargs);
+  cpen333::process::subprocess p2(pargs);
   p1.join();
   p2.join();
   auto end = std::chrono::steady_clock::now();
@@ -55,9 +59,10 @@ int main() {
   std::cout << "Safe access to shared variable 'a':" << std::endl;
   start = std::chrono::steady_clock::now();
   data->a = 0;
+  
   // run child processes
-  cpen333::process::subprocess p3({"./child_safe", "1000000"});
-  cpen333::process::subprocess p4({"./child_safe", "1000000"});
+  cpen333::process::subprocess p3(pargs);
+  cpen333::process::subprocess p4(pargs);
   p3.join();
   p4.join();
   end = std::chrono::steady_clock::now();

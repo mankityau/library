@@ -20,7 +20,7 @@ void sleep(int ms) {
 int main() {
 
   cpen333::console console;
-  using color = cpen333::color;
+  typedef cpen333::color color;
 
   console.set_background_color(color::DARK_MAGENTA);
   console.set_foreground_color(color::WHITE);
@@ -34,7 +34,7 @@ int main() {
   std::cout.flush();  // on linux, doesn't flush until newline or manual
   sleep(2000);
 
-  std::vector<std::string> poem = {"In the great green room", "There was a telephone", "And a red balloon",
+  std::string poem[] = {"In the great green room", "There was a telephone", "And a red balloon",
                                    "And a picture of", "The cow jumping over the moon",
                                    "And there were three little bears", "   sitting on chairs",
                                    "And two little kittens", "And a pair of mittens", "And a little toy house",

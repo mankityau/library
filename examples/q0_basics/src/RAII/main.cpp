@@ -41,7 +41,7 @@ class resource_lock {
  private:
   bool locked_;
  public:
-  resource_lock() : locked_{false}{}  // start unlocked
+  resource_lock() : locked_(false){}  // start unlocked
   void lock() { locked_ = true; }      // lock
   void unlock() { locked_ = false; }   // unlock
   bool is_locked() { return locked_; } // check whether mechanism is locked

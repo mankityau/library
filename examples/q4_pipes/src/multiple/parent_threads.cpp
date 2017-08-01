@@ -46,12 +46,16 @@ int main() {
     std::string pipe_name = std::string(PIPES_MULTIPLE_PREFIX) + std::to_string(i+1);
     pipes[i] = new cpen333::process::pipe(pipe_name, cpen333::process::pipe::READ);
     threads[i] = new std::thread(&thread_consumer, i+1, std::ref(*pipes[i]));
-    processes[i] = new cpen333::process::subprocess({"./child", std::to_string(i+1)}, true, true);
+
+    std::vector<std::string> args;
+    args.push_back("./child");
+    args.push_back(std::to_string(i+1));
+    processes[i] = new cpen333::process::subprocess(args, true, true);
   }
 
   // main loop
-  while(true) {
-    char c = std::cin.get();
+  char c;
+  while(std::cin.get(c)) {
     std::cout << "Parent read " << c << " from keyboard." << std::endl;
     if (c == 'Q' || c == 'q') {
       std::cout << "Shutting down...." << std::endl;

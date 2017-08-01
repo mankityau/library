@@ -25,6 +25,7 @@
 #include <iostream>
 #include <string>
 #include <memory>
+#include <vector>
 
 namespace cpen333 {
 
@@ -48,6 +49,16 @@ std::string string_format( const std::string& format, Args ... args ) {
   std::unique_ptr<char[]> buf( new char[size] );              // unique_ptr will delete memory when done
   std::snprintf( buf.get(), size, format.c_str(), args ... ); // actually do the snprintf
   return std::string( buf.get(), buf.get() + size - 1 );      // create output string
+}
+
+template <typename T, size_t N>
+inline std::vector<T> to_vector(T (&array) [N]) {
+  std::vector<T> out;
+  out.reserve(N);
+  for (int i=0; i<N; ++i) {
+    out.push_back(array[i]);
+  }
+  return out;
 }
 
 #ifndef WINDOWS

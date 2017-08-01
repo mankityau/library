@@ -38,7 +38,7 @@ class shared_memory : public impl::named_resource_base {
   /**
    * @brief Alias to native handle for shared memory
    */
-  using native_handle_type = HANDLE;
+  typedef HANDLE native_handle_type;
 
   /**
    * @copydoc cpen333::process::posix::shared_memory::shared_memory()
@@ -167,7 +167,7 @@ class shared_memory : public impl::named_resource_base {
 /**
  * @brief Alias to Windows native implementation of inter=process shared memory
  */
-using shared_memory = windows::shared_memory;
+typedef windows::shared_memory shared_memory;
 
 } // process
 } // cpen333

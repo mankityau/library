@@ -35,19 +35,22 @@ class basic_semaphore {
   /**
    * @brief Alias to condition variable native handle type
    */
-  using native_handle_type = typename CondVar::native_handle_type;
+  typedef typename CondVar::native_handle_type native_handle_type;
 
   /**
    * @brief Simple constructor that allows setting the initial count
    * @param count resource count (default 1)
    */
-  explicit basic_semaphore(size_t count = 1) : mutex_{}, cv_{}, count_{count} {}
+  explicit basic_semaphore(size_t count = 1) : mutex_(), cv_(), count_(count) {}
 
+ private:
   // do not allow copying or moving
-  basic_semaphore(const basic_semaphore&) = delete;
-  basic_semaphore(basic_semaphore&&) = delete;
-  basic_semaphore& operator=(const basic_semaphore&) = delete;
-  basic_semaphore& operator=(basic_semaphore&&) = delete;
+  basic_semaphore(const basic_semaphore&);
+  basic_semaphore(basic_semaphore&&);
+  basic_semaphore& operator=(const basic_semaphore&);
+  basic_semaphore& operator=(basic_semaphore&&);
+
+ public:
 
   /**
    * @brief Increments the semaphore value
@@ -56,7 +59,7 @@ class basic_semaphore {
    * blocked in a wait() operation will be woken up and will proceed.
    */
   void notify() {
-    std::lock_guard<Mutex> lock{mutex_};
+    std::lock_guard<Mutex> lock(mutex_);
     ++count_;
     cv_.notify_one();
   }
@@ -68,7 +71,7 @@ class basic_semaphore {
    * block until it becomes possible to perform the decrement.
    */
   void wait() {
-    std::unique_lock<Mutex> lock{mutex_};
+    std::unique_lock<Mutex> lock(mutex_);
     cv_.wait(lock, [&]{ return count_ > 0; });
     --count_;
   }
@@ -152,7 +155,7 @@ class basic_semaphore {
 /**
  * @brief Alias to default semaphore implementation with std::mutex and std::condition_variable
  */
-using semaphore = basic_semaphore<std::mutex, std::condition_variable>;
+typedef basic_semaphore<std::mutex, std::condition_variable> semaphore;
 
 /**
  * @brief Semaphore guard, similar to std::lock_guard
@@ -169,7 +172,7 @@ class semaphore_guard {
    * @brief Constructor, waits on semaphore
    * @param sem semaphore to wait on
    */
-  semaphore_guard(SemaphoreType& sem) : sem_{sem} {
+  semaphore_guard(SemaphoreType& sem) : sem_(sem) {
     sem_.wait();
   }
 
@@ -181,10 +184,11 @@ class semaphore_guard {
   }
 
   // do not allow copying or moving
-  semaphore_guard(const semaphore_guard&) = delete;
-  semaphore_guard(semaphore_guard&&) = delete;
-  semaphore_guard& operator=(const semaphore_guard&) = delete;
-  semaphore_guard& operator=(semaphore_guard&&) = delete;
+ private:
+  semaphore_guard(const semaphore_guard&);
+  semaphore_guard(semaphore_guard&&);
+  semaphore_guard& operator=(const semaphore_guard&);
+  semaphore_guard& operator=(semaphore_guard&&);
   
 };
 

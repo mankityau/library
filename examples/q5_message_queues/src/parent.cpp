@@ -35,6 +35,9 @@ struct PalInfo {
   std::string name;
   cpen333::process::subprocess*  process;
   cpen333::process::message_queue<MessageType>* mailbox;
+
+  PalInfo(std::string name, cpen333::process::subprocess* process, cpen333::process::message_queue<MessageType>* mailbox) :
+	  name(name), process(process), mailbox(mailbox) {}
 };
 
 int main() {
@@ -46,16 +49,25 @@ int main() {
   cpen333::process::unlinker<decltype(my_mailbox)> unlink(my_mailbox);
 
   // These are my friends
-  std::vector<std::string> friend_names = {"Tigress", "Master Shifu", "Viper", "Monkey", "Mantis", "Crane"};
+  std::vector<std::string> friend_names;
+  friend_names.push_back("Tigress");
+  friend_names.push_back("Master Shifu");
+  friend_names.push_back("Viper");
+  friend_names.push_back("Monkey");
+  friend_names.push_back("Mantis");
+  friend_names.push_back("Crane");
   std::vector<PalInfo> friends;
 
   // create a bunch of friends and mailboxes
   for (const std::string& pal : friend_names) {
-    friends.push_back(PalInfo{
+    std::vector<std::string> args;
+    args.push_back("./penpal");
+    args.push_back(pal);
+    friends.push_back(PalInfo(
                         pal,
-                        new cpen333::process::subprocess({"./penpal", pal}, true, true),
+                        new cpen333::process::subprocess(args, true, true),
                         new cpen333::process::message_queue<MessageType>(pal)
-                      });
+                      ));
   }
 
   // We will send mail at a fixed rate to each of my friends.  This is
@@ -63,7 +75,7 @@ int main() {
   auto message_blast = [&friends, &my_name]() {
     std::cout << "Blasting message" << std::endl;
     for (PalInfo& pal : friends) {
-      pal.mailbox->send( {MessageCode::NOTE, std::string("Hi ") +  pal.name, my_name} );
+      pal.mailbox->send( MessageType(MessageCode::NOTE, std::string("Hi ") +  pal.name, my_name) );
     }
   };
 

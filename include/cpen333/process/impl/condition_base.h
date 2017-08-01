@@ -54,7 +54,7 @@ class lock_inverter {
    * @brief Constructor
    * @param lock lock to invert
    */
-  lock_inverter(BasicLock& lock) : lock_{lock}{}
+  lock_inverter(BasicLock& lock) : lock_(lock){}
 
   /**
    * @brief Unlocks the underlying lock
@@ -105,11 +105,14 @@ class condition_base : public virtual named_resource {
 
   }
 
+ private:
   // disable copy/move constructors
-  condition_base(const condition_base&) = delete;
-  condition_base(condition_base&&) = delete;
-  condition_base& operator=(const condition_base&) = delete;
-  condition_base& operator=(condition_base&&) = delete;
+  condition_base(const condition_base&);
+  condition_base(condition_base&&);
+  condition_base& operator=(const condition_base&);
+  condition_base& operator=(condition_base&&);
+
+ public:
 
   /**
    * @brief Wait until the thread is notified

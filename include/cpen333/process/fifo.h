@@ -47,7 +47,7 @@ class fifo : public virtual named_resource {
   /**
    * @brief data type stored in buffer
    */
-  using value_type = ValueType;
+  typedef ValueType value_type;
 
   /**
    * @brief Creates or connects to an existing named fifo
@@ -55,12 +55,12 @@ class fifo : public virtual named_resource {
    * @param size if creating, the maximum number of elements that can be stored in the queue without blocking
    */
   fifo(const std::string& name, size_t size = 1024) :
-      memory_{name + std::string(FIFO_SUFFIX), sizeof(fifo_info)+size*sizeof(ValueType)}, // reserve memory
-      info_{nullptr}, data_{nullptr}, // will initialize these after memory valid
-      pmutex_{name + std::string(FIFO_PRODUCER_SUFFIX)},
-      cmutex_{name + std::string(FIFO_CONSUMER_SUFFIX)},
-      psem_{name + std::string(FIFO_PRODUCER_SUFFIX), size},  // start at size of fifo
-      csem_{name + std::string(FIFO_CONSUMER_SUFFIX), 0} {    // start at zero
+      memory_(name + std::string(FIFO_SUFFIX), sizeof(fifo_info)+size*sizeof(ValueType)), // reserve memory
+      info_(nullptr), data_(nullptr), // will initialize these after memory valid
+      pmutex_(name + std::string(FIFO_PRODUCER_SUFFIX)),
+      cmutex_(name + std::string(FIFO_CONSUMER_SUFFIX)),
+      psem_(name + std::string(FIFO_PRODUCER_SUFFIX), size),  // start at size of fifo
+      csem_(name + std::string(FIFO_CONSUMER_SUFFIX), 0) {    // start at zero
 
     // info is at start of memory block, followed by the actual data in the fifo
     info_ = (fifo_info*)memory_.get();

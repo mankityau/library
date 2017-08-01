@@ -9,7 +9,7 @@
 
 namespace cpen333 {
 namespace process {
-namespace windows {
+// namespace windows {  // remove namespace due to issue with VS2012
 
 /**
  * @brief A named-resource wrapper that provides a convenient RAII-style unlinking of the resource name
@@ -26,14 +26,14 @@ class unlinker {
   /**
    * Alias to the named-resource type
    */
-  using type = T;
+  typedef T type;
 
   /**
    * @brief Constructs the object, wrapping the provided resource
    *
    * @param resource resource to unlink when unlinker drops out of scope
    */
-  unlinker(T &resource) : resource_{resource} {}
+  unlinker(T &resource) : resource_(resource) {}
 
   /**
    * @brief Destructor, calls the `unlink()` function of the wrapped resource
@@ -55,14 +55,15 @@ class unlinker {
   T &resource_;
 };
 
-} // windows
+// } // windows
 
-/**
- * @brief Alias to the Windows implementation of an unlinker
- * @tparam T named-resource type
- */
-template<typename T>
-using unlinker = windows::unlinker<T>;
+// Template Alias doesn't work in VS2012
+// /**
+//  * @brief Alias to the Windows implementation of an unlinker
+//  * @tparam T named-resource type
+//  */
+// template<typename T>
+// using unlinker = windows::unlinker<T>;
 
 } // process
 } // cpen333

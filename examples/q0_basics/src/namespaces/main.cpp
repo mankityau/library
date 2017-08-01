@@ -41,13 +41,13 @@ int main() {
   // you can use a specific, localized "using" directive (c++11 and higher)
   // or typedef (prior to c++11)
 
-  // typedef foo::FooBar Foo;   // prior to c++11
-  using Foo = foo::FooBar;      // after c++11
+  typedef foo::FooBar Foo;         // prior to c++11
+  // using Foo = foo::FooBar;      // after c++11
   Foo foo;
   std::cout << foo.Hello() << std::endl;
 
-  // typedef foo::FooBar Foo;   // prior to c++11
-  using Bar = bar::FooBar;      // after c++11
+  typedef foo::FooBar Bar;         // prior to c++11
+  // using Bar = bar::FooBar;      // after c++11
   Bar bar;
   std::cout << bar.Hello() << std::endl;
 

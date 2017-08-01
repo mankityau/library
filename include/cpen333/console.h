@@ -37,91 +37,91 @@ namespace detail {
  * @brief ANSI codes used for POSIX terminal formatting and manipulation
  */
 struct ANSI_CODES {
-  static constexpr const char *FOREGROUND_COLOR_BLACK = "\u001B[30m";
-  static constexpr const char *FOREGROUND_COLOR_DARK_RED = "\u001B[31m";
-  static constexpr const char *FOREGROUND_COLOR_DARK_GREEN = "\u001B[32m";
-  static constexpr const char *FOREGROUND_COLOR_DARK_YELLOW = "\u001B[33m";
-  static constexpr const char *FOREGROUND_COLOR_DARK_BLUE = "\u001B[34m";
-  static constexpr const char *FOREGROUND_COLOR_DARK_MAGENTA = "\u001B[35m";
-  static constexpr const char *FOREGROUND_COLOR_DARK_CYAN = "\u001B[36m";
-  static constexpr const char *FOREGROUND_COLOR_LIGHT_GREY = "\u001B[37m";
-  static constexpr const char *FOREGROUND_COLOR_DEFAULT = "\u001B[39m";
+  static std::string FOREGROUND_COLOR_BLACK() {  return "\u001B[30m"; }
+  static std::string FOREGROUND_COLOR_DARK_RED() {  return "\u001B[31m"; }
+  static std::string FOREGROUND_COLOR_DARK_GREEN() {  return "\u001B[32m"; }
+  static std::string FOREGROUND_COLOR_DARK_YELLOW() {  return "\u001B[33m"; }
+  static std::string FOREGROUND_COLOR_DARK_BLUE() {  return "\u001B[34m"; }
+  static std::string FOREGROUND_COLOR_DARK_MAGENTA() {  return "\u001B[35m"; }
+  static std::string FOREGROUND_COLOR_DARK_CYAN() {  return "\u001B[36m"; }
+  static std::string FOREGROUND_COLOR_LIGHT_GREY() {  return "\u001B[37m"; }
+  static std::string FOREGROUND_COLOR_DEFAULT() {  return "\u001B[39m"; }
 
-  static constexpr const char *BACKGROUND_COLOR_BLACK = "\u001B[40m";
-  static constexpr const char *BACKGROUND_COLOR_DARK_RED = "\u001B[41m";
-  static constexpr const char *BACKGROUND_COLOR_DARK_GREEN = "\u001B[42m";
-  static constexpr const char *BACKGROUND_COLOR_DARK_YELLOW = "\u001B[43m";
-  static constexpr const char *BACKGROUND_COLOR_DARK_BLUE = "\u001B[44m";
-  static constexpr const char *BACKGROUND_COLOR_DARK_MAGENTA = "\u001B[45m";
-  static constexpr const char *BACKGROUND_COLOR_DARK_CYAN = "\u001B[46m";
-  static constexpr const char *BACKGROUND_COLOR_LIGHT_GREY = "\u001B[47m";
-  static constexpr const char *BACKGROUND_COLOR_DEFAULT = "\u001B[49m";
+  static std::string BACKGROUND_COLOR_BLACK() {  return "\u001B[40m"; }
+  static std::string BACKGROUND_COLOR_DARK_RED() {  return "\u001B[41m"; }
+  static std::string BACKGROUND_COLOR_DARK_GREEN() {  return "\u001B[42m"; }
+  static std::string BACKGROUND_COLOR_DARK_YELLOW() {  return "\u001B[43m"; }
+  static std::string BACKGROUND_COLOR_DARK_BLUE() {  return "\u001B[44m"; }
+  static std::string BACKGROUND_COLOR_DARK_MAGENTA() {  return "\u001B[45m"; }
+  static std::string BACKGROUND_COLOR_DARK_CYAN() {  return "\u001B[46m"; }
+  static std::string BACKGROUND_COLOR_LIGHT_GREY() {  return "\u001B[47m"; }
+  static std::string BACKGROUND_COLOR_DEFAULT() {  return "\u001B[49m"; }
 
 #ifdef NO_AIX
   // standard ANSI versions (uses "bold")
-  static constexpr const char *FOREGROUND_COLOR_DARK_GREY = "\u001B[30;1m";
-  static constexpr const char *FOREGROUND_COLOR_RED = "\u001B[31;1m";
-  static constexpr const char *FOREGROUND_COLOR_GREEN = "\u001B[32;1m";
-  static constexpr const char *FOREGROUND_COLOR_YELLOW = "\u001B[33;1m";
-  static constexpr const char *FOREGROUND_COLOR_BLUE = "\u001B[34;1m";
-  static constexpr const char *FOREGROUND_COLOR_MAGENTA = "\u001B[35;1m";
-  static constexpr const char *FOREGROUND_COLOR_CYAN = "\u001B[36;1m";
-  static constexpr const char *FOREGROUND_COLOR_WHITE = "\u001B[37;1m";
+  static std::string FOREGROUND_COLOR_DARK_GREY() {  return "\u001B[30;1m"; }
+  static std::string FOREGROUND_COLOR_RED() {  return "\u001B[31;1m"; }
+  static std::string FOREGROUND_COLOR_GREEN() {  return "\u001B[32;1m"; }
+  static std::string FOREGROUND_COLOR_YELLOW() {  return "\u001B[33;1m"; }
+  static std::string FOREGROUND_COLOR_BLUE() {  return "\u001B[34;1m"; }
+  static std::string FOREGROUND_COLOR_MAGENTA() {  return "\u001B[35;1m"; }
+  static std::string FOREGROUND_COLOR_CYAN() {  return "\u001B[36;1m"; }
+  static std::string FOREGROUND_COLOR_WHITE() {  return "\u001B[37;1m"; }
 
-  static constexpr const char *BACKGROUND_COLOR_DARK_GREY = "\u001B[40;1m";
-  static constexpr const char *BACKGROUND_COLOR_RED = "\u001B[41;1m";
-  static constexpr const char *BACKGROUND_COLOR_GREEN = "\u001B[42;1m";
-  static constexpr const char *BACKGROUND_COLOR_YELLOW = "\u001B[43;1m";
-  static constexpr const char *BACKGROUND_COLOR_BLUE = "\u001B[44;1m";
-  static constexpr const char *BACKGROUND_COLOR_MAGENTA = "\u001B[45;1m";
-  static constexpr const char *BACKGROUND_COLOR_CYAN = "\u001B[46;1m";
-  static constexpr const char *BACKGROUND_COLOR_WHITE = "\u001B[47;1m";
+  static std::string BACKGROUND_COLOR_DARK_GREY() {  return "\u001B[40;1m"; }
+  static std::string BACKGROUND_COLOR_RED() {  return "\u001B[41;1m"; }
+  static std::string BACKGROUND_COLOR_GREEN() {  return "\u001B[42;1m"; }
+  static std::string BACKGROUND_COLOR_YELLOW() {  return "\u001B[43;1m"; }
+  static std::string BACKGROUND_COLOR_BLUE() {  return "\u001B[44;1m"; }
+  static std::string BACKGROUND_COLOR_MAGENTA() {  return "\u001B[45;1m"; }
+  static std::string BACKGROUND_COLOR_CYAN() {  return "\u001B[46;1m"; }
+  static std::string BACKGROUND_COLOR_WHITE() {  return "\u001B[47;1m"; }
 #else
   // AIX versions
-  static constexpr const char *FOREGROUND_COLOR_DARK_GREY = "\u001B[90m";
-  static constexpr const char *FOREGROUND_COLOR_RED = "\u001B[91m";
-  static constexpr const char *FOREGROUND_COLOR_GREEN = "\u001B[92m";
-  static constexpr const char *FOREGROUND_COLOR_YELLOW = "\u001B[93m";
-  static constexpr const char *FOREGROUND_COLOR_BLUE = "\u001B[94m";
-  static constexpr const char *FOREGROUND_COLOR_MAGENTA = "\u001B[95m";
-  static constexpr const char *FOREGROUND_COLOR_CYAN = "\u001B[96m";
-  static constexpr const char *FOREGROUND_COLOR_WHITE = "\u001B[97m";
+  static std::string FOREGROUND_COLOR_DARK_GREY() {  return "\u001B[90m"; }
+  static std::string FOREGROUND_COLOR_RED() {  return "\u001B[91m"; }
+  static std::string FOREGROUND_COLOR_GREEN() {  return "\u001B[92m"; }
+  static std::string FOREGROUND_COLOR_YELLOW() {  return "\u001B[93m"; }
+  static std::string FOREGROUND_COLOR_BLUE() {  return "\u001B[94m"; }
+  static std::string FOREGROUND_COLOR_MAGENTA() {  return "\u001B[95m"; }
+  static std::string FOREGROUND_COLOR_CYAN() {  return "\u001B[96m"; }
+  static std::string FOREGROUND_COLOR_WHITE() {  return "\u001B[97m"; }
 
-  static constexpr const char *BACKGROUND_COLOR_DARK_GREY = "\u001B[100m";
-  static constexpr const char *BACKGROUND_COLOR_RED = "\u001B[101m";
-  static constexpr const char *BACKGROUND_COLOR_GREEN = "\u001B[102m";
-  static constexpr const char *BACKGROUND_COLOR_YELLOW = "\u001B[103m";
-  static constexpr const char *BACKGROUND_COLOR_BLUE = "\u001B[104m";
-  static constexpr const char *BACKGROUND_COLOR_MAGENTA = "\u001B[105m";
-  static constexpr const char *BACKGROUND_COLOR_CYAN = "\u001B[106m";
-  static constexpr const char *BACKGROUND_COLOR_WHITE = "\u001B[107m";
+  static std::string BACKGROUND_COLOR_DARK_GREY() {  return "\u001B[100m"; }
+  static std::string BACKGROUND_COLOR_RED() {  return "\u001B[101m"; }
+  static std::string BACKGROUND_COLOR_GREEN() {  return "\u001B[102m"; }
+  static std::string BACKGROUND_COLOR_YELLOW() {  return "\u001B[103m"; }
+  static std::string BACKGROUND_COLOR_BLUE() {  return "\u001B[104m"; }
+  static std::string BACKGROUND_COLOR_MAGENTA() {  return "\u001B[105m"; }
+  static std::string BACKGROUND_COLOR_CYAN() {  return "\u001B[106m"; }
+  static std::string BACKGROUND_COLOR_WHITE() {  return "\u001B[107m"; }
 #endif
 
-  static constexpr const char *COLOR_RESET = "\u001B[0m";
-  static constexpr const char *COLOR_REVERSE = "\u001B[7m";
-  static constexpr const char *COLOR_UNREVERSE = "\u001B[27m";
+  static std::string COLOR_RESET() {  return "\u001B[0m"; }
+  static std::string COLOR_REVERSE() {  return "\u001B[7m"; }
+  static std::string COLOR_UNREVERSE() {  return "\u001B[27m"; }
 
-  static constexpr const char *ERASE_DISPLAY_TO_END = "\u001B[0J";
-  static constexpr const char *ERASE_DISPLAY_TO_BEGINNING = "\u001B[1J";
-  static constexpr const char *ERASE_DISPLAY = "\u001B[2J";
+  static std::string ERASE_DISPLAY_TO_END() {  return "\u001B[0J"; }
+  static std::string ERASE_DISPLAY_TO_BEGINNING() {  return "\u001B[1J"; }
+  static std::string ERASE_DISPLAY() {  return "\u001B[2J"; }
 
-  static constexpr const char *ERASE_LINE_TO_END = "\u001B[0K";
-  static constexpr const char *ERASE_LINE_TO_BEGINNING = "\u001B[1K";
-  static constexpr const char *ERASE_LINE = "\u001B[2K";
+  static std::string ERASE_LINE_TO_END() {  return "\u001B[0K"; }
+  static std::string ERASE_LINE_TO_BEGINNING() {  return "\u001B[1K"; }
+  static std::string ERASE_LINE() {  return "\u001B[2K"; }
 
-  static constexpr const char *HIDE_CURSOR = "\u001B[?25l";
-  static constexpr const char *SHOW_CURSOR = "\u001B[?25h";
+  static std::string HIDE_CURSOR() {  return "\u001B[?25l"; }
+  static std::string SHOW_CURSOR() {  return "\u001B[?25h"; }
 
   // NOTE: these are format strings taking positions
-  static constexpr const char *CURSOR_HORIZONTAL_ABSOLUTE = "\u001B[%iG";
-  static constexpr const char *CURSOR_POSITION = "\u001B[%i;%iH";
+  static std::string CURSOR_HORIZONTAL_ABSOLUTE() {  return "\u001B[%iG"; }
+  static std::string CURSOR_POSITION() {  return "\u001B[%i;%iH"; }
 
 };
 
 #ifdef WINDOWS
 class console_handler {
-  static constexpr const int FOREGROUND_MASK = 0x0F;
-  static constexpr const int BACKGROUND_MASK = 0xF0;
+  static const int FOREGROUND_MASK = 0x0F;
+  static const int BACKGROUND_MASK = 0xF0;
   int default_attributes_;
  public:
 
@@ -414,71 +414,71 @@ class console_handler {
     // get current color
     switch (color) {
       case BLACK: {
-        std::cout << ANSI_CODES::FOREGROUND_COLOR_BLACK;
+        std::cout << ANSI_CODES::FOREGROUND_COLOR_BLACK();
         break;
       }
       case DARK_RED: {
-        std::cout << ANSI_CODES::FOREGROUND_COLOR_DARK_RED;
+        std::cout << ANSI_CODES::FOREGROUND_COLOR_DARK_RED();
         break;
       }
       case DARK_GREEN: {
-        std::cout << ANSI_CODES::FOREGROUND_COLOR_DARK_GREEN;
+        std::cout << ANSI_CODES::FOREGROUND_COLOR_DARK_GREEN();
         break;
       }
       case DARK_YELLOW: {
-         std::cout << ANSI_CODES::FOREGROUND_COLOR_DARK_YELLOW;
+         std::cout << ANSI_CODES::FOREGROUND_COLOR_DARK_YELLOW();
         break;
       }
       case DARK_BLUE: {
-         std::cout << ANSI_CODES::FOREGROUND_COLOR_DARK_BLUE;
+         std::cout << ANSI_CODES::FOREGROUND_COLOR_DARK_BLUE();
         break;
       }
       case DARK_MAGENTA: {
-         std::cout << ANSI_CODES::FOREGROUND_COLOR_DARK_MAGENTA;
+         std::cout << ANSI_CODES::FOREGROUND_COLOR_DARK_MAGENTA();
          break;
       }
       case DARK_CYAN: {
-        std::cout << ANSI_CODES::FOREGROUND_COLOR_DARK_CYAN;
+        std::cout << ANSI_CODES::FOREGROUND_COLOR_DARK_CYAN();
         break;
       }
       case LIGHT_GREY: {
-        std::cout << ANSI_CODES::FOREGROUND_COLOR_LIGHT_GREY;
+        std::cout << ANSI_CODES::FOREGROUND_COLOR_LIGHT_GREY();
         break;
       }
       case DARK_GREY: {
-        std::cout << ANSI_CODES::FOREGROUND_COLOR_DARK_GREY;
+        std::cout << ANSI_CODES::FOREGROUND_COLOR_DARK_GREY();
         break;
       }
       case RED: {
-        std::cout << ANSI_CODES::FOREGROUND_COLOR_RED;
+        std::cout << ANSI_CODES::FOREGROUND_COLOR_RED();
         break;
       }
       case GREEN: {
-        std::cout << ANSI_CODES::FOREGROUND_COLOR_GREEN;
+        std::cout << ANSI_CODES::FOREGROUND_COLOR_GREEN();
         break;
       }
       case YELLOW: {
-        std::cout << ANSI_CODES::FOREGROUND_COLOR_YELLOW;
+        std::cout << ANSI_CODES::FOREGROUND_COLOR_YELLOW();
         break;
       }
       case BLUE: {
-        std::cout << ANSI_CODES::FOREGROUND_COLOR_BLUE;
+        std::cout << ANSI_CODES::FOREGROUND_COLOR_BLUE();
         break;
       }
       case MAGENTA: {
-        std::cout << ANSI_CODES::FOREGROUND_COLOR_MAGENTA;
+        std::cout << ANSI_CODES::FOREGROUND_COLOR_MAGENTA();
         break;
       }
       case CYAN: {
-        std::cout << ANSI_CODES::FOREGROUND_COLOR_CYAN;
+        std::cout << ANSI_CODES::FOREGROUND_COLOR_CYAN();
         break;
       }
       case WHITE: {
-        std::cout << ANSI_CODES::FOREGROUND_COLOR_WHITE;
+        std::cout << ANSI_CODES::FOREGROUND_COLOR_WHITE();
         break;
       }
       case DEFAULT: {
-        std::cout << ANSI_CODES::FOREGROUND_COLOR_DEFAULT;
+        std::cout << ANSI_CODES::FOREGROUND_COLOR_DEFAULT();
         break;
       }
     }
@@ -493,71 +493,71 @@ class console_handler {
     // get current color
     switch (color) {
       case BLACK: {
-        std::cout << ANSI_CODES::BACKGROUND_COLOR_BLACK;
+        std::cout << ANSI_CODES::BACKGROUND_COLOR_BLACK();
         break;
       }
       case DARK_RED: {
-        std::cout << ANSI_CODES::BACKGROUND_COLOR_DARK_RED;
+        std::cout << ANSI_CODES::BACKGROUND_COLOR_DARK_RED();
         break;
       }
       case DARK_GREEN: {
-        std::cout << ANSI_CODES::BACKGROUND_COLOR_DARK_GREEN;
+        std::cout << ANSI_CODES::BACKGROUND_COLOR_DARK_GREEN();
         break;
       }
       case DARK_YELLOW: {
-         std::cout << ANSI_CODES::BACKGROUND_COLOR_DARK_YELLOW;
+         std::cout << ANSI_CODES::BACKGROUND_COLOR_DARK_YELLOW();
         break;
       }
       case DARK_BLUE: {
-         std::cout << ANSI_CODES::BACKGROUND_COLOR_DARK_BLUE;
+         std::cout << ANSI_CODES::BACKGROUND_COLOR_DARK_BLUE();
         break;
       }
       case DARK_MAGENTA: {
-         std::cout << ANSI_CODES::BACKGROUND_COLOR_DARK_MAGENTA;
+         std::cout << ANSI_CODES::BACKGROUND_COLOR_DARK_MAGENTA();
          break;
       }
       case DARK_CYAN: {
-        std::cout << ANSI_CODES::BACKGROUND_COLOR_DARK_CYAN;
+        std::cout << ANSI_CODES::BACKGROUND_COLOR_DARK_CYAN();
         break;
       }
       case LIGHT_GREY: {
-        std::cout << ANSI_CODES::BACKGROUND_COLOR_LIGHT_GREY;
+        std::cout << ANSI_CODES::BACKGROUND_COLOR_LIGHT_GREY();
         break;
       }
       case DARK_GREY: {
-        std::cout << ANSI_CODES::BACKGROUND_COLOR_DARK_GREY;
+        std::cout << ANSI_CODES::BACKGROUND_COLOR_DARK_GREY();
         break;
       }
       case RED: {
-        std::cout << ANSI_CODES::BACKGROUND_COLOR_RED;
+        std::cout << ANSI_CODES::BACKGROUND_COLOR_RED();
         break;
       }
       case GREEN: {
-        std::cout << ANSI_CODES::BACKGROUND_COLOR_GREEN;
+        std::cout << ANSI_CODES::BACKGROUND_COLOR_GREEN();
         break;
       }
       case YELLOW: {
-        std::cout << ANSI_CODES::BACKGROUND_COLOR_YELLOW;
+        std::cout << ANSI_CODES::BACKGROUND_COLOR_YELLOW();
         break;
       }
       case BLUE: {
-        std::cout << ANSI_CODES::BACKGROUND_COLOR_BLUE;
+        std::cout << ANSI_CODES::BACKGROUND_COLOR_BLUE();
         break;
       }
       case MAGENTA: {
-        std::cout << ANSI_CODES::BACKGROUND_COLOR_MAGENTA;
+        std::cout << ANSI_CODES::BACKGROUND_COLOR_MAGENTA();
         break;
       }
       case CYAN: {
-        std::cout << ANSI_CODES::BACKGROUND_COLOR_CYAN;
+        std::cout << ANSI_CODES::BACKGROUND_COLOR_CYAN();
         break;
       }
       case WHITE: {
-        std::cout << ANSI_CODES::BACKGROUND_COLOR_WHITE;
+        std::cout << ANSI_CODES::BACKGROUND_COLOR_WHITE();
         break;
       }
       case DEFAULT: {
-        std::cout << ANSI_CODES::BACKGROUND_COLOR_DEFAULT;
+        std::cout << ANSI_CODES::BACKGROUND_COLOR_DEFAULT();
         break;
       }
     }
@@ -567,16 +567,16 @@ class console_handler {
   void set_colors_reverse(bool set) {
     std::cout.flush();
     if (set) {
-      std::cout << ANSI_CODES::COLOR_REVERSE;
+      std::cout << ANSI_CODES::COLOR_REVERSE();
     } else {
-      std::cout << ANSI_CODES::COLOR_UNREVERSE;
+      std::cout << ANSI_CODES::COLOR_UNREVERSE();
     }
     std::cout.flush();
   }
 
   void reset_colors() {
     std::cout.flush();
-    std::cout << ANSI_CODES::COLOR_RESET;
+    std::cout << ANSI_CODES::COLOR_RESET();
     std::cout.flush();
   }
 
@@ -597,41 +597,41 @@ class console_handler {
 
   void clear_display() {
     std::cout.flush();
-    std::cout << ANSI_CODES::ERASE_DISPLAY;
+    std::cout << ANSI_CODES::ERASE_DISPLAY();
     std::cout.flush();
   }
 
   void clear_line() {
     std::cout.flush();
-    std::cout << ANSI_CODES::ERASE_LINE;
+    std::cout << ANSI_CODES::ERASE_LINE();
     std::cout.flush();
   }
 
   void clear_line_right() {
     std::cout.flush();
-    std::cout << ANSI_CODES::ERASE_LINE_TO_END;
+    std::cout << ANSI_CODES::ERASE_LINE_TO_END();
     std::cout.flush();
   }
 
   void clear_line_left() {
     std::cout.flush();
-    std::cout << ANSI_CODES::ERASE_LINE_TO_BEGINNING;
+    std::cout << ANSI_CODES::ERASE_LINE_TO_BEGINNING();
     std::cout.flush();
   }
   
   void set_cursor_visible(bool set) {
     std::cout.flush();
     if (set) {
-      std::cout << ANSI_CODES::SHOW_CURSOR;
+      std::cout << ANSI_CODES::SHOW_CURSOR();
     } else {
-      std::cout << ANSI_CODES::HIDE_CURSOR;
+      std::cout << ANSI_CODES::HIDE_CURSOR();
     }
     std::cout.flush();
   }
 
   void reset() {
     std::cout.flush();
-    std::cout << ANSI_CODES::COLOR_RESET;
+    std::cout << ANSI_CODES::COLOR_RESET();
     std::cout.flush();
     set_cursor_visible(true);
 

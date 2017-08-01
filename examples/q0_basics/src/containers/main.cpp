@@ -22,7 +22,10 @@ int main() {
   //=======================================================
   // A vector is like a dynamic array, and can be accessed like one.  You can add to and remove from the back of it.
   // It also has methods to check its size, if it is empty, etc...
-  std::vector<int> vec = {1, 2, 3, 4, 5, 6, 7, 8};
+  std::vector<int> vec;
+  for (int i=0; i<8; ++i) {
+    vec.push_back(i+1);
+  }
   // append 9 and 10 to the back of it
   vec.push_back(9);
   vec.push_back(10);

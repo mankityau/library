@@ -34,7 +34,7 @@ class message_queue : public virtual named_resource {
   /**
    * @brief Message type
    */
-  using message_type = MessageType;
+  typedef MessageType message_type;
 
   /**
    * @brief Constructs a named message queue
@@ -43,7 +43,7 @@ class message_queue : public virtual named_resource {
    * @param size if creating, the maximum number of elements that can be stored in the queue without blocking
    */
   message_queue(const std::string& name, size_t size = 1024) :
-      fifo_{name + std::string(MESSAGE_QUEUE_SUFFIX), size} {}
+      fifo_(name + std::string(MESSAGE_QUEUE_SUFFIX), size) {}
 
   /**
    * @brief Sends a message to the queue

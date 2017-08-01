@@ -30,7 +30,10 @@ int main() {
 
   // spawn 30 processes :S
   for (int i=0; i<30; ++i) {
-    cars.push_back(cpen333::process::subprocess({"./car", std::to_string(i+1)}, true, false));
+    std::vector<std::string> args;
+    args.push_back("./car");
+    args.push_back(std::to_string(i+1));
+    cars.push_back(cpen333::process::subprocess(args, true, false));
   }
 
   // wait for all processes to finish

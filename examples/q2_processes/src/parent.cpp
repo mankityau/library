@@ -22,20 +22,29 @@ int main(int argc, char* argv[]) {
   //  Note: for cross-platform compatibility, use / as a path-separator, and prefer to use relative paths when possible.
   //  the path "./" refers to the current directory you are running the program from, ".." is one directory up, "../../"
   //  is two directories up, "../../../" three directories up, etc...
+  std::vector<std::string> args1;
+  args1.push_back("./child1");
   cpen333::process::subprocess p1(
-      {"./child1"},   // child program and arguments, separated by commas, argv[]-style
+      args1,          // child program and arguments
       true,           // whether to start running process immediately
       true            // "detached" mode, if true, process will continue even if THIS program terminates
   );
 
+  std::vector<std::string> args2;
+  args2.push_back("./child2");
   cpen333::process::subprocess p2(
-      {"./child2"},
+      args2,
       true,
       true
   );
 
+  std::vector<std::string> args3;
+  args3.push_back("./child3");
+  args3.push_back("fred");
+  args3.push_back("1.2");
+  args3.push_back("child 3");
   cpen333::process::subprocess p3(
-      {"./child3", "fred", "1.2", "child 3"},  // pass arguments to child 3's argv[]
+      args3,
       false,
       true
   );

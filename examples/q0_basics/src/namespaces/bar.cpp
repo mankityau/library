@@ -18,7 +18,14 @@ namespace bar {
  * @return a^(1/3)
  */
 double foo(double a) {
-  return cbrt(a);
+  // return std::cbrt(a);
+  double sign = 1.0;
+  if (a < 0) {
+    sign = -1;
+    a = -a;
+  }
+  double out = sign*std::pow(a, 1.0/3);
+  return out;
 }
 
 /**

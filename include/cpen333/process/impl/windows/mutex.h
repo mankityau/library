@@ -37,7 +37,7 @@ class mutex : public impl::named_resource_base {
   /**
    * @brief Alias to native handle type, which on Windows is type HANDLE
    */
-  using native_handle_type = HANDLE;
+  typedef HANDLE native_handle_type;
 
   /**
    * @copydoc cpen333::process::posix::mutex::mutex()
@@ -158,13 +158,13 @@ class mutex : public impl::named_resource_base {
 /**
  * @brief Alias to Windows implementation of a named mutex
  */
-using mutex = windows::mutex;
+typedef windows::mutex mutex;
 
 
 /**
  * @brief Alias to Windows implementation of a named mutex allowing timed waits
  */
-using timed_mutex = windows::mutex;
+typedef windows::mutex timed_mutex;
 
 } // process
 } // cpen333

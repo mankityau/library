@@ -22,7 +22,7 @@ namespace detail {
 struct noop_function_t {
   void operator () () const {}
 };
-constexpr const noop_function_t noop_function;  // constant instance
+const noop_function_t noop_function;  // constant instance
 
 /**
  * @brief runs events in a separate thread
@@ -64,8 +64,8 @@ class runner {
   }
 
  public:
-  runner(T&& func) : func_{std::move(func)}, mutex_{}, cv_{}, 
-                     count_{0}, terminate_{0}, thread_{} {}
+  runner(T&& func) : func_(std::move(func)), mutex_(), cv_(), 
+                     count_(0), terminate_(0), thread_(nullptr) {}
 
   void start() {
     // spawn new thread
@@ -142,7 +142,7 @@ class timer {
   template<typename Func, typename...Args>
   timer(const Duration& period, Func &&func, Args &&... args) :
     time_{period}, ring_{false}, run_{false}, terminate_{false},
-    runner_{std::bind(std::forward<Func>(func), std::forward<Args>(args)...)},
+    runner_(std::bind(std::forward<Func>(func), std::forward<Args>(args)...)),
     mutex_{}, cv_{},
     thread_{nullptr} {
     runner_.start();  // start new thread running

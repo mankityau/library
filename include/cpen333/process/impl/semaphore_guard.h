@@ -28,10 +28,13 @@ class semaphore_guard {
   }
 
   // disable copy/move constructors
-  semaphore_guard(const semaphore_guard&) = delete;
-  semaphore_guard(semaphore_guard&&) = delete;
-  semaphore_guard& operator=(const semaphore_guard&) = delete;
-  semaphore_guard& operator=(semaphore_guard&&) = delete;
+ private:
+  semaphore_guard(const semaphore_guard&);
+  semaphore_guard(semaphore_guard&&);
+  semaphore_guard& operator=(const semaphore_guard&);
+  semaphore_guard& operator=(semaphore_guard&&);
+
+ public:
 
   /**
    * @brief Destructor, automatically notifies semaphore

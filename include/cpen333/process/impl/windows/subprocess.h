@@ -41,7 +41,7 @@ class subprocess {
   /**
    * @brief Alias to native handle type, on Windows is a PROCESS_INFORMATION structure
    */
-  using native_handle_type = HANDLE;
+  typedef HANDLE native_handle_type;
 
   /**
    * @brief Constructs a new subprocess
@@ -278,7 +278,7 @@ class subprocess {
 /**
  * @brief Alias to Windows implementation of a child process
  */
-using subprocess = windows::subprocess;
+typedef windows::subprocess subprocess;
 
 } // process
 } // cpen333

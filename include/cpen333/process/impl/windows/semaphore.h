@@ -50,7 +50,7 @@ class semaphore : public impl::named_resource_base {
    *
    * In this case, a Windows HANDLE to a Semaphore
    */
-  using native_handle_type = HANDLE;
+  typedef HANDLE native_handle_type;
 
   /**
    * @copydoc cpen333::process::posix::semaphore::semaphore()
@@ -189,7 +189,7 @@ class semaphore : public impl::named_resource_base {
 /**
  * @brief Alias to a Windows implementation of a semaphore
  */
-using semaphore = windows::semaphore;
+typedef windows::semaphore semaphore;
 
 } // process
 } // cpen333

@@ -150,7 +150,7 @@ class pipe : public virtual named_resource {
 
       // write next byte and advance write index
       lock.lock();
-      int pos = info_->write;
+      size_t pos = info_->write;
 
       // check for EOF
       if (info_->weof > 0) {
@@ -241,7 +241,7 @@ class pipe : public virtual named_resource {
       
       // check for EOF
       if (info_->reof > 0) {
-        if ( (pos == 0 && info_->reof == info_->size)
+        if ( ((pos == 0) && (info_->reof == info_->size))
              || (pos == info_->reof)) {
           producer_.notify();  // notify any other reader threads
           return false;
@@ -391,8 +391,8 @@ class pipe : public virtual named_resource {
     size_t read;
     size_t write;
     size_t size;
-    bool reof;
-    bool weof;
+    size_t reof;
+    size_t weof;
     bool has_reader;
     bool has_writer;
   };

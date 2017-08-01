@@ -38,7 +38,7 @@ int main() {
   std::cout << "x = " <<  x << std::endl << std::endl;
 
   // "auto" is often used when looping through items
-  std::vector<std::string> gocrazy =  {"No", "TV", "and", "no", "beer", "makes", "Homer", "something", "something"};
+  std::string gocrazy[] =  {"No", "TV", "and", "no", "beer", "makes", "Homer", "something", "something"};
   for (const auto& word : gocrazy) {
     std::cout << word << " ";
   }
