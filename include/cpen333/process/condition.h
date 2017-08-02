@@ -43,9 +43,9 @@ class condition : private condition_base, public virtual named_resource {
    * @param value initial state, as either set (`true`) or reset (`false`)
    */
   condition(const std::string &name, bool value = false) :
-      condition_base{name + std::string(CONDITION_NAME_SUFFIX)},
-      storage_{name + std::string(CONDITION_NAME_SUFFIX)},
-      mutex_{name + std::string(CONDITION_NAME_SUFFIX)}{
+      condition_base(name + std::string(CONDITION_NAME_SUFFIX)),
+      storage_(name + std::string(CONDITION_NAME_SUFFIX)),
+      mutex_(name + std::string(CONDITION_NAME_SUFFIX)) {
 
     // initialize data if we need to
     std::lock_guard<decltype(mutex_)> lock(mutex_);

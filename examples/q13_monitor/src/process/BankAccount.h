@@ -27,7 +27,7 @@ class BankAccount   {
    * @param amount amount to withdraw
    * @return true if successful, false if not sufficient funds
    */
-  bool WithdrawFunds (double amount) {
+  bool withdraw (double amount) {
     std::lock_guard<cpen333::process::mutex> lock(mutex_);
 
     bool status = false;
@@ -43,7 +43,7 @@ class BankAccount   {
    * Add funds to bank account
    * @param amount amount to deposit
    */
-  void DepositFunds (double amount) {
+  void deposit (double amount) {
     std::lock_guard<cpen333::process::mutex> lock(mutex_); // protect data
     data_->balance += amount;
     cv_.notify_all();
@@ -53,7 +53,7 @@ class BankAccount   {
    * Retrieve bank balance
    * @return your current savings, treat with care
    */
-  double GetBalance() {
+  double getBalance() {
     std::lock_guard<cpen333::process::mutex> lock(mutex_);  // this will automatically release mutex after return
     return data_->balance;
   }
@@ -62,26 +62,26 @@ class BankAccount   {
    * Set a new balance in your bank account
    * @param newBalance are you a world-class hacker?  How can you do this without depositing money?
    */
-  void SetBalance(double new_balance) {
+  void setBalance(double new_balance) {
     std::lock_guard<cpen333::process::mutex> lock(mutex_);
     data_->balance = new_balance;
     cv_.notify_all();
   }
 
   // allows waiting until there is money in the account
-  void WaitForMoney() {
+  void waitForMoney() {
     std::unique_lock<cpen333::process::mutex> lock(mutex_);
     cv_.wait(lock, [&](){ return data_->balance > 0;});
   }
 
-  void WaitForBankrupt() {
+  void waitForBankrupt() {
     std::unique_lock<cpen333::process::mutex> lock(mutex_);
     cv_.wait(lock, [&](){ return data_->balance == 0;});
   }
 
   // constructor and destructor
   BankAccount (const std::string &name) :
-      data_{name}, mutex_{name}, cv_{name} {
+      data_(name), mutex_(name), cv_(name) {
 
     // maybe initialize bank account data
     std::lock_guard<cpen333::process::mutex> lock(mutex_);
@@ -97,7 +97,7 @@ class BankAccount   {
   /**
    * Unlink the bank account, preventing others from ever accessing it
    */
-  void Unlink() {
+  void unlink() {
     // unlink named resources
     data_.unlink();
     mutex_.unlink();

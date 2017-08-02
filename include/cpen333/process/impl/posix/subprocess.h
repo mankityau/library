@@ -15,6 +15,7 @@
 #include <fcntl.h>
 #include <signal.h>
 #include <sys/wait.h>
+#include <wordexp.h>
 
 #include "../../../util.h"
 
@@ -78,11 +79,10 @@ class subprocess {
 
     wordexp_t p;
     char **w;
-    int i;
 
-    wordexp(cmd, &p, 0);
+    wordexp(cmd.c_str(), &p, 0);
     w = p.we_wordv;
-    for (i = 0; i < p.we_wordc; i++) {
+    for (size_t i = 0; i < p.we_wordc; i++) {
       printf("%s\n", w[i]);
       exec_.push_back(w[i]);
     }
@@ -246,7 +246,9 @@ class subprocess {
     int status = kill(pid_, SIGKILL);
     if (status != 0) {
       cpen333::perror("Failed to terminate process.");
+      return false;
     }
+    return true;
   }
 
 };

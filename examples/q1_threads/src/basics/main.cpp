@@ -48,9 +48,9 @@ int main() {
   // which will start a thread that automically runs function(arguments...)
 
 
-  std::thread t1(&thread_fn1, 50);  // function pointer.  This will also work without the &,
-                                    // since template magic will deduce what you mean.
-  thread_fn2 thread_fn2_inst;       // create an instance of our thread_fn2 struct
+  std::thread t1(&thread_fn1, 50);      // function pointer.  This will also work without the &,
+                                        // since template magic will deduce what you mean.
+  thread_fn2 thread_fn2_inst;           // create an instance of our thread_fn2 struct
   std::thread t2(thread_fn2_inst, 30);  // pass in instance
   std::thread t3(thread_fn3, 20, 52);   // lambda (pass in directly)
 

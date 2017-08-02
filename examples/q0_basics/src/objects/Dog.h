@@ -19,11 +19,11 @@ class Dog : public Animal {
  public:
   Dog(std::string name, int age);   // constructor
   virtual ~Dog();                   // destructor
-  virtual std::string Speak();      // we will override Speak
-  std::string Class();              // will "hide" Animal::Class
+  virtual std::string speak();      // we will override speak
+  std::string type();              // will "hide" Animal::type
 
   // something unique to dog
-  std::string Drool();
+  std::string drool();
 
 };
 

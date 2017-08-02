@@ -37,9 +37,9 @@ class rendezvous : public virtual named_resource {
    * @param size  number of processes in group
    */
   rendezvous(const std::string &name, size_t size) :
-      shared_{name + std::string(RENDEZVOUS_NAME_SUFFIX)},
-      semaphore_{name + std::string(RENDEZVOUS_NAME_SUFFIX), 0},
-      mutex_{name + std::string(RENDEZVOUS_NAME_SUFFIX)}{
+      shared_(name + std::string(RENDEZVOUS_NAME_SUFFIX)),
+      semaphore_(name + std::string(RENDEZVOUS_NAME_SUFFIX), 0),
+      mutex_(name + std::string(RENDEZVOUS_NAME_SUFFIX)){
 
     // initialize data
     std::lock_guard<decltype(mutex_)> lock(mutex_);
@@ -68,8 +68,8 @@ class rendezvous : public virtual named_resource {
       // reset count
       shared_->count = shared_->size;
       // release size-1 (since we are the last to arrive)
-      int release = (shared_->size)-1;
-      for (int i=0; i<release; ++i) {
+      auto release = (shared_->size)-1;
+      for (size_t i=0; i<release; ++i) {
         semaphore_.notify();
       }
     } else {

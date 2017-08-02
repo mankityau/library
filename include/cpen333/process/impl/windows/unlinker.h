@@ -35,6 +35,14 @@ class unlinker {
    */
   unlinker(T &resource) : resource_(resource) {}
 
+ private:
+  unlinker(const unlinker &);
+  unlinker(unlinker &&);
+  unlinker &operator=(const unlinker &);
+  unlinker &operator=(unlinker &&);
+
+ public:
+
   /**
    * @brief Destructor, calls the `unlink()` function of the wrapped resource
    */

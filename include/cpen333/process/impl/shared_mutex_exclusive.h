@@ -59,11 +59,11 @@ class shared_mutex_exclusive : public virtual named_resource {
    * @param name identifier for creating or connecting to an existing inter-process shared mutex
    */
   shared_mutex_exclusive(const std::string &name) :
-      shared_{name + std::string(SHARED_MUTEX_EXCLUSIVE_NAME_SUFFIX)},
-      global_{name + std::string(SHARED_MUTEX_EXCLUSIVE_NAME_SUFFIX), 1},   // gate opened
-      count_{name + std::string(SHARED_MUTEX_EXCLUSIVE_NAME_SUFFIX)},
-      exclusive_{name + std::string(SHARED_MUTEX_EXCLUSIVE_MUTEX_SUFFIX)},
-      cond_{name + std::string(SHARED_MUTEX_EXCLUSIVE_NAME_SUFFIX), true}  // gate opened
+      shared_(name + std::string(SHARED_MUTEX_EXCLUSIVE_NAME_SUFFIX)),
+      global_(name + std::string(SHARED_MUTEX_EXCLUSIVE_NAME_SUFFIX), 1),   // gate opened
+      count_(name + std::string(SHARED_MUTEX_EXCLUSIVE_NAME_SUFFIX)),
+      exclusive_(name + std::string(SHARED_MUTEX_EXCLUSIVE_MUTEX_SUFFIX)),
+      cond_(name + std::string(SHARED_MUTEX_EXCLUSIVE_NAME_SUFFIX), true)  // gate opened
   {
 
     // initialize storage

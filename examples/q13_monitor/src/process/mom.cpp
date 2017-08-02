@@ -25,15 +25,15 @@ int main() {
 
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
     std::cout << "Giving child $300 for school" << std::endl;
-    forschool.DepositFunds(300);
+    forschool.deposit(300);
     // wait until child is out of money or done for the week
     std::cout << "Waiting until child has spent all money" << std::endl;
-    forschool.WaitForBankrupt();
+    forschool.waitForBankrupt();
     bigspender.join();  // wait for child
   }
 
   // terminate account
-  forschool.Unlink();
+  forschool.unlink();
 
   std::cout << "Done." << std::endl;
   cpen333::pause();

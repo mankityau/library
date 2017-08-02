@@ -44,7 +44,7 @@ int main(int argc, char* argv[]) {
   return 0;
 }
 #else
-int main(int argc, char* argv[]) {
+int main() {
 
   std::cin.peek();
   std::cout << "Cannot unlink semaphores on Windows" << std::endl;

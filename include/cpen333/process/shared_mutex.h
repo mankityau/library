@@ -5,7 +5,7 @@
 #ifndef CPEN333_PROCESS_SHARED_MUTEX_H
 #define CPEN333_PROCESS_SHARED_MUTEX_H
 
-// #include <shared_timed_mutex>
+
 #include "mutex.h"
 #include "semaphore.h"
 #include "shared_memory.h"
@@ -13,7 +13,11 @@
 #include "impl/shared_mutex_fair.h"
 #include "impl/shared_mutex_shared.h"
 
+#if __cplusplus >= 201402L
+#include <shared_mutex>
+#else
 #include "impl/shared_lock.h"
+#endif
 
 namespace cpen333 {
 namespace process {

@@ -29,7 +29,7 @@ class rendezvous {
    * @brief Constructs a rendezvous primitive
    * @param size  number of threads in group
    */
-  rendezvous(size_t size) : mutex_{}, countdown_{size}, countup_{0}, size_{size} {}
+  rendezvous(size_t size) : mutex_(), countdown_(size), countup_(0), size_(size) {}
 
   /**
    * @brief Waits until all other threads are also waiting

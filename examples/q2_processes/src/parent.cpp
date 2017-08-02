@@ -12,32 +12,29 @@
 #include "cpen333/process/subprocess.h"
 #include "cpen333/util.h"
 
-int main(int argc, char* argv[]) {
+int main() {
 
   std::cout << "Creating Child Processes....." << std::endl;
 
   // create process objects p1, p2 and p3
   // to run programs found in the current directory, use the prefix "./"
   //
-  //  Note: for cross-platform compatibility, use / as a path-separator, and prefer to use relative paths when possible.
-  //  the path "./" refers to the current directory you are running the program from, ".." is one directory up, "../../"
-  //  is two directories up, "../../../" three directories up, etc...
-  std::vector<std::string> args1;
-  args1.push_back("./child1");
+  // Note: for cross-platform compatibility, use / as a path-separator, and prefer to use relative paths when possible.
+  //   the path "./" refers to the current directory you are running the program from, "../" is one directory up,
+  //   "../../" is two directories up, "../../../" three directories up, etc...
   cpen333::process::subprocess p1(
-      args1,          // child program and arguments
+      "./child1",
       true,           // whether to start running process immediately
       true            // "detached" mode, if true, process will continue even if THIS program terminates
   );
 
-  std::vector<std::string> args2;
-  args2.push_back("./child2");
   cpen333::process::subprocess p2(
-      args2,
+      "./child2",
       true,
       true
   );
 
+  // We can send a program with multiple arguments as a vector (SAFEST)
   std::vector<std::string> args3;
   args3.push_back("./child3");
   args3.push_back("fred");
@@ -48,6 +45,14 @@ int main(int argc, char* argv[]) {
       false,
       true
   );
+
+  //  Or we can send it as a single string that needs to be parsed (NOT AS SAFE)
+  //   Any arguments containing spaces need to be quoted, and
+  //   quotes need to be escaped with a backslash, and if you want
+  //   a backslash, they need to be escaped, and if you want a quote
+  //   in your argument, you need to double-escape it, ...
+  //   This is why it's much safer and easier to send arguments as a vector
+  cpen333::process::subprocess p4("./child4 mindy engineer \"child 4\"", false, true);
 
   std::cout << "Child Processes Activated....." << std::endl;
 
@@ -62,6 +67,10 @@ int main(int argc, char* argv[]) {
   p3.start();
   std::cout << "Waiting For Child3 to Terminate....." << std::endl;
   p3.join();
+
+  p4.start();
+  std::cout << "Waiting For Child4 to Terminate....." << std::endl;
+  p4.join();
 
   cpen333::pause();
 

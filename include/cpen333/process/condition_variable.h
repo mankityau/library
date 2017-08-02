@@ -49,7 +49,7 @@ class condition_variable : public condition_base, public virtual named_resource 
    * @param name name identifier for creating or connecting to an existing inter-process condition_variable
    */
   condition_variable(const std::string &name) :
-      condition_base{name + std::string(CONDITION_VARIABLE_NAME_SUFFIX)} {}
+      condition_base(name + std::string(CONDITION_VARIABLE_NAME_SUFFIX)) {}
 
   /**
    * @brief Waits until the condition_variable is notified

@@ -20,7 +20,7 @@ class CustomThread1 : public cpen333::thread::thread_object {
   int id_;
 
  public:
-  CustomThread1(int id) : id_{id} {}
+  CustomThread1(int id) : id_(id) {}
 
  private:
 
@@ -40,7 +40,7 @@ class CustomThread2 : public cpen333::thread::thread_object {
   int id_;
 
  public:
-  CustomThread2(int id) : id_{id} {}
+  CustomThread2(int id) : id_(id) {}
 
  private:
   // override "main" method, which is executed by thread

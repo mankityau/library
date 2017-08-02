@@ -56,9 +56,9 @@ class shared_mutex_fair : public virtual named_resource {
    * @param name identifier for creating or connecting to an existing inter-process shared mutex
    */
   shared_mutex_fair(const std::string &name) :
-      mutex_{name + std::string(SHARED_MUTEX_FAIR_NAME_SUFFIX)},
-      econd_{name + std::string(SHARED_MUTEX_FAIR_NAME_SUFFIX)},
-      state_{name + std::string(SHARED_MUTEX_FAIR_NAME_SUFFIX)} {
+      mutex_(name + std::string(SHARED_MUTEX_FAIR_NAME_SUFFIX)),
+      econd_(name + std::string(SHARED_MUTEX_FAIR_NAME_SUFFIX)),
+      state_(name + std::string(SHARED_MUTEX_FAIR_NAME_SUFFIX)) {
 
     // initialize storage
     std::lock_guard<decltype(mutex_)> lock(mutex_);

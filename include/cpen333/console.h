@@ -400,7 +400,7 @@ class console_handler {
 
   static void set_text_attributes(int flags) {
     HANDLE hstdout = get_stdout_handle();
-    SetConsoleTextAttribute(hstdout, flags);
+    SetConsoleTextAttribute(hstdout, (WORD)flags);
   }
 };
 #else
@@ -591,8 +591,20 @@ class console_handler {
     ++r;
     ++c;
     std::cout.flush();
-    std::cout << cpen333::string_format(ANSI_CODES::CURSOR_POSITION, r, c);
+	
+	// compute size of necessary string
+    size_t size = std::snprintf( nullptr, 0, ANSI_CODES::CURSOR_POSITION().c_str(), r, c) + 1;  // added 1 for terminating \0
+    
+	// create a new character buffer
+    char* buf = new char[size];
+    std::snprintf( buf, size, ANSI_CODES::CURSOR_POSITION().c_str(), r, c); // actually do the snprintf
+    std::string msg( buf, buf + size - 1 );      // create output string
+
+	std::cout.flush();
+    std::cout << msg;
     std::cout.flush();
+
+	delete[] buf;
   }
 
   void clear_display() {
@@ -653,7 +665,7 @@ class console {
   /**
    * @brief Default constructor
    */
-  console() : handler_{}, foreground_{color::DEFAULT}, background_{color::DEFAULT}, reversed_{false} {}
+  console() : handler_(), foreground_(color::DEFAULT), background_(color::DEFAULT), reversed_(false) {}
 
   /**
    * @brief Destructor, currently does nothing

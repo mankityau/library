@@ -56,8 +56,8 @@ class subprocess {
    */
   subprocess(const std::vector<std::string> &exec, bool start = true,
              bool detached = false) :
-      process_info_{}, cmd_{create_windows_command(exec)}, detached_{detached},
-      started_{false}, terminated_{false} {
+      process_info_(), cmd_(create_windows_command(exec)), detached_(detached),
+      started_(false), terminated_(false) {
     if (start) {
       this->start();
     }
@@ -75,8 +75,8 @@ class subprocess {
   * @param detached run the subprocess in `detached' mode
   */
   subprocess(const std::string &cmd, bool start = true, bool detached = false) :
-      process_info_{}, cmd_{cmd}, detached_{detached},
-      started_{false}, terminated_{false} {
+      process_info_(), cmd_(cmd), detached_(detached),
+      started_(false), terminated_(false) {
     if (start) {
       this->start();
     }
@@ -117,7 +117,7 @@ class subprocess {
     };
 
     // try to create a process
-    bool success = CreateProcess( NULL,	// application name
+    BOOL success = CreateProcess( NULL,	// application name
                                   (char*)cmd_.c_str(),
                                   NULL,			// process attributes
                                   NULL,			// thread attributes
@@ -131,12 +131,12 @@ class subprocess {
 
     // check for error and print message if appropriate
     if (!success) {
-      process_info_.dwProcessId = -1; // signal bad process
+      process_info_.dwProcessId = (DWORD)(-1); // signal bad process
       cpen333::perror(std::string("Failed to create process ")+cmd_);
     } else {
       started_ = true;
     }
-    return success;
+    return success != 0;
   }
 
   /**
@@ -162,7 +162,7 @@ class subprocess {
   template<typename Rep, typename Period>
   bool wait_for(const std::chrono::duration<Rep,Period>& duration) {
     // convert to milliseconds
-    DWORD time = std::chrono::duration_cast<std::chrono::milliseconds>(duration).count();
+    DWORD time = (DWORD)(std::chrono::duration_cast<std::chrono::milliseconds>(duration).count());
     return wait_for_internal(time);
   }
 
@@ -197,7 +197,7 @@ class subprocess {
    */
   bool terminate() {
     auto success = TerminateProcess(process_info_.hProcess, SUBPROCESS_TERMINATED);
-    return success;
+    return success != 0;
   }
 
  private:

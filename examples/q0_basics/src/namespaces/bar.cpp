@@ -49,7 +49,7 @@ int bar(int a, int b) {
  * Says hello
  * @return bar::FooBar's hello message
  */
-std::string FooBar::Hello() {
+std::string FooBar::hello() {
   return "Hello from bar::FooBar";
 }
 

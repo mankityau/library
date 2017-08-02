@@ -17,7 +17,7 @@ int bar(int a, int b);
 
 class FooBar {
  public:
-  std::string Hello();
+  std::string hello();
 };
 
 } // bar

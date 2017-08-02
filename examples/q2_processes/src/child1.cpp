@@ -2,7 +2,7 @@
 #include <chrono>   // for times
 #include <thread>   // for sleep
 
-int main(int argc, char* argv[]) {
+int main() {
 
   for(int i = 0; i < 200; ++i) {
     std::cout << "Hello from child process 1...." << std::endl;

@@ -18,9 +18,9 @@ int main(int argc, char* argv[]) {
   // keep going until barbershop is closed
   while(true) {
     std::cout << "Customer " << name << " arriving for haircut" << std::endl;
-    if (!barbershop.CustomerWaitsForHaircut()) {
+    if (!barbershop.customerWaitsForHaircut()) {
       std::cout << name << " turned away :(" << std::endl;
-      if (!barbershop.Opened()) {
+      if (!barbershop.isOpened()) {
         break;  // leave if shop is now closed
       }
     } else {

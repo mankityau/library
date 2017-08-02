@@ -10,16 +10,16 @@ Cat::~Cat() {
 }
 
 // Override "Speak"
-std::string Cat::Speak() {
+std::string Cat::speak() {
   return "meow";
 }
 
 // Class of referring type (not overridden, but can be hidden)
-std::string Cat::Class() {
+std::string Cat::type() {
   return "Cat";
 }
 
-std::string Cat::Rule() {
+std::string Cat::rule() {
   // ... if you are a cat person, I suppose you might think so...
   return "rule";
 }

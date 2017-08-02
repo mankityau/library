@@ -22,6 +22,10 @@ namespace detail {
 struct noop_function_t {
   void operator () () const {}
 };
+
+/**
+ * @brief Basic no-operation function
+ */
 const noop_function_t noop_function;  // constant instance
 
 /**
@@ -124,7 +128,7 @@ class timer {
   /**
    * @brief Creates a timer with a callback function
    *
-   * The callback function func(args...) is executed on every tick.  The function
+   * The callback function func() is executed on every tick.  The function
    * execution time should be well within a single tick period.  Callbacks are
    * executed in a single thread, meaning that if one execution does not
    * finish before the next tick, calls will be accumulated and run
@@ -134,17 +138,15 @@ class timer {
    * start().
    *
    * @tparam Func callback function type
-   * @tparam Args callback argument types
    * @param period tick interval
    * @param func callback function
-   * @param args callback arguments
    */
-  template<typename Func, typename...Args>
-  timer(const Duration& period, Func &&func, Args &&... args) :
-    time_{period}, ring_{false}, run_{false}, terminate_{false},
-    runner_(std::bind(std::forward<Func>(func), std::forward<Args>(args)...)),
-    mutex_{}, cv_{},
-    thread_{nullptr} {
+  template<typename Func>
+  timer(const Duration& period, Func &&func) :
+    time_(period), ring_(false), run_(false), terminate_(false),
+    runner_(std::forward<Func>(func)),
+    mutex_(), cv_(),
+    thread_(nullptr) {
     runner_.start();  // start new thread running
     // ensure created after all memory is allocated, otherwise may run into errors in run()
     thread_ = new std::thread(&timer::run, this);

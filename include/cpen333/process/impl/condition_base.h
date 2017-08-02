@@ -56,6 +56,15 @@ class lock_inverter {
    */
   lock_inverter(BasicLock& lock) : lock_(lock){}
 
+ private:
+  // disable assignment
+  lock_inverter(const lock_inverter&);
+  lock_inverter(lock_inverter &&);
+  lock_inverter &operator=(const lock_inverter &);
+  lock_inverter &operator=(lock_inverter &&);
+
+ public:
+
   /**
    * @brief Unlocks the underlying lock
    */
@@ -89,10 +98,10 @@ class condition_base : public virtual named_resource {
    * @param name unique identifier
    */
   condition_base(const std::string &name) :
-      waiters_{name + std::string(CONDITION_BASE_STORAGE_SUFFIX)},
-      block_lock_{name + std::string(CONDITION_BASE_BLOCK_LOCK_SUFFIX),1},
-      block_queue_{name + std::string(CONDITION_BASE_BLOCK_QUEUE_SUFFIX),0},
-      unblock_lock_{name + std::string(CONDITION_BASE_UNBLOCK_LOCK_SUFFIX)} {
+      waiters_(name + std::string(CONDITION_BASE_STORAGE_SUFFIX)),
+      block_lock_(name + std::string(CONDITION_BASE_BLOCK_LOCK_SUFFIX),1),
+      block_queue_(name + std::string(CONDITION_BASE_BLOCK_QUEUE_SUFFIX),0),
+      unblock_lock_(name + std::string(CONDITION_BASE_UNBLOCK_LOCK_SUFFIX)) {
 
     // initialize data
     std::lock_guard<decltype(unblock_lock_)> lock(unblock_lock_);

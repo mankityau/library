@@ -42,9 +42,7 @@ int main() {
   cpen333::process::unlinker<decltype(pipe)> unlinker(pipe);    // unlink pipe when runs out of scope
 
   std::cout << "Parent process creating child to read from pipe....." << std::endl;
-  std::vector<std::string> args;
-  args.push_back("./child");
-  cpen333::process::subprocess p1(args, true, true);
+  cpen333::process::subprocess p1("./child", true, true);
 
   // write i to pipe
   int i = 20;

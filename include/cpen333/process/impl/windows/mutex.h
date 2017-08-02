@@ -43,7 +43,7 @@ class mutex : public impl::named_resource_base {
    * @copydoc cpen333::process::posix::mutex::mutex()
    */
   mutex(const std::string& name) :
-    impl::named_resource_base{name + std::string(MUTEX_NAME_SUFFIX)} {
+    impl::named_resource_base(name + std::string(MUTEX_NAME_SUFFIX)) {
     handle_  = CreateMutex(NULL, false, name_ptr()) ;
     if (handle_ == INVALID_HANDLE_VALUE) {
       cpen333::perror(std::string("Cannot create mutex ")+this->name());
@@ -92,7 +92,7 @@ class mutex : public impl::named_resource_base {
    */
   template< class Rep, class Period >
   bool try_lock_for( const std::chrono::duration<Rep,Period>& timeout_duration ) {
-    DWORD time = std::chrono::duration_cast<std::chrono::milliseconds>(timeout_duration).count();
+    DWORD time = (DWORD)(std::chrono::duration_cast<std::chrono::milliseconds>(timeout_duration).count());
     UINT result = WaitForSingleObject(handle_, time) ;
     if (result == WAIT_FAILED) {
       cpen333::perror(std::string("Failed to lock mutex "+name()));
@@ -119,11 +119,11 @@ class mutex : public impl::named_resource_base {
    * @copydoc cpen333::process::posix::mutex::unlock()
    */
   bool unlock() {
-    bool success = ReleaseMutex(handle_) ;  // FALSE on failure, TRUE on success
+    BOOL success = ReleaseMutex(handle_) ;  // FALSE on failure, TRUE on success
     if (!success) {
       cpen333::perror(std::string("Failed to unlock mutex "+name()));
     }
-    return success;
+    return success != 0;
   }
 
   /**
@@ -145,6 +145,7 @@ class mutex : public impl::named_resource_base {
    * @copydoc cpen333::process::named_resource::unlink(const std::string&)
    */
   static bool unlink(const std::string& name) {
+	UNUSED(name);
     return false;
   }
 

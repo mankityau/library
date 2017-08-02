@@ -28,11 +28,11 @@ class BarberShop {
 
  public:
   BarberShop(const std::string &name, int chairs) :
-      name_{name},
-      customers_{name + std::string("_sleeping_barbers_customers_"), 0},
-      barbers_{name + std::string("_sleeping_barbers_barbers_"), 0},
-      mutex_{name + std::string("_sleeping_barbers_mutex_")},
-      data_{name + std::string("__sleeping_barbers_data_")} {
+      name_(name),
+      customers_(name + std::string("_sleeping_barbers_customers_"), 0),
+      barbers_(name + std::string("_sleeping_barbers_barbers_"), 0),
+      mutex_(name + std::string("_sleeping_barbers_mutex_")),
+      data_(name + std::string("__sleeping_barbers_data_")) {
 
     std::lock_guard<cpen333::process::mutex> lock(mutex_);
     if (data_->initialized != 0x98765432) {
@@ -44,12 +44,12 @@ class BarberShop {
     }
   }
 
-  void Open() {
+  void open() {
     std::lock_guard<decltype(mutex_)> lock(mutex_);
     data_->open = true;
   }
 
-  bool Opened() {
+  bool isOpened() {
     std::lock_guard<decltype(mutex_)> lock(mutex_);
     return data_->open;
   }
@@ -58,7 +58,7 @@ class BarberShop {
    * Customers wait here if there's a seat, or barber is free
    * @return true if eventually had haircut, false if left because there were no seats
    */
-  bool CustomerWaitsForHaircut() {
+  bool customerWaitsForHaircut() {
     // protect memory access
     std::unique_lock<decltype(mutex_)> lock(mutex_);
 
@@ -85,7 +85,7 @@ class BarberShop {
    * Barbers wait here for customers, returns after starting haircut
    * @return true if giving haircut, false if shop closed
    */
-  bool BarberWaitsForCustomer() {
+  bool barberWaitsForCustomer() {
     std::unique_lock<decltype(mutex_)> lock(mutex_);
     // shop is closed
     if (!data_->open) {
@@ -109,7 +109,7 @@ class BarberShop {
    * Release named resources so they can start anew next round
    * @return true if succesfull
    */
-  bool Close() {
+  bool close() {
 
     std::unique_lock<decltype(mutex_)> lock(mutex_);
     data_->open = false;
@@ -143,7 +143,7 @@ class BarberShop {
    * @param name barber shop name to release
    * @return true if successful
    */
-  static bool Unlink(const std::string& name) {
+  static bool unlink(const std::string& name) {
     bool b1 = cpen333::process::semaphore::unlink(name + std::string("_sleeping_barbers_customers_"));
     bool b2 = cpen333::process::semaphore::unlink(name + std::string("_sleeping_barbers_barbers_"));
     bool b3 = cpen333::process::mutex::unlink(name + std::string("_sleeping_barbers_mutex_"));

@@ -17,7 +17,7 @@ class Container {
   T val_;  // contained value
 
  public:
-  Container(const T& val) : val_(val){} // initialize val_ to val
+  Container(const T& val) : val_(val) {} // initialize val_ to val
 
   /**
    * Gets the contained value
@@ -72,11 +72,11 @@ int main() {
   // deduce your template parameters.
   print_this(name.get(), age.get());  // same as above
 
-  print_this("Pi: ", pi.get());
+  print_this("Pi", pi.get());
 
   std::cout << std::endl;
   print_this("JULIET", "O Romeo, Romeo! Wherefore art thou Romeo?");
-  print_this("ROMEO", "I'm over here, under the balcony.");
+  print_this("ROMEO", "Hey Juliet, I'm over here under the balcony");
 
   cpen333::pause();
   return 0;

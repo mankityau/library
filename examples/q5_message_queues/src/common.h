@@ -15,10 +15,13 @@ struct MessageType {
   char sender[20];
 
   // need a default constructor
-  MessageType() : code{MessageCode::NOTE}, msg{}, sender{} {}
+  MessageType() : code(MessageCode::NOTE) {
+    msg[0] = 0;
+    sender[0] = 0;
+  }
 
   // convenience constructor to use string
-  MessageType(MessageCode code, const std::string& msg, const std::string& sender) : code(code) , msg{}, sender{} {
+  MessageType(MessageCode code, const std::string& msg, const std::string& sender) : code(code) {
     // copy strings to msg/sender
     size_t i = 0;
     for (; i<sizeof(this->msg)-1 && i < msg.length(); ++i) {

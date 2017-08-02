@@ -28,7 +28,7 @@ class thread_object {
   /**
    * @brief Constructs the thread base
    */
-  thread_object() : thread_{nullptr}, result_{0} {}
+  thread_object() : thread_(nullptr), result_(0) {}
 
   /**
    * @brief Destructor, frees the thread

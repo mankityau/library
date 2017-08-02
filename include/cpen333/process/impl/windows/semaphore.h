@@ -56,10 +56,10 @@ class semaphore : public impl::named_resource_base {
    * @copydoc cpen333::process::posix::semaphore::semaphore()
    */
   semaphore(const std::string& name, size_t value = 1) :
-      impl::named_resource_base{name+std::string(SEMAPHORE_NAME_SUFFIX)}, handle_{NULL} {
+      impl::named_resource_base(name+std::string(SEMAPHORE_NAME_SUFFIX)), handle_(NULL) {
 
     // create named semaphore
-    handle_ = CreateSemaphore(NULL, value, MAX_SEMAPHORE_SIZE, name_ptr());
+    handle_ = CreateSemaphore(NULL, (LONG)value, MAX_SEMAPHORE_SIZE, name_ptr());
     if (handle_ == INVALID_HANDLE_VALUE) {
        cpen333::perror(std::string("Cannot create semaphore ")+this->name());
     }
@@ -124,7 +124,7 @@ class semaphore : public impl::named_resource_base {
    */
   template< class Rep, class Period >
   bool wait_for( const std::chrono::duration<Rep,Period>& timeout_duration ) {
-    DWORD time = std::chrono::duration_cast<std::chrono::milliseconds>(timeout_duration).count();
+    DWORD time = (DWORD)(std::chrono::duration_cast<std::chrono::milliseconds>(timeout_duration).count());
     if (time < 0) {
       time = 0;
     }
@@ -149,7 +149,7 @@ class semaphore : public impl::named_resource_base {
    * @copydoc cpen333::process::posix::semaphore::notify()
    */
   void notify() {
-    bool success = ReleaseSemaphore(handle_, 1, NULL) ;  // FALSE on failure, TRUE on success
+    BOOL success = ReleaseSemaphore(handle_, 1, NULL) ;  // FALSE on failure, TRUE on success
     if (!success) {
       cpen333::perror(std::string("Failed to post semaphore ")+name());
     }
@@ -176,6 +176,7 @@ class semaphore : public impl::named_resource_base {
    * @copydoc cpen333::process::named_resource::unlink(const std::string&)
    */
   static bool unlink(const std::string& name) {
+    UNUSED(name);
     return false;
   }
 

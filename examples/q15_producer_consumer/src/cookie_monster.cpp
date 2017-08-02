@@ -33,7 +33,7 @@ int main(int argc, char* argv[]) {
   CookieQueue queue(COOKIE_QUEUE_NAME, 256);
 
   while(true) { // keep eating cookies forever
-    Cookie cookie = queue.Pop();
+    Cookie cookie = queue.pop();
       if (cookie.type == CookieType::POISON) {
         std::cout << "Monster " << monster_id << " died from a POISON Cookie" << std::endl;
         break;

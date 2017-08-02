@@ -20,7 +20,7 @@ int main(int argc, char* argv[]) {
 
   std::cout << "Barber " << name << " arriving at work" << std::endl;
   for (int i=0; i<100; ++i) {
-    if (!barbershop.BarberWaitsForCustomer()) {
+    if (!barbershop.barberWaitsForCustomer()) {
       std::cout << "Shop closed" << std::endl;
       break;
     }
@@ -28,8 +28,6 @@ int main(int argc, char* argv[]) {
     std::this_thread::sleep_for(std::chrono::milliseconds(1500));
   }
   std::cout << name << " leaving for the night" << std::endl;
-
-
 
   return 0;
 }

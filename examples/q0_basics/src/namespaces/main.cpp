@@ -44,12 +44,12 @@ int main() {
   typedef foo::FooBar Foo;         // prior to c++11
   // using Foo = foo::FooBar;      // after c++11
   Foo foo;
-  std::cout << foo.Hello() << std::endl;
+  std::cout << foo.hello() << std::endl;
 
-  typedef foo::FooBar Bar;         // prior to c++11
+  typedef bar::FooBar Bar;         // prior to c++11
   // using Bar = bar::FooBar;      // after c++11
   Bar bar;
-  std::cout << bar.Hello() << std::endl;
+  std::cout << bar.hello() << std::endl;
 
   cpen333::pause();
 

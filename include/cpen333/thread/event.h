@@ -25,8 +25,15 @@ class lock_inverter {
    * @brief Creates the inverter, does not lock or unlock
    * @param lock lock to reverse
    */
-  lock_inverter(BasicLock& lock) : lock_(lock){}
+  lock_inverter(BasicLock& lock) : lock_(lock) {}
 
+ private:
+  lock_inverter(const lock_inverter &);
+  lock_inverter(lock_inverter &&);
+  lock_inverter &operator=(const lock_inverter &);
+  lock_inverter &operator=(lock_inverter &&);
+
+ public:
   /**
    * @brief Unlocks the underlying lock
    */
@@ -60,7 +67,7 @@ class event {
   /**
  * @brief Creates the event
  */
-  event() : waiters_{}, block_lock_{1}, block_queue_{0}, unblock_lock_{}, external_{} {}
+  event() : waiters_(), block_lock_(1), block_queue_(0), unblock_lock_(), external_() {}
 
   // disable copy/move constructors
  private:
@@ -269,7 +276,7 @@ class event {
     long blocked;   // number of waiters blocked
     long unblock;   // number of waiters to unblock
     long gone;      // number of waiters gone
-    waiting_data() : blocked{0}, unblock{0}, gone{0} {}
+    waiting_data() : blocked(0), unblock(0), gone(0) {}
   };
 
   waiting_data waiters_;

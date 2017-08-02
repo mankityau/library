@@ -8,6 +8,6 @@
 struct example {
   int x;
   float y;
-} ;
+};
 
 #endif //PIPES_COMMON_H

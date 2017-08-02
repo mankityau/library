@@ -15,21 +15,21 @@ int main() {
 
   // What do the animals say?
   std::cout << "Testing Cat/Dog pointers" << std::endl;
-  std::cout << "  " << garfield->Name() << " the " << garfield->Class() << " says " << garfield->Speak() << std::endl;
-  std::cout << "  " << wishbone->Name() << " the " << wishbone->Class() << " says " << wishbone->Speak() << std::endl;
+  std::cout << "  " << garfield->name() << " the " << garfield->type() << " says " << garfield->speak() << std::endl;
+  std::cout << "  " << wishbone->name() << " the " << wishbone->type() << " says " << wishbone->speak() << std::endl;
 
   std::cout << "Testing Animal pointer" << std::endl;
   pet = garfield;
-  std::cout << "  " << pet->Name() << " the " << pet->Class() << " says " << pet->Speak() << std::endl;
+  std::cout << "  " << pet->name() << " the " << pet->type() << " says " << pet->speak() << std::endl;
   // Did it print what you expected?
 
   // Trying out functions unique to Cat and Dog
-  std::cout << wishbone->Class() << "s " << wishbone->Drool() << " and "
-            << garfield->Class() << "s " << garfield->Rule() << std::endl;
+  std::cout << wishbone->type() << "s " << wishbone->drool() << " and "
+            << garfield->type() << "s " << garfield->rule() << std::endl;
 
-  // Forcing it to get at the parent class' Speak() method
-  // this is WAY more than what you need to know
-  std::cout << "  Forcing " << pet->Name() << " to say " << pet->Animal::Speak() << std::endl;
+  // Forcing it to get at the parent class' speak() method
+  // this is more than what you need to know for this course (and perhaps life)
+  std::cout << "  Forcing " << pet->name() << " to say " << pet->Animal::speak() << std::endl;
 
   // free heap memory
   delete wishbone;

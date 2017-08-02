@@ -21,12 +21,16 @@ add_process_executable(${PROJECT}_child2 child2 . src/child2.cpp)
 
 add_process_executable(${PROJECT}_child3 child3 . src/child3.cpp)
 
+add_process_executable(${PROJECT}_child4 child4 . src/child4.cpp)
+
 #==============  Parent  ======================================
 add_process_executable(${PROJECT}_parent parent . src/parent.cpp)
 
 # Parent executable depends on all children (since it tries to spawn them)
-add_dependencies(${PROJECT}_parent ${PROJECT}_child1 ${PROJECT}_child2 ${PROJECT}_child3)
+add_dependencies(${PROJECT}_parent ${PROJECT}_child1 ${PROJECT}_child2
+        ${PROJECT}_child3 ${PROJECT}_child4)
 
 # install all targets
-install(TARGETS ${PROJECT}_child1 ${PROJECT}_child2 ${PROJECT}_child3 ${PROJECT}_parent
+install(TARGETS ${PROJECT}_child1 ${PROJECT}_child2 ${PROJECT}_child3
+        ${PROJECT}_child4 ${PROJECT}_parent
         DESTINATION bin/${MY_OUTPUT_DIR})

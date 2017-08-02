@@ -36,7 +36,8 @@ struct PalInfo {
   cpen333::process::subprocess*  process;
   cpen333::process::message_queue<MessageType>* mailbox;
 
-  PalInfo(std::string name, cpen333::process::subprocess* process, cpen333::process::message_queue<MessageType>* mailbox) :
+  PalInfo(std::string name, cpen333::process::subprocess* process,
+          cpen333::process::message_queue<MessageType>* mailbox) :
 	  name(name), process(process), mailbox(mailbox) {}
 };
 
@@ -60,9 +61,12 @@ int main() {
 
   // create a bunch of friends and mailboxes
   for (const std::string& pal : friend_names) {
+
+    // build up process command as a vector of strings
     std::vector<std::string> args;
     args.push_back("./penpal");
     args.push_back(pal);
+
     friends.push_back(PalInfo(
                         pal,
                         new cpen333::process::subprocess(args, true, true),
@@ -107,7 +111,7 @@ int main() {
   // In order to close all friend threads, we will send a good-bye message.  This tells them to shut down.
   // send a goodbye to everyone
   for (PalInfo& pal : friends) {
-    pal.mailbox->send({MessageCode::GOODBYE, " ... ", my_name});
+    pal.mailbox->send(MessageType(MessageCode::GOODBYE, " ... ", my_name));
     pal.process->join();    // wait for process to terminate
     pal.mailbox->unlink();  // close down mailbox
     delete pal.mailbox;
@@ -115,7 +119,7 @@ int main() {
   }
 
   // say goodbye to myself to close my reader thread
-  my_mailbox.send({MessageCode::GOODBYE, "", my_name});
+  my_mailbox.send(MessageType(MessageCode::GOODBYE, "", my_name));
   read_thread.join();
 
   std::cout << "Goodbye." << std::endl;

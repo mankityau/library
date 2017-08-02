@@ -235,4 +235,18 @@ typedef impl::shared_mutex_fair shared_timed_mutex_fair;
 } // process
 } // cpen333
 
+namespace std {
+
+/**
+ * @brief Shared mutex replacement
+ */
+typedef cpen333::thread::shared_mutex_fair shared_mutex;
+
+/**
+ * @brief Shared timed mutex replacement
+ */
+typedef cpen333::thread::shared_mutex_fair shared_timed_mutex;
+
+}
+
 #endif //CPEN333_PROCESS_SHARED_MUTEX_FAIR_H

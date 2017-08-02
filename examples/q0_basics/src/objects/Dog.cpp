@@ -10,17 +10,17 @@ Dog::~Dog() {
 }
 
 // Override "Species" to return Dog
-std::string Dog::Speak() {
+std::string Dog::speak() {
   return "woof";
 }
 
 // Class of referring type (not overridden, but can be hidden)
-std::string Dog::Class() {
+std::string Dog::type() {
   return "Dog";
 }
 
 // Unique method to Dog
-std::string Dog::Drool() {
+std::string Dog::drool() {
   // ewww, the slobber is everywhere
   return "drool";
 }

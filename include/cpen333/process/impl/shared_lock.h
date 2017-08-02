@@ -26,6 +26,14 @@ class shared_lock {
     mutex_.lock_shared();
   }
 
+ private:
+  shared_lock(const shared_lock &);
+  shared_lock(shared_lock &&);
+  shared_lock &operator=(const shared_lock &);
+  shared_lock &operator=(shared_lock &&);
+
+ public:
+
   /**
    * @brief Locks mutex in shared access mode
    */

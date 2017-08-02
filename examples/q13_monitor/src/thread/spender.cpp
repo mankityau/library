@@ -14,16 +14,16 @@ void child(BankAccount& forfun) {
 
   // I need money to spend
   std::cout << "Waiting for money to be put into account" << std::endl;
-  forfun.WaitForMoney();
+  forfun.waitForMoney();
 
   for (int i=0; i<7; ++i) {
-    if (forfun.WithdrawFunds(40)) {
+    if (forfun.withdraw(40)) {
       std::cout << "  Spent $40" << std::endl;
     } else {
-      int balance = forfun.GetBalance();
+      double balance = forfun.getBalance();
       if (balance > 0) {
         std::cout << "  Uh oh, only " << balance << " left, withdrawing..." << std::endl;
-        forfun.WithdrawFunds(balance);
+        forfun.withdraw(balance);
       } else {
         std::cout << "  Out of money :(." << std::endl;
         return; // break out of loop
@@ -32,14 +32,14 @@ void child(BankAccount& forfun) {
   }
 
   // end of the week, spend all my money
-  int balance = forfun.GetBalance();
-  forfun.WithdrawFunds(balance);
+  double balance = forfun.getBalance();
+  forfun.withdraw(balance);
   std::cout << "  Spending all my extra money :), $" << balance << std::endl;
 }
 
 int main() {
   // BankAccount is a monitor class that provides safe access for depositing/withdrawing funds, and checking balances.
-  BankAccount forschool{};
+  BankAccount forschool;
 
   // every week put 200 in
   for (int i=0; i<52; ++i) {
@@ -47,10 +47,10 @@ int main() {
 
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
     std::cout << "Giving child $300 for school" << std::endl;
-    forschool.DepositFunds(300);
+    forschool.deposit(300);
     // wait until child is out of money or done for the week
     std::cout << "Waiting until child has spent all money" << std::endl;
-    forschool.WaitForBankrupt();
+    forschool.waitForBankrupt();
     bigspender.join();  // wait for child
   }
 

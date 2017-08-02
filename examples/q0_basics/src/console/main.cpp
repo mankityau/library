@@ -3,11 +3,10 @@
 #include <chrono>   // for times
 #include <string>
 #include <vector>
+
 #include "cpen333/console.h"
 #include "cpen333/util.h"
 
-
-//
 //  To help creating console-based GUIs, we provide a simple "console" class in
 //      cpen333/console.h
 //
@@ -24,30 +23,31 @@ int main() {
 
   console.set_background_color(color::DARK_MAGENTA);
   console.set_foreground_color(color::WHITE);
-  console.clear_display();  // fill entires display
+  console.clear_display();             // fill entires display
   console.set_cursor_visible(false);   // hide cursor
 
   console.set_cursor_position(2, 33);
   std::cout << "Goodnight Moon";
   console.set_cursor_position(4, 29);
   std::cout << "By Margaret Wise Brown";
-  std::cout.flush();  // on linux, doesn't flush until newline or manual
+  std::cout.flush();                        // on linux, doesn't flush until newline or manual
   sleep(2000);
 
   std::string poem[] = {"In the great green room", "There was a telephone", "And a red balloon",
-                                   "And a picture of", "The cow jumping over the moon",
-                                   "And there were three little bears", "   sitting on chairs",
-                                   "And two little kittens", "And a pair of mittens", "And a little toy house",
-                                   "And a young mouse", "And a comb and a brush", "   and a bowl full of mush",
-                                   "And a quiet old lady", "   who was whispering \"hush\"", "Goodnight room",
-                                   "Goodnight moon", "Goodnight cow jumping over the moon", "Goodnight light",
-                                   "And the red balloon", "Goodnight bears", "Goodnight chairs", "Goodnight kittens",
-                                   "And goodnight mittens", "Goodnight clocks", "And goodnight socks",
-                                   "Goodnight little house", "And goodnight mouse", "Goodnight comb",
-                                   "And goodnight brush", "Goodnight nobody", "Goodnight mush",
-                                   "And goodnight to the old lady", "   whispering \"hush\"", "Goodnight stars",
-                                   "Goodnight air", "Good night noises everywhere"};
+                        "And a picture of", "The cow jumping over the moon",
+                        "And there were three little bears", "   sitting on chairs",
+                        "And two little kittens", "And a pair of mittens", "And a little toy house",
+                        "And a young mouse", "And a comb and a brush", "   and a bowl full of mush",
+                        "And a quiet old lady", "   who was whispering \"hush\"", "Goodnight room",
+                        "Goodnight moon", "Goodnight cow jumping over the moon", "Goodnight light",
+                        "And the red balloon", "Goodnight bears", "Goodnight chairs", "Goodnight kittens",
+                        "And goodnight mittens", "Goodnight clocks", "And goodnight socks",
+                        "Goodnight little house", "And goodnight mouse", "Goodnight comb",
+                        "And goodnight brush", "Goodnight nobody", "Goodnight mush",
+                        "And goodnight to the old lady", "   whispering \"hush\"", "Goodnight stars",
+                        "Goodnight air", "Good night noises everywhere"};
 
+  // initialize row/column locations
   int rtop = 7;
   int r = rtop;
   int c = 4;
@@ -85,6 +85,7 @@ int main() {
   }
 
   // always reset console settings, or else they may persist
+  //    after your program exits
   console.reset();
 
   console.set_cursor_position(28, 4);
@@ -92,5 +93,6 @@ int main() {
   cpen333::pause();
 
   console.clear_all();
+
   return 0;
 }

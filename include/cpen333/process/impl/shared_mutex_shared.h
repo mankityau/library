@@ -53,9 +53,9 @@ class shared_mutex_shared : public virtual named_resource {
    * @param name identifier for creating or connecting to an existing inter-process shared mutex
    */
   shared_mutex_shared(const std::string &name) :
-      shared_{name + std::string(SHARED_MUTEX_SHARED_NAME_SUFFIX)},
-      global_{name + std::string(SHARED_MUTEX_SHARED_NAME_SUFFIX), 1},
-      count_{name + std::string(SHARED_MUTEX_SHARED_NAME_SUFFIX)} {
+      shared_(name + std::string(SHARED_MUTEX_SHARED_NAME_SUFFIX)),
+      global_(name + std::string(SHARED_MUTEX_SHARED_NAME_SUFFIX), 1),
+      count_(name + std::string(SHARED_MUTEX_SHARED_NAME_SUFFIX)) {
 
     // initialize storage
     std::lock_guard<decltype(shared_)> lock(shared_);

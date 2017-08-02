@@ -7,7 +7,7 @@
 
 // Animal constructor
 Animal::Animal(std::string name, int age)
-  : _name(name), _age(age) // initialze the internal _name and _age to the provided name and age
+  : name_(name), age_(age) // initialze the internal name_ and age_ to the provided name and age
 {
   // nothing else to do here
 }
@@ -18,21 +18,21 @@ Animal::~Animal() {
 }
 
 // Animal Speak
-std::string Animal::Speak() {
+std::string Animal::speak() {
   return "...";  // we don't know what to say
 }
 
 // Class of referring type (not overridden, but can be hidden)
-std::string Animal::Class() {
+std::string Animal::type() {
   return "Animal";
 }
 
 // Name "accessor", returns the animal's name
-std::string Animal::Name() {
-  return _name;
+std::string Animal::name() {
+  return name_;
 }
 
 // Age "accessor", returns the animal's age
-int Animal::Age() {
-  return _age;
+int Animal::age() {
+  return age_;
 }

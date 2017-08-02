@@ -10,7 +10,7 @@ class Fork {
   const size_t id_;                // fixed id, useful for ordering
 
  public:
-  Fork(size_t id) : id_{id} {}  // set id
+  Fork(size_t id) : id_(id) {}  // set id
 
   /**
    * ID label of fork

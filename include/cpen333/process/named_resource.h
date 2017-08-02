@@ -7,6 +7,11 @@
 
 #include <string>
 
+/**
+ * @brief Macro for avoiding unused variable warnings
+ */
+#define UNUSED(X) (void)(X)
+
 namespace cpen333 {
 namespace process {
 
@@ -57,6 +62,7 @@ class named_resource {
    * @return `true` if unlink successful, `false` if not successful or not supported
    */
   static bool unlink(const std::string& name) {
+    UNUSED(name);
     return false;
   }
 

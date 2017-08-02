@@ -15,7 +15,7 @@ int main(int argc, char* argv[]) {
   cpen333::pause();
 
   for( int i = 0; i < 300; ++i) {
-    std::cout << "Hello from child process 3...." << std::endl;
+    std::cout << "Hello from child process 4...." << std::endl;
     // sleep 50 ms
     std::this_thread::sleep_for(std::chrono::milliseconds(50));
   }

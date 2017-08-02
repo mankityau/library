@@ -39,13 +39,15 @@ int main() {
 
   // Unsafe access, does not use a mutex to protect the shared resource "data"
   std::cout << "Unsafe access to shared variable 'a':" << std::endl;
-  auto start = std::chrono::steady_clock::now();
   data->a = 0;
-  // run child processes
+
+  // program arguments for child processes
   std::vector<std::string> pargs;
   pargs.push_back("./child_unsafe");
   pargs.push_back("1000000");
 
+  // run child processes
+  auto start = std::chrono::steady_clock::now();
   cpen333::process::subprocess p1(pargs);
   cpen333::process::subprocess p2(pargs);
   p1.join();
@@ -57,10 +59,11 @@ int main() {
 
   // Safe access, using a mutex to protect the shared resource
   std::cout << "Safe access to shared variable 'a':" << std::endl;
-  start = std::chrono::steady_clock::now();
   data->a = 0;
   
   // run child processes
+  pargs[0] = "./child_safe";
+  start = std::chrono::steady_clock::now();
   cpen333::process::subprocess p3(pargs);
   cpen333::process::subprocess p4(pargs);
   p3.join();

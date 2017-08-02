@@ -17,7 +17,7 @@ class ProductionLine : public cpen333::thread::thread_object {
   
  public:
   ProductionLine(cpen333::thread::event &chassis_ready, cpen333::thread::event &robot_finished) :
-      chassis_ready_{chassis_ready}, robot_finished_{robot_finished} {}
+      chassis_ready_(chassis_ready), robot_finished_(robot_finished) {}
 
  private:
   // main method
@@ -45,7 +45,7 @@ class Robot : public cpen333::thread::thread_object {
 
  public:
   Robot(cpen333::thread::event &chassis_ready, cpen333::thread::event &robot_finished) :
-      chassis_ready_{chassis_ready}, robot_finished_{robot_finished} {}
+      chassis_ready_(chassis_ready), robot_finished_(robot_finished) {}
 
  private:
   // main method

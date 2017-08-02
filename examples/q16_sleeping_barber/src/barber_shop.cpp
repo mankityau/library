@@ -14,15 +14,16 @@ int main() {
   std::cout << "Opening barber shop" << std::endl;
   std::this_thread::sleep_for(std::chrono::seconds(1));
 
-  barber_shop.Open();  // start accepting customers and barbers
+  barber_shop.open();  // start accepting customers and barbers
   barbershop_opened.notify();  // open gate
 
   // let's stay open for about 20 seconds
   std::this_thread::sleep_for(std::chrono::seconds(20));
 
   std::cout << "Closing barber shop" << std::endl;
-  // detach name
-  barber_shop.Close();
+
+  // close down shop
+  barber_shop.close();
 
   return 0;
 }

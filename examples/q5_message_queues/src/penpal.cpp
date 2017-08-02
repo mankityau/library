@@ -1,6 +1,5 @@
 #include "common.h"
 #include "cpen333/process/message_queue.h"
-#include <map>  // map of friends' mailboxes
 
 #include <iostream>
 #include <string>
@@ -18,7 +17,7 @@ int main(int argc, char* argv[]) {
   cpen333::process::message_queue<MessageType> mailbox(name);
 
   // keep waiting for messages until we hear goodbye
-  while (true) {
+  for (;;) {
 
     MessageType message = mailbox.receive();
 

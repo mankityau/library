@@ -69,6 +69,7 @@ class named_resource_base : public virtual named_resource {
   * @copydoc cpen333::process::named_resource::unlink(const std::string&)
   */
   static bool unlink(const std::string &name) {
+    UNUSED(name);
     return false;
   }
 

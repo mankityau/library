@@ -44,10 +44,10 @@ class shared_memory : public impl::named_resource_base {
    * @copydoc cpen333::process::posix::shared_memory::shared_memory()
    */
   shared_memory(const std::string &name, size_t size, bool readonly = false ) :
-      impl::named_resource_base{name+std::string(SHARED_MEMORY_NAME_SUFFIX)},
-      handle_{NULL},
-      data_{nullptr},
-      size_{size} {
+      impl::named_resource_base(name+std::string(SHARED_MEMORY_NAME_SUFFIX)),
+      handle_(NULL),
+      data_(nullptr),
+      size_(size) {
 
     // Clear thread error, create mapping, then check if already exists
     SetLastError(0);
@@ -55,7 +55,7 @@ class shared_memory : public impl::named_resource_base {
                                 NULL,
                                 PAGE_READWRITE,        // always read-write so we can initialize if we need to
                                 0,
-                                size,
+                                (DWORD)size,
                                 name_ptr() );
     if (handle_ == INVALID_HANDLE_VALUE) {
       cpen333::perror(std::string("Cannot create shared memory ") + this->name());
@@ -85,7 +85,7 @@ class shared_memory : public impl::named_resource_base {
   ~shared_memory() {
     // unmap memory
     if (data_ != nullptr) {
-      bool success = UnmapViewOfFile(data_);
+      BOOL success = UnmapViewOfFile(data_);
       if (!success) {
         cpen333::perror(std::string("Cannot unmap shared memory ") + name());
       }
@@ -152,6 +152,7 @@ class shared_memory : public impl::named_resource_base {
    * @copydoc cpen333::process::named_resource::unlink(const std::string&)
    */
   static bool unlink(const std::string& name) {
+    UNUSED(name);
     return false;
   }
 

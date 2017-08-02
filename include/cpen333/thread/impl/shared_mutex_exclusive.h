@@ -40,12 +40,12 @@ class shared_mutex_exclusive {
    * Constructor, creates a write-preferring shared mutex
    */
   shared_mutex_exclusive() :
-      mutex_{},
-      global_{1},   // gate opened
-      shared_count_{0},
-      exclusive_count_{0},
-      exclusive_{},
-      cond_{true}  // gate starts opened
+      mutex_(),
+      global_(1),   // gate opened
+      shared_count_(0),
+      exclusive_count_(0),
+      exclusive_(),
+      cond_(true)  // gate starts opened
   {}
 
  private:

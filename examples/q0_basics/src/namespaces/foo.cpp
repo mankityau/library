@@ -34,7 +34,7 @@ int bar(int a) {
  * Says hello
  * @return foo::FooBar's hello message
  */
-std::string FooBar::Hello() {
+std::string FooBar::hello() {
   return "Hello from foo::FooBar";
 }
 

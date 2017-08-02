@@ -50,13 +50,17 @@ int main() {
 
     // check for keyboard input
     if (cpen333::test_stdin() != 0) {
-      char c = std::cin.get();
-      std::cout << "Parent read " << c << " from keyboard." << std::endl;
-      if (c == 'Q' || c == 'q') {
-        std::cout << "Shutting down...." << std::endl;
+      char c;
+      if (std::cin.get(c)) {
+        std::cout << "Parent read " << c << " from keyboard." << std::endl;
+        if (c == 'Q' || c == 'q') {
+          std::cout << "Shutting down...." << std::endl;
+          break;
+        }
+        std::cout << "Type 'Q' to exit main thread" << std::endl;
+      } else {
         break;
       }
-      std::cout << "Type 'Q' to exit main thread" << std::endl;
     }
   }
 

@@ -29,38 +29,6 @@
 
 namespace cpen333 {
 
-/**
- * @brief Formats a string according to standard C printf rules.
- *
- * Writes the string described by `format` to a new output string.
- * If `format` includes format specifiers (subsequences beginning with @%), the additional arguments following
- * `format` are formatted and inserted in the resulting string replacing their respective specifiers.
- *
- * @tparam Args variadic template types of additional arguments
- * @param format format specifier string
- * @param args additional arguments
- * @return new formatted string
- */
-template<typename ... Args>
-std::string string_format( const std::string& format, Args ... args ) {
-  // compute size of necessary string
-  size_t size = std::snprintf( nullptr, 0, format.c_str(), args ... ) + 1;  // added 1 for terminating \0
-  // create a new character buffer
-  std::unique_ptr<char[]> buf( new char[size] );              // unique_ptr will delete memory when done
-  std::snprintf( buf.get(), size, format.c_str(), args ... ); // actually do the snprintf
-  return std::string( buf.get(), buf.get() + size - 1 );      // create output string
-}
-
-template <typename T, size_t N>
-inline std::vector<T> to_vector(T (&array) [N]) {
-  std::vector<T> out;
-  out.reserve(N);
-  for (int i=0; i<N; ++i) {
-    out.push_back(array[i]);
-  }
-  return out;
-}
-
 #ifndef WINDOWS
 namespace detail {
 template<typename Dummy>

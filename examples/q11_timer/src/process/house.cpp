@@ -14,7 +14,7 @@ int main() {
   for (int i=0; i<3; ++i) {
     std::vector<std::string> args;
     args.push_back("./faucet");
-    args.push_back("clock_tick_event");
+    args.push_back("clock_tic_event");
 	args.push_back(std::to_string(i+1));
 	args.push_back(std::to_string(15));
     faucets.push_back(cpen333::process::subprocess(

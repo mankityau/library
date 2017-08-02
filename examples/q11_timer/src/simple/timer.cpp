@@ -26,15 +26,17 @@
 class TimedPrinter {
  public:
   TimedPrinter(const std::vector<std::string>& lines) :
-      lidx_{0}, lines_{lines} {}
+      lidx_(0), lines_(lines) {}
 
   // override () operator
   void operator()() {
-    std::cout << lines_[lidx_];
-    std::cout.flush();
-    ++lidx_;
-    if (lidx_ == lines_.size()) {
-      lidx_ = 0;
+    if (lidx_ < lines_.size()) {
+      std::cout << lines_[lidx_];
+      std::cout.flush();
+      ++lidx_;
+      if (lidx_ == lines_.size()) {
+        lidx_ = 0;
+      }
     }
   }
 
@@ -49,15 +51,19 @@ int main() {
 
   // load data from file
   std::ifstream fin("./timer.dat");
-  while (!fin.eof()) {
+  if (!fin.is_open()) {
+    fin.open("../timer.dat");  // search up one directory with Visual Studio
+  }
+
+  while (fin.is_open() && !fin.eof()) {
     std::string line;
     std::getline(fin, line);
 
     // substitute "\n" for end-of-line characters
     // and strip away \r characters
     std::string add;
-    size_t i;
-    for (i=0; i<line.size()-1; ++i) {
+	size_t i;
+    for (i=0; i+1<line.size(); ++i) {
       if (line[i]== '\\' && line[i+1] == 'n') {
         add.push_back('\n');
         ++i; // advance another character

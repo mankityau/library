@@ -72,14 +72,14 @@ class pipe : public virtual named_resource {
    * @param size  if creating, the maximum number of bytes that can be stored in the pipe without blocking
    */
   pipe(const std::string& name, mode mode, size_t size = 1024) :
-      mode_{mode},
-      wmutex_{name + std::string(PIPE_WRITE_SUFFIX)},
-      rmutex_{name + std::string(PIPE_READ_SUFFIX)},
-      omutex_{name + std::string(PIPE_OPEN_SUFFIX)},
-      info_{name + std::string(PIPE_INFO_SUFFIX)},
-      pipe_{name + std::string(PIPE_NAME_SUFFIX), size},
-      producer_{name + std::string(PIPE_WRITE_SUFFIX), 0},
-      consumer_{name + std::string(PIPE_READ_SUFFIX), size} {
+      mode_(mode),
+      wmutex_(name + std::string(PIPE_WRITE_SUFFIX)),
+      rmutex_(name + std::string(PIPE_READ_SUFFIX)),
+      omutex_(name + std::string(PIPE_OPEN_SUFFIX)),
+      info_(name + std::string(PIPE_INFO_SUFFIX)),
+      pipe_(name + std::string(PIPE_NAME_SUFFIX), size),
+      producer_(name + std::string(PIPE_WRITE_SUFFIX), 0),
+      consumer_(name + std::string(PIPE_READ_SUFFIX), size) {
 
     // potentially initialize info
     std::lock_guard<decltype(wmutex_)> lock(omutex_);

@@ -33,16 +33,16 @@ int main() {
   baker3.join();
 
   // tell monsters there will be no more cookies, one for each monster
-  queue.Push({CookieType::POISON, -1, -1});
-  queue.Push({CookieType::POISON, -1, -1});
-  queue.Push({CookieType::POISON, -1, -1});
+  queue.push(Cookie(CookieType::POISON, -1, -1));
+  queue.push(Cookie(CookieType::POISON, -1, -1));
+  queue.push(Cookie(CookieType::POISON, -1, -1));
 
   // wait for monsters to finish
   monster1.join();
   monster2.join();
   monster3.join();
 
-  queue.Unlink(); // unlink names to free them on POSIX systems
+  queue.unlink(); // unlink names to free them on POSIX systems
 
   std::cout << "Goodbye." << std::endl;
   cpen333::pause();

@@ -37,8 +37,8 @@ class event : private condition_base, public virtual named_resource {
    * @param name name identifier for creating or connecting to an existing inter-process event
    */
   event(const std::string &name) :
-      condition_base{name + std::string(EVENT_NAME_SUFFIX)},
-      mutex_{name + std::string(EVENT_NAME_SUFFIX)} {}
+      condition_base(name + std::string(EVENT_NAME_SUFFIX)),
+      mutex_(name + std::string(EVENT_NAME_SUFFIX)) {}
 
   /**
    * @brief Waits for the event to be triggered

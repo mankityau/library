@@ -23,13 +23,11 @@ int main() {
   // A vector is like a dynamic array, and can be accessed like one.  You can add to and remove from the back of it.
   // It also has methods to check its size, if it is empty, etc...
   std::vector<int> vec;
-  for (int i=0; i<8; ++i) {
-    vec.push_back(i+1);
+  for (int i=0; i<10; ++i) {
+    vec.push_back(i+1);  // append to back
   }
-  // append 9 and 10 to the back of it
-  vec.push_back(9);
-  vec.push_back(10);
-  vec.pop_back();  // remove the last element
+
+  vec.pop_back();        // remove the last element
 
   std::cout << "Contents of vec: {";
   for (size_t i=0; i<vec.size(); ++i) {
@@ -42,7 +40,7 @@ int main() {
   // QUEUE
   //=======================================================
   // A queue adds to the back and removes from the front (like lining up at the grocery store).
-  // Unfortunately, you cannot access individual elements of the queue except for the front/back.
+  // You cannot access individual elements of the queue except for the front/back.
   // i.e. first-in, first-out (FIFO)
   std::queue<double> queue;
   // add some doubles to the queue
@@ -59,7 +57,7 @@ int main() {
   // STACK
   //=======================================================
   // A stack adds to the back and removes from the back (like stacking books)
-  // Unfortunately, you cannot access elements of the stack except for the "top"
+  // You cannot access elements of the stack except for the "top"
   std::stack<short> stack;
   stack.push(5);
   stack.push(6);
@@ -91,7 +89,7 @@ int main() {
   // PAIR
   //=======================================================
   // A pair stores two values, which can be of different types
-  std::pair<int, std::string> pair = {10, "happy"};
+  std::pair<int, std::string> pair(10, "happy");
   std::cout << "Contents of pair: {" << pair.first << ", " << pair.second <<  "}" << std::endl << std::endl;
 
   //=======================================================
@@ -100,9 +98,11 @@ int main() {
   // A map associates a "key" with a "value".
   // This is EXTREMELY useful, particularly for associating data with other objects.
   std::map<std::string,int> agemap;
-  agemap.insert({"Jack", 18});  // can insert as pairs
-  agemap.insert({"Jill", 20});
-  agemap["Adam"] = 21;          // can also insert through element access, will create new element if key doesn't exist
+  agemap.insert(std::pair<std::string,int>("Jack", 18));  // can insert as pairs
+  agemap.insert(std::pair<std::string,int>("Jill", 20));
+
+  // can also insert through element access, will create new element if key doesn't exist
+  agemap["Adam"] = 21;
   agemap["Amy"] = 21;
   agemap["Patrick"] = 22;
   agemap.erase("Adam");         // remove Adam from the group

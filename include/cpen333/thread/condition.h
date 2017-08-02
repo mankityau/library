@@ -26,7 +26,7 @@ class condition {
  * @brief Creates the condition
  * @param value initial state, as either set (`true`) or reset (`false`)
  */
-  condition(bool value = false) : open_{value}, cv_{}, mutex_{} {}
+  condition(bool value = false) : open_(value), cv_(), mutex_() {}
 
   /**
    * @brief Waits until the condition is set

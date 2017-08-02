@@ -48,12 +48,12 @@ class CookieQueue {
  public:
 
   CookieQueue(const std::string& name, size_t size) :
-      memory_{name + std::string("_memory_"), sizeof(QueueInfo)+size*sizeof(Cookie)}, // reserve memory
-      info_{nullptr}, data_{nullptr}, // will initialize these after memory valid
-      pmutex_{name + std::string("_pmutex_")},
-      cmutex_{name + std::string("_cmutex_")},
-      psem_{name + std::string("_psem_"), size},  // start at size of queue
-      csem_{name + std::string("_csem_"), 0} {    // start at zero
+      memory_(name + std::string("_memory_"), sizeof(QueueInfo)+size*sizeof(Cookie)), // reserve memory
+      info_(nullptr), data_(nullptr), // will initialize these after memory valid
+      pmutex_(name + std::string("_pmutex_")),
+      cmutex_(name + std::string("_cmutex_")),
+      psem_(name + std::string("_psem_"), size),  // start at size of queue
+      csem_(name + std::string("_csem_"), 0) {    // start at zero
 
     // info is at start of memory block, followed by the actual data in the queue
     info_ = (QueueInfo*)memory_.get();
@@ -71,12 +71,12 @@ class CookieQueue {
   }
 
   // add cookie to queue
-  void Push(const Cookie &cookie) {
+  void push(const Cookie &cookie) {
 
     // wait until room to push a cookie
     psem_.wait();
 
-    int loc = 0;
+    size_t loc = 0;
     {
       // look at index, protect memory from multiple simultaneous pushes
       std::lock_guard<cpen333::process::mutex> lock(pmutex_);
@@ -98,7 +98,7 @@ class CookieQueue {
 
   }
 
-  Cookie Pop() {
+  Cookie pop() {
 
     // wait until cookie available
     csem_.wait();
@@ -128,7 +128,7 @@ class CookieQueue {
 
   }
 
-  size_t Size() {
+  size_t size() {
     std::lock_guard<cpen333::process::mutex> lock1(pmutex_);
     std::lock_guard<cpen333::process::mutex> lock2(cmutex_);
 
@@ -139,7 +139,7 @@ class CookieQueue {
   }
 
   // Free named resources on POSIX systems which have kernel persistence
-  void Unlink() {
+  void unlink() {
     memory_.unlink();
     pmutex_.unlink();
     cmutex_.unlink();
@@ -147,7 +147,7 @@ class CookieQueue {
     csem_.unlink();
   }
 
-  static void Unlink(const std::string& name) {
+  static void unlink(const std::string& name) {
     cpen333::process::shared_memory::unlink(name + std::string("_memory_"));
     cpen333::process::mutex::unlink(name + std::string("_pmutex_"));
     cpen333::process::mutex::unlink(name + std::string("_cmutex_"));

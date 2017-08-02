@@ -41,7 +41,7 @@ class resource_lock {
  private:
   bool locked_;
  public:
-  resource_lock() : locked_(false){}  // start unlocked
+  resource_lock() : locked_(false) {}  // start unlocked
   void lock() { locked_ = true; }      // lock
   void unlock() { locked_ = false; }   // unlock
   bool is_locked() { return locked_; } // check whether mechanism is locked
@@ -56,7 +56,7 @@ class lock_guard {
   resource_lock& lock_;  // reference to lock
  public:
 
-  lock_guard(resource_lock& lk) : lock_{lk} {
+  lock_guard(resource_lock& lk) : lock_(lk) {
     lock_.lock();   // acquire resource, preventing others from using it
   }
 
@@ -70,6 +70,7 @@ class lock_guard {
 int main() {
 
   // Memory-managed dynamic array of doubles
+
   { // brackets used to provide limited scope on variable
     // create array
     DoubleArray safe_array(10);
