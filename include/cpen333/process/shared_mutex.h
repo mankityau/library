@@ -69,10 +69,10 @@ class shared_lock_guard {
 
  private:
   // disable copy/move constructors
-  shared_lock_guard(const shared_lock_guard&);
-  shared_lock_guard(shared_lock_guard&&);
-  shared_lock_guard& operator=(const shared_lock_guard&);
-  shared_lock_guard& operator=(shared_lock_guard&&);
+  shared_lock_guard(const shared_lock_guard&) DELETE_METHOD;
+  shared_lock_guard(shared_lock_guard&&) DELETE_METHOD;
+  shared_lock_guard& operator=(const shared_lock_guard&) DELETE_METHOD;
+  shared_lock_guard& operator=(shared_lock_guard&&) DELETE_METHOD;
 
  public:
   /**

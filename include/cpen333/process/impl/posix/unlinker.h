@@ -12,6 +12,7 @@
 #include <signal.h>
 
 #include "../../named_resource.h"
+#include "../../../util.h"
 
 namespace cpen333 {
 namespace process {
@@ -237,6 +238,13 @@ class unlinker {
     shandler_.add_unlink(resource_);  // add unlink to signal handler
   }
 
+ private:
+  unlinker(const unlinker &) DELETE_METHOD;
+  unlinker(unlinker &&) DELETE_METHOD;
+  unlinker &operator=(const unlinker &) DELETE_METHOD;
+  unlinker &operator=(unlinker &&) DELETE_METHOD;
+
+ public:
   /**
    * @brief Destructor, calls the `unlink()` function of the wrapped resource
    */

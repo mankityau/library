@@ -36,10 +36,10 @@ class unlinker {
   unlinker(T &resource) : resource_(resource) {}
 
  private:
-  unlinker(const unlinker &);
-  unlinker(unlinker &&);
-  unlinker &operator=(const unlinker &);
-  unlinker &operator=(unlinker &&);
+  unlinker(const unlinker &) DELETE_METHOD;
+  unlinker(unlinker &&) DELETE_METHOD;
+  unlinker &operator=(const unlinker &) DELETE_METHOD;
+  unlinker &operator=(unlinker &&) DELETE_METHOD;
 
  public:
 

@@ -30,6 +30,14 @@ class thread_object {
    */
   thread_object() : thread_(nullptr), result_(0) {}
 
+ private:
+  thread_object(const thread_object &) DELETE_METHOD;
+  thread_object(thread_object &&) DELETE_METHOD;
+  thread_object &operator=(const thread_object &) DELETE_METHOD;
+  thread_object &operator=(thread_object &&) DELETE_METHOD;
+
+ public:
+  
   /**
    * @brief Destructor, frees the thread
    */

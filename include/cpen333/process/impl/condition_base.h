@@ -58,10 +58,10 @@ class lock_inverter {
 
  private:
   // disable assignment
-  lock_inverter(const lock_inverter&);
-  lock_inverter(lock_inverter &&);
-  lock_inverter &operator=(const lock_inverter &);
-  lock_inverter &operator=(lock_inverter &&);
+  lock_inverter(const lock_inverter&) DELETE_METHOD;
+  lock_inverter(lock_inverter &&) DELETE_METHOD;
+  lock_inverter &operator=(const lock_inverter &) DELETE_METHOD;
+  lock_inverter &operator=(lock_inverter &&) DELETE_METHOD;
 
  public:
 

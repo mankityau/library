@@ -28,6 +28,14 @@ class condition {
  */
   condition(bool value = false) : open_(value), cv_(), mutex_() {}
 
+ private:
+  condition(const condition &) DELETE_METHOD;
+  condition(condition &&) DELETE_METHOD;
+  condition &operator=(const condition &) DELETE_METHOD;
+  condition &operator=(condition &&) DELETE_METHOD;
+
+ public:
+  
   /**
    * @brief Waits until the condition is set
    *

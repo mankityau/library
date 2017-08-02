@@ -9,6 +9,7 @@
 
 #include <mutex>
 #include <condition_variable>
+#include "../../util.h"
 
 namespace cpen333 {
 namespace thread {
@@ -59,10 +60,10 @@ class shared_mutex_fair {
 
   // disable copy/move constructors
  private:
-  shared_mutex_fair(const shared_mutex_fair &);
-  shared_mutex_fair(shared_mutex_fair &&);
-  shared_mutex_fair &operator=(const shared_mutex_fair &);
-  shared_mutex_fair &operator=(shared_mutex_fair &&);
+  shared_mutex_fair(const shared_mutex_fair &) DELETE_METHOD;
+  shared_mutex_fair(shared_mutex_fair &&) DELETE_METHOD;
+  shared_mutex_fair &operator=(const shared_mutex_fair &) DELETE_METHOD;
+  shared_mutex_fair &operator=(shared_mutex_fair &&) DELETE_METHOD;
 
  public:
 

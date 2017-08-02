@@ -9,6 +9,7 @@
 #include <mutex>
 #include <condition_variable>
 #include "semaphore.h"
+#include "../util.h"
 
 namespace cpen333 {
 namespace thread {
@@ -28,10 +29,10 @@ class lock_inverter {
   lock_inverter(BasicLock& lock) : lock_(lock) {}
 
  private:
-  lock_inverter(const lock_inverter &);
-  lock_inverter(lock_inverter &&);
-  lock_inverter &operator=(const lock_inverter &);
-  lock_inverter &operator=(lock_inverter &&);
+  lock_inverter(const lock_inverter &) DELETE_METHOD;
+  lock_inverter(lock_inverter &&) DELETE_METHOD;
+  lock_inverter &operator=(const lock_inverter &) DELETE_METHOD;
+  lock_inverter &operator=(lock_inverter &&) DELETE_METHOD;
 
  public:
   /**

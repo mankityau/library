@@ -5,6 +5,8 @@
 #ifndef STD_SHARED_LOCK_H
 #define STD_SHARED_LOCK_H
 
+#include "../../util.h"
+
 // replacement shared_lock
 namespace std {
 
@@ -27,10 +29,10 @@ class shared_lock {
   }
 
  private:
-  shared_lock(const shared_lock &);
-  shared_lock(shared_lock &&);
-  shared_lock &operator=(const shared_lock &);
-  shared_lock &operator=(shared_lock &&);
+  shared_lock(const shared_lock &) DELETE_METHOD;
+  shared_lock(shared_lock &&) DELETE_METHOD;
+  shared_lock &operator=(const shared_lock &) DELETE_METHOD;
+  shared_lock &operator=(shared_lock &&) DELETE_METHOD;
 
  public:
 

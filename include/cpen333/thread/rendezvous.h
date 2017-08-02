@@ -7,6 +7,7 @@
 
 #include <mutex>
 #include <condition_variable>
+#include "../util.h"
 
 namespace cpen333 {
 namespace thread {
@@ -31,6 +32,14 @@ class rendezvous {
    */
   rendezvous(size_t size) : mutex_(), countdown_(size), countup_(0), size_(size) {}
 
+ private:
+  rendezvous(const rendezvous &) DELETE_METHOD;
+  rendezvous(rendezvous &&) DELETE_METHOD;
+  rendezvous &operator=(const rendezvous &) DELETE_METHOD;
+  rendezvous &operator=(rendezvous &&) DELETE_METHOD;
+
+ public:
+  
   /**
    * @brief Waits until all other threads are also waiting
    *

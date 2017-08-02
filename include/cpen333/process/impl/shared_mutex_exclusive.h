@@ -77,10 +77,10 @@ class shared_mutex_exclusive : public virtual named_resource {
 
  private:
   // disable copy/move constructors
-  shared_mutex_exclusive(const shared_mutex_exclusive &);
-  shared_mutex_exclusive(shared_mutex_exclusive &&);
-  shared_mutex_exclusive &operator=(const shared_mutex_exclusive &);
-  shared_mutex_exclusive &operator=(shared_mutex_exclusive &&);
+  shared_mutex_exclusive(const shared_mutex_exclusive &) DELETE_METHOD;
+  shared_mutex_exclusive(shared_mutex_exclusive &&) DELETE_METHOD;
+  shared_mutex_exclusive &operator=(const shared_mutex_exclusive &) DELETE_METHOD;
+  shared_mutex_exclusive &operator=(shared_mutex_exclusive &&) DELETE_METHOD;
 
  public:
 

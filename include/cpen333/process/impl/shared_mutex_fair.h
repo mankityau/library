@@ -75,10 +75,10 @@ class shared_mutex_fair : public virtual named_resource {
 
   // disable copy/move constructors
  private:
-  shared_mutex_fair(const shared_mutex_fair &);
-  shared_mutex_fair(shared_mutex_fair &&);
-  shared_mutex_fair &operator=(const shared_mutex_fair &);
-  shared_mutex_fair &operator=(shared_mutex_fair &&);
+  shared_mutex_fair(const shared_mutex_fair &) DELETE_METHOD;
+  shared_mutex_fair(shared_mutex_fair &&) DELETE_METHOD;
+  shared_mutex_fair &operator=(const shared_mutex_fair &) DELETE_METHOD;
+  shared_mutex_fair &operator=(shared_mutex_fair &&) DELETE_METHOD;
 
  public:
 

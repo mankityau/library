@@ -27,6 +27,20 @@
 #include <memory>
 #include <vector>
 
+// if using c++11, explicitly delete constructors and assignment operators
+// otherwise, just declare but not define them
+#if __cplusplus >= 201102L
+/**
+ * @brief Delete constructor/assignment operator
+ */
+#define DELETE_METHOD = delete
+#else
+/**
+* @brief Mark constructor/assignment as deleted
+*/
+#define DELETE_METHOD
+#endif
+
 namespace cpen333 {
 
 #ifndef WINDOWS

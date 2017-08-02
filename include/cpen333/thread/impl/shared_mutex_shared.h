@@ -38,10 +38,10 @@ class shared_mutex_shared {
 
   // disable copy/move constructors
  private:
-  shared_mutex_shared(const shared_mutex_shared &);
-  shared_mutex_shared(shared_mutex_shared &&);
-  shared_mutex_shared &operator=(const shared_mutex_shared &);
-  shared_mutex_shared &operator=(shared_mutex_shared &&);
+  shared_mutex_shared(const shared_mutex_shared &) DELETE_METHOD;
+  shared_mutex_shared(shared_mutex_shared &&) DELETE_METHOD;
+  shared_mutex_shared &operator=(const shared_mutex_shared &) DELETE_METHOD;
+  shared_mutex_shared &operator=(shared_mutex_shared &&) DELETE_METHOD;
 
  public:
 

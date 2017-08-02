@@ -8,6 +8,7 @@
 #include <mutex>
 #include <condition_variable>
 #include <chrono>
+#include "../util.h"
 
 namespace cpen333 {
 namespace thread {
@@ -45,10 +46,10 @@ class basic_semaphore {
 
  private:
   // do not allow copying or moving
-  basic_semaphore(const basic_semaphore&);
-  basic_semaphore(basic_semaphore&&);
-  basic_semaphore& operator=(const basic_semaphore&);
-  basic_semaphore& operator=(basic_semaphore&&);
+  basic_semaphore(const basic_semaphore&) DELETE_METHOD;
+  basic_semaphore(basic_semaphore&&) DELETE_METHOD;
+  basic_semaphore& operator=(const basic_semaphore&) DELETE_METHOD;
+  basic_semaphore& operator=(basic_semaphore&&) DELETE_METHOD;
 
  public:
 

@@ -152,6 +152,14 @@ class timer {
     thread_ = new std::thread(&timer::run, this);
   }
 
+ private:
+  timer(const timer &) DELETE_METHOD;
+  timer(timer &&) DELETE_METHOD;
+  timer &operator=(const timer &) DELETE_METHOD;
+  timer &operator=(timer &&) DELETE_METHOD;
+
+ public:
+  
   /**
    * @brief Start timer running
    *

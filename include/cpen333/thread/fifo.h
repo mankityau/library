@@ -7,6 +7,7 @@
 
 #include <string>
 #include <chrono>
+#include "../util.h"
 
 #include <mutex>
 #include "semaphore.h"
@@ -43,6 +44,14 @@ class fifo {
       csem_{0} {    // start at zero
     data_ = new ValueType[size];
   }
+
+ private:
+  fifo(const fifo &) DELETE_METHOD;
+  fifo(fifo &&) DELETE_METHOD;
+  fifo &operator=(const fifo &) DELETE_METHOD;
+  fifo &operator=(fifo &&) DELETE_METHOD;
+
+ public:
 
   /**
    * @brief Destructor
