@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CPEN333: Process and Threads Library: cpen333::process::unlinker Class Reference</title>
+<title>CPEN333: Process and Threads Library: cpen333::process::unlinker&lt; T &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -64,20 +64,150 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="classcpen333_1_1process_1_1unlinker-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">cpen333::process::unlinker Class Reference</div>  </div>
+<div class="title">cpen333::process::unlinker&lt; T &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p>A named-resource wrapper that provides a convenient RAII-style unlinking of the resource name.  
  <a href="classcpen333_1_1process_1_1unlinker.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="unlinker_8h_source.html">unlinker.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="impl_2windows_2unlinker_8h_source.html">unlinker.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:aca3c99d7ac2fba23d2855c88486c3f51"><td class="memItemLeft" align="right" valign="top">typedef T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpen333_1_1process_1_1unlinker.html#aca3c99d7ac2fba23d2855c88486c3f51">type</a></td></tr>
+<tr class="separator:aca3c99d7ac2fba23d2855c88486c3f51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a44039679bd9939254fc53a5e876d8b8c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpen333_1_1process_1_1unlinker.html#a44039679bd9939254fc53a5e876d8b8c">unlinker</a> (T &amp;resource)</td></tr>
+<tr class="memdesc:a44039679bd9939254fc53a5e876d8b8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs the object, wrapping the provided resource.  <a href="#a44039679bd9939254fc53a5e876d8b8c">More...</a><br /></td></tr>
+<tr class="separator:a44039679bd9939254fc53a5e876d8b8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b402f30b9cde1ed09252db7521a1bc2"><td class="memItemLeft" align="right" valign="top"><a id="a1b402f30b9cde1ed09252db7521a1bc2"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpen333_1_1process_1_1unlinker.html#a1b402f30b9cde1ed09252db7521a1bc2">~unlinker</a> ()</td></tr>
+<tr class="memdesc:a1b402f30b9cde1ed09252db7521a1bc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor, calls the <code><a class="el" href="classcpen333_1_1process_1_1unlinker.html#a00dd4ad138a95aa0173f81fd83c3210e" title="Statically calls the unlink(name) function for the underlying type. ">unlink()</a></code> function of the wrapped resource. <br /></td></tr>
+<tr class="separator:a1b402f30b9cde1ed09252db7521a1bc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a00dd4ad138a95aa0173f81fd83c3210e"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpen333_1_1process_1_1unlinker.html#a00dd4ad138a95aa0173f81fd83c3210e">unlink</a> (const std::string &amp;name)</td></tr>
+<tr class="memdesc:a00dd4ad138a95aa0173f81fd83c3210e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Statically calls the <code>unlink(name)</code> function for the underlying type.  <a href="#a00dd4ad138a95aa0173f81fd83c3210e">More...</a><br /></td></tr>
+<tr class="separator:a00dd4ad138a95aa0173f81fd83c3210e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A named-resource wrapper that provides a convenient RAII-style unlinking of the resource name. </p>
-<p>Used to ensure that a resource's name is unlinked when the unlinker object drops out of scope. On POSIX systems, this can help guarantee that the lifetime of a resource will not persist beyond the lifetime of the controlling process. This is an alias to either <a class="el" href="classcpen333_1_1process_1_1posix_1_1unlinker.html" title="A named-resource wrapper that provides a convenient RAII-style unlinking of the resource name...">cpen333::process::posix::unlinker</a> or <a class="el" href="classcpen333_1_1process_1_1windows_1_1unlinker.html" title="A named-resource wrapper that provides a convenient RAII-style unlinking of the resource name...">cpen333::process::windows::unlinker</a> depending on your platform. </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>D:/school/teaching/CPEN333/workspace/labs/include/cpen333/process/<a class="el" href="unlinker_8h_source.html">unlinker.h</a></li>
+<div class="textblock"><h3>template&lt;typename T&gt;<br />
+class cpen333::process::unlinker&lt; T &gt;</h3>
+
+<p>A named-resource wrapper that provides a convenient RAII-style unlinking of the resource name. </p>
+<p>Used to ensure that a resource's name is unlinked when the unlinker object drops out of scope. On Windows, this doesn't really do anything, since unlinking of resource names is not a supported operation.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>named-resource type, should extend <a class="el" href="classcpen333_1_1process_1_1named__resource.html" title="Pure virtual base class for all inter-process resources. ">cpen333::process::named_resource</a>, must support <code>bool <a class="el" href="classcpen333_1_1process_1_1unlinker.html#a00dd4ad138a95aa0173f81fd83c3210e" title="Statically calls the unlink(name) function for the underlying type. ">unlink()</a></code> and <code>static bool unlink(std::string&amp;)</code></td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Used to ensure that a resource's name is unlinked when the unlinker object drops out of scope. On POSIX systems, this can help guarantee that the lifetime of a resource will not persist beyond the lifetime of the controlling process. This is an alias to either <a class="el" href="classcpen333_1_1process_1_1posix_1_1unlinker.html" title="A named-resource wrapper that provides a convenient RAII-style unlinking of the resource name...">cpen333::process::posix::unlinker</a> or cpen333::process::windows::unlinker depending on your platform. </p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="aca3c99d7ac2fba23d2855c88486c3f51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca3c99d7ac2fba23d2855c88486c3f51">&#9670;&nbsp;</a></span>type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef T <a class="el" href="classcpen333_1_1process_1_1unlinker.html">cpen333::process::unlinker</a>&lt; T &gt;::<a class="el" href="classcpen333_1_1process_1_1unlinker.html#aca3c99d7ac2fba23d2855c88486c3f51">type</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Alias to the named-resource type </p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a44039679bd9939254fc53a5e876d8b8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44039679bd9939254fc53a5e876d8b8c">&#9670;&nbsp;</a></span>unlinker()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classcpen333_1_1process_1_1unlinker.html">cpen333::process::unlinker</a>&lt; T &gt;::<a class="el" href="classcpen333_1_1process_1_1unlinker.html">unlinker</a> </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>resource</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs the object, wrapping the provided resource. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">resource</td><td>resource to unlink when unlinker drops out of scope </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a00dd4ad138a95aa0173f81fd83c3210e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00dd4ad138a95aa0173f81fd83c3210e">&#9670;&nbsp;</a></span>unlink()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool <a class="el" href="classcpen333_1_1process_1_1unlinker.html">cpen333::process::unlinker</a>&lt; T &gt;::unlink </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Statically calls the <code>unlink(name)</code> function for the underlying type. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>name of resource to unlink </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>always <code>false</code>, since unlinking is not supported on Windows </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>D:/school/teaching/CPEN333/workspace/library/include/cpen333/process/impl/windows/<a class="el" href="impl_2windows_2unlinker_8h_source.html">unlinker.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

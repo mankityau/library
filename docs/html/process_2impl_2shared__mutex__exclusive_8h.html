@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CPEN333: Process and Threads Library: D:/school/teaching/CPEN333/workspace/labs/include/cpen333/process/impl/shared_mutex_exclusive.h File Reference</title>
+<title>CPEN333: Process and Threads Library: D:/school/teaching/CPEN333/workspace/library/include/cpen333/process/impl/shared_mutex_exclusive.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -75,11 +75,11 @@ $(function() {
 
 <p>Implementation of an inter-process mutex with shared access that gives priority to exclusive use (write-priority)  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="mutex_8h_source.html">cpen333/process/mutex.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="process_2semaphore_8h_source.html">cpen333/process/semaphore.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="process_2condition_8h_source.html">cpen333/process/condition.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="shared__memory_8h_source.html">cpen333/process/shared_memory.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="named__resource_8h_source.html">cpen333/process/named_resource.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="mutex_8h_source.html">../mutex.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="process_2semaphore_8h_source.html">../semaphore.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="process_2condition_8h_source.html">../condition.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="shared__memory_8h_source.html">../shared_memory.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="named__resource_8h_source.html">../named_resource.h</a>&quot;</code><br />
 </div>
 <p><a href="process_2impl_2shared__mutex__exclusive_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -106,14 +106,14 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:ae9605866760bed8a440e6793fab5dad8"><td class="memItemLeft" align="right" valign="top"><a id="ae9605866760bed8a440e6793fab5dad8"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="process_2impl_2shared__mutex__exclusive_8h.html#ae9605866760bed8a440e6793fab5dad8">cpen333::process::shared_mutex_exclusive</a> = impl::shared_mutex_exclusive</td></tr>
-<tr class="memdesc:ae9605866760bed8a440e6793fab5dad8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for default shared mutex with exclusive (write) priority. <br /></td></tr>
-<tr class="separator:ae9605866760bed8a440e6793fab5dad8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec7fadfebb9605da108974f1a3ed2bd0"><td class="memItemLeft" align="right" valign="top"><a id="aec7fadfebb9605da108974f1a3ed2bd0"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="process_2impl_2shared__mutex__exclusive_8h.html#aec7fadfebb9605da108974f1a3ed2bd0">cpen333::process::shared_timed_mutex_exclusive</a> = impl::shared_mutex_exclusive</td></tr>
-<tr class="memdesc:aec7fadfebb9605da108974f1a3ed2bd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for default shared timed mutex with exclusive (write) priority. <br /></td></tr>
-<tr class="separator:aec7fadfebb9605da108974f1a3ed2bd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0a30f6a95f8eaec3df39c9bc53f9283"><td class="memItemLeft" align="right" valign="top"><a id="ad0a30f6a95f8eaec3df39c9bc53f9283"></a>
+typedef impl::shared_mutex_exclusive&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="process_2impl_2shared__mutex__exclusive_8h.html#ad0a30f6a95f8eaec3df39c9bc53f9283">cpen333::process::shared_mutex_exclusive</a></td></tr>
+<tr class="memdesc:ad0a30f6a95f8eaec3df39c9bc53f9283"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for default shared mutex with exclusive (write) priority. <br /></td></tr>
+<tr class="separator:ad0a30f6a95f8eaec3df39c9bc53f9283"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5683a7b525b63ed776cdc3a3bb847b51"><td class="memItemLeft" align="right" valign="top"><a id="a5683a7b525b63ed776cdc3a3bb847b51"></a>
+typedef impl::shared_mutex_exclusive&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="process_2impl_2shared__mutex__exclusive_8h.html#a5683a7b525b63ed776cdc3a3bb847b51">cpen333::process::shared_timed_mutex_exclusive</a></td></tr>
+<tr class="memdesc:a5683a7b525b63ed776cdc3a3bb847b51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for default shared timed mutex with exclusive (write) priority. <br /></td></tr>
+<tr class="separator:a5683a7b525b63ed776cdc3a3bb847b51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Implementation of an inter-process mutex with shared access that gives priority to exclusive use (write-priority) </p>

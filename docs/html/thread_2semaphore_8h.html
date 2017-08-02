@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CPEN333: Process and Threads Library: D:/school/teaching/CPEN333/workspace/labs/include/cpen333/thread/semaphore.h File Reference</title>
+<title>CPEN333: Process and Threads Library: D:/school/teaching/CPEN333/workspace/library/include/cpen333/thread/semaphore.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -77,6 +77,7 @@ $(function() {
 <div class="textblock"><code>#include &lt;mutex&gt;</code><br />
 <code>#include &lt;condition_variable&gt;</code><br />
 <code>#include &lt;chrono&gt;</code><br />
+<code>#include &quot;<a class="el" href="util_8h_source.html">../util.h</a>&quot;</code><br />
 </div>
 <p><a href="thread_2semaphore_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -91,10 +92,10 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a18e8932a5a5670bf3c472f16105e1060"><td class="memItemLeft" align="right" valign="top"><a id="a18e8932a5a5670bf3c472f16105e1060"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="thread_2semaphore_8h.html#a18e8932a5a5670bf3c472f16105e1060">cpen333::thread::semaphore</a> = basic_semaphore&lt; std::mutex, std::condition_variable &gt;</td></tr>
-<tr class="memdesc:a18e8932a5a5670bf3c472f16105e1060"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias to default semaphore implementation with std::mutex and std::condition_variable. <br /></td></tr>
-<tr class="separator:a18e8932a5a5670bf3c472f16105e1060"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7414c66f80d3de6bb3b8c3d541bc5c4b"><td class="memItemLeft" align="right" valign="top"><a id="a7414c66f80d3de6bb3b8c3d541bc5c4b"></a>
+typedef basic_semaphore&lt; std::mutex, std::condition_variable &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="thread_2semaphore_8h.html#a7414c66f80d3de6bb3b8c3d541bc5c4b">cpen333::thread::semaphore</a></td></tr>
+<tr class="memdesc:a7414c66f80d3de6bb3b8c3d541bc5c4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias to default semaphore implementation with std::mutex and std::condition_variable. <br /></td></tr>
+<tr class="separator:a7414c66f80d3de6bb3b8c3d541bc5c4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Semaphore synchronization primitive implementation. </p>

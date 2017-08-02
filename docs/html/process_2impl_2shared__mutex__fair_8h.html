@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CPEN333: Process and Threads Library: D:/school/teaching/CPEN333/workspace/labs/include/cpen333/process/impl/shared_mutex_fair.h File Reference</title>
+<title>CPEN333: Process and Threads Library: D:/school/teaching/CPEN333/workspace/library/include/cpen333/process/impl/shared_mutex_fair.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -75,12 +75,12 @@ $(function() {
 
 <p>Implementation of an inter-process mutex with shared access that tries to fairly balance priorities between exclusive and shared use.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="mutex_8h_source.html">cpen333/process/mutex.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="condition__variable_8h_source.html">cpen333/process/condition_variable.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="shared__memory_8h_source.html">cpen333/process/shared_memory.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="named__resource_8h_source.html">cpen333/process/named_resource.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="mutex_8h_source.html">../mutex.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="condition__variable_8h_source.html">../condition_variable.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="shared__memory_8h_source.html">../shared_memory.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="named__resource_8h_source.html">../named_resource.h</a>&quot;</code><br />
 </div>
-<p><a href="shared__mutex__fair_8h_source.html">Go to the source code of this file.</a></p>
+<p><a href="process_2impl_2shared__mutex__fair_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
@@ -91,24 +91,24 @@ Classes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a08a5193b102dbfa936377d683e2afa6f"><td class="memItemLeft" align="right" valign="top"><a id="a08a5193b102dbfa936377d683e2afa6f"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shared__mutex__fair_8h.html#a08a5193b102dbfa936377d683e2afa6f">SHARED_MUTEX_FAIR_NAME_SUFFIX</a>&#160;&#160;&#160;&quot;_smf&quot;</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="process_2impl_2shared__mutex__fair_8h.html#a08a5193b102dbfa936377d683e2afa6f">SHARED_MUTEX_FAIR_NAME_SUFFIX</a>&#160;&#160;&#160;&quot;_smf&quot;</td></tr>
 <tr class="memdesc:a08a5193b102dbfa936377d683e2afa6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name suffix for internals to guarantee uniqueness. <br /></td></tr>
 <tr class="separator:a08a5193b102dbfa936377d683e2afa6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab78d2bcada1a62d9f36e4ae8e68a8b80"><td class="memItemLeft" align="right" valign="top"><a id="ab78d2bcada1a62d9f36e4ae8e68a8b80"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shared__mutex__fair_8h.html#ab78d2bcada1a62d9f36e4ae8e68a8b80">SHARED_MUTEX_FAIR_INITIALIZED</a>&#160;&#160;&#160;0x91271238</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="process_2impl_2shared__mutex__fair_8h.html#ab78d2bcada1a62d9f36e4ae8e68a8b80">SHARED_MUTEX_FAIR_INITIALIZED</a>&#160;&#160;&#160;0x91271238</td></tr>
 <tr class="memdesc:ab78d2bcada1a62d9f36e4ae8e68a8b80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Magic number used to test initialization. <br /></td></tr>
 <tr class="separator:ab78d2bcada1a62d9f36e4ae8e68a8b80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a9f938ee7b2cb22c2812c665b83a4f18c"><td class="memItemLeft" align="right" valign="top"><a id="a9f938ee7b2cb22c2812c665b83a4f18c"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shared__mutex__fair_8h.html#a9f938ee7b2cb22c2812c665b83a4f18c">cpen333::process::shared_mutex_fair</a> = impl::shared_mutex_fair</td></tr>
-<tr class="memdesc:a9f938ee7b2cb22c2812c665b83a4f18c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for default shared mutex with fair priority. <br /></td></tr>
-<tr class="separator:a9f938ee7b2cb22c2812c665b83a4f18c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a051d1a6a5fd6dbcb9941d09f87a67c32"><td class="memItemLeft" align="right" valign="top"><a id="a051d1a6a5fd6dbcb9941d09f87a67c32"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shared__mutex__fair_8h.html#a051d1a6a5fd6dbcb9941d09f87a67c32">cpen333::process::shared_timed_mutex_fair</a> = impl::shared_mutex_fair</td></tr>
-<tr class="memdesc:a051d1a6a5fd6dbcb9941d09f87a67c32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for default shared timed mutex with fair priority. <br /></td></tr>
-<tr class="separator:a051d1a6a5fd6dbcb9941d09f87a67c32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2d4a85122834c747c3bbf9e8cfb32de"><td class="memItemLeft" align="right" valign="top"><a id="af2d4a85122834c747c3bbf9e8cfb32de"></a>
+typedef impl::shared_mutex_fair&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="process_2impl_2shared__mutex__fair_8h.html#af2d4a85122834c747c3bbf9e8cfb32de">cpen333::process::shared_mutex_fair</a></td></tr>
+<tr class="memdesc:af2d4a85122834c747c3bbf9e8cfb32de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for default shared mutex with fair priority. <br /></td></tr>
+<tr class="separator:af2d4a85122834c747c3bbf9e8cfb32de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abacd02002d03285d5eda3e25b2d8c510"><td class="memItemLeft" align="right" valign="top"><a id="abacd02002d03285d5eda3e25b2d8c510"></a>
+typedef impl::shared_mutex_fair&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="process_2impl_2shared__mutex__fair_8h.html#abacd02002d03285d5eda3e25b2d8c510">cpen333::process::shared_timed_mutex_fair</a></td></tr>
+<tr class="memdesc:abacd02002d03285d5eda3e25b2d8c510"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for default shared timed mutex with fair priority. <br /></td></tr>
+<tr class="separator:abacd02002d03285d5eda3e25b2d8c510"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Implementation of an inter-process mutex with shared access that tries to fairly balance priorities between exclusive and shared use. </p>

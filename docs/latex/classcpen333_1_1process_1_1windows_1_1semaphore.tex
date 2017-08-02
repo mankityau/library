@@ -18,7 +18,7 @@ Inheritance diagram for cpen333\+:\+:process\+:\+:windows\+:\+:semaphore\+:\begi
 \subsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-using \hyperlink{classcpen333_1_1process_1_1windows_1_1semaphore_aa3e5433587a4f60fc2984eb3509946c9}{native\+\_\+handle\+\_\+type} = H\+A\+N\+D\+LE
+typedef H\+A\+N\+D\+LE \hyperlink{classcpen333_1_1process_1_1windows_1_1semaphore_a07f523e9a1edf0ae8afa2f21487a1953}{native\+\_\+handle\+\_\+type}
 \begin{DoxyCompactList}\small\item\em Alias to native handle type for semaphore. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -40,7 +40,7 @@ bool \hyperlink{classcpen333_1_1process_1_1windows_1_1semaphore_a06cffd6c2ed120a
 \begin{DoxyCompactList}\small\item\em Tries to wait for the semaphore for up to a maximum absolute time. \end{DoxyCompactList}\item 
 void \hyperlink{classcpen333_1_1process_1_1windows_1_1semaphore_a7f1443d55e1112e7b2a15334bafc958b}{notify} ()
 \begin{DoxyCompactList}\small\item\em Increments the semaphore value. \end{DoxyCompactList}\item 
-\hyperlink{classcpen333_1_1process_1_1windows_1_1semaphore_aa3e5433587a4f60fc2984eb3509946c9}{native\+\_\+handle\+\_\+type} \hyperlink{classcpen333_1_1process_1_1windows_1_1semaphore_ae73fa406be3b0df603b260e892c94081}{native\+\_\+handle} ()
+\hyperlink{classcpen333_1_1process_1_1windows_1_1semaphore_a07f523e9a1edf0ae8afa2f21487a1953}{native\+\_\+handle\+\_\+type} \hyperlink{classcpen333_1_1process_1_1windows_1_1semaphore_ae73fa406be3b0df603b260e892c94081}{native\+\_\+handle} ()
 \begin{DoxyCompactList}\small\item\em Returns a native handle to the semaphore. \end{DoxyCompactList}\item 
 bool \hyperlink{classcpen333_1_1process_1_1windows_1_1semaphore_abc5159f32e61024c6c6a978ac64fe39d}{unlink} ()
 \begin{DoxyCompactList}\small\item\em Detaches the name from the named resource. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -62,11 +62,11 @@ This implementation has no explicit maximum value
 This semaphore has U\+S\+A\+GE P\+E\+R\+S\+I\+S\+T\+E\+N\+CE, meaning the mutex will continue to exist as long as at least one process/thread is holding a reference to it. 
 
 \subsection{Member Typedef Documentation}
-\mbox{\Hypertarget{classcpen333_1_1process_1_1windows_1_1semaphore_aa3e5433587a4f60fc2984eb3509946c9}\label{classcpen333_1_1process_1_1windows_1_1semaphore_aa3e5433587a4f60fc2984eb3509946c9}} 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1windows_1_1semaphore_a07f523e9a1edf0ae8afa2f21487a1953}\label{classcpen333_1_1process_1_1windows_1_1semaphore_a07f523e9a1edf0ae8afa2f21487a1953}} 
 \index{cpen333\+::process\+::windows\+::semaphore@{cpen333\+::process\+::windows\+::semaphore}!native\+\_\+handle\+\_\+type@{native\+\_\+handle\+\_\+type}}
 \index{native\+\_\+handle\+\_\+type@{native\+\_\+handle\+\_\+type}!cpen333\+::process\+::windows\+::semaphore@{cpen333\+::process\+::windows\+::semaphore}}
 \subsubsection{\texorpdfstring{native\+\_\+handle\+\_\+type}{native\_handle\_type}}
-{\footnotesize\ttfamily using \hyperlink{classcpen333_1_1process_1_1posix_1_1semaphore_ad63150e5c8c196a84a7b214462756f1a}{cpen333\+::process\+::windows\+::semaphore\+::native\+\_\+handle\+\_\+type} =  H\+A\+N\+D\+LE}
+{\footnotesize\ttfamily typedef H\+A\+N\+D\+LE \hyperlink{classcpen333_1_1process_1_1posix_1_1semaphore_ad63150e5c8c196a84a7b214462756f1a}{cpen333\+::process\+::windows\+::semaphore\+::native\+\_\+handle\+\_\+type}}
 
 
 
@@ -99,13 +99,13 @@ Constructs or connects to a named semaphore.
 \index{cpen333\+::process\+::windows\+::semaphore@{cpen333\+::process\+::windows\+::semaphore}!native\+\_\+handle@{native\+\_\+handle}}
 \index{native\+\_\+handle@{native\+\_\+handle}!cpen333\+::process\+::windows\+::semaphore@{cpen333\+::process\+::windows\+::semaphore}}
 \subsubsection{\texorpdfstring{native\+\_\+handle()}{native\_handle()}}
-{\footnotesize\ttfamily \hyperlink{classcpen333_1_1process_1_1windows_1_1semaphore_aa3e5433587a4f60fc2984eb3509946c9}{native\+\_\+handle\+\_\+type} cpen333\+::process\+::windows\+::semaphore\+::native\+\_\+handle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \hyperlink{classcpen333_1_1process_1_1windows_1_1semaphore_a07f523e9a1edf0ae8afa2f21487a1953}{native\+\_\+handle\+\_\+type} cpen333\+::process\+::windows\+::semaphore\+::native\+\_\+handle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 Returns a native handle to the semaphore. 
 
-The native handle has a type aliased to \hyperlink{classcpen333_1_1process_1_1windows_1_1semaphore_aa3e5433587a4f60fc2984eb3509946c9}{semaphore\+::native\+\_\+handle\+\_\+type}
+The native handle has a type aliased to \hyperlink{classcpen333_1_1process_1_1windows_1_1semaphore_a07f523e9a1edf0ae8afa2f21487a1953}{semaphore\+::native\+\_\+handle\+\_\+type}
 
 On Windows systems, is of type H\+A\+N\+D\+LE to a Semaphore.
 
@@ -261,4 +261,4 @@ true if semaphore successfully decremented, false if timed-\/out
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/impl/windows/\hyperlink{process_2impl_2windows_2semaphore_8h}{semaphore.\+h}\end{DoxyCompactItemize}
+D\+:/school/teaching/\+C\+P\+E\+N333/workspace/library/include/cpen333/process/impl/windows/\hyperlink{process_2impl_2windows_2semaphore_8h}{semaphore.\+h}\end{DoxyCompactItemize}

@@ -1,10 +1,7 @@
 var searchData=
 [
-  ['pipe_5finfo_5fsuffix',['PIPE_INFO_SUFFIX',['../pipe_8h.html#a91e911cc2c8873dbd401fc939d75c871',1,'pipe.h']]],
-  ['pipe_5finitialized',['PIPE_INITIALIZED',['../pipe_8h.html#a5d34eb688443a62e1558a264385b561f',1,'pipe.h']]],
-  ['pipe_5fname_5fsuffix',['PIPE_NAME_SUFFIX',['../pipe_8h.html#a87a937b24dabc2fb64be6f1cdca4bee6',1,'pipe.h']]],
-  ['pipe_5fopen_5fsuffix',['PIPE_OPEN_SUFFIX',['../pipe_8h.html#a641dadd9d2c1c772e0702aa91f97c740',1,'pipe.h']]],
-  ['pipe_5fread_5fsuffix',['PIPE_READ_SUFFIX',['../pipe_8h.html#af2950b599e2b61eb8a7975ede87e0ca4',1,'pipe.h']]],
-  ['pipe_5fwrite_5fsuffix',['PIPE_WRITE_SUFFIX',['../pipe_8h.html#abb1d5adad5f79e8c817b69f078fdc0a4',1,'pipe.h']]],
-  ['posix',['POSIX',['../os_8h.html#a1c3d85ae80df5590fa314acffd8bf840',1,'os.h']]]
+  ['max_5fresource_5fname',['MAX_RESOURCE_NAME',['../named__resource__base_8h.html#a90f3d6a2beaff7b53af40fd47aa9070b',1,'named_resource_base.h']]],
+  ['max_5fsemaphore_5fsize',['MAX_SEMAPHORE_SIZE',['../process_2impl_2windows_2semaphore_8h.html#ae0da9797c84aacec4e7ed6888f084a2e',1,'semaphore.h']]],
+  ['message_5fqueue_5fsuffix',['MESSAGE_QUEUE_SUFFIX',['../message__queue_8h.html#a6643040afe6fd6e2c486a3c7b8e0dbe3',1,'message_queue.h']]],
+  ['mutex_5fname_5fsuffix',['MUTEX_NAME_SUFFIX',['../impl_2posix_2mutex_8h.html#abf8c3019dca364cbb7b828047f84b335',1,'MUTEX_NAME_SUFFIX():&#160;mutex.h'],['../impl_2windows_2mutex_8h.html#abf8c3019dca364cbb7b828047f84b335',1,'MUTEX_NAME_SUFFIX():&#160;mutex.h']]]
 ];

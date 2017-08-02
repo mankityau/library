@@ -1,0 +1,39 @@
+\hypertarget{process_2impl_2shared__mutex__fair_8h}{}\section{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/library/include/cpen333/process/impl/shared\+\_\+mutex\+\_\+fair.h File Reference}
+\label{process_2impl_2shared__mutex__fair_8h}\index{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/library/include/cpen333/process/impl/shared\+\_\+mutex\+\_\+fair.\+h@{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/library/include/cpen333/process/impl/shared\+\_\+mutex\+\_\+fair.\+h}}
+
+
+Implementation of an inter-\/process mutex with shared access that tries to fairly balance priorities between exclusive and shared use.  
+
+
+{\ttfamily \#include \char`\"{}../mutex.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../condition\+\_\+variable.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../shared\+\_\+memory.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../named\+\_\+resource.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classcpen333_1_1process_1_1impl_1_1shared__mutex__fair}{cpen333\+::process\+::impl\+::shared\+\_\+mutex\+\_\+fair}
+\begin{DoxyCompactList}\small\item\em An inter-\/process shared mutex implementation with balanced priorities. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{process_2impl_2shared__mutex__fair_8h_a08a5193b102dbfa936377d683e2afa6f}\label{process_2impl_2shared__mutex__fair_8h_a08a5193b102dbfa936377d683e2afa6f}} 
+\#define \hyperlink{process_2impl_2shared__mutex__fair_8h_a08a5193b102dbfa936377d683e2afa6f}{S\+H\+A\+R\+E\+D\+\_\+\+M\+U\+T\+E\+X\+\_\+\+F\+A\+I\+R\+\_\+\+N\+A\+M\+E\+\_\+\+S\+U\+F\+F\+IX}~\char`\"{}\+\_\+smf\char`\"{}
+\begin{DoxyCompactList}\small\item\em Name suffix for internals to guarantee uniqueness. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{process_2impl_2shared__mutex__fair_8h_ab78d2bcada1a62d9f36e4ae8e68a8b80}\label{process_2impl_2shared__mutex__fair_8h_ab78d2bcada1a62d9f36e4ae8e68a8b80}} 
+\#define \hyperlink{process_2impl_2shared__mutex__fair_8h_ab78d2bcada1a62d9f36e4ae8e68a8b80}{S\+H\+A\+R\+E\+D\+\_\+\+M\+U\+T\+E\+X\+\_\+\+F\+A\+I\+R\+\_\+\+I\+N\+I\+T\+I\+A\+L\+I\+Z\+ED}~0x91271238
+\begin{DoxyCompactList}\small\item\em Magic number used to test initialization. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{process_2impl_2shared__mutex__fair_8h_af2d4a85122834c747c3bbf9e8cfb32de}\label{process_2impl_2shared__mutex__fair_8h_af2d4a85122834c747c3bbf9e8cfb32de}} 
+typedef impl\+::shared\+\_\+mutex\+\_\+fair \hyperlink{process_2impl_2shared__mutex__fair_8h_af2d4a85122834c747c3bbf9e8cfb32de}{cpen333\+::process\+::shared\+\_\+mutex\+\_\+fair}
+\begin{DoxyCompactList}\small\item\em Alias for default shared mutex with fair priority. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{process_2impl_2shared__mutex__fair_8h_abacd02002d03285d5eda3e25b2d8c510}\label{process_2impl_2shared__mutex__fair_8h_abacd02002d03285d5eda3e25b2d8c510}} 
+typedef impl\+::shared\+\_\+mutex\+\_\+fair \hyperlink{process_2impl_2shared__mutex__fair_8h_abacd02002d03285d5eda3e25b2d8c510}{cpen333\+::process\+::shared\+\_\+timed\+\_\+mutex\+\_\+fair}
+\begin{DoxyCompactList}\small\item\em Alias for default shared timed mutex with fair priority. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implementation of an inter-\/process mutex with shared access that tries to fairly balance priorities between exclusive and shared use. 
+

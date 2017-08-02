@@ -14,7 +14,7 @@ Timer implementation.
 \item 
 \hyperlink{classcpen333_1_1thread_1_1timer_adf189ddfc276e7efa2c49ac9413627b9}{timer} (const Duration \&period)
 \begin{DoxyCompactList}\small\item\em Creates a basic timer. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename Func , typename... Args$>$ }\\\hyperlink{classcpen333_1_1thread_1_1timer_a850ad7eb401f54c5dc53ec0b01765135}{timer} (const Duration \&period, Func \&\&func, Args \&\&... args)
+{\footnotesize template$<$typename Func $>$ }\\\hyperlink{classcpen333_1_1thread_1_1timer_a8eb8ec006064a7eed1f63d1ae2c74acd}{timer} (const Duration \&period, Func \&\&func)
 \begin{DoxyCompactList}\small\item\em Creates a timer with a callback function. \end{DoxyCompactList}\item 
 void \hyperlink{classcpen333_1_1thread_1_1timer_a0d1be90402f46912966ec5fc13707bce}{start} ()
 \begin{DoxyCompactList}\small\item\em Start timer running. \end{DoxyCompactList}\item 
@@ -68,19 +68,19 @@ The timer is N\+OT started automatically. It must be started by calling \hyperli
 {\em period} & tick interval \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{classcpen333_1_1thread_1_1timer_a850ad7eb401f54c5dc53ec0b01765135}\label{classcpen333_1_1thread_1_1timer_a850ad7eb401f54c5dc53ec0b01765135}} 
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1timer_a8eb8ec006064a7eed1f63d1ae2c74acd}\label{classcpen333_1_1thread_1_1timer_a8eb8ec006064a7eed1f63d1ae2c74acd}} 
 \index{cpen333\+::thread\+::timer@{cpen333\+::thread\+::timer}!timer@{timer}}
 \index{timer@{timer}!cpen333\+::thread\+::timer@{cpen333\+::thread\+::timer}}
 \subsubsection{\texorpdfstring{timer()}{timer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename Duration $>$ \\
-template$<$typename Func , typename... Args$>$ \\
-\hyperlink{classcpen333_1_1thread_1_1timer}{cpen333\+::thread\+::timer}$<$ Duration $>$\+::\hyperlink{classcpen333_1_1thread_1_1timer}{timer} (\begin{DoxyParamCaption}\item[{const Duration \&}]{period,  }\item[{Func \&\&}]{func,  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+template$<$typename Func $>$ \\
+\hyperlink{classcpen333_1_1thread_1_1timer}{cpen333\+::thread\+::timer}$<$ Duration $>$\+::\hyperlink{classcpen333_1_1thread_1_1timer}{timer} (\begin{DoxyParamCaption}\item[{const Duration \&}]{period,  }\item[{Func \&\&}]{func }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 Creates a timer with a callback function. 
 
-The callback function func(args...) is executed on every tick. The function execution time should be well within a single tick period. Callbacks are executed in a single thread, meaning that if one execution does not finish before the next tick, calls will be accumulated and run sequentially.
+The callback function func() is executed on every tick. The function execution time should be well within a single tick period. Callbacks are executed in a single thread, meaning that if one execution does not finish before the next tick, calls will be accumulated and run sequentially.
 
 The timer is N\+OT started automatically. It must be started by calling \hyperlink{classcpen333_1_1thread_1_1timer_a0d1be90402f46912966ec5fc13707bce}{start()}.
 
@@ -88,16 +88,12 @@ The timer is N\+OT started automatically. It must be started by calling \hyperli
 \begin{DoxyTemplParams}{Template Parameters}
 {\em Func} & callback function type \\
 \hline
-{\em Args} & callback argument types \\
-\hline
 \end{DoxyTemplParams}
 
 \begin{DoxyParams}{Parameters}
 {\em period} & tick interval \\
 \hline
 {\em func} & callback function \\
-\hline
-{\em args} & callback arguments \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classcpen333_1_1thread_1_1timer_a4c25e491b57438c7a60fe54b45b369b8}\label{classcpen333_1_1thread_1_1timer_a4c25e491b57438c7a60fe54b45b369b8}} 
@@ -193,4 +189,4 @@ Blocks the current thread until the next tick event, or the timer is stopped.
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/thread/timer.\+h\end{DoxyCompactItemize}
+D\+:/school/teaching/\+C\+P\+E\+N333/workspace/library/include/cpen333/thread/\hyperlink{timer_8h}{timer.\+h}\end{DoxyCompactItemize}

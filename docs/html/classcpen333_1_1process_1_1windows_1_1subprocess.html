@@ -80,16 +80,19 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a579616d8fd1401a85aae1046412f451d"><td class="memItemLeft" align="right" valign="top"><a id="a579616d8fd1401a85aae1046412f451d"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpen333_1_1process_1_1windows_1_1subprocess.html#a579616d8fd1401a85aae1046412f451d">native_handle_type</a> = PROCESS_INFORMATION</td></tr>
-<tr class="memdesc:a579616d8fd1401a85aae1046412f451d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias to native handle type, on Windows is a PROCESS_INFORMATION structure. <br /></td></tr>
-<tr class="separator:a579616d8fd1401a85aae1046412f451d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac53f61176d4a9e02f8bd558995d56b4d"><td class="memItemLeft" align="right" valign="top"><a id="ac53f61176d4a9e02f8bd558995d56b4d"></a>
+typedef HANDLE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpen333_1_1process_1_1windows_1_1subprocess.html#ac53f61176d4a9e02f8bd558995d56b4d">native_handle_type</a></td></tr>
+<tr class="memdesc:ac53f61176d4a9e02f8bd558995d56b4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias to native handle type, on Windows is a PROCESS_INFORMATION structure. <br /></td></tr>
+<tr class="separator:ac53f61176d4a9e02f8bd558995d56b4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ab927ab6d2b499cb7079bc2dedbd670ff"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpen333_1_1process_1_1windows_1_1subprocess.html#ab927ab6d2b499cb7079bc2dedbd670ff">subprocess</a> (const std::vector&lt; std::string &gt; &amp;exec, bool <a class="el" href="classcpen333_1_1process_1_1windows_1_1subprocess.html#ad6fddf2c148cefff9753dafaeb35d1a3">start</a>=true, bool detached=false)</td></tr>
 <tr class="memdesc:ab927ab6d2b499cb7079bc2dedbd670ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new subprocess.  <a href="#ab927ab6d2b499cb7079bc2dedbd670ff">More...</a><br /></td></tr>
 <tr class="separator:ab927ab6d2b499cb7079bc2dedbd670ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf8e8c5cbeb63bebd888896a07b4fa58"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpen333_1_1process_1_1windows_1_1subprocess.html#adf8e8c5cbeb63bebd888896a07b4fa58">subprocess</a> (const std::string &amp;cmd, bool <a class="el" href="classcpen333_1_1process_1_1windows_1_1subprocess.html#ad6fddf2c148cefff9753dafaeb35d1a3">start</a>=true, bool detached=false)</td></tr>
+<tr class="memdesc:adf8e8c5cbeb63bebd888896a07b4fa58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new subprocess from a command string.  <a href="#adf8e8c5cbeb63bebd888896a07b4fa58">More...</a><br /></td></tr>
+<tr class="separator:adf8e8c5cbeb63bebd888896a07b4fa58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad6fddf2c148cefff9753dafaeb35d1a3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpen333_1_1process_1_1windows_1_1subprocess.html#ad6fddf2c148cefff9753dafaeb35d1a3">start</a> ()</td></tr>
 <tr class="memdesc:ad6fddf2c148cefff9753dafaeb35d1a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the subprocess.  <a href="#ad6fddf2c148cefff9753dafaeb35d1a3">More...</a><br /></td></tr>
 <tr class="separator:ad6fddf2c148cefff9753dafaeb35d1a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -110,13 +113,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7fc3a589bdd4cde9adb09fc3debf9bc9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpen333_1_1process_1_1windows_1_1subprocess.html#a7fc3a589bdd4cde9adb09fc3debf9bc9">terminated</a> ()</td></tr>
 <tr class="memdesc:a7fc3a589bdd4cde9adb09fc3debf9bc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the process has already been terminated.  <a href="#a7fc3a589bdd4cde9adb09fc3debf9bc9">More...</a><br /></td></tr>
 <tr class="separator:a7fc3a589bdd4cde9adb09fc3debf9bc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae45daefd812b9629baa9b42d0ac8cd15"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpen333_1_1process_1_1windows_1_1subprocess.html#ae45daefd812b9629baa9b42d0ac8cd15">terminate</a> ()</td></tr>
+<tr class="memdesc:ae45daefd812b9629baa9b42d0ac8cd15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Force the process to terminate.  <a href="#ae45daefd812b9629baa9b42d0ac8cd15">More...</a><br /></td></tr>
+<tr class="separator:ae45daefd812b9629baa9b42d0ac8cd15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A child process. </p>
 <p>Allows launching of a child process, with environment inherited from the current process. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab927ab6d2b499cb7079bc2dedbd670ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab927ab6d2b499cb7079bc2dedbd670ff">&#9670;&nbsp;</a></span>subprocess()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab927ab6d2b499cb7079bc2dedbd670ff">&#9670;&nbsp;</a></span>subprocess() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -160,6 +166,59 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">exec</td><td>command and arguments to execute </td></tr>
+    <tr><td class="paramname">start</td><td>whether to start the subprocess immediately </td></tr>
+    <tr><td class="paramname">detached</td><td>run the subprocess in `detached' mode </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="adf8e8c5cbeb63bebd888896a07b4fa58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf8e8c5cbeb63bebd888896a07b4fa58">&#9670;&nbsp;</a></span>subprocess() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">cpen333::process::windows::subprocess::subprocess </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>cmd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>start</em> = <code>true</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>detached</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs a new subprocess from a command string. </p>
+<p>The new process will run the command cmd with argv parameters parsed from the string. A detached child process will run in a separate thread, (and on Windows, a separate window) concurrently with the parent process. If not detached, the parent will wait for a running child to complete.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cmd</td><td>command and arguments to execute </td></tr>
     <tr><td class="paramname">start</td><td>whether to start the subprocess immediately </td></tr>
     <tr><td class="paramname">detached</td><td>run the subprocess in `detached' mode </td></tr>
   </table>
@@ -222,6 +281,34 @@ Public Member Functions</h2></td></tr>
 
 <p>Starts the subprocess. </p>
 <dl class="section return"><dt>Returns</dt><dd>true if started, false if process already started or an error occurs </dd></dl>
+
+</div>
+</div>
+<a id="ae45daefd812b9629baa9b42d0ac8cd15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae45daefd812b9629baa9b42d0ac8cd15">&#9670;&nbsp;</a></span>terminate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool cpen333::process::windows::subprocess::terminate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Force the process to terminate. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if successful </dd></dl>
 
 </div>
 </div>
@@ -371,7 +458,7 @@ template&lt;class Clock , class Duration &gt; </div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>D:/school/teaching/CPEN333/workspace/labs/include/cpen333/process/impl/windows/<a class="el" href="impl_2windows_2subprocess_8h_source.html">subprocess.h</a></li>
+<li>D:/school/teaching/CPEN333/workspace/library/include/cpen333/process/impl/windows/<a class="el" href="impl_2windows_2subprocess_8h_source.html">subprocess.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

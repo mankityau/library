@@ -1,11 +1,11 @@
-\hypertarget{util_8h}{}\section{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/util.h File Reference}
-\label{util_8h}\index{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/util.\+h@{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/util.\+h}}
+\hypertarget{util_8h}{}\section{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/library/include/cpen333/util.h File Reference}
+\label{util_8h}\index{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/library/include/cpen333/util.\+h@{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/library/include/cpen333/util.\+h}}
 
 
 Utility functions.  
 
 
-{\ttfamily \#include \char`\"{}cpen333/os.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}os.\+h\char`\"{}}\newline
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
 {\ttfamily \#include $<$sys/select.\+h$>$}\newline
 {\ttfamily \#include $<$sys/ioctl.\+h$>$}\newline
@@ -14,11 +14,16 @@ Utility functions.
 {\ttfamily \#include $<$iostream$>$}\newline
 {\ttfamily \#include $<$string$>$}\newline
 {\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{util_8h_a3229fb1aca43b37f588b871e1a9e3438}\label{util_8h_a3229fb1aca43b37f588b871e1a9e3438}} 
+\#define \hyperlink{util_8h_a3229fb1aca43b37f588b871e1a9e3438}{D\+E\+L\+E\+T\+E\+\_\+\+M\+E\+T\+H\+OD}
+\begin{DoxyCompactList}\small\item\em Mark constructor/assignment as deleted. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$typename ... Args$>$ }\\std\+::string \hyperlink{util_8h_a5e83cd2baae9bd0faaa60db2eed9525a}{cpen333\+::string\+\_\+format} (const std\+::string \&format, Args ... args)
-\begin{DoxyCompactList}\small\item\em Formats a string according to standard C printf rules. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Dummy $>$ }\\int \hyperlink{util_8h_aadd4070521219770731241a37ed1ae07}{cpen333\+::detail\+::\+\_\+kbhit} ()
 \item 
 int \hyperlink{util_8h_a68b5b8834128fc802ed44d31064c0416}{cpen333\+::test\+\_\+stdin} ()
@@ -73,34 +78,6 @@ perror should be called right after the error was produced, otherwise it may be 
 {\em msg} & custom message \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{util_8h_file_a5e83cd2baae9bd0faaa60db2eed9525a}\label{util_8h_file_a5e83cd2baae9bd0faaa60db2eed9525a}} 
-\index{util.\+h@{util.\+h}!string\+\_\+format@{string\+\_\+format}}
-\index{string\+\_\+format@{string\+\_\+format}!util.\+h@{util.\+h}}
-\subsubsection{\texorpdfstring{string\+\_\+format()}{string\_format()}}
-{\footnotesize\ttfamily template$<$typename ... Args$>$ \\
-std\+::string cpen333\+::string\+\_\+format (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{format,  }\item[{Args ...}]{args }\end{DoxyParamCaption})}
-
-
-
-Formats a string according to standard C printf rules. 
-
-Writes the string described by {\ttfamily format} to a new output string. If {\ttfamily format} includes format specifiers (subsequences beginning with \%), the additional arguments following {\ttfamily format} are formatted and inserted in the resulting string replacing their respective specifiers.
-
-
-\begin{DoxyTemplParams}{Template Parameters}
-{\em Args} & variadic template types of additional arguments \\
-\hline
-\end{DoxyTemplParams}
-
-\begin{DoxyParams}{Parameters}
-{\em format} & format specifier string \\
-\hline
-{\em args} & additional arguments \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-new formatted string 
-\end{DoxyReturn}
 \mbox{\Hypertarget{util_8h_file_a68b5b8834128fc802ed44d31064c0416}\label{util_8h_file_a68b5b8834128fc802ed44d31064c0416}} 
 \index{util.\+h@{util.\+h}!test\+\_\+stdin@{test\+\_\+stdin}}
 \index{test\+\_\+stdin@{test\+\_\+stdin}!util.\+h@{util.\+h}}

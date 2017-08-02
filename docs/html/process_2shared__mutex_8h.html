@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CPEN333: Process and Threads Library: D:/school/teaching/CPEN333/workspace/labs/include/cpen333/process/shared_mutex.h File Reference</title>
+<title>CPEN333: Process and Threads Library: D:/school/teaching/CPEN333/workspace/library/include/cpen333/process/shared_mutex.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,13 +74,13 @@ $(function() {
 
 <p>Inter-process shared-access mutex implementations, allowing for multi-read/write access.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;shared_mutex&gt;</code><br />
-<code>#include &quot;<a class="el" href="mutex_8h_source.html">cpen333/process/mutex.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="process_2semaphore_8h_source.html">cpen333/process/semaphore.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="shared__memory_8h_source.html">cpen333/process/shared_memory.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="process_2impl_2shared__mutex__exclusive_8h_source.html">cpen333/process/impl/shared_mutex_exclusive.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="shared__mutex__fair_8h_source.html">cpen333/process/impl/shared_mutex_fair.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="process_2impl_2shared__mutex__shared_8h_source.html">cpen333/process/impl/shared_mutex_shared.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="mutex_8h_source.html">mutex.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="process_2semaphore_8h_source.html">semaphore.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="shared__memory_8h_source.html">shared_memory.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="process_2impl_2shared__mutex__exclusive_8h_source.html">impl/shared_mutex_exclusive.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="process_2impl_2shared__mutex__fair_8h_source.html">impl/shared_mutex_fair.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="process_2impl_2shared__mutex__shared_8h_source.html">impl/shared_mutex_shared.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="process_2impl_2shared__lock_8h_source.html">impl/shared_lock.h</a>&quot;</code><br />
 </div>
 <p><a href="process_2shared__mutex_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -92,14 +92,14 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:aea98f3be656ea734bbe502c5d6a25af9"><td class="memItemLeft" align="right" valign="top"><a id="aea98f3be656ea734bbe502c5d6a25af9"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="process_2shared__mutex_8h.html#aea98f3be656ea734bbe502c5d6a25af9">cpen333::process::shared_mutex</a> = impl::shared_mutex_fair</td></tr>
-<tr class="memdesc:aea98f3be656ea734bbe502c5d6a25af9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default shared mutex that uses fair priority. <br /></td></tr>
-<tr class="separator:aea98f3be656ea734bbe502c5d6a25af9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9cfe57631a8c62bc0876173e401ef74f"><td class="memItemLeft" align="right" valign="top"><a id="a9cfe57631a8c62bc0876173e401ef74f"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="process_2shared__mutex_8h.html#a9cfe57631a8c62bc0876173e401ef74f">cpen333::process::shared_timed_mutex</a> = impl::shared_mutex_fair</td></tr>
-<tr class="memdesc:a9cfe57631a8c62bc0876173e401ef74f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default shared timed mutex uses fair priority. <br /></td></tr>
-<tr class="separator:a9cfe57631a8c62bc0876173e401ef74f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a143668c5996f6d5a389cb972c9c4364a"><td class="memItemLeft" align="right" valign="top"><a id="a143668c5996f6d5a389cb972c9c4364a"></a>
+typedef impl::shared_mutex_fair&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="process_2shared__mutex_8h.html#a143668c5996f6d5a389cb972c9c4364a">cpen333::process::shared_mutex</a></td></tr>
+<tr class="memdesc:a143668c5996f6d5a389cb972c9c4364a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default shared mutex that uses fair priority. <br /></td></tr>
+<tr class="separator:a143668c5996f6d5a389cb972c9c4364a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2252e76f3cb7a50ebda2c75b24037905"><td class="memItemLeft" align="right" valign="top"><a id="a2252e76f3cb7a50ebda2c75b24037905"></a>
+typedef impl::shared_mutex_fair&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="process_2shared__mutex_8h.html#a2252e76f3cb7a50ebda2c75b24037905">cpen333::process::shared_timed_mutex</a></td></tr>
+<tr class="memdesc:a2252e76f3cb7a50ebda2c75b24037905"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default shared timed mutex uses fair priority. <br /></td></tr>
+<tr class="separator:a2252e76f3cb7a50ebda2c75b24037905"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Inter-process shared-access mutex implementations, allowing for multi-read/write access. </p>

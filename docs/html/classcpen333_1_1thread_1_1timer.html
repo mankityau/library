@@ -82,10 +82,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:adf189ddfc276e7efa2c49ac9413627b9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpen333_1_1thread_1_1timer.html#adf189ddfc276e7efa2c49ac9413627b9">timer</a> (const Duration &amp;period)</td></tr>
 <tr class="memdesc:adf189ddfc276e7efa2c49ac9413627b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a basic timer.  <a href="#adf189ddfc276e7efa2c49ac9413627b9">More...</a><br /></td></tr>
 <tr class="separator:adf189ddfc276e7efa2c49ac9413627b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a850ad7eb401f54c5dc53ec0b01765135"><td class="memTemplParams" colspan="2">template&lt;typename Func , typename... Args&gt; </td></tr>
-<tr class="memitem:a850ad7eb401f54c5dc53ec0b01765135"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcpen333_1_1thread_1_1timer.html#a850ad7eb401f54c5dc53ec0b01765135">timer</a> (const Duration &amp;period, Func &amp;&amp;func, Args &amp;&amp;... args)</td></tr>
-<tr class="memdesc:a850ad7eb401f54c5dc53ec0b01765135"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a timer with a callback function.  <a href="#a850ad7eb401f54c5dc53ec0b01765135">More...</a><br /></td></tr>
-<tr class="separator:a850ad7eb401f54c5dc53ec0b01765135"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8eb8ec006064a7eed1f63d1ae2c74acd"><td class="memTemplParams" colspan="2">template&lt;typename Func &gt; </td></tr>
+<tr class="memitem:a8eb8ec006064a7eed1f63d1ae2c74acd"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcpen333_1_1thread_1_1timer.html#a8eb8ec006064a7eed1f63d1ae2c74acd">timer</a> (const Duration &amp;period, Func &amp;&amp;func)</td></tr>
+<tr class="memdesc:a8eb8ec006064a7eed1f63d1ae2c74acd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a timer with a callback function.  <a href="#a8eb8ec006064a7eed1f63d1ae2c74acd">More...</a><br /></td></tr>
+<tr class="separator:a8eb8ec006064a7eed1f63d1ae2c74acd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d1be90402f46912966ec5fc13707bce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpen333_1_1thread_1_1timer.html#a0d1be90402f46912966ec5fc13707bce">start</a> ()</td></tr>
 <tr class="memdesc:a0d1be90402f46912966ec5fc13707bce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start timer running.  <a href="#a0d1be90402f46912966ec5fc13707bce">More...</a><br /></td></tr>
 <tr class="separator:a0d1be90402f46912966ec5fc13707bce"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -159,15 +159,15 @@ template&lt;typename Duration &gt; </div>
 
 </div>
 </div>
-<a id="a850ad7eb401f54c5dc53ec0b01765135"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a850ad7eb401f54c5dc53ec0b01765135">&#9670;&nbsp;</a></span>timer() <span class="overload">[2/2]</span></h2>
+<a id="a8eb8ec006064a7eed1f63d1ae2c74acd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8eb8ec006064a7eed1f63d1ae2c74acd">&#9670;&nbsp;</a></span>timer() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Duration &gt; </div>
 <div class="memtemplate">
-template&lt;typename Func , typename... Args&gt; </div>
+template&lt;typename Func &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -182,13 +182,7 @@ template&lt;typename Func , typename... Args&gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">Func &amp;&amp;&#160;</td>
-          <td class="paramname"><em>func</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Args &amp;&amp;...&#160;</td>
-          <td class="paramname"><em>args</em>&#160;</td>
+          <td class="paramname"><em>func</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -204,12 +198,11 @@ template&lt;typename Func , typename... Args&gt; </div>
 </div><div class="memdoc">
 
 <p>Creates a timer with a callback function. </p>
-<p>The callback function func(args...) is executed on every tick. The function execution time should be well within a single tick period. Callbacks are executed in a single thread, meaning that if one execution does not finish before the next tick, calls will be accumulated and run sequentially.</p>
+<p>The callback function func() is executed on every tick. The function execution time should be well within a single tick period. Callbacks are executed in a single thread, meaning that if one execution does not finish before the next tick, calls will be accumulated and run sequentially.</p>
 <p>The timer is NOT started automatically. It must be started by calling <a class="el" href="classcpen333_1_1thread_1_1timer.html#a0d1be90402f46912966ec5fc13707bce" title="Start timer running. ">start()</a>.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">Func</td><td>callback function type </td></tr>
-    <tr><td class="paramname">Args</td><td>callback argument types </td></tr>
   </table>
   </dd>
 </dl>
@@ -217,7 +210,6 @@ template&lt;typename Func , typename... Args&gt; </div>
   <table class="params">
     <tr><td class="paramname">period</td><td>tick interval </td></tr>
     <tr><td class="paramname">func</td><td>callback function </td></tr>
-    <tr><td class="paramname">args</td><td>callback arguments </td></tr>
   </table>
   </dd>
 </dl>
@@ -436,7 +428,7 @@ template&lt;typename Duration &gt; </div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>D:/school/teaching/CPEN333/workspace/labs/include/cpen333/thread/<a class="el" href="timer_8h_source.html">timer.h</a></li>
+<li>D:/school/teaching/CPEN333/workspace/library/include/cpen333/thread/<a class="el" href="timer_8h_source.html">timer.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

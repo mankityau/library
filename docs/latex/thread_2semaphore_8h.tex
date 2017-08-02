@@ -1,5 +1,5 @@
-\hypertarget{thread_2semaphore_8h}{}\section{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/thread/semaphore.h File Reference}
-\label{thread_2semaphore_8h}\index{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/thread/semaphore.\+h@{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/thread/semaphore.\+h}}
+\hypertarget{thread_2semaphore_8h}{}\section{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/library/include/cpen333/thread/semaphore.h File Reference}
+\label{thread_2semaphore_8h}\index{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/library/include/cpen333/thread/semaphore.\+h@{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/library/include/cpen333/thread/semaphore.\+h}}
 
 
 Semaphore synchronization primitive implementation.  
@@ -8,6 +8,7 @@ Semaphore synchronization primitive implementation.
 {\ttfamily \#include $<$mutex$>$}\newline
 {\ttfamily \#include $<$condition\+\_\+variable$>$}\newline
 {\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include \char`\"{}../util.\+h\char`\"{}}\newline
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
@@ -18,8 +19,8 @@ class \hyperlink{classcpen333_1_1thread_1_1semaphore__guard}{cpen333\+::thread\+
 \subsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{thread_2semaphore_8h_a18e8932a5a5670bf3c472f16105e1060}\label{thread_2semaphore_8h_a18e8932a5a5670bf3c472f16105e1060}} 
-using \hyperlink{thread_2semaphore_8h_a18e8932a5a5670bf3c472f16105e1060}{cpen333\+::thread\+::semaphore} = basic\+\_\+semaphore$<$ std\+::mutex, std\+::condition\+\_\+variable $>$
+\mbox{\Hypertarget{thread_2semaphore_8h_a7414c66f80d3de6bb3b8c3d541bc5c4b}\label{thread_2semaphore_8h_a7414c66f80d3de6bb3b8c3d541bc5c4b}} 
+typedef basic\+\_\+semaphore$<$ std\+::mutex, std\+::condition\+\_\+variable $>$ \hyperlink{thread_2semaphore_8h_a7414c66f80d3de6bb3b8c3d541bc5c4b}{cpen333\+::thread\+::semaphore}
 \begin{DoxyCompactList}\small\item\em Alias to default semaphore implementation with std\+::mutex and std\+::condition\+\_\+variable. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 

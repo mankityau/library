@@ -1,5 +1,5 @@
-\hypertarget{thread_2impl_2shared__mutex__exclusive_8h}{}\section{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/thread/impl/shared\+\_\+mutex\+\_\+exclusive.h File Reference}
-\label{thread_2impl_2shared__mutex__exclusive_8h}\index{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/thread/impl/shared\+\_\+mutex\+\_\+exclusive.\+h@{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/thread/impl/shared\+\_\+mutex\+\_\+exclusive.\+h}}
+\hypertarget{thread_2impl_2shared__mutex__exclusive_8h}{}\section{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/library/include/cpen333/thread/impl/shared\+\_\+mutex\+\_\+exclusive.h File Reference}
+\label{thread_2impl_2shared__mutex__exclusive_8h}\index{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/library/include/cpen333/thread/impl/shared\+\_\+mutex\+\_\+exclusive.\+h@{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/library/include/cpen333/thread/impl/shared\+\_\+mutex\+\_\+exclusive.\+h}}
 
 
 Implementation of a mutex with shared access that gives priority to exclusive use (write-\/priority)  
@@ -7,8 +7,8 @@ Implementation of a mutex with shared access that gives priority to exclusive us
 
 {\ttfamily \#include $<$mutex$>$}\newline
 {\ttfamily \#include $<$condition\+\_\+variable$>$}\newline
-{\ttfamily \#include \char`\"{}cpen333/thread/semaphore.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}cpen333/thread/condition.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../semaphore.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../condition.\+h\char`\"{}}\newline
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
@@ -17,11 +17,11 @@ class \hyperlink{classcpen333_1_1thread_1_1impl_1_1shared__mutex__exclusive}{cpe
 \subsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{thread_2impl_2shared__mutex__exclusive_8h_a65aec586b76e30058cb3d6954873eca5}\label{thread_2impl_2shared__mutex__exclusive_8h_a65aec586b76e30058cb3d6954873eca5}} 
-using \hyperlink{thread_2impl_2shared__mutex__exclusive_8h_a65aec586b76e30058cb3d6954873eca5}{cpen333\+::thread\+::shared\+\_\+mutex\+\_\+exclusive} = impl\+::shared\+\_\+mutex\+\_\+exclusive
+\mbox{\Hypertarget{thread_2impl_2shared__mutex__exclusive_8h_ae6b7eb38ede9b8deabaf6aab302368e5}\label{thread_2impl_2shared__mutex__exclusive_8h_ae6b7eb38ede9b8deabaf6aab302368e5}} 
+typedef impl\+::shared\+\_\+mutex\+\_\+exclusive \hyperlink{thread_2impl_2shared__mutex__exclusive_8h_ae6b7eb38ede9b8deabaf6aab302368e5}{cpen333\+::thread\+::shared\+\_\+mutex\+\_\+exclusive}
 \begin{DoxyCompactList}\small\item\em Alias for default shared mutex with exclusive (write) priority. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{thread_2impl_2shared__mutex__exclusive_8h_ad9d4746c0c75c425f8a652d114b5d6dc}\label{thread_2impl_2shared__mutex__exclusive_8h_ad9d4746c0c75c425f8a652d114b5d6dc}} 
-using \hyperlink{thread_2impl_2shared__mutex__exclusive_8h_ad9d4746c0c75c425f8a652d114b5d6dc}{cpen333\+::thread\+::shared\+\_\+timed\+\_\+mutex\+\_\+exclusive} = impl\+::shared\+\_\+mutex\+\_\+exclusive
+\mbox{\Hypertarget{thread_2impl_2shared__mutex__exclusive_8h_a085094e3743a093f500b63bccb663489}\label{thread_2impl_2shared__mutex__exclusive_8h_a085094e3743a093f500b63bccb663489}} 
+typedef impl\+::shared\+\_\+mutex\+\_\+exclusive \hyperlink{thread_2impl_2shared__mutex__exclusive_8h_a085094e3743a093f500b63bccb663489}{cpen333\+::thread\+::shared\+\_\+timed\+\_\+mutex\+\_\+exclusive}
 \begin{DoxyCompactList}\small\item\em Alias for default shared timed mutex with exclusive (write) priority. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 

@@ -97,25 +97,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a23384ba303cc2111cc4272830ae9f72b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpen333_1_1process_1_1condition__base.html#a23384ba303cc2111cc4272830ae9f72b">condition_base</a> (const std::string &amp;name)</td></tr>
 <tr class="memdesc:a23384ba303cc2111cc4272830ae9f72b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a23384ba303cc2111cc4272830ae9f72b">More...</a><br /></td></tr>
 <tr class="separator:a23384ba303cc2111cc4272830ae9f72b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e0b0c4673dbf0a671384e2cbb052eb5"><td class="memItemLeft" align="right" valign="top"><a id="a9e0b0c4673dbf0a671384e2cbb052eb5"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>condition_base</b> (const <a class="el" href="classcpen333_1_1process_1_1condition__base.html">condition_base</a> &amp;)=delete</td></tr>
-<tr class="separator:a9e0b0c4673dbf0a671384e2cbb052eb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a548a4d624fb76931bfecbdf94f5c0071"><td class="memItemLeft" align="right" valign="top"><a id="a548a4d624fb76931bfecbdf94f5c0071"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>condition_base</b> (<a class="el" href="classcpen333_1_1process_1_1condition__base.html">condition_base</a> &amp;&amp;)=delete</td></tr>
-<tr class="separator:a548a4d624fb76931bfecbdf94f5c0071"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6db93cee4800ed14ed56e9029cdd0bd4"><td class="memItemLeft" align="right" valign="top"><a id="a6db93cee4800ed14ed56e9029cdd0bd4"></a>
-<a class="el" href="classcpen333_1_1process_1_1condition__base.html">condition_base</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classcpen333_1_1process_1_1condition__base.html">condition_base</a> &amp;)=delete</td></tr>
-<tr class="separator:a6db93cee4800ed14ed56e9029cdd0bd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5cc13eb5e8317a05ed3130cdd8c1a4bf"><td class="memItemLeft" align="right" valign="top"><a id="a5cc13eb5e8317a05ed3130cdd8c1a4bf"></a>
-<a class="el" href="classcpen333_1_1process_1_1condition__base.html">condition_base</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classcpen333_1_1process_1_1condition__base.html">condition_base</a> &amp;&amp;)=delete</td></tr>
-<tr class="separator:a5cc13eb5e8317a05ed3130cdd8c1a4bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29b67e4579cef831f709ea4c3a32ffe5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcpen333_1_1process_1_1condition__base.html#a29b67e4579cef831f709ea4c3a32ffe5">wait</a> (std::unique_lock&lt; <a class="el" href="classcpen333_1_1process_1_1mutex.html">cpen333::process::mutex</a> &gt; &amp;lock)</td></tr>
 <tr class="memdesc:a29b67e4579cef831f709ea4c3a32ffe5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait until the thread is notified.  <a href="#a29b67e4579cef831f709ea4c3a32ffe5">More...</a><br /></td></tr>
 <tr class="separator:a29b67e4579cef831f709ea4c3a32ffe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2243e72e2205c31851d2c16eddb9b54f"><td class="memTemplParams" colspan="2">template&lt;class Rep , class Period &gt; </td></tr>
-<tr class="memitem:a2243e72e2205c31851d2c16eddb9b54f"><td class="memTemplItemLeft" align="right" valign="top">std::cv_status&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcpen333_1_1process_1_1condition__base.html#a2243e72e2205c31851d2c16eddb9b54f">wait_for</a> (std::unique_lock&lt; <a class="el" href="classcpen333_1_1process_1_1mutex.html">cpen333::process::mutex</a> &gt; &amp;lock, const std::chrono::duration&lt; Rep, Period &gt; &amp;rel_time)</td></tr>
-<tr class="memdesc:a2243e72e2205c31851d2c16eddb9b54f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait until the thread is notified, or until a timeout period has elapsed.  <a href="#a2243e72e2205c31851d2c16eddb9b54f">More...</a><br /></td></tr>
-<tr class="separator:a2243e72e2205c31851d2c16eddb9b54f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab19d033fcec20cd7f2a3f0b38e67a19d"><td class="memTemplParams" colspan="2">template&lt;class Rep , class Period &gt; </td></tr>
+<tr class="memitem:ab19d033fcec20cd7f2a3f0b38e67a19d"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcpen333_1_1process_1_1condition__base.html#ab19d033fcec20cd7f2a3f0b38e67a19d">wait_for</a> (std::unique_lock&lt; <a class="el" href="classcpen333_1_1process_1_1mutex.html">cpen333::process::mutex</a> &gt; &amp;lock, const std::chrono::duration&lt; Rep, Period &gt; &amp;rel_time)</td></tr>
+<tr class="memdesc:ab19d033fcec20cd7f2a3f0b38e67a19d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait until the thread is notified, or until a timeout period has elapsed.  <a href="#ab19d033fcec20cd7f2a3f0b38e67a19d">More...</a><br /></td></tr>
+<tr class="separator:ab19d033fcec20cd7f2a3f0b38e67a19d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6af33a75565bf4177cb6616a08acaac0"><td class="memTemplParams" colspan="2">template&lt;class Clock , class Duration &gt; </td></tr>
 <tr class="memitem:a6af33a75565bf4177cb6616a08acaac0"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classcpen333_1_1process_1_1condition__base.html#a6af33a75565bf4177cb6616a08acaac0">wait_until</a> (std::unique_lock&lt; <a class="el" href="classcpen333_1_1process_1_1mutex.html">cpen333::process::mutex</a> &gt; &amp;lock, const std::chrono::time_point&lt; Clock, Duration &gt; &amp;timeout_time)</td></tr>
 <tr class="memdesc:a6af33a75565bf4177cb6616a08acaac0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait until the thread is notified, or until a timeout time has been reached.  <a href="#a6af33a75565bf4177cb6616a08acaac0">More...</a><br /></td></tr>
@@ -449,8 +437,8 @@ template&lt;class Clock , class Duration &gt; </div>
 
 </div>
 </div>
-<a id="a2243e72e2205c31851d2c16eddb9b54f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2243e72e2205c31851d2c16eddb9b54f">&#9670;&nbsp;</a></span>wait_for()</h2>
+<a id="ab19d033fcec20cd7f2a3f0b38e67a19d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab19d033fcec20cd7f2a3f0b38e67a19d">&#9670;&nbsp;</a></span>wait_for()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -461,7 +449,7 @@ template&lt;class Rep , class Period &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::cv_status cpen333::process::condition_base::wait_for </td>
+          <td class="memname">bool cpen333::process::condition_base::wait_for </td>
           <td>(</td>
           <td class="paramtype">std::unique_lock&lt; <a class="el" href="classcpen333_1_1process_1_1mutex.html">cpen333::process::mutex</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>lock</em>, </td>
@@ -500,7 +488,7 @@ template&lt;class Rep , class Period &gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>std::cv_status to indicate whether or not a timeout has occured </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if successful, false iftimeout has occured </dd></dl>
 
 </div>
 </div>
@@ -560,7 +548,7 @@ template&lt;class Clock , class Duration &gt; </div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>D:/school/teaching/CPEN333/workspace/labs/include/cpen333/process/impl/<a class="el" href="condition__base_8h_source.html">condition_base.h</a></li>
+<li>D:/school/teaching/CPEN333/workspace/library/include/cpen333/process/impl/<a class="el" href="condition__base_8h_source.html">condition_base.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -20,21 +20,9 @@ Inheritance diagram for cpen333\+:\+:process\+:\+:condition\+\_\+base\+:\begin{f
 \item 
 \hyperlink{classcpen333_1_1process_1_1condition__base_a23384ba303cc2111cc4272830ae9f72b}{condition\+\_\+base} (const std\+::string \&name)
 \begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classcpen333_1_1process_1_1condition__base_a9e0b0c4673dbf0a671384e2cbb052eb5}\label{classcpen333_1_1process_1_1condition__base_a9e0b0c4673dbf0a671384e2cbb052eb5}} 
-{\bfseries condition\+\_\+base} (const \hyperlink{classcpen333_1_1process_1_1condition__base}{condition\+\_\+base} \&)=delete
-\item 
-\mbox{\Hypertarget{classcpen333_1_1process_1_1condition__base_a548a4d624fb76931bfecbdf94f5c0071}\label{classcpen333_1_1process_1_1condition__base_a548a4d624fb76931bfecbdf94f5c0071}} 
-{\bfseries condition\+\_\+base} (\hyperlink{classcpen333_1_1process_1_1condition__base}{condition\+\_\+base} \&\&)=delete
-\item 
-\mbox{\Hypertarget{classcpen333_1_1process_1_1condition__base_a6db93cee4800ed14ed56e9029cdd0bd4}\label{classcpen333_1_1process_1_1condition__base_a6db93cee4800ed14ed56e9029cdd0bd4}} 
-\hyperlink{classcpen333_1_1process_1_1condition__base}{condition\+\_\+base} \& {\bfseries operator=} (const \hyperlink{classcpen333_1_1process_1_1condition__base}{condition\+\_\+base} \&)=delete
-\item 
-\mbox{\Hypertarget{classcpen333_1_1process_1_1condition__base_a5cc13eb5e8317a05ed3130cdd8c1a4bf}\label{classcpen333_1_1process_1_1condition__base_a5cc13eb5e8317a05ed3130cdd8c1a4bf}} 
-\hyperlink{classcpen333_1_1process_1_1condition__base}{condition\+\_\+base} \& {\bfseries operator=} (\hyperlink{classcpen333_1_1process_1_1condition__base}{condition\+\_\+base} \&\&)=delete
-\item 
 void \hyperlink{classcpen333_1_1process_1_1condition__base_a29b67e4579cef831f709ea4c3a32ffe5}{wait} (std\+::unique\+\_\+lock$<$ \hyperlink{classcpen333_1_1process_1_1mutex}{cpen333\+::process\+::mutex} $>$ \&lock)
 \begin{DoxyCompactList}\small\item\em Wait until the thread is notified. \end{DoxyCompactList}\item 
-{\footnotesize template$<$class Rep , class Period $>$ }\\std\+::cv\+\_\+status \hyperlink{classcpen333_1_1process_1_1condition__base_a2243e72e2205c31851d2c16eddb9b54f}{wait\+\_\+for} (std\+::unique\+\_\+lock$<$ \hyperlink{classcpen333_1_1process_1_1mutex}{cpen333\+::process\+::mutex} $>$ \&lock, const std\+::chrono\+::duration$<$ Rep, Period $>$ \&rel\+\_\+time)
+{\footnotesize template$<$class Rep , class Period $>$ }\\bool \hyperlink{classcpen333_1_1process_1_1condition__base_ab19d033fcec20cd7f2a3f0b38e67a19d}{wait\+\_\+for} (std\+::unique\+\_\+lock$<$ \hyperlink{classcpen333_1_1process_1_1mutex}{cpen333\+::process\+::mutex} $>$ \&lock, const std\+::chrono\+::duration$<$ Rep, Period $>$ \&rel\+\_\+time)
 \begin{DoxyCompactList}\small\item\em Wait until the thread is notified, or until a timeout period has elapsed. \end{DoxyCompactList}\item 
 {\footnotesize template$<$class Clock , class Duration $>$ }\\bool \hyperlink{classcpen333_1_1process_1_1condition__base_a6af33a75565bf4177cb6616a08acaac0}{wait\+\_\+until} (std\+::unique\+\_\+lock$<$ \hyperlink{classcpen333_1_1process_1_1mutex}{cpen333\+::process\+::mutex} $>$ \&lock, const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&timeout\+\_\+time)
 \begin{DoxyCompactList}\small\item\em Wait until the thread is notified, or until a timeout time has been reached. \end{DoxyCompactList}\item 
@@ -205,12 +193,12 @@ Waits for condition to be notified.
 \begin{DoxyReturn}{Returns}
 true if wait was successful, false if timeout occurred 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classcpen333_1_1process_1_1condition__base_a2243e72e2205c31851d2c16eddb9b54f}\label{classcpen333_1_1process_1_1condition__base_a2243e72e2205c31851d2c16eddb9b54f}} 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1condition__base_ab19d033fcec20cd7f2a3f0b38e67a19d}\label{classcpen333_1_1process_1_1condition__base_ab19d033fcec20cd7f2a3f0b38e67a19d}} 
 \index{cpen333\+::process\+::condition\+\_\+base@{cpen333\+::process\+::condition\+\_\+base}!wait\+\_\+for@{wait\+\_\+for}}
 \index{wait\+\_\+for@{wait\+\_\+for}!cpen333\+::process\+::condition\+\_\+base@{cpen333\+::process\+::condition\+\_\+base}}
 \subsubsection{\texorpdfstring{wait\+\_\+for()}{wait\_for()}}
 {\footnotesize\ttfamily template$<$class Rep , class Period $>$ \\
-std\+::cv\+\_\+status cpen333\+::process\+::condition\+\_\+base\+::wait\+\_\+for (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+lock$<$ \hyperlink{classcpen333_1_1process_1_1mutex}{cpen333\+::process\+::mutex} $>$ \&}]{lock,  }\item[{const std\+::chrono\+::duration$<$ Rep, Period $>$ \&}]{rel\+\_\+time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+bool cpen333\+::process\+::condition\+\_\+base\+::wait\+\_\+for (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+lock$<$ \hyperlink{classcpen333_1_1process_1_1mutex}{cpen333\+::process\+::mutex} $>$ \&}]{lock,  }\item[{const std\+::chrono\+::duration$<$ Rep, Period $>$ \&}]{rel\+\_\+time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -231,7 +219,7 @@ Wait until the thread is notified, or until a timeout period has elapsed.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-std\+::cv\+\_\+status to indicate whether or not a timeout has occured 
+true if successful, false iftimeout has occured 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classcpen333_1_1process_1_1condition__base_a6af33a75565bf4177cb6616a08acaac0}\label{classcpen333_1_1process_1_1condition__base_a6af33a75565bf4177cb6616a08acaac0}} 
 \index{cpen333\+::process\+::condition\+\_\+base@{cpen333\+::process\+::condition\+\_\+base}!wait\+\_\+until@{wait\+\_\+until}}
@@ -265,4 +253,4 @@ true if wait is successful, false if timeout has been reached
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/impl/\hyperlink{condition__base_8h}{condition\+\_\+base.\+h}\end{DoxyCompactItemize}
+D\+:/school/teaching/\+C\+P\+E\+N333/workspace/library/include/cpen333/process/impl/\hyperlink{condition__base_8h}{condition\+\_\+base.\+h}\end{DoxyCompactItemize}

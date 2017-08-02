@@ -1,0 +1,89 @@
+\hypertarget{classstd_1_1shared__lock}{}\section{std\+:\+:shared\+\_\+lock$<$ Shared\+Mutex\+Type $>$ Class Template Reference}
+\label{classstd_1_1shared__lock}\index{std\+::shared\+\_\+lock$<$ Shared\+Mutex\+Type $>$@{std\+::shared\+\_\+lock$<$ Shared\+Mutex\+Type $>$}}
+
+
+Basic \hyperlink{classstd_1_1shared__lock}{shared\+\_\+lock} replacement, only supports simple locking.  
+
+
+
+
+{\ttfamily \#include $<$shared\+\_\+lock.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classstd_1_1shared__lock_ad98172785abb3cf717e758dfe033798e}{shared\+\_\+lock} (Shared\+Mutex\+Type \&mutex)
+\begin{DoxyCompactList}\small\item\em Constructor, lock mutex in shared access mode. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classstd_1_1shared__lock_a42150925d58f5e4a11de9731aaccabc3}\label{classstd_1_1shared__lock_a42150925d58f5e4a11de9731aaccabc3}} 
+void \hyperlink{classstd_1_1shared__lock_a42150925d58f5e4a11de9731aaccabc3}{lock} ()
+\begin{DoxyCompactList}\small\item\em Locks mutex in shared access mode. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classstd_1_1shared__lock_ae84b24e0f1b3c6bf8e8ff24af779450e}\label{classstd_1_1shared__lock_ae84b24e0f1b3c6bf8e8ff24af779450e}} 
+void \hyperlink{classstd_1_1shared__lock_ae84b24e0f1b3c6bf8e8ff24af779450e}{unlock} ()
+\begin{DoxyCompactList}\small\item\em Unlocks mutex from shared access mode. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classstd_1_1shared__lock_a0c954081592f905fa65b0f45c4c06100}\label{classstd_1_1shared__lock_a0c954081592f905fa65b0f45c4c06100}} 
+\hyperlink{classstd_1_1shared__lock_a0c954081592f905fa65b0f45c4c06100}{$\sim$shared\+\_\+lock} ()
+\begin{DoxyCompactList}\small\item\em Destructor, automatically unlocks mutex. \end{DoxyCompactList}\item 
+\hyperlink{classstd_1_1shared__lock_ad98172785abb3cf717e758dfe033798e}{shared\+\_\+lock} (Shared\+Mutex\+Type \&mutex)
+\begin{DoxyCompactList}\small\item\em Constructor, lock mutex in shared access mode. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classstd_1_1shared__lock_a42150925d58f5e4a11de9731aaccabc3}\label{classstd_1_1shared__lock_a42150925d58f5e4a11de9731aaccabc3}} 
+void \hyperlink{classstd_1_1shared__lock_a42150925d58f5e4a11de9731aaccabc3}{lock} ()
+\begin{DoxyCompactList}\small\item\em Locks mutex in shared access mode. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classstd_1_1shared__lock_ae84b24e0f1b3c6bf8e8ff24af779450e}\label{classstd_1_1shared__lock_ae84b24e0f1b3c6bf8e8ff24af779450e}} 
+void \hyperlink{classstd_1_1shared__lock_ae84b24e0f1b3c6bf8e8ff24af779450e}{unlock} ()
+\begin{DoxyCompactList}\small\item\em Unlocks mutex from shared access mode. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classstd_1_1shared__lock_a0c954081592f905fa65b0f45c4c06100}\label{classstd_1_1shared__lock_a0c954081592f905fa65b0f45c4c06100}} 
+\hyperlink{classstd_1_1shared__lock_a0c954081592f905fa65b0f45c4c06100}{$\sim$shared\+\_\+lock} ()
+\begin{DoxyCompactList}\small\item\em Destructor, automatically unlocks mutex. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename Shared\+Mutex\+Type$>$\newline
+class std\+::shared\+\_\+lock$<$ Shared\+Mutex\+Type $>$}
+
+Basic \hyperlink{classstd_1_1shared__lock}{shared\+\_\+lock} replacement, only supports simple locking. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Shared\+Mutex\+Type} & mutex type supporting lock\+\_\+shared() \\
+\hline
+\end{DoxyTemplParams}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classstd_1_1shared__lock_ad98172785abb3cf717e758dfe033798e}\label{classstd_1_1shared__lock_ad98172785abb3cf717e758dfe033798e}} 
+\index{std\+::shared\+\_\+lock@{std\+::shared\+\_\+lock}!shared\+\_\+lock@{shared\+\_\+lock}}
+\index{shared\+\_\+lock@{shared\+\_\+lock}!std\+::shared\+\_\+lock@{std\+::shared\+\_\+lock}}
+\subsubsection{\texorpdfstring{shared\+\_\+lock()}{shared\_lock()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Shared\+Mutex\+Type $>$ \\
+\hyperlink{classstd_1_1shared__lock}{std\+::shared\+\_\+lock}$<$ Shared\+Mutex\+Type $>$\+::\hyperlink{classstd_1_1shared__lock}{shared\+\_\+lock} (\begin{DoxyParamCaption}\item[{Shared\+Mutex\+Type \&}]{mutex }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor, lock mutex in shared access mode. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mutex} & shared mutex \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classstd_1_1shared__lock_ad98172785abb3cf717e758dfe033798e}\label{classstd_1_1shared__lock_ad98172785abb3cf717e758dfe033798e}} 
+\index{std\+::shared\+\_\+lock@{std\+::shared\+\_\+lock}!shared\+\_\+lock@{shared\+\_\+lock}}
+\index{shared\+\_\+lock@{shared\+\_\+lock}!std\+::shared\+\_\+lock@{std\+::shared\+\_\+lock}}
+\subsubsection{\texorpdfstring{shared\+\_\+lock()}{shared\_lock()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Shared\+Mutex\+Type $>$ \\
+\hyperlink{classstd_1_1shared__lock}{std\+::shared\+\_\+lock}$<$ Shared\+Mutex\+Type $>$\+::\hyperlink{classstd_1_1shared__lock}{shared\+\_\+lock} (\begin{DoxyParamCaption}\item[{Shared\+Mutex\+Type \&}]{mutex }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor, lock mutex in shared access mode. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mutex} & shared mutex \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/school/teaching/\+C\+P\+E\+N333/workspace/library/include/cpen333/process/impl/\hyperlink{process_2impl_2shared__lock_8h}{shared\+\_\+lock.\+h}\end{DoxyCompactItemize}

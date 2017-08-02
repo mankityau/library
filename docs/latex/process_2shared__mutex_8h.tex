@@ -1,17 +1,17 @@
-\hypertarget{process_2shared__mutex_8h}{}\section{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/shared\+\_\+mutex.h File Reference}
-\label{process_2shared__mutex_8h}\index{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/shared\+\_\+mutex.\+h@{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/process/shared\+\_\+mutex.\+h}}
+\hypertarget{process_2shared__mutex_8h}{}\section{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/library/include/cpen333/process/shared\+\_\+mutex.h File Reference}
+\label{process_2shared__mutex_8h}\index{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/library/include/cpen333/process/shared\+\_\+mutex.\+h@{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/library/include/cpen333/process/shared\+\_\+mutex.\+h}}
 
 
 Inter-\/process shared-\/access mutex implementations, allowing for multi-\/read/write access.  
 
 
-{\ttfamily \#include $<$shared\+\_\+mutex$>$}\newline
-{\ttfamily \#include \char`\"{}cpen333/process/mutex.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}cpen333/process/semaphore.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}cpen333/process/shared\+\_\+memory.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}cpen333/process/impl/shared\+\_\+mutex\+\_\+exclusive.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}cpen333/process/impl/shared\+\_\+mutex\+\_\+fair.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}cpen333/process/impl/shared\+\_\+mutex\+\_\+shared.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mutex.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}semaphore.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}shared\+\_\+memory.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}impl/shared\+\_\+mutex\+\_\+exclusive.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}impl/shared\+\_\+mutex\+\_\+fair.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}impl/shared\+\_\+mutex\+\_\+shared.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}impl/shared\+\_\+lock.\+h\char`\"{}}\newline
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
@@ -20,11 +20,11 @@ class \hyperlink{classcpen333_1_1process_1_1shared__lock__guard}{cpen333\+::proc
 \subsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{process_2shared__mutex_8h_aea98f3be656ea734bbe502c5d6a25af9}\label{process_2shared__mutex_8h_aea98f3be656ea734bbe502c5d6a25af9}} 
-using \hyperlink{process_2shared__mutex_8h_aea98f3be656ea734bbe502c5d6a25af9}{cpen333\+::process\+::shared\+\_\+mutex} = impl\+::shared\+\_\+mutex\+\_\+fair
+\mbox{\Hypertarget{process_2shared__mutex_8h_a143668c5996f6d5a389cb972c9c4364a}\label{process_2shared__mutex_8h_a143668c5996f6d5a389cb972c9c4364a}} 
+typedef impl\+::shared\+\_\+mutex\+\_\+fair \hyperlink{process_2shared__mutex_8h_a143668c5996f6d5a389cb972c9c4364a}{cpen333\+::process\+::shared\+\_\+mutex}
 \begin{DoxyCompactList}\small\item\em Default shared mutex that uses fair priority. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{process_2shared__mutex_8h_a9cfe57631a8c62bc0876173e401ef74f}\label{process_2shared__mutex_8h_a9cfe57631a8c62bc0876173e401ef74f}} 
-using \hyperlink{process_2shared__mutex_8h_a9cfe57631a8c62bc0876173e401ef74f}{cpen333\+::process\+::shared\+\_\+timed\+\_\+mutex} = impl\+::shared\+\_\+mutex\+\_\+fair
+\mbox{\Hypertarget{process_2shared__mutex_8h_a2252e76f3cb7a50ebda2c75b24037905}\label{process_2shared__mutex_8h_a2252e76f3cb7a50ebda2c75b24037905}} 
+typedef impl\+::shared\+\_\+mutex\+\_\+fair \hyperlink{process_2shared__mutex_8h_a2252e76f3cb7a50ebda2c75b24037905}{cpen333\+::process\+::shared\+\_\+timed\+\_\+mutex}
 \begin{DoxyCompactList}\small\item\em Default shared timed mutex uses fair priority. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 

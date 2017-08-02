@@ -12,26 +12,14 @@ A local semaphore synchronization primitive.
 \subsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classcpen333_1_1thread_1_1basic__semaphore_a22e2293b6882f2bf4312aeb167a0b409}\label{classcpen333_1_1thread_1_1basic__semaphore_a22e2293b6882f2bf4312aeb167a0b409}} 
-using \hyperlink{classcpen333_1_1thread_1_1basic__semaphore_a22e2293b6882f2bf4312aeb167a0b409}{native\+\_\+handle\+\_\+type} = typename Cond\+Var\+::native\+\_\+handle\+\_\+type
+\mbox{\Hypertarget{classcpen333_1_1thread_1_1basic__semaphore_a15d9956adddf81d3a39aea36c6c0fd18}\label{classcpen333_1_1thread_1_1basic__semaphore_a15d9956adddf81d3a39aea36c6c0fd18}} 
+typedef Cond\+Var\+::native\+\_\+handle\+\_\+type \hyperlink{classcpen333_1_1thread_1_1basic__semaphore_a15d9956adddf81d3a39aea36c6c0fd18}{native\+\_\+handle\+\_\+type}
 \begin{DoxyCompactList}\small\item\em Alias to condition variable native handle type. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \hyperlink{classcpen333_1_1thread_1_1basic__semaphore_adfcd90a6776f9bdbb580bff6d9fa2a3e}{basic\+\_\+semaphore} (size\+\_\+t count=1)
 \begin{DoxyCompactList}\small\item\em Simple constructor that allows setting the initial count. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classcpen333_1_1thread_1_1basic__semaphore_aa09fc45f7f9689046175fbdd3ee0a19d}\label{classcpen333_1_1thread_1_1basic__semaphore_aa09fc45f7f9689046175fbdd3ee0a19d}} 
-{\bfseries basic\+\_\+semaphore} (const \hyperlink{classcpen333_1_1thread_1_1basic__semaphore}{basic\+\_\+semaphore} \&)=delete
-\item 
-\mbox{\Hypertarget{classcpen333_1_1thread_1_1basic__semaphore_adb6c92c4f7ba870dc20b96e4fd655ee7}\label{classcpen333_1_1thread_1_1basic__semaphore_adb6c92c4f7ba870dc20b96e4fd655ee7}} 
-{\bfseries basic\+\_\+semaphore} (\hyperlink{classcpen333_1_1thread_1_1basic__semaphore}{basic\+\_\+semaphore} \&\&)=delete
-\item 
-\mbox{\Hypertarget{classcpen333_1_1thread_1_1basic__semaphore_aaefa267aafa84e5baf759c38769d50d1}\label{classcpen333_1_1thread_1_1basic__semaphore_aaefa267aafa84e5baf759c38769d50d1}} 
-\hyperlink{classcpen333_1_1thread_1_1basic__semaphore}{basic\+\_\+semaphore} \& {\bfseries operator=} (const \hyperlink{classcpen333_1_1thread_1_1basic__semaphore}{basic\+\_\+semaphore} \&)=delete
-\item 
-\mbox{\Hypertarget{classcpen333_1_1thread_1_1basic__semaphore_aa1e893a6e7c37d4d3d48086bbac79235}\label{classcpen333_1_1thread_1_1basic__semaphore_aa1e893a6e7c37d4d3d48086bbac79235}} 
-\hyperlink{classcpen333_1_1thread_1_1basic__semaphore}{basic\+\_\+semaphore} \& {\bfseries operator=} (\hyperlink{classcpen333_1_1thread_1_1basic__semaphore}{basic\+\_\+semaphore} \&\&)=delete
-\item 
 void \hyperlink{classcpen333_1_1thread_1_1basic__semaphore_a0b5032fc8df915cb51276411b1153b84}{notify} ()
 \begin{DoxyCompactList}\small\item\em Increments the semaphore value. \end{DoxyCompactList}\item 
 void \hyperlink{classcpen333_1_1thread_1_1basic__semaphore_ac5cacef970643d393429ff87c0c6d6bf}{wait} ()
@@ -42,7 +30,7 @@ bool \hyperlink{classcpen333_1_1thread_1_1basic__semaphore_a72eb19243d4c55013f7f
 \begin{DoxyCompactList}\small\item\em Tries to wait for the semaphore for up to a maximum timeout duration. \end{DoxyCompactList}\item 
 {\footnotesize template$<$class Clock , class Duration $>$ }\\bool \hyperlink{classcpen333_1_1thread_1_1basic__semaphore_a19d3b188f86c565acbf83ec4872d9773}{wait\+\_\+until} (const std\+::chrono\+::time\+\_\+point$<$ Clock, Duration $>$ \&timeout\+\_\+time)
 \begin{DoxyCompactList}\small\item\em Tries to wait for the semaphore for up to a maximum absolute time. \end{DoxyCompactList}\item 
-\hyperlink{classcpen333_1_1thread_1_1basic__semaphore_a22e2293b6882f2bf4312aeb167a0b409}{native\+\_\+handle\+\_\+type} \hyperlink{classcpen333_1_1thread_1_1basic__semaphore_a3c3cd804e1aaa10f414820867f2e3798}{native\+\_\+handle} ()
+\hyperlink{classcpen333_1_1thread_1_1basic__semaphore_a15d9956adddf81d3a39aea36c6c0fd18}{native\+\_\+handle\+\_\+type} \hyperlink{classcpen333_1_1thread_1_1basic__semaphore_a3c3cd804e1aaa10f414820867f2e3798}{native\+\_\+handle} ()
 \begin{DoxyCompactList}\small\item\em Returns a native handle to the semaphore. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -92,13 +80,13 @@ Simple constructor that allows setting the initial count.
 \index{native\+\_\+handle@{native\+\_\+handle}!cpen333\+::thread\+::basic\+\_\+semaphore@{cpen333\+::thread\+::basic\+\_\+semaphore}}
 \subsubsection{\texorpdfstring{native\+\_\+handle()}{native\_handle()}}
 {\footnotesize\ttfamily template$<$typename Mutex, typename Cond\+Var$>$ \\
-\hyperlink{classcpen333_1_1thread_1_1basic__semaphore_a22e2293b6882f2bf4312aeb167a0b409}{native\+\_\+handle\+\_\+type} \hyperlink{classcpen333_1_1thread_1_1basic__semaphore}{cpen333\+::thread\+::basic\+\_\+semaphore}$<$ Mutex, Cond\+Var $>$\+::native\+\_\+handle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\hyperlink{classcpen333_1_1thread_1_1basic__semaphore_a15d9956adddf81d3a39aea36c6c0fd18}{native\+\_\+handle\+\_\+type} \hyperlink{classcpen333_1_1thread_1_1basic__semaphore}{cpen333\+::thread\+::basic\+\_\+semaphore}$<$ Mutex, Cond\+Var $>$\+::native\+\_\+handle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 Returns a native handle to the semaphore. 
 
-The native handle has a type aliased to \hyperlink{classcpen333_1_1thread_1_1basic__semaphore_a22e2293b6882f2bf4312aeb167a0b409}{semaphore\+::native\+\_\+handle\+\_\+type}.
+The native handle has a type aliased to \hyperlink{classcpen333_1_1thread_1_1basic__semaphore_a15d9956adddf81d3a39aea36c6c0fd18}{semaphore\+::native\+\_\+handle\+\_\+type}.
 
 \begin{DoxyReturn}{Returns}
 native semaphore handle 
@@ -203,4 +191,4 @@ true if semaphore successfully decremented, false if timed-\/out
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-D\+:/school/teaching/\+C\+P\+E\+N333/workspace/labs/include/cpen333/thread/\hyperlink{thread_2semaphore_8h}{semaphore.\+h}\end{DoxyCompactItemize}
+D\+:/school/teaching/\+C\+P\+E\+N333/workspace/library/include/cpen333/thread/\hyperlink{thread_2semaphore_8h}{semaphore.\+h}\end{DoxyCompactItemize}

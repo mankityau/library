@@ -1,0 +1,57 @@
+\hypertarget{thread_2impl_2shared__mutex__fair_8h}{}\section{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/library/include/cpen333/thread/impl/shared\+\_\+mutex\+\_\+fair.h File Reference}
+\label{thread_2impl_2shared__mutex__fair_8h}\index{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/library/include/cpen333/thread/impl/shared\+\_\+mutex\+\_\+fair.\+h@{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/library/include/cpen333/thread/impl/shared\+\_\+mutex\+\_\+fair.\+h}}
+
+
+Implementation of a mutex with shared access that tries to fairly balance priorities between exclusive and shared use.  
+
+
+{\ttfamily \#include $<$mutex$>$}\newline
+{\ttfamily \#include $<$condition\+\_\+variable$>$}\newline
+{\ttfamily \#include \char`\"{}../../util.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classcpen333_1_1thread_1_1impl_1_1shared__mutex__fair}{cpen333\+::thread\+::impl\+::shared\+\_\+mutex\+\_\+fair}
+\begin{DoxyCompactList}\small\item\em A shared mutex implementation with balanced priorities. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef impl\+::shared\+\_\+mutex\+\_\+fair \hyperlink{thread_2impl_2shared__mutex__fair_8h_ab6bb6ebbb57834f76243f932246f62ca}{cpen333\+::thread\+::shared\+\_\+mutex\+\_\+fair}
+\begin{DoxyCompactList}\small\item\em Alias for default shared mutex with fair priority. \end{DoxyCompactList}\item 
+typedef impl\+::shared\+\_\+mutex\+\_\+fair \hyperlink{thread_2impl_2shared__mutex__fair_8h_a0538142cd8b676516eb92eaf1577d872}{cpen333\+::thread\+::shared\+\_\+timed\+\_\+mutex\+\_\+fair}
+\begin{DoxyCompactList}\small\item\em Alias for default shared timed mutex with fair priority. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{thread_2impl_2shared__mutex__fair_8h_acc211dc79b76e70c3dfffc7b14020d58}\label{thread_2impl_2shared__mutex__fair_8h_acc211dc79b76e70c3dfffc7b14020d58}} 
+typedef \hyperlink{thread_2impl_2shared__mutex__fair_8h_ab6bb6ebbb57834f76243f932246f62ca}{cpen333\+::thread\+::shared\+\_\+mutex\+\_\+fair} \hyperlink{thread_2impl_2shared__mutex__fair_8h_acc211dc79b76e70c3dfffc7b14020d58}{std\+::shared\+\_\+mutex}
+\begin{DoxyCompactList}\small\item\em Shared mutex replacement. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{thread_2impl_2shared__mutex__fair_8h_a101addad866455217531e734603c5b8c}\label{thread_2impl_2shared__mutex__fair_8h_a101addad866455217531e734603c5b8c}} 
+typedef \hyperlink{thread_2impl_2shared__mutex__fair_8h_ab6bb6ebbb57834f76243f932246f62ca}{cpen333\+::thread\+::shared\+\_\+mutex\+\_\+fair} \hyperlink{thread_2impl_2shared__mutex__fair_8h_a101addad866455217531e734603c5b8c}{std\+::shared\+\_\+timed\+\_\+mutex}
+\begin{DoxyCompactList}\small\item\em Shared timed mutex replacement. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implementation of a mutex with shared access that tries to fairly balance priorities between exclusive and shared use. 
+
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{thread_2impl_2shared__mutex__fair_8h_file_ab6bb6ebbb57834f76243f932246f62ca}\label{thread_2impl_2shared__mutex__fair_8h_file_ab6bb6ebbb57834f76243f932246f62ca}} 
+\index{thread/impl/shared\+\_\+mutex\+\_\+fair.\+h@{thread/impl/shared\+\_\+mutex\+\_\+fair.\+h}!shared\+\_\+mutex\+\_\+fair@{shared\+\_\+mutex\+\_\+fair}}
+\index{shared\+\_\+mutex\+\_\+fair@{shared\+\_\+mutex\+\_\+fair}!thread/impl/shared\+\_\+mutex\+\_\+fair.\+h@{thread/impl/shared\+\_\+mutex\+\_\+fair.\+h}}
+\subsubsection{\texorpdfstring{shared\+\_\+mutex\+\_\+fair}{shared\_mutex\_fair}}
+{\footnotesize\ttfamily typedef \hyperlink{thread_2impl_2shared__mutex__fair_8h_a101addad866455217531e734603c5b8c}{std\+::shared\+\_\+timed\+\_\+mutex} \hyperlink{thread_2impl_2shared__mutex__fair_8h_ab6bb6ebbb57834f76243f932246f62ca}{cpen333\+::thread\+::shared\+\_\+mutex\+\_\+fair}}
+
+
+
+Alias for default shared mutex with fair priority. 
+
+Default shared mutex that uses fair priority. \mbox{\Hypertarget{thread_2impl_2shared__mutex__fair_8h_file_a0538142cd8b676516eb92eaf1577d872}\label{thread_2impl_2shared__mutex__fair_8h_file_a0538142cd8b676516eb92eaf1577d872}} 
+\index{thread/impl/shared\+\_\+mutex\+\_\+fair.\+h@{thread/impl/shared\+\_\+mutex\+\_\+fair.\+h}!shared\+\_\+timed\+\_\+mutex\+\_\+fair@{shared\+\_\+timed\+\_\+mutex\+\_\+fair}}
+\index{shared\+\_\+timed\+\_\+mutex\+\_\+fair@{shared\+\_\+timed\+\_\+mutex\+\_\+fair}!thread/impl/shared\+\_\+mutex\+\_\+fair.\+h@{thread/impl/shared\+\_\+mutex\+\_\+fair.\+h}}
+\subsubsection{\texorpdfstring{shared\+\_\+timed\+\_\+mutex\+\_\+fair}{shared\_timed\_mutex\_fair}}
+{\footnotesize\ttfamily typedef \hyperlink{thread_2impl_2shared__mutex__fair_8h_a101addad866455217531e734603c5b8c}{std\+::shared\+\_\+timed\+\_\+mutex} \hyperlink{thread_2impl_2shared__mutex__fair_8h_a0538142cd8b676516eb92eaf1577d872}{cpen333\+::thread\+::shared\+\_\+timed\+\_\+mutex\+\_\+fair}}
+
+
+
+Alias for default shared timed mutex with fair priority. 
+
+Default shared timed mutex that uses fair priority. 

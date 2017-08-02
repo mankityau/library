@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CPEN333: Process and Threads Library: D:/school/teaching/CPEN333/workspace/labs/include/cpen333/thread/shared_mutex.h File Reference</title>
+<title>CPEN333: Process and Threads Library: D:/school/teaching/CPEN333/workspace/library/include/cpen333/thread/shared_mutex.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -73,30 +73,23 @@ $(function() {
 
 <p>Shared-access mutex implementations, allowing for multi-read/write access.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;shared_mutex&gt;</code><br />
-<code>#include &quot;<a class="el" href="thread_2impl_2shared__mutex__shared_8h_source.html">cpen333/thread/impl/shared_mutex_shared.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="thread_2impl_2shared__mutex__exclusive_8h_source.html">cpen333/thread/impl/shared_mutex_exclusive.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="thread_2impl_2shared__mutex__shared_8h_source.html">impl/shared_mutex_shared.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="thread_2impl_2shared__mutex__exclusive_8h_source.html">impl/shared_mutex_exclusive.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="thread_2impl_2shared__mutex__fair_8h_source.html">impl/shared_mutex_fair.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="thread_2impl_2shared__lock_8h_source.html">impl/shared_lock.h</a>&quot;</code><br />
 </div>
 <p><a href="thread_2shared__mutex_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:ac973f6b77b214925d563a644e2b652e7"><td class="memItemLeft" align="right" valign="top"><a id="ac973f6b77b214925d563a644e2b652e7"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="thread_2shared__mutex_8h.html#ac973f6b77b214925d563a644e2b652e7">cpen333::thread::shared_mutex_fair</a> = std::shared_timed_mutex</td></tr>
-<tr class="memdesc:ac973f6b77b214925d563a644e2b652e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default shared mutex that uses fair priority. <br /></td></tr>
-<tr class="separator:ac973f6b77b214925d563a644e2b652e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a893bf9e24b662533bac041f92870bcf6"><td class="memItemLeft" align="right" valign="top"><a id="a893bf9e24b662533bac041f92870bcf6"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="thread_2shared__mutex_8h.html#a893bf9e24b662533bac041f92870bcf6">cpen333::thread::shared_timed_mutex_fair</a> = std::shared_timed_mutex</td></tr>
-<tr class="memdesc:a893bf9e24b662533bac041f92870bcf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default shared timed mutex that uses fair priority. <br /></td></tr>
-<tr class="separator:a893bf9e24b662533bac041f92870bcf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a337a87e7e394a58536dfe747b9bfb4b8"><td class="memItemLeft" align="right" valign="top"><a id="a337a87e7e394a58536dfe747b9bfb4b8"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="thread_2shared__mutex_8h.html#a337a87e7e394a58536dfe747b9bfb4b8">cpen333::thread::shared_mutex</a> = std::shared_timed_mutex</td></tr>
-<tr class="memdesc:a337a87e7e394a58536dfe747b9bfb4b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default shared mutex that uses fair priority. <br /></td></tr>
-<tr class="separator:a337a87e7e394a58536dfe747b9bfb4b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84af6ea160c8c2dc2007c218ed6d0d41"><td class="memItemLeft" align="right" valign="top"><a id="a84af6ea160c8c2dc2007c218ed6d0d41"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="thread_2shared__mutex_8h.html#a84af6ea160c8c2dc2007c218ed6d0d41">cpen333::thread::shared_timed_mutex</a> = std::shared_timed_mutex</td></tr>
-<tr class="memdesc:a84af6ea160c8c2dc2007c218ed6d0d41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default shared timed mutex that uses fair priority. <br /></td></tr>
-<tr class="separator:a84af6ea160c8c2dc2007c218ed6d0d41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5977e4da1af293edf0159b20b9c35b98"><td class="memItemLeft" align="right" valign="top"><a id="a5977e4da1af293edf0159b20b9c35b98"></a>
+typedef shared_mutex_fair&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="thread_2shared__mutex_8h.html#a5977e4da1af293edf0159b20b9c35b98">cpen333::thread::shared_mutex</a></td></tr>
+<tr class="memdesc:a5977e4da1af293edf0159b20b9c35b98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default shared mutex that uses fair priority. <br /></td></tr>
+<tr class="separator:a5977e4da1af293edf0159b20b9c35b98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcfa3713889989c88b927079db7870c8"><td class="memItemLeft" align="right" valign="top"><a id="adcfa3713889989c88b927079db7870c8"></a>
+typedef shared_mutex_fair&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="thread_2shared__mutex_8h.html#adcfa3713889989c88b927079db7870c8">cpen333::thread::shared_timed_mutex</a></td></tr>
+<tr class="memdesc:adcfa3713889989c88b927079db7870c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default shared timed mutex that uses fair priority. <br /></td></tr>
+<tr class="separator:adcfa3713889989c88b927079db7870c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Shared-access mutex implementations, allowing for multi-read/write access. </p>
