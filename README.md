@@ -1,6 +1,6 @@
-# CPEN333 - Processes and Threads Library and Labs
+# CPEN333 - Processes and Threads Library and Examples
 
-Course library and labs for CPEN333 - System Software Engineering (University of British Columbia)
+Course library and examples for CPEN333 - System Software Engineering (University of British Columbia)
 
 Includes a cross-platform header-only library for
 - Process/thread synchronization
@@ -16,7 +16,7 @@ Usage:
 ## Documentation
 
 The main library is heavily documented in-code using Doxygen (http://www.stack.nl/~dimitri/doxygen/download.html).  A compiled version can be viewed here:
-- https://cantonios.github.io/cpen333/docs/html/index.html
+- https://cpen333.github.io/library/
 
 ## Building the Examples
 
@@ -30,8 +30,8 @@ The examples *should* compile and run on most platforms and with most IDEs.  I h
 ### Download the repository:
 Open a terminal (or command-prompt) and clone the repository
 ```
-> git clone https://github.com/cantonios/cpen333.git
-> cd cpen333
+> git clone https://github.com/cpen333/library.git
+> cd library
 ```
 Otherwise, you can download the zip file, extract it somewhere, and navigate to that folder in the terminal.
 
