@@ -1,7 +1,7 @@
 var searchData=
 [
   ['terminate',['terminate',['../classcpen333_1_1process_1_1posix_1_1subprocess.html#aee0a935ed7052a7622872345bd148ca1',1,'cpen333::process::posix::subprocess::terminate()'],['../classcpen333_1_1process_1_1windows_1_1subprocess.html#ae45daefd812b9629baa9b42d0ac8cd15',1,'cpen333::process::windows::subprocess::terminate()']]],
-  ['terminated',['terminated',['../classcpen333_1_1process_1_1posix_1_1subprocess.html#aabc5ed98ead25bc40663e586a83e62bb',1,'cpen333::process::posix::subprocess::terminated()'],['../classcpen333_1_1process_1_1windows_1_1subprocess.html#a7fc3a589bdd4cde9adb09fc3debf9bc9',1,'cpen333::process::windows::subprocess::terminated()']]],
+  ['terminated',['terminated',['../classcpen333_1_1process_1_1posix_1_1subprocess.html#aabc5ed98ead25bc40663e586a83e62bb',1,'cpen333::process::posix::subprocess::terminated()'],['../classcpen333_1_1process_1_1windows_1_1subprocess.html#a7fc3a589bdd4cde9adb09fc3debf9bc9',1,'cpen333::process::windows::subprocess::terminated()'],['../classcpen333_1_1thread_1_1thread__object.html#a3f7f0eb9632797cbd86dc4b84f38baed',1,'cpen333::thread::thread_object::terminated()']]],
   ['test',['test',['../classcpen333_1_1thread_1_1timer.html#af81a4656b66d8bebd7497ffe826f4373',1,'cpen333::thread::timer']]],
   ['test_5fand_5freset',['test_and_reset',['../classcpen333_1_1thread_1_1timer.html#a6fc134f093e0ff35ef1baebefd62ed8b',1,'cpen333::thread::timer']]],
   ['test_5fstdin',['test_stdin',['../util_8h.html#a68b5b8834128fc802ed44d31064c0416',1,'cpen333']]],

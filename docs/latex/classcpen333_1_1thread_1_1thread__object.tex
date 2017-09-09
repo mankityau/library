@@ -26,7 +26,9 @@ int \hyperlink{classcpen333_1_1thread_1_1thread__object_ac7334918eabfcf855cec00e
 void \hyperlink{classcpen333_1_1thread_1_1thread__object_a6e6fd163c5f5f72dcd6385a74ad316b6}{detach} ()
 \begin{DoxyCompactList}\small\item\em Allows the thread to execute independently from the thread\textquotesingle{}s handle. \end{DoxyCompactList}\item 
 bool \hyperlink{classcpen333_1_1thread_1_1thread__object_a374e31ea56accc37a3468012a411da5d}{joinable} ()
-\begin{DoxyCompactList}\small\item\em Checks whether the thread is joinable. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Checks whether the thread is joinable. \end{DoxyCompactList}\item 
+bool \hyperlink{classcpen333_1_1thread_1_1thread__object_a3f7f0eb9632797cbd86dc4b84f38baed}{terminated} ()
+\begin{DoxyCompactList}\small\item\em Checks whether thread object has finished executing. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -95,7 +97,20 @@ main return value
 
 Start thread execution. 
 
-Runs the \hyperlink{classcpen333_1_1thread_1_1thread__object_adbd74f6f7461d90a1c12e8078aa5f3af}{main()} method of this thread object 
+Runs the \hyperlink{classcpen333_1_1thread_1_1thread__object_adbd74f6f7461d90a1c12e8078aa5f3af}{main()} method of this thread object \mbox{\Hypertarget{classcpen333_1_1thread_1_1thread__object_a3f7f0eb9632797cbd86dc4b84f38baed}\label{classcpen333_1_1thread_1_1thread__object_a3f7f0eb9632797cbd86dc4b84f38baed}} 
+\index{cpen333\+::thread\+::thread\+\_\+object@{cpen333\+::thread\+::thread\+\_\+object}!terminated@{terminated}}
+\index{terminated@{terminated}!cpen333\+::thread\+::thread\+\_\+object@{cpen333\+::thread\+::thread\+\_\+object}}
+\subsubsection{\texorpdfstring{terminated()}{terminated()}}
+{\footnotesize\ttfamily bool cpen333\+::thread\+::thread\+\_\+object\+::terminated (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks whether thread object has finished executing. 
+
+\begin{DoxyReturn}{Returns}
+true if thread is terminated, false otherwise 
+\end{DoxyReturn}
+
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
