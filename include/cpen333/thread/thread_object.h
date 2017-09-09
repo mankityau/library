@@ -6,6 +6,7 @@
 #define CPEN333_THREAD_THREAD_OBJECT_H
 
 #include <thread>
+#include "../util.h"
 
 namespace cpen333 {
 namespace thread {
@@ -22,13 +23,14 @@ namespace thread {
 class thread_object {
  private:
   std::thread* thread_;        // underlying thread object
+  volatile bool terminated_;   // whether thread is terminated
   volatile int result_;
 
  public:
   /**
    * @brief Constructs the thread base
    */
-  thread_object() : thread_(nullptr), result_(0) {}
+  thread_object() : thread_(nullptr), terminated_(false), result_(0) {}
 
  private:
   thread_object(const thread_object &) DELETE_METHOD;
@@ -99,6 +101,14 @@ class thread_object {
     return false;
   }
 
+  /**
+   * @brief Checks whether thread object has finished executing
+   * @return true if thread is terminated, false otherwise
+   */
+  bool terminated() {
+    return terminated_;
+  }
+
  protected:
 
   /**
@@ -111,6 +121,7 @@ class thread_object {
   // private non-virtual internal method that calls main
   void __run() {
     result_ = main();
+    terminated_ = true;
   }
 };
 

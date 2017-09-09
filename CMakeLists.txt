@@ -24,6 +24,7 @@ include(config/Macros.cmake)
 warnall()  # enable all warnings
 
 add_subdirectory("examples")
+add_subdirectory("lectures")
 add_subdirectory("tools")
 
 #==========================================================

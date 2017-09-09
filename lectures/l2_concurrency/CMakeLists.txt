@@ -9,12 +9,10 @@ set(MY_OUTPUT_DIR ${MY_OUTPUT_DIR}/${PROJECT})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/${MY_OUTPUT_DIR})
 
 set(CMAKE_CXX_STANDARD 11)
-include(../config/Macros.cmake)
+include(../../config/Macros.cmake)
 
 # directories to search for header files
-include_directories(../include)
+include_directories(../../include)
 
-# enable testing
-enable_testing()
-
-# add tests here
+#==============  Lecture Examples ===============================
+add_thread_executable(${PROJECT}_threads threads . src/threads.cpp)
