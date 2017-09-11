@@ -217,6 +217,10 @@ class subprocess {
 
     if (result == WAIT_OBJECT_0) {
       terminated_ = true;
+
+      // close process and thread handles
+      CloseHandle( process_info_.hProcess );
+      CloseHandle( process_info_.hThread );
     }
 
     return terminated_;

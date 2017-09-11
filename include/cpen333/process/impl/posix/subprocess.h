@@ -204,7 +204,7 @@ class subprocess {
     int r = 0;
     do {
       errno = 0;
-      r = waitpid(pid_,&status, WNOHANG);
+      r = waitpid(pid_, &status, WNOHANG);
       if (r < 0) {
         // error
         cpen333::perror(std::string("Failed to wait for process "));
