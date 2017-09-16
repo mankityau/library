@@ -126,13 +126,15 @@ class unlink_signal_handler {
     }
 
     // chain on old handler
-    struct sigaction *old;
+    struct sigaction *old = nullptr;
     if (signum == SIGINT) {
       old = &old_int_action_;
     } else if (signum == SIGHUP) {
       old = &old_hup_action_;
     } else if (signum == SIGTERM) {
       old = &old_term_action_;
+    } else {
+      return;
     }
 
     // check for default handler, otherwise call
