@@ -19,7 +19,9 @@ namespace detail {
 /**
  * @brief No-op functor
  */
-struct noop_function_t {
+class noop_function_t {
+ public:
+  noop_function_t() {}    // user-defined constructor for const type
   void operator () () const {}
 };
 
