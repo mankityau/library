@@ -8,11 +8,24 @@
 #include "impl/shared_mutex_shared.h"
 #include "impl/shared_mutex_exclusive.h"
 
-#if __cplusplus >= 201402L
-#include <shared_mutex>
+// Apples inconsistent C++ standard
+#ifdef APPLE
+  // ensure at least macOS 10.12
+  #include <Availability.h>
+  #if __MAC_OS_X_VERSION_MIN_REQUIRED < 101200
+    #include "impl/shared_mutex_fair.h"
+    #include "impl/shared_lock.h"
+  #else
+    #include <shared_mutex>
+  #endif
 #else
-#include "impl/shared_mutex_fair.h"
-#include "impl/shared_lock.h"
+  // check standard supported
+  #if __cplusplus >= 201402L
+    #include <shared_mutex>
+  #else
+    #include "impl/shared_mutex_fair.h"
+    #include "impl/shared_lock.h"
+  #endif
 #endif
 
 namespace cpen333 {
