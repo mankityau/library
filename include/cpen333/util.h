@@ -115,6 +115,14 @@ inline void perror(const std::string& msg) {
 }
 
 /**
+ * @brief Print message to standard error
+ * @param msg custom message
+ */
+inline void error(const std::string& msg) {
+  std::cerr << msg << std::endl;
+}
+
+/**
  * @brief Pause for input
  *
  * Mirrors the Windows system("pause") command in a cross-platform way, waiting for

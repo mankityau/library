@@ -10,6 +10,7 @@ add_subdirectory("q2_processes")
 add_subdirectory("q3_datapools")
 add_subdirectory("q4_pipes")
 add_subdirectory("q5_message_queues")
+add_subdirectory("q18_socket")
 
 # Synchronization
 add_subdirectory("q6_mutex")
