@@ -17,10 +17,20 @@
 #include "../../../util.h"
 
 #ifndef CPEN333_SOCKET_DEFAULT_PORT
+/**
+ * @brief Default port for making connections
+ */
 #define CPEN333_SOCKET_DEFAULT_PORT 5120
 #endif
 
+/**
+ * @brief Invalid socket when trying to form a connection
+ */
 #define INVALID_SOCKET  -1
+
+/**
+ * @brief Socket error when connecting/binding/listening
+ */
 #define SOCKET_ERROR -1
 
 namespace cpen333 {
@@ -31,6 +41,13 @@ namespace posix {
 // forward declaration so client can friend it
 class socket_server;
 
+/**
+ * @brief Socket client
+ *
+ * POSIX/BSD implementation of a socket client.  The client is
+ * NOT connected automatically.  To start the connection,
+ * call the open() function.
+ */
 class socket_client {
  private:
   std::string server_;
@@ -42,6 +59,9 @@ class socket_client {
 
   friend class socket_server;
 
+  /**
+   * @copydoc cpen333::process::windows::socket_client::__initialize()
+   */
   void __initialize(const std::string& server, int port,
                     int socket, bool open, bool connected) {
     server_ = server;
@@ -51,18 +71,49 @@ class socket_client {
     connected_ = connected;
   }
 
+  /**
+   * @copydoc cpen333::process::windows::socket_client::disconnect()
+   */
+  bool disconnect() {
+
+    if (!connected_) {
+      return false;
+    }
+
+    // shutdown the connection since no more data will be sent
+    int status = ::shutdown(socket_, SHUT_WR);
+    if (status != 0) {
+      cpen333::perror("shutdown(...) failed");
+      return false;
+    }
+    connected_ = false;
+    return true;
+  }
+
  public:
+  /**
+   * @copydoc cpen333::process::windows::socket_client::socket_client()
+   */
   socket_client() : server_("localhost"), port_(CPEN333_SOCKET_DEFAULT_PORT),
                     socket_(INVALID_SOCKET), open_(false), connected_(false) {}
 
+  /**
+   * @copydoc cpen333::process::windows::socket_client::socket_client(const std::string&,int)
+   */
   socket_client(const std::string& server, int port) :
       server_(server), port_(port),
       socket_(INVALID_SOCKET), open_(false), connected_(false) {}
 
+  /**
+   * @copydoc cpen333::process::windows::socket_client::~socket_client()
+   */
   ~socket_client() {
     close();
   }
 
+  /**
+   * @copydoc cpen333::process::windows::socket_client::open()
+   */
   bool open() {
 
     // don't open if already opened
@@ -127,10 +178,16 @@ class socket_client {
     return true;
   }
 
-  bool send(const std::string str) {
-    return send(str.c_str(), str.length());
+  /**
+   * @copydoc cpen333::process::windows::socket_client::send(const std::string&)
+   */
+  bool send(const std::string& str) {
+    return send(str.c_str(), str.length()+1);
   }
 
+  /**
+   * @copydoc cpen333::process::windows::socket_client::send(const char*, size_t)
+   */
   bool send(const char* buff, size_t len) {
 
     if (!connected_) {
@@ -151,6 +208,9 @@ class socket_client {
     return true;
   }
 
+  /**
+   * @copydoc cpen333::process::windows::socket_client::receive(char*,int)
+   */
   int receive(char* buff, int len) {
 
     if (!open_) {
@@ -164,22 +224,9 @@ class socket_client {
     return nread;
   }
 
-  bool disconnect() {
-
-    if (!connected_) {
-      return false;
-    }
-
-    // shutdown the connection since no more data will be sent
-    int status = ::shutdown(socket_, SHUT_WR);
-    if (status != 0) {
-      cpen333::perror("shutdown(...) failed");
-      return false;
-    }
-    connected_ = false;
-    return true;
-  }
-
+  /**
+   * @copydoc cpen333::process::windows::socket_client::close()
+   */
   bool close() {
 
     if (!open_) {
@@ -209,22 +256,42 @@ class socket_client {
 
 };
 
-
+/**
+ * @brief Socket server
+ *
+ * POSIX/BSD implementation of a socket server that listens
+ * for connections.  The server is NOT started automatically.
+ * To start listening for connections, call the start() function.
+ */
 class socket_server {
   int port_;
   int socket_;
   bool open_;
 
  public:
+
+  /**
+   * @copydoc cpen333::process::windows::socket_server::socket_server()
+   */
   socket_server() : port_(CPEN333_SOCKET_DEFAULT_PORT),
                     socket_(INVALID_SOCKET), open_(false) {}
+
+  /**
+   * @copydoc cpen333::process::windows::socket_server::socket_server(int)
+   */
   socket_server(int port) : port_(port), socket_(INVALID_SOCKET),
                             open_(false) {}
 
+  /**
+   * @copydoc cpen333::process::windows::socket_server::~socket_server()
+   */
   ~socket_server() {
     close();
   }
 
+  /**
+   * @copydoc cpen333::process::windows::socket_server::start()
+   */
   bool start() {
 
     if (open_){
@@ -292,6 +359,9 @@ class socket_server {
     return true;
   }
 
+  /**
+   * @copydoc cpen333::process::windows::socket_server::accept()
+   */
   bool accept(socket_client& client) {
     if (!open_) {
       return false;
@@ -312,6 +382,9 @@ class socket_server {
     return true;
   }
 
+  /**
+   * @copydoc cpen333::process::windows::socket_server::close()
+   */
   bool close() {
     if (!open_) {
       return false;
@@ -323,7 +396,10 @@ class socket_server {
     return true;
   }
 
-  int get_port() {
+  /**
+   * @copydoc cpen333::process::windows::socket_server::port()
+   */
+  int port() {
     return port_;
   }
 
@@ -331,7 +407,14 @@ class socket_server {
 
 } // posix
 
+/**
+ * @brief POSIX implementation of a socket client
+ */
 typedef posix::socket_client socket_client;
+
+/**
+ * @brief POSIX implementation of a socket server
+ */
 typedef posix::socket_server socket_server;
 
 

@@ -17,6 +17,7 @@ Makefile
 .vs
 
 # Compiled docs
+/docs/
 
 # OSX
 .DS_Store

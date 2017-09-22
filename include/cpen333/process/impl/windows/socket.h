@@ -24,6 +24,9 @@
 #endif
 
 #ifndef CPEN333_SOCKET_DEFAULT_PORT
+/**
+ * @brief Default port for making connections
+ */
 #define CPEN333_SOCKET_DEFAULT_PORT 5120
 #endif
 
@@ -31,6 +34,8 @@ namespace cpen333 {
 namespace process {
 
 namespace windows {
+
+namespace detail {
 
 /**
  * @brief Singleton used for initializing and destroying WSA
@@ -40,46 +45,75 @@ class WSASingleton {
   std::mutex mutex_;
   int count_;
 
-  WSASingleton() : mutex_(), count_(0){
+  /**
+   * @brief Constructor, starts WSA
+   */
+  WSASingleton() : mutex_(), count_(0) {
     // Initialize Winsock
     WSADATA wsaData;
-    int result = WSAStartup(MAKEWORD(2,2), &wsaData);
+    int result = WSAStartup(MAKEWORD(2, 2), &wsaData);
     if (result != 0) {
       cpen333::error(std::string("WSAStartup(...) failed with error: ") + std::to_string(result));
     }
     // std::cout << "WSA startup" << std::endl;
   }
 
+  /**
+   * @brief Destructor, cleans up WSA
+   */
   ~WSASingleton() {
     WSACleanup();
     // std::cout << "WSA cleanup" << std::endl;
   }
 
  public:
+  /**
+   * @brief Increments usage count
+   */
   void acquire() {
     std::lock_guard<std::mutex> lock(mutex_);
     ++count_;
   }
 
+  /**
+   * @brief Decrements usage count
+   */
   void release() {
     std::lock_guard<std::mutex> lock(mutex_);
     --count_;
   }
 
+  /**
+   * @brief Retrieves usage count
+   * @return current usage count (number of clients/servers)
+   */
   int usage_count() {
     std::lock_guard<std::mutex> lock(mutex_);
     return count_;
   }
 
-  static WSASingleton& instance() {
+  /**
+   * @Brief Meyers' singleton
+   * @return singleton instance reference
+   */
+  static WSASingleton &instance() {
     static WSASingleton guard;
     return guard;
   }
 };
 
+} // detail
+
 // forward declaration so client can friend it
 class socket_server;
 
+/**
+ * @brief Socket client
+ *
+ * WinSock implementation of a socket client.  The client is
+ * NOT connected automatically.  To start the connection,
+ * call the open() function.
+ */
 class socket_client {
  private:
   std::string server_;
@@ -88,10 +122,21 @@ class socket_client {
 
   bool open_;
   bool connected_;
-  WSASingleton& wsa_;
+  detail::WSASingleton& wsa_;
 
   friend class socket_server;
 
+  /**
+   * @brief Initialize a socket with provided info
+   *
+   * For use by the socket server when creating socket
+   *
+   * @param server server name
+   * @param port port number
+   * @param socket socket identifier
+   * @param open whether the socket is open
+   * @param connected whether the socket is connected for sending
+   */
   void __initialize(const std::string& server, int port,
                     SOCKET socket, bool open, bool connected) {
     server_ = server;
@@ -101,25 +146,63 @@ class socket_client {
     connected_ = connected;
   }
 
+  /**
+   * @brief Disconnect the socket for sending data (can still receive)
+   * @return true if successful, false if failed
+   */
+  bool disconnect() {
+
+    if (!connected_) {
+      return false;
+    }
+
+    // shutdown the connection since no more data will be sent
+    int result = ::shutdown(socket_, SD_SEND);
+    if (result == SOCKET_ERROR) {
+      cpen333::error(std::string("shutdown(...) failed with error: ")
+                         + std::to_string(WSAGetLastError()));
+      return false;
+    }
+    connected_ = false;
+    return true;
+  }
+
  public:
+  /**
+   * @brief Default constructor, connects to localhost at the default port
+   */
   socket_client() : server_("localhost"), port_(CPEN333_SOCKET_DEFAULT_PORT),
                     socket_(INVALID_SOCKET), open_(false), connected_(false),
-                    wsa_(WSASingleton::instance()){
+                    wsa_(detail::WSASingleton::instance()){
     wsa_.acquire();
   }
 
+  /**
+   * @brief Constructor specifying server address and port
+   * @param server server address
+   * @param port  port number
+   */
   socket_client(const std::string& server, int port) :
       server_(server), port_(port),
       socket_(INVALID_SOCKET), open_(false), connected_(false),
-      wsa_(WSASingleton::instance()) {
+      wsa_(detail::WSASingleton::instance()) {
     wsa_.acquire();
   }
 
+  /**
+   * @brief Destructor, closes socket if not already closed
+   */
   ~socket_client() {
     close();
     wsa_.release();
   }
 
+  /**
+   * @brief Opens socket if not already open, attempts to connect
+   * to server.
+   *
+   * @return true if connection established, false otherwise
+   */
   bool open() {
 
     // don't open if already opened
@@ -184,10 +267,22 @@ class socket_client {
     return true;
   }
 
-  bool send(const std::string str) {
-    return send(str.c_str(), str.length());
+  /**
+   * @brief Sends string through the socket, including the terminating zero
+   * @param str string to send
+   * @return true if send successful, false otherwise
+   */
+  bool send(const std::string& str) {
+    return send(str.c_str(), str.length()+1);
   }
 
+  /**
+   * @brief Sends bytes through the socket
+   *
+   * @param buff pointer to data buffer to send
+   * @param len number of bytes to send
+   * @return true if send successful, false otherwise
+   */
   bool send(const char* buff, size_t len) {
 
     if (!connected_) {
@@ -203,6 +298,12 @@ class socket_client {
     return true;
   }
 
+  /**
+   * @brief Receives bytes of data from a socket
+   * @param buff pointer to data buffer to populate
+   * @param len size of buffer
+   * @return number of bytes read, or -1 if error
+   */
   int receive(char* buff, int len) {
 
     if (!open_) {
@@ -217,23 +318,10 @@ class socket_client {
     return result;
   }
 
-  bool disconnect() {
-
-    if (!connected_) {
-      return false;
-    }
-
-    // shutdown the connection since no more data will be sent
-    int result = ::shutdown(socket_, SD_SEND);
-    if (result == SOCKET_ERROR) {
-      cpen333::error(std::string("shutdown(...) failed with error: ")
-                         + std::to_string(WSAGetLastError()));
-      return false;
-    }
-    connected_ = false;
-    return true;
-  }
-
+  /**
+   * @brief Closes the socket
+   * @return true if successful, false otherwise
+   */
   bool close() {
 
     if (!open_) {
@@ -265,27 +353,54 @@ class socket_client {
 };
 
 
+/**
+ * @brief Socket server
+ *
+ * WinSock implementation of a socket server that listens
+ * for connections.  The server is NOT started automatically.
+ * To start listening for connections, call the start() function.
+ */
 class socket_server {
   int port_;
   SOCKET socket_;
   bool open_;
-  WSASingleton& wsa_;
+  detail::WSASingleton& wsa_;
 
  public:
+  /**
+   * @brief Default constructor, creates a server that listens on the default
+   * port.
+   */
   socket_server() : port_(CPEN333_SOCKET_DEFAULT_PORT), socket_(INVALID_SOCKET),
-                    open_(false), wsa_(WSASingleton::instance()) {
-    wsa_.acquire();
-  }
-  socket_server(int port) : port_(port), socket_(INVALID_SOCKET),
-                            open_(false), wsa_(WSASingleton::instance()) {
+                    open_(false), wsa_(detail::WSASingleton::instance()) {
     wsa_.acquire();
   }
 
+  /**
+   * @brief Constructor, creates a server that listens on the provided port
+   *
+   * If the port is 0, then finds an open port.  The port number can
+   * be quieried with get_port()
+   *
+   * @param port port number to listen for connections
+   */
+  socket_server(int port) : port_(port), socket_(INVALID_SOCKET),
+                            open_(false), wsa_(detail::WSASingleton::instance()) {
+    wsa_.acquire();
+  }
+
+  /**
+   * @brief Destructor, closes the server socket
+   */
   ~socket_server() {
     close();
     wsa_.release();
   }
 
+  /**
+   * @brief Starts listening for connections.
+   * @return true if successful, false otherwise.
+   */
   bool start() {
 
     if (open_){
@@ -343,6 +458,7 @@ class socket_server {
       }
     }
 
+    // start listening
     status = listen(socket_, SOMAXCONN);
     if (status == SOCKET_ERROR) {
       cpen333::error(std::string("listen(...) failed with error: ")
@@ -356,6 +472,16 @@ class socket_server {
     return true;
   }
 
+  /**
+   * @brief Accepts a client connection
+   *
+   * This method will block until a client connects to the server.
+   * Upon connection, the provide client is populated and automatically
+   * opened.
+   *
+   * @param client connected socket client
+   * @return true if successful, false otherwise
+   */
   bool accept(socket_client& client) {
     if (!open_) {
       return false;
@@ -377,6 +503,10 @@ class socket_server {
     return true;
   }
 
+  /**
+   * @brief Close the server socket
+   * @return true if successful, false otherwise
+   */
   bool close() {
     if (!open_) {
       return false;
@@ -388,7 +518,11 @@ class socket_server {
     return true;
   }
 
-  int get_port() {
+  /**
+   * @brief Retries the server port
+   * @return port number that server is listening on for connections
+   */
+  int port() {
     return port_;
   }
 
@@ -396,7 +530,14 @@ class socket_server {
 
 } // windows
 
+/**
+ * @brief Windows implementation of a socket client
+ */
 typedef windows::socket_client socket_client;
+
+/**
+ * @brief Windows implementation of a socket server
+ */
 typedef windows::socket_server socket_server;
 
 } // process

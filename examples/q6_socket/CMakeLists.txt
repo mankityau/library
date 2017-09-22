@@ -16,11 +16,7 @@ include_directories(../../include)
 
 #==============  Socket implementation ===============================
 
+add_thread_executable(${PROJECT}_socket socket . src/socket.cpp)
 if(WIN32)
-    add_thread_executable(${PROJECT}_windows windows . src/windows.cpp)
-    target_link_libraries(${PROJECT}_windows wsock32 ws2_32)
-endif()
-
-if(UNIX)
-    add_thread_executable(${PROJECT}_posix posix . src/posix.cpp)
+    target_link_libraries(${PROJECT}_socket wsock32 ws2_32)
 endif()
