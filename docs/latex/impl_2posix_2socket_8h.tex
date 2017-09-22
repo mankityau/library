@@ -1,0 +1,70 @@
+\hypertarget{impl_2posix_2socket_8h}{}\section{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/library/include/cpen333/process/impl/posix/socket.h File Reference}
+\label{impl_2posix_2socket_8h}\index{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/library/include/cpen333/process/impl/posix/socket.\+h@{D\+:/school/teaching/\+C\+P\+E\+N333/workspace/library/include/cpen333/process/impl/posix/socket.\+h}}
+
+
+P\+O\+S\+IX implementation of a socket.  
+
+
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$cstdint$>$}\newline
+{\ttfamily \#include $<$cstring$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/socket.\+h$>$}\newline
+{\ttfamily \#include $<$netdb.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../../../util.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classcpen333_1_1process_1_1posix_1_1socket__client}{cpen333\+::process\+::posix\+::socket\+\_\+client}
+\begin{DoxyCompactList}\small\item\em Socket client. \end{DoxyCompactList}\item 
+class \hyperlink{classcpen333_1_1process_1_1posix_1_1socket__server}{cpen333\+::process\+::posix\+::socket\+\_\+server}
+\begin{DoxyCompactList}\small\item\em Socket server. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{impl_2posix_2socket_8h_a5164d95d122c5161aceda0d59b962e2e}\label{impl_2posix_2socket_8h_a5164d95d122c5161aceda0d59b962e2e}} 
+\#define \hyperlink{impl_2posix_2socket_8h_a5164d95d122c5161aceda0d59b962e2e}{C\+P\+E\+N333\+\_\+\+S\+O\+C\+K\+E\+T\+\_\+\+D\+E\+F\+A\+U\+L\+T\+\_\+\+P\+O\+RT}~5120
+\begin{DoxyCompactList}\small\item\em Default port for making connections. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{impl_2posix_2socket_8h_a26769957ec1a2beaf223f33b66ee64ab}\label{impl_2posix_2socket_8h_a26769957ec1a2beaf223f33b66ee64ab}} 
+\#define \hyperlink{impl_2posix_2socket_8h_a26769957ec1a2beaf223f33b66ee64ab}{I\+N\+V\+A\+L\+I\+D\+\_\+\+S\+O\+C\+K\+ET}~-\/1
+\begin{DoxyCompactList}\small\item\em Invalid socket when trying to form a connection. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{impl_2posix_2socket_8h_a633b0396ff93d336a088412a190a5072}\label{impl_2posix_2socket_8h_a633b0396ff93d336a088412a190a5072}} 
+\#define \hyperlink{impl_2posix_2socket_8h_a633b0396ff93d336a088412a190a5072}{S\+O\+C\+K\+E\+T\+\_\+\+E\+R\+R\+OR}~-\/1
+\begin{DoxyCompactList}\small\item\em Socket error when connecting/binding/listening. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef posix\+::socket\+\_\+client \hyperlink{impl_2posix_2socket_8h_a21a1f23dcdd4516428d91dcf29a3da2a}{cpen333\+::process\+::socket\+\_\+client}
+\begin{DoxyCompactList}\small\item\em P\+O\+S\+IX implementation of a socket client. \end{DoxyCompactList}\item 
+typedef posix\+::socket\+\_\+server \hyperlink{impl_2posix_2socket_8h_a20117aaea46c0b0bb93ea8621c8e45dd}{cpen333\+::process\+::socket\+\_\+server}
+\begin{DoxyCompactList}\small\item\em P\+O\+S\+IX implementation of a socket server. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+P\+O\+S\+IX implementation of a socket. 
+
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{impl_2posix_2socket_8h_file_a21a1f23dcdd4516428d91dcf29a3da2a}\label{impl_2posix_2socket_8h_file_a21a1f23dcdd4516428d91dcf29a3da2a}} 
+\index{impl/posix/socket.\+h@{impl/posix/socket.\+h}!socket\+\_\+client@{socket\+\_\+client}}
+\index{socket\+\_\+client@{socket\+\_\+client}!impl/posix/socket.\+h@{impl/posix/socket.\+h}}
+\subsubsection{\texorpdfstring{socket\+\_\+client}{socket\_client}}
+{\footnotesize\ttfamily typedef windows\+::socket\+\_\+client \hyperlink{classcpen333_1_1process_1_1socket__client}{cpen333\+::process\+::socket\+\_\+client}}
+
+
+
+P\+O\+S\+IX implementation of a socket client. 
+
+Windows implementation of a socket client. \mbox{\Hypertarget{impl_2posix_2socket_8h_file_a20117aaea46c0b0bb93ea8621c8e45dd}\label{impl_2posix_2socket_8h_file_a20117aaea46c0b0bb93ea8621c8e45dd}} 
+\index{impl/posix/socket.\+h@{impl/posix/socket.\+h}!socket\+\_\+server@{socket\+\_\+server}}
+\index{socket\+\_\+server@{socket\+\_\+server}!impl/posix/socket.\+h@{impl/posix/socket.\+h}}
+\subsubsection{\texorpdfstring{socket\+\_\+server}{socket\_server}}
+{\footnotesize\ttfamily typedef windows\+::socket\+\_\+server \hyperlink{classcpen333_1_1process_1_1socket__server}{cpen333\+::process\+::socket\+\_\+server}}
+
+
+
+P\+O\+S\+IX implementation of a socket server. 
+
+Windows implementation of a socket server. 

@@ -10,5 +10,6 @@ var searchData=
   ['shared_5fmutex_5fexclusive_2eh',['shared_mutex_exclusive.h',['../process_2impl_2shared__mutex__exclusive_8h.html',1,'(Global Namespace)'],['../thread_2impl_2shared__mutex__exclusive_8h.html',1,'(Global Namespace)']]],
   ['shared_5fmutex_5ffair_2eh',['shared_mutex_fair.h',['../process_2impl_2shared__mutex__fair_8h.html',1,'(Global Namespace)'],['../thread_2impl_2shared__mutex__fair_8h.html',1,'(Global Namespace)']]],
   ['shared_5fmutex_5fshared_2eh',['shared_mutex_shared.h',['../process_2impl_2shared__mutex__shared_8h.html',1,'(Global Namespace)'],['../thread_2impl_2shared__mutex__shared_8h.html',1,'(Global Namespace)']]],
+  ['socket_2eh',['socket.h',['../impl_2posix_2socket_8h.html',1,'(Global Namespace)'],['../impl_2windows_2socket_8h.html',1,'(Global Namespace)'],['../socket_8h.html',1,'(Global Namespace)']]],
   ['subprocess_2eh',['subprocess.h',['../impl_2posix_2subprocess_8h.html',1,'(Global Namespace)'],['../impl_2windows_2subprocess_8h.html',1,'(Global Namespace)'],['../subprocess_8h.html',1,'(Global Namespace)']]]
 ];

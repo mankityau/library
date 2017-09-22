@@ -10,5 +10,7 @@ var searchData=
   ['shared_5ftimed_5fmutex_5fexclusive',['shared_timed_mutex_exclusive',['../process_2impl_2shared__mutex__exclusive_8h.html#a5683a7b525b63ed776cdc3a3bb847b51',1,'cpen333::process::shared_timed_mutex_exclusive()'],['../thread_2impl_2shared__mutex__exclusive_8h.html#a085094e3743a093f500b63bccb663489',1,'cpen333::thread::shared_timed_mutex_exclusive()']]],
   ['shared_5ftimed_5fmutex_5ffair',['shared_timed_mutex_fair',['../process_2impl_2shared__mutex__fair_8h.html#abacd02002d03285d5eda3e25b2d8c510',1,'cpen333::process::shared_timed_mutex_fair()'],['../thread_2impl_2shared__mutex__fair_8h.html#a0538142cd8b676516eb92eaf1577d872',1,'cpen333::thread::shared_timed_mutex_fair()']]],
   ['shared_5ftimed_5fmutex_5fshared',['shared_timed_mutex_shared',['../process_2impl_2shared__mutex__shared_8h.html#a4f82505d2343496671c839642c960510',1,'cpen333::process::shared_timed_mutex_shared()'],['../thread_2impl_2shared__mutex__shared_8h.html#ad9a245111cd81b2e7d08229a9ec244a3',1,'cpen333::thread::shared_timed_mutex_shared()']]],
+  ['socket_5fclient',['socket_client',['../impl_2posix_2socket_8h.html#a21a1f23dcdd4516428d91dcf29a3da2a',1,'cpen333::process']]],
+  ['socket_5fserver',['socket_server',['../impl_2posix_2socket_8h.html#a20117aaea46c0b0bb93ea8621c8e45dd',1,'cpen333::process']]],
   ['subprocess',['subprocess',['../impl_2posix_2subprocess_8h.html#af2d04aa38f82b256f2244ebffc04d530',1,'cpen333::process']]]
 ];

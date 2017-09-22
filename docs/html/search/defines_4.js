@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['linux',['LINUX',['../os_8h.html#a157a956e14c5c44b3f73ef23a4776f64',1,'os.h']]]
+  ['invalid_5fsocket',['INVALID_SOCKET',['../impl_2posix_2socket_8h.html#a26769957ec1a2beaf223f33b66ee64ab',1,'socket.h']]]
 ];

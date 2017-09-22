@@ -1,0 +1,122 @@
+\hypertarget{classcpen333_1_1process_1_1windows_1_1socket__server}{}\section{cpen333\+:\+:process\+:\+:windows\+:\+:socket\+\_\+server Class Reference}
+\label{classcpen333_1_1process_1_1windows_1_1socket__server}\index{cpen333\+::process\+::windows\+::socket\+\_\+server@{cpen333\+::process\+::windows\+::socket\+\_\+server}}
+
+
+Socket server.  
+
+
+
+
+{\ttfamily \#include $<$socket.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1windows_1_1socket__server_a719c448f8f7f7b48dd54ac426e18fdfe}\label{classcpen333_1_1process_1_1windows_1_1socket__server_a719c448f8f7f7b48dd54ac426e18fdfe}} 
+\hyperlink{classcpen333_1_1process_1_1windows_1_1socket__server_a719c448f8f7f7b48dd54ac426e18fdfe}{socket\+\_\+server} ()
+\begin{DoxyCompactList}\small\item\em Default constructor, creates a server that listens on the default port. \end{DoxyCompactList}\item 
+\hyperlink{classcpen333_1_1process_1_1windows_1_1socket__server_ada3d9f2a11e196dc91b3199b37fe50e2}{socket\+\_\+server} (int \hyperlink{classcpen333_1_1process_1_1windows_1_1socket__server_a4b5f9231c046f947a77a6458202c2712}{port})
+\begin{DoxyCompactList}\small\item\em Constructor, creates a server that listens on the provided port. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcpen333_1_1process_1_1windows_1_1socket__server_a83cf30c312cacb0bbabb2c14b32fff88}\label{classcpen333_1_1process_1_1windows_1_1socket__server_a83cf30c312cacb0bbabb2c14b32fff88}} 
+\hyperlink{classcpen333_1_1process_1_1windows_1_1socket__server_a83cf30c312cacb0bbabb2c14b32fff88}{$\sim$socket\+\_\+server} ()
+\begin{DoxyCompactList}\small\item\em Destructor, closes the server socket. \end{DoxyCompactList}\item 
+bool \hyperlink{classcpen333_1_1process_1_1windows_1_1socket__server_a0a2021766c8d5728d044a96d24bbc684}{start} ()
+\begin{DoxyCompactList}\small\item\em Starts listening for connections. \end{DoxyCompactList}\item 
+bool \hyperlink{classcpen333_1_1process_1_1windows_1_1socket__server_aee5db9af683de8a0b26272a25661aa40}{accept} (\hyperlink{classcpen333_1_1process_1_1windows_1_1socket__client}{socket\+\_\+client} \&client)
+\begin{DoxyCompactList}\small\item\em Accepts a client connection. \end{DoxyCompactList}\item 
+bool \hyperlink{classcpen333_1_1process_1_1windows_1_1socket__server_a5eddf38d7b08e27f2299a750f16eae66}{close} ()
+\begin{DoxyCompactList}\small\item\em Close the server socket. \end{DoxyCompactList}\item 
+int \hyperlink{classcpen333_1_1process_1_1windows_1_1socket__server_a4b5f9231c046f947a77a6458202c2712}{port} ()
+\begin{DoxyCompactList}\small\item\em Retries the server port. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Socket server. 
+
+Win\+Sock implementation of a socket server that listens for connections. The server is N\+OT started automatically. To start listening for connections, call the \hyperlink{classcpen333_1_1process_1_1windows_1_1socket__server_a0a2021766c8d5728d044a96d24bbc684}{start()} function. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1windows_1_1socket__server_ada3d9f2a11e196dc91b3199b37fe50e2}\label{classcpen333_1_1process_1_1windows_1_1socket__server_ada3d9f2a11e196dc91b3199b37fe50e2}} 
+\index{cpen333\+::process\+::windows\+::socket\+\_\+server@{cpen333\+::process\+::windows\+::socket\+\_\+server}!socket\+\_\+server@{socket\+\_\+server}}
+\index{socket\+\_\+server@{socket\+\_\+server}!cpen333\+::process\+::windows\+::socket\+\_\+server@{cpen333\+::process\+::windows\+::socket\+\_\+server}}
+\subsubsection{\texorpdfstring{socket\+\_\+server()}{socket\_server()}}
+{\footnotesize\ttfamily cpen333\+::process\+::windows\+::socket\+\_\+server\+::socket\+\_\+server (\begin{DoxyParamCaption}\item[{int}]{port }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor, creates a server that listens on the provided port. 
+
+If the port is 0, then finds an open port. The port number can be quieried with get\+\_\+port()
+
+
+\begin{DoxyParams}{Parameters}
+{\em port} & port number to listen for connections \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1windows_1_1socket__server_aee5db9af683de8a0b26272a25661aa40}\label{classcpen333_1_1process_1_1windows_1_1socket__server_aee5db9af683de8a0b26272a25661aa40}} 
+\index{cpen333\+::process\+::windows\+::socket\+\_\+server@{cpen333\+::process\+::windows\+::socket\+\_\+server}!accept@{accept}}
+\index{accept@{accept}!cpen333\+::process\+::windows\+::socket\+\_\+server@{cpen333\+::process\+::windows\+::socket\+\_\+server}}
+\subsubsection{\texorpdfstring{accept()}{accept()}}
+{\footnotesize\ttfamily bool cpen333\+::process\+::windows\+::socket\+\_\+server\+::accept (\begin{DoxyParamCaption}\item[{\hyperlink{classcpen333_1_1process_1_1windows_1_1socket__client}{socket\+\_\+client} \&}]{client }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Accepts a client connection. 
+
+This method will block until a client connects to the server. Upon connection, the provide client is populated and automatically opened.
+
+
+\begin{DoxyParams}{Parameters}
+{\em client} & connected socket client \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if successful, false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1windows_1_1socket__server_a5eddf38d7b08e27f2299a750f16eae66}\label{classcpen333_1_1process_1_1windows_1_1socket__server_a5eddf38d7b08e27f2299a750f16eae66}} 
+\index{cpen333\+::process\+::windows\+::socket\+\_\+server@{cpen333\+::process\+::windows\+::socket\+\_\+server}!close@{close}}
+\index{close@{close}!cpen333\+::process\+::windows\+::socket\+\_\+server@{cpen333\+::process\+::windows\+::socket\+\_\+server}}
+\subsubsection{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily bool cpen333\+::process\+::windows\+::socket\+\_\+server\+::close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Close the server socket. 
+
+\begin{DoxyReturn}{Returns}
+true if successful, false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1windows_1_1socket__server_a4b5f9231c046f947a77a6458202c2712}\label{classcpen333_1_1process_1_1windows_1_1socket__server_a4b5f9231c046f947a77a6458202c2712}} 
+\index{cpen333\+::process\+::windows\+::socket\+\_\+server@{cpen333\+::process\+::windows\+::socket\+\_\+server}!port@{port}}
+\index{port@{port}!cpen333\+::process\+::windows\+::socket\+\_\+server@{cpen333\+::process\+::windows\+::socket\+\_\+server}}
+\subsubsection{\texorpdfstring{port()}{port()}}
+{\footnotesize\ttfamily int cpen333\+::process\+::windows\+::socket\+\_\+server\+::port (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retries the server port. 
+
+\begin{DoxyReturn}{Returns}
+port number that server is listening on for connections 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcpen333_1_1process_1_1windows_1_1socket__server_a0a2021766c8d5728d044a96d24bbc684}\label{classcpen333_1_1process_1_1windows_1_1socket__server_a0a2021766c8d5728d044a96d24bbc684}} 
+\index{cpen333\+::process\+::windows\+::socket\+\_\+server@{cpen333\+::process\+::windows\+::socket\+\_\+server}!start@{start}}
+\index{start@{start}!cpen333\+::process\+::windows\+::socket\+\_\+server@{cpen333\+::process\+::windows\+::socket\+\_\+server}}
+\subsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily bool cpen333\+::process\+::windows\+::socket\+\_\+server\+::start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Starts listening for connections. 
+
+\begin{DoxyReturn}{Returns}
+true if successful, false otherwise. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/school/teaching/\+C\+P\+E\+N333/workspace/library/include/cpen333/process/impl/windows/\hyperlink{impl_2windows_2socket_8h}{socket.\+h}\end{DoxyCompactItemize}

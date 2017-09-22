@@ -30,6 +30,8 @@ int \hyperlink{util_8h_a68b5b8834128fc802ed44d31064c0416}{cpen333\+::test\+\_\+s
 \begin{DoxyCompactList}\small\item\em Tests for keyboard input. \end{DoxyCompactList}\item 
 void \hyperlink{util_8h_a03bbd76906ff61c8fa8efcc3422ff416}{cpen333\+::perror} (const std\+::string \&msg)
 \begin{DoxyCompactList}\small\item\em Print error message. \end{DoxyCompactList}\item 
+void \hyperlink{util_8h_a5fc400ba28586b822c38e07e85222a0c}{cpen333\+::error} (const std\+::string \&msg)
+\begin{DoxyCompactList}\small\item\em Print message to standard error. \end{DoxyCompactList}\item 
 void \hyperlink{util_8h_aa29e8379d38f9a9ddcf1df0ce13c6a42}{cpen333\+::pause} ()
 \begin{DoxyCompactList}\small\item\em Pause for input. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -47,7 +49,22 @@ Contains functions for formatting strings, testing for data on standard input, a
 {\footnotesize\ttfamily template$<$typename Dummy $>$ \\
 int cpen333\+::detail\+::\+\_\+kbhit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Linux (P\+O\+S\+IX) implementation of \hyperlink{util_8h_aadd4070521219770731241a37ed1ae07}{\+\_\+kbhit()}. Morgan Mc\+Guire, \href{mailto:morgan@cs.brown.edu}{\tt morgan@cs.\+brown.\+edu} \mbox{\Hypertarget{util_8h_file_aa29e8379d38f9a9ddcf1df0ce13c6a42}\label{util_8h_file_aa29e8379d38f9a9ddcf1df0ce13c6a42}} 
+Linux (P\+O\+S\+IX) implementation of \hyperlink{util_8h_aadd4070521219770731241a37ed1ae07}{\+\_\+kbhit()}. Morgan Mc\+Guire, \href{mailto:morgan@cs.brown.edu}{\tt morgan@cs.\+brown.\+edu} \mbox{\Hypertarget{util_8h_file_a5fc400ba28586b822c38e07e85222a0c}\label{util_8h_file_a5fc400ba28586b822c38e07e85222a0c}} 
+\index{util.\+h@{util.\+h}!error@{error}}
+\index{error@{error}!util.\+h@{util.\+h}}
+\subsubsection{\texorpdfstring{error()}{error()}}
+{\footnotesize\ttfamily void cpen333\+::error (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Print message to standard error. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & custom message \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{util_8h_file_aa29e8379d38f9a9ddcf1df0ce13c6a42}\label{util_8h_file_aa29e8379d38f9a9ddcf1df0ce13c6a42}} 
 \index{util.\+h@{util.\+h}!pause@{pause}}
 \index{pause@{pause}!util.\+h@{util.\+h}}
 \subsubsection{\texorpdfstring{pause()}{pause()}}
