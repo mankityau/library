@@ -228,7 +228,7 @@ class subprocess {
 
   /**
    * @brief Checks if the process has already been terminated
-   * @return
+   * @return true if process is terminated
    */
   bool terminated() {
     if (terminated_) {
