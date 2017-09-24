@@ -129,14 +129,10 @@ inline void error(const std::string& msg) {
  * keyboard input.
  */
 void pause() {
-#ifdef WINDOWS
-  system("pause");
-#else
   std::cin.clear();  // flush input
   std::cout << "Press ENTER to continue . . .";
   std::string line;
   std::getline(std::cin, line);
-#endif
 }
 
 }// cpen333

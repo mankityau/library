@@ -19,10 +19,18 @@
 // Due to the 30 character limit on POSIX, we will take a sha1 hash and base64-encode
 //      which will generate 28 characters.  Add a / prefix and terminating zero = 30.
 //      We will also replace an / with a _ in the resulting hash
+
+#ifdef CPEN333_USE_RAW_NAMES
+/**
+ * @brief Size required for resource unique identifier
+ */
+#define MAX_RESOURCE_NAME 250
+#else
 /**
  * @brief Size required for resource unique identifier
  */
 #define MAX_RESOURCE_NAME 30
+#endif
 
 namespace cpen333 {
 namespace process {
@@ -101,10 +109,21 @@ class named_resource_base : public virtual named_resource {
    * @param out platform-safe resource name
    */
   static void make_resource_name(const std::string &name, char out[]) {
-    sha1 hash = sha1(name.c_str()).finalize();
 
     // leading slash for pathname
     out[0] = '/';
+
+#ifdef CPEN333_USE_RAW_NAMES
+    // raw names useful for debugging
+    for (size_t i=0; i<name.length(); ++i) {
+      if (name[i] == '/') {
+        out[i+1] = '_';
+      } else {
+        out[i+1] = name[i];
+      }
+    }
+#else
+    sha1 hash = sha1(name.c_str()).finalize();
     hash.print_base64(&out[1], true); // print starting at offset 1, with terminating zero
     // replace '/', '+', and '=' with _ for safer path name
     for (int i=1; i<MAX_RESOURCE_NAME; ++i) {
@@ -112,6 +131,7 @@ class named_resource_base : public virtual named_resource {
         out[i] = '_';
       }
     }
+#endif
   }
 
 };

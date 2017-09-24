@@ -25,6 +25,6 @@ install(TARGETS ${PROJECT}_process_parent ${PROJECT}_process_child
 
 #==============  Datapool Thread  ======================================
 
-add_thread_executable(${PROJECT}_thread_datapool datapool thread src/thread/datapool.cpp)
+add_thread_executable(${PROJECT}_thread_datapool datapool thread src/thread/thread.cpp)
 install(TARGETS ${PROJECT}_thread_datapool
         DESTINATION bin/${MY_OUTPUT_DIR}/thread)

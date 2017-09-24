@@ -211,7 +211,7 @@ class socket_client {
   /**
    * @copydoc cpen333::process::windows::socket_client::receive(char*,int)
    */
-  int receive(char* buff, int len) {
+  int receive(char* buff, size_t len) {
 
     if (!open_) {
       return -1;

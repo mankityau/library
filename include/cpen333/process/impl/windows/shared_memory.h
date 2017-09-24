@@ -97,13 +97,6 @@ class shared_memory : public impl::named_resource_base {
   }
 
   /**
-   * @copydoc cpen333::process::posix::shared_memory::operator->()
-   */
-  void* operator->() {
-    return data_;
-  }
-
-  /**
    * @copydoc cpen333::process::posix::shared_memory::get(size_t)
    */
   void* get(size_t offset = 0) {

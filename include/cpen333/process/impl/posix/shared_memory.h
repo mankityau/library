@@ -109,36 +109,6 @@ class shared_memory : public impl::named_resource_base {
     }
   }
 
-  bool unlink() {
-    errno = 0;
-    int status = shm_unlink(name_ptr());
-    if (status != 0) {
-      cpen333::perror(std::string("Failed to unlink shared memory with id ") + name());
-    }
-    return status == 0;
-  }
-
-  /**
-   * @copydoc cpen333::process::named_resource::unlink(const std::string&)
-   */
-  static bool unlink(const std::string& name) {
-    char nm[MAX_RESOURCE_NAME];
-    impl::named_resource_base::make_resource_name(name+std::string(SHARED_MEMORY_NAME_SUFFIX), nm);
-    int status = shm_unlink(&nm[0]);
-    if (status != 0) {
-      cpen333::perror(std::string("Failed to unlink shared memory with id ") + std::string(nm));
-    }
-    return status == 0;
-  }
-
-  /**
-   * @brief Pointer operator for accessing underlying data
-   * @return pointer to underlying data
-   */
-  void* operator->() {
-    return data_;
-  }
-
   /**
    * @brief Pointer to memory at a particular offset from the block
    * @param offset memory offset (in bytes)
@@ -177,6 +147,28 @@ class shared_memory : public impl::named_resource_base {
   template<typename T>
   T* get() {
     return (T*)data_;
+  }
+
+  bool unlink() {
+    errno = 0;
+    int status = shm_unlink(name_ptr());
+    if (status != 0) {
+      cpen333::perror(std::string("Failed to unlink shared memory with id ") + name());
+    }
+    return status == 0;
+  }
+
+  /**
+   * @copydoc cpen333::process::named_resource::unlink(const std::string&)
+   */
+  static bool unlink(const std::string& name) {
+    char nm[MAX_RESOURCE_NAME];
+    impl::named_resource_base::make_resource_name(name+std::string(SHARED_MEMORY_NAME_SUFFIX), nm);
+    int status = shm_unlink(&nm[0]);
+    if (status != 0) {
+      cpen333::perror(std::string("Failed to unlink shared memory with id ") + std::string(nm));
+    }
+    return status == 0;
   }
 
   /**

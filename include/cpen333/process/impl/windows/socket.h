@@ -304,7 +304,7 @@ class socket_client {
    * @param len size of buffer
    * @return number of bytes read, or -1 if error
    */
-  int receive(char* buff, int len) {
+  int receive(char* buff, size_t len) {
 
     if (!open_) {
       return -1;

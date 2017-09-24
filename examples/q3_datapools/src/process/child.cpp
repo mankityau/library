@@ -5,7 +5,7 @@
 //
 //	It's important to that all processes accessing the same datapool must describe exactly the same datapool layout.
 //  This is usually best accomplished with a shared header.
-struct DataPoolData {
+struct SharedData {
   char movie[20];    // title
   long length;       // in seconds
   double rating;     // on a 5* scale
@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
   // and will do any necessary casting of pointers.  We have also overridden the -> operator so it can be tried like
   // a pointer to the underlying data type directly.
   std::cout << "Child attempting to create/use the datapool....." << std::endl;
-  cpen333::process::shared_object<DataPoolData> datapool("movie1") ;
+  cpen333::process::shared_object<SharedData> datapool("movie1") ;
 
   std::cout << "Child linked to datapool at address " << datapool.get() << std::endl;
 
