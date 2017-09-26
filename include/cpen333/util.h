@@ -128,15 +128,11 @@ inline void error(const std::string& msg) {
  * Mirrors the Windows system("pause") command in a cross-platform way, waiting for
  * keyboard input.
  */
-void pause() {
-#ifdef WINDOWS
-  system("pause");
-#else
+inline void pause() {
   std::cin.clear();  // flush input
   std::cout << "Press ENTER to continue . . .";
   std::string line;
   std::getline(std::cin, line);
-#endif
 }
 
 }// cpen333
