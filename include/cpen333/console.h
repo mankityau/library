@@ -14,6 +14,9 @@
 #include "util.h"
 
 #ifdef WINDOWS
+// prevent windows max macro
+#undef NOMINMAX
+#define NOMINMAX 1
 #include <windows.h>
 #else
 #include <cstdio>   // for safe printf

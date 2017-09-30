@@ -12,6 +12,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netdb.h>
+#include <arpa/inet.h>
 #include <unistd.h>
 
 #include "../../../util.h"
@@ -48,7 +49,7 @@ class socket_server;
  * NOT connected automatically.  To start the connection,
  * call the open() function.
  */
-class socket_client {
+class socket {
  private:
   std::string server_;
   int port_;
@@ -60,7 +61,7 @@ class socket_client {
   friend class socket_server;
 
   /**
-   * @copydoc cpen333::process::windows::socket_client::__initialize()
+   * @copydoc cpen333::process::windows::socket::__initialize()
    */
   void __initialize(const std::string& server, int port,
                     int socket, bool open, bool connected) {
@@ -72,7 +73,7 @@ class socket_client {
   }
 
   /**
-   * @copydoc cpen333::process::windows::socket_client::disconnect()
+   * @copydoc cpen333::process::windows::socket::disconnect()
    */
   bool disconnect() {
 
@@ -92,27 +93,43 @@ class socket_client {
 
  public:
   /**
-   * @copydoc cpen333::process::windows::socket_client::socket_client()
+   * @copydoc cpen333::process::windows::socket::socket()
    */
-  socket_client() : server_("localhost"), port_(CPEN333_SOCKET_DEFAULT_PORT),
+  socket() : server_("localhost"), port_(CPEN333_SOCKET_DEFAULT_PORT),
                     socket_(INVALID_SOCKET), open_(false), connected_(false) {}
 
   /**
-   * @copydoc cpen333::process::windows::socket_client::socket_client(const std::string&,int)
+   * @copydoc cpen333::process::windows::socket::socket(const std::string&,int)
    */
-  socket_client(const std::string& server, int port) :
+  socket(const std::string& server, int port) :
       server_(server), port_(port),
       socket_(INVALID_SOCKET), open_(false), connected_(false) {}
 
+  socket(const socket &) DELETE_METHOD;
+  socket &operator=(const socket &) DELETE_METHOD;
+
+  socket(socket&& other) {
+    *this = std::move(other);
+  }
+  socket &operator=(socket&& other) {
+    __initialize(other.server_, other.port_, other.socket_, other.open_, other.connected_);
+    other.server_ = "";
+    other.port_ = 0;
+    other.socket_ = INVALID_SOCKET;
+    other.open_ = false;
+    other.connected_ = false;
+    return *this;
+  }
+
   /**
-   * @copydoc cpen333::process::windows::socket_client::~socket_client()
+   * @copydoc cpen333::process::windows::socket::~socket()
    */
-  ~socket_client() {
+  ~socket() {
     close();
   }
 
   /**
-   * @copydoc cpen333::process::windows::socket_client::open()
+   * @copydoc cpen333::process::windows::socket::open()
    */
   bool open() {
 
@@ -148,7 +165,7 @@ class socket_client {
     for (struct addrinfo* ptr = addrresult; ptr != NULL; ptr = ptr->ai_next) {
 
       // Create a SOCKET for connecting to server
-      socket_ = socket(ptr->ai_family, ptr->ai_socktype,
+      socket_ = ::socket(ptr->ai_family, ptr->ai_socktype,
                              ptr->ai_protocol);
 
       if (socket_ == INVALID_SOCKET) {
@@ -179,14 +196,14 @@ class socket_client {
   }
 
   /**
-   * @copydoc cpen333::process::windows::socket_client::send(const std::string&)
+   * @copydoc cpen333::process::windows::socket::send(const std::string&)
    */
   bool send(const std::string& str) {
     return send(str.c_str(), str.length()+1);
   }
 
   /**
-   * @copydoc cpen333::process::windows::socket_client::send(const char*, size_t)
+   * @copydoc cpen333::process::windows::socket::send(const char*, size_t)
    */
   bool send(const char* buff, size_t len) {
 
@@ -209,7 +226,7 @@ class socket_client {
   }
 
   /**
-   * @copydoc cpen333::process::windows::socket_client::receive(char*,int)
+   * @copydoc cpen333::process::windows::socket::receive(char*,int)
    */
   int receive(char* buff, size_t len) {
 
@@ -225,7 +242,7 @@ class socket_client {
   }
 
   /**
-   * @copydoc cpen333::process::windows::socket_client::close()
+   * @copydoc cpen333::process::windows::socket::close()
    */
   bool close() {
 
@@ -282,6 +299,12 @@ class socket_server {
   socket_server(int port) : port_(port), socket_(INVALID_SOCKET),
                             open_(false) {}
 
+
+  socket_server(const socket_server &) DELETE_METHOD;
+  socket_server(socket_server &&) DELETE_METHOD;
+  socket_server &operator=(const socket_server &) DELETE_METHOD;
+  socket_server &operator=(socket_server &&) DELETE_METHOD;
+
   /**
    * @copydoc cpen333::process::windows::socket_server::~socket_server()
    */
@@ -316,7 +339,7 @@ class socket_server {
     }
 
     // Create a SOCKET for connecting to server
-    socket_ = socket(addrresult->ai_family, addrresult->ai_socktype,
+    socket_ = ::socket(addrresult->ai_family, addrresult->ai_socktype,
                      addrresult->ai_protocol);
     if (socket_ == INVALID_SOCKET) {
       cpen333::perror("socket(...) failed");
@@ -362,7 +385,7 @@ class socket_server {
   /**
    * @copydoc cpen333::process::windows::socket_server::accept()
    */
-  bool accept(socket_client& client) {
+  bool accept(socket& client) {
     if (!open_) {
       return false;
     }
@@ -403,6 +426,46 @@ class socket_server {
     return port_;
   }
 
+  /**
+   * @copydoc cpen333::process::windows::socket_server::address_lookup()
+   */
+  static std::vector<std::string> address_lookup() {
+
+    std::vector<std::string> out;
+
+    // host name
+    char ac[80];
+    if (gethostname(ac, sizeof(ac)) == SOCKET_ERROR) {
+      return out;
+    }
+    std::string hostname(ac);
+
+    struct addrinfo hints;
+    std::memset(&hints, 0, sizeof(hints));
+    hints.ai_family = AF_INET;
+    hints.ai_socktype = SOCK_STREAM;
+    hints.ai_protocol = IPPROTO_TCP;
+    hints.ai_flags = AI_PASSIVE;
+
+    struct addrinfo *addrresult;
+    int status = getaddrinfo(hostname.c_str(), NULL,
+                             &hints, &addrresult);
+
+    if (status != 0) {
+      return out;
+    }
+
+    // loop through addresses
+    char ipbuf[INET_ADDRSTRLEN];
+    // Attempt to connect to an address until one succeeds
+    for (struct addrinfo* ptr = addrresult; ptr != NULL; ptr = ptr->ai_next) {
+      out.push_back(inet_ntop(AF_INET, &((struct sockaddr_in *)ptr->ai_addr)->sin_addr, ipbuf, sizeof(ipbuf)));
+    }
+    freeaddrinfo(addrresult);
+
+    return out;
+  }
+
 };
 
 } // posix
@@ -410,7 +473,7 @@ class socket_server {
 /**
  * @brief POSIX implementation of a socket client
  */
-typedef posix::socket_client socket_client;
+typedef posix::socket socket;
 
 /**
  * @brief POSIX implementation of a socket server

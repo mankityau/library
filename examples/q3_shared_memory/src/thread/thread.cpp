@@ -4,13 +4,13 @@
 #include "cpen333/util.h"
 
 //
-//  Datapools (a.k.a Shared Memory, or Mapped Memory) are simply blocks of shared memory accessible by multiple
-//  threads/processes.  Since threads within a single process all share memory anyways, we can just use either
-//  a shared object, or a global variable
+//  Interprocess Shared Memory (a.k.a Shared Memory, Datapools, or Mapped Memory) are simply blocks of shared memory
+//  accessible by multiple threads/processes.  Since threads within a single process all share memory anyways, we can
+//  just use either a shared object, or a global variable
 //
 //  There is a subtlety: the shared data block should be contiguous and completely self-contained.  This means we
-//  can't store regular object pointers within the pool, since those will inevitably refer to memory outside of the
-//  pool itself.  While this may not be an issue for threads which would also share that outside memory and address
+//  can't store regular object pointers within the memory block, since those will inevitably refer to memory outside of
+//  the block itself.  While this may not be an issue for threads which would also share that outside memory and address
 //  space, it becomes a really big issue for processes, which don't.  From the perspective of a different process,
 //  that pointer-based memory address may be invalid, or refer to some other completely unrelated block of memory.
 //
@@ -22,16 +22,16 @@
 // Since all members are fixed-length basic types, this is a self-contained contiguous block of memory.  In C++, the
 // memory layout is gauranteed, with members arranged in order [ 20 chars, 1 long, 1 double ].  The actual number of
 // bytes may change from system to system, but the addresses can be computed using the sizeof() operator
-struct DataPoolData {
+struct SharedData {
   char movie[20];    // title
   long length;       // in seconds
   double rating;     // on a 5* scale
 };
 
-// create a function to run in a thread that takes a reference to the shared data pool and prints its info
-void ThreadFunction(const std::string &name, DataPoolData& data) {
+// create a function to run in a thread that takes a reference to the shared data and prints its info
+void ThreadFunction(const std::string &name, SharedData& data) {
 
-  // print out the data in the datapool that was stored there by the parent
+  // print out the data in the shared memory that was stored there by the parent
   std::cout << "Child " << name << " read value for Movie = " << data.movie << std::endl;
   std::cout << "Child " << name << " read value for length = " << data.length << std::endl;
   std::cout << "Child " << name << " read values for rating = " << data.rating << std::endl << std::endl;
@@ -43,7 +43,7 @@ void ThreadFunction(const std::string &name, DataPoolData& data) {
 
 int main() {
   
-  DataPoolData data;
+  SharedData data;
   
   std::cout << "Parent Writing value 'Toy Story 2' to movie variable....." << std::endl;
   // copy data from a string to the output array, leave room for a terminating 0
@@ -56,8 +56,8 @@ int main() {
   std::cout << "Parent Writing value '4.9' to ratings variable....." << std::endl;
   data.rating = 4.9;
 
-  //	Now that we have created the data pool and have stored data in it, it is safe to create
-  //	a child thread that can access the data
+  // Now that we have created the shared memory object and have stored data in it, it is safe to create
+  // a child thread that can access the data
   std::cout << "Press Enter to launch thread" << std::endl;
   std::cin.get();
 

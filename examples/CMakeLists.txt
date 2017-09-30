@@ -7,10 +7,10 @@ add_subdirectory("q1_threads")
 add_subdirectory("q2_processes")
 
 # Inter-Process Communication
-add_subdirectory("q3_datapools")
+add_subdirectory("q3_shared_memory")
 add_subdirectory("q4_pipes")
 add_subdirectory("q5_message_queues")
-add_subdirectory("q6_socket")
+add_subdirectory("q6_sockets")
 
 # Synchronization
 add_subdirectory("q7_mutex")

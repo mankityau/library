@@ -13,9 +13,11 @@
 #define SHARED_MEMORY_NAME_SUFFIX "_shm"
 
 #include <string>
+#include <mutex>  // for lock
 
 #include "../../../util.h"
 #include "../named_resource_base.h"
+#include "mutex.h"
 
 #include <unistd.h>
 #include <sys/types.h>
@@ -59,26 +61,33 @@ class shared_memory : public impl::named_resource_base {
     bool initialize = true;
     int mode = S_IRWXU | S_IRWXG; // user/group +rw permissions
     errno = 0;
-    fid_ = shm_open(name_ptr(), O_RDWR | O_CREAT | O_EXCL, mode);
-    if (fid_ < 0 && errno == EEXIST) {
-      // create for open
-      initialize = false;
-      fid_ = shm_open(name_ptr(), readonly ? O_RDONLY : O_RDWR, mode);
-    }
 
-    if (fid_ < 0) {
-      cpen333::perror(std::string("Cannot create shared memory with id ") + this->name());
-      return;
-    }
+    {
+      // protect initialization
+      cpen333::process::mutex mutex(name + std::string(SHARED_MEMORY_NAME_SUFFIX));
+      std::lock_guard<cpen333::process::mutex> lock(mutex);
 
-    // truncate and initialize
-    if (initialize) {
-      int resize = ftruncate(fid_, size_);
-      if (resize < 0) {
-        cpen333::perror(std::string("Cannot allocate shared memory with id ") + this->name());
+      fid_ = shm_open(name_ptr(), O_RDWR | O_CREAT | O_EXCL, mode);
+      if (fid_ < 0 && errno == EEXIST) {
+        // create for open
+        initialize = false;
+        fid_ = shm_open(name_ptr(), readonly ? O_RDONLY : O_RDWR, mode);
+      }
+
+      if (fid_ < 0) {
+        cpen333::perror(std::string("Cannot create shared memory with id ") + this->name());
         return;
       }
-    }
+
+      // truncate and initialize
+      if (initialize) {
+        int resize = ftruncate(fid_, size_);
+        if (resize < 0) {
+          cpen333::perror(std::string("Cannot allocate shared memory with id ") + this->name());
+          return;
+        }
+      }
+    } // end of critical section
 
     int flags = readonly ? PROT_READ : PROT_WRITE;
     data_ = mmap(nullptr, size_, flags, MAP_SHARED, fid_, 0);
@@ -88,7 +97,6 @@ class shared_memory : public impl::named_resource_base {
       return;
     }
   }
-
 
   /**
    * @brief Destructor, unmaps this instance of the shared memory block (but does not unmap memory from other users)

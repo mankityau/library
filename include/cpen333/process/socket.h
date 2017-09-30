@@ -18,7 +18,7 @@
  * @brief A client socket implementation for inter-process communication
  *
  * Used to communicate between processes over IP.  This is an alias to either
- * cpen333::process::posix::socket_client or cpen333::process::windows::socket_client
+ * cpen333::process::posix::socket or cpen333::process::windows::socket
  * depending on your platform.
  */
 

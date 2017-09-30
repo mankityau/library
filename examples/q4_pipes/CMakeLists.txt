@@ -33,3 +33,11 @@ add_dependencies(${PROJECT}_multiple_parent_threads ${PROJECT}_multiple_child)  
 
 install(TARGETS ${PROJECT}_multiple_parent_poll ${PROJECT}_multiple_parent_threads ${PROJECT}_multiple_child
         DESTINATION bin/${MY_OUTPUT_DIR}/multiple)
+
+##===============  Pipe Server ============================
+#
+#add_process_executable(${PROJECT}_server_server server server src/server/server.cpp)
+#add_process_executable(${PROJECT}_server_client client server src/server/client.cpp)
+#
+#install(TARGETS ${PROJECT}_server_server ${PROJECT}_server_client
+#        DESTINATION bin/${MY_OUTPUT_DIR}/server)

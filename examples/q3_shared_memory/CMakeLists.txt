@@ -15,7 +15,7 @@ include(../../config/Macros.cmake)          # add_process_executable and add_thr
 # directories to search for header files
 include_directories(../../include)
 
-#==============  Datapool Process =====================================
+#==============  Shared Memory Process =====================================
 
 add_process_executable(${PROJECT}_process_child child process src/process/child.cpp)
 add_process_executable(${PROJECT}_process_parent parent process src/process/parent.cpp)
@@ -23,8 +23,8 @@ add_dependencies(${PROJECT}_process_parent ${PROJECT}_process_child)    # parent
 install(TARGETS ${PROJECT}_process_parent ${PROJECT}_process_child
         DESTINATION bin/${MY_OUTPUT_DIR}/process)
 
-#==============  Datapool Thread  ======================================
+#==============  Shared Memory Thread  ======================================
 
-add_thread_executable(${PROJECT}_thread_datapool datapool thread src/thread/thread.cpp)
-install(TARGETS ${PROJECT}_thread_datapool
+add_thread_executable(${PROJECT}_thread_shmem shmem thread src/thread/thread.cpp)
+install(TARGETS ${PROJECT}_thread_shmem
         DESTINATION bin/${MY_OUTPUT_DIR}/thread)

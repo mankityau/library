@@ -19,7 +19,9 @@
 
 #include <string>
 #include <chrono>
-
+// prevent windows max macro
+#undef NOMINMAX
+#define NOMINMAX 1
 #include <windows.h>
 
 #include "../../../util.h"

@@ -47,13 +47,31 @@ class named_resource_base : public virtual named_resource {
  private:
   char name_[MAX_RESOURCE_NAME];
 
+ protected:
+  /**
+   * @brief set's the resource's name
+   * @param name
+   */
+  void set_name(const std::string &name) {
+    make_resource_name(name, name_);
+  }
+
+  void set_name_raw(const char *name) {
+    for (int i=0; i<MAX_RESOURCE_NAME; ++i) {
+      name_[i] = name[i];
+      if (name_[i] == 0) {
+        break;
+      }
+    }
+  }
+
  public:
   /**
    * @brief Constructor for base named resource
    * @param name unique identifier
    */
   named_resource_base(const std::string &name) {
-    make_resource_name(name, name_);
+    set_name(name);
   }
 
   // do not allow copying or moving

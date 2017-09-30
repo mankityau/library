@@ -14,6 +14,9 @@
 
 #include <string>
 #include <cstdint>
+// prevent windows max macro
+#undef NOMINMAX
+#define NOMINMAX 1
 #include <windows.h>
 
 #include "../../../util.h"
@@ -61,7 +64,7 @@ class shared_memory : public impl::named_resource_base {
       cpen333::perror(std::string("Cannot create shared memory ") + this->name());
       return;
     }
-    // see if we need to initialize??
+    // see if we need to initialize
     // bool initialize = GetLastError() != ERROR_ALREADY_EXISTS;
 
     // map (if not already mapped
