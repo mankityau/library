@@ -16,7 +16,7 @@
 #define CPEN333_OS_H
 
 // Platform-dependent defines
-#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) || defined(_WIN64) || defined(WIN64) || defined(_WIN64)
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) || defined(_WIN64) || defined(WIN64) || defined(_WIN64) || defined(__CYGWIN__)
 /**
  * Defined on Windows platforms
  */

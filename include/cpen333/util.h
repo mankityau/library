@@ -11,6 +11,9 @@
 
 #include "os.h"
 #ifdef WINDOWS
+// prevent windows max macro
+#undef NOMINMAX
+#define NOMINMAX 1
 #include <windows.h>
 #include <conio.h>
 #else
@@ -128,7 +131,7 @@ inline void error(const std::string& msg) {
  * Mirrors the Windows system("pause") command in a cross-platform way, waiting for
  * keyboard input.
  */
-void pause() {
+inline void pause() {
   std::cin.clear();  // flush input
   std::cout << "Press ENTER to continue . . .";
   std::string line;
