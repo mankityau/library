@@ -1,15 +1,17 @@
-#include <cpen333/process/impl/windows/pipe.h>
+#include <cpen333/process/pipe.h>
 #include <iostream>
 
 int main() {
 
-  cpen333::process::windows::pipe pipe("q4_pipes_server");
+  cpen333::process::pipe pipe("q4_pipes_server");
   pipe.open();
   pipe.write("Hello server!");
-  pipe.close();
+  pipe.write("What's up?");
+
+  cpen333::pause();
 
   std::cout << "Goodbye" << std::endl;
-  cpen333::pause();
+  pipe.close();
 
   return 0;
 }

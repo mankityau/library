@@ -10,6 +10,8 @@
 #define NOMINMAX 1
 #include <windows.h>
 #include <mutex>
+#include <thread>
+#include <chrono>
 
 #include "mutex.h"
 #include "../named_resource_base.h"
@@ -99,12 +101,24 @@ class pipe : private impl::named_resource_base {
     // try to create a pipe
     std::string pipename = WINDOWS_PIPE_PREFIX;
     pipename.append(name());
+
+    auto started = std::chrono::system_clock::now();
     while(true) {
       // Wait for pending pipe connection
-      //if (WaitNamedPipe(pipename.c_str(), NMPWAIT_USE_DEFAULT_WAIT) == 0) {
-      if (WaitNamedPipe(pipename.c_str(), 10000) == 0) {
-        cpen333::perror("Pipe failed to wait for server");
-        return false;
+      if (WaitNamedPipe(pipename.c_str(), NMPWAIT_USE_DEFAULT_WAIT) == 0) {
+        DWORD err = GetLastError();
+        if (err == ERROR_SEM_TIMEOUT) {
+          cpen333::perror("Pipe failed to wait for server");
+          return false;
+        }
+        auto now = std::chrono::system_clock::now();
+        auto tdiff = std::chrono::duration_cast<std::chrono::milliseconds>(now-started);
+        if (tdiff.count() > 10000) {
+          cpen333::perror("Pipe failed to wait for server");
+          return false;
+        }
+        std::this_thread::yield();
+        continue;
       }
 
       SetLastError(0);
@@ -181,7 +195,7 @@ class pipe : private impl::named_resource_base {
    * @param len size of buffer
    * @return number of bytes read, or -1 if error
    */
-  int read(void* buff, size_t len) {
+  ssize_t read(void* buff, size_t len) {
 
     if (!open_) {
       return -1;
@@ -195,12 +209,18 @@ class pipe : private impl::named_resource_base {
         &nread,   // number of bytes read
         NULL);    // not overlapped
 
-    if ( !success && GetLastError() != ERROR_MORE_DATA ) {
-      cpen333::perror("Pipe read(...) failed");
-      return -1;
+    if ( !success ) {
+      DWORD err = GetLastError();
+      if (err == ERROR_BROKEN_PIPE) {
+        close();
+        return -1;
+      } else if ( err != ERROR_MORE_DATA ) {
+        cpen333::perror("Pipe read(...) failed");
+        return -1;
+      }
     }
 
-    return (int)nread;
+    return (ssize_t)nread;
   }
 
   /**
@@ -215,7 +235,7 @@ class pipe : private impl::named_resource_base {
 
     // cleanup
     int success = CloseHandle(pipe_);
-    if (success != 0) {
+    if (success == 0) {
       cpen333::perror("Failed to close pipe");
     }
     pipe_ = INVALID_HANDLE_VALUE;

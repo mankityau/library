@@ -14,7 +14,7 @@
 #endif
 
 /**
- * @class cpen333::process::socket_client
+ * @class cpen333::process::socket
  * @brief A client socket implementation for inter-process communication
  *
  * Used to communicate between processes over IP.  This is an alias to either

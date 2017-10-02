@@ -18,7 +18,7 @@
 #include <thread>
 
 #include "../../../util.h"
-#include "../../semaphore.h"
+#include "semaphore.h"
 #include "../../named_resource.h"
 
 namespace cpen333 {

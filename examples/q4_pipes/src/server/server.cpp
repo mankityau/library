@@ -1,4 +1,4 @@
-#include <cpen333/process/impl/windows/pipe.h>
+#include <cpen333/process/pipe.h>
 #include <iostream>
 #include <thread>
 
@@ -27,6 +27,7 @@ void service(cpen333::process::pipe&& pipe, int i) {
 
 int main() {
 
+  cpen333::process::pipe_server::unlink("q4_pipes_server");  // clean-up
   cpen333::process::pipe_server server("q4_pipes_server");
   server.start();
 
