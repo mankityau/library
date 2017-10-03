@@ -41,6 +41,12 @@ class named_resource {
   virtual ~named_resource() {};
 
   /**
+   * @brief The underlying resource's name
+   * @return name of resource
+   */
+  virtual std::string name () = 0;
+
+  /**
  * @brief Detaches the name from the named resource
  *
  * On POSIX systems, named resources will persist beyond the lifetime of any process that uses them as

@@ -14,7 +14,7 @@ void server(int& port) {
 
   std::string msg = "Hello, world!";
   std::cout << "server sending: " << msg << std::endl;
-  client.send(msg);
+  client.write(msg);
 
   client.close();
   server.close();
@@ -33,7 +33,7 @@ void client(const std::string& server, int& port) {
   char buff[buffsize];
   int len = 0;
   do {
-    len = client.receive(buff, buffsize);
+    len = client.read(buff, buffsize);
     std::string msg(buff, 0, len);
     if (len > 0) {
       std::cout << "client received: " << msg << std::endl;

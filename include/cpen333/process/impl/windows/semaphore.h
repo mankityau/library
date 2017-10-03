@@ -7,16 +7,7 @@
 #ifndef CPEN333_PROCESS_WINDOWS_SEMAPHORE_H
 #define CPEN333_PROCESS_WINDOWS_SEMAPHORE_H
 
-/**
- * @brief Maximum possible size of a semaphore
- */
-#define MAX_SEMAPHORE_SIZE LONG_MAX
-
-/**
- * @brief Suffix appended to semaphore names for uniqueness
- */
-#define SEMAPHORE_NAME_SUFFIX "_sem"
-
+#include <climits>
 #include <string>
 #include <chrono>
 // prevent windows max macro
@@ -26,6 +17,16 @@
 
 #include "../../../util.h"
 #include "../named_resource_base.h"
+
+/**
+ * @brief Maximum possible size of a semaphore
+ */
+#define MAX_SEMAPHORE_SIZE LONG_MAX
+
+/**
+ * @brief Suffix appended to semaphore names for uniqueness
+ */
+#define SEMAPHORE_NAME_SUFFIX "_sem"
 
 namespace cpen333 {
 namespace process {
@@ -61,7 +62,7 @@ class semaphore : public impl::named_resource_base {
       impl::named_resource_base(name+std::string(SEMAPHORE_NAME_SUFFIX)), handle_(NULL) {
 
     // create named semaphore
-    handle_ = CreateSemaphore(NULL, (LONG)value, MAX_SEMAPHORE_SIZE, name_ptr());
+    handle_ = CreateSemaphore(NULL, (LONG)value, (LONG)MAX_SEMAPHORE_SIZE, name_ptr());
     if (handle_ == INVALID_HANDLE_VALUE) {
        cpen333::perror(std::string("Cannot create semaphore ")+this->name());
     }

@@ -222,7 +222,7 @@ class pipe : private impl::named_resource_base {
    * @brief Reads bytes of data from a pipe
    * @param buff pointer to data buffer to populate
    * @param len size of buffer
-   * @return number of bytes read, or -1 if error
+   * @return number of bytes read, 0 if pipe is closed, or -1 if error
    */
   ssize_t read(void* buff, size_t len) {
 

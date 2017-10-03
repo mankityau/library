@@ -193,7 +193,7 @@ class pipe : private impl::named_resource_base {
    * @brief Reads bytes of data from a pipe
    * @param buff pointer to data buffer to populate
    * @param len size of buffer
-   * @return number of bytes read, or -1 if error
+   * @return number of bytes read, 0 if pipe is closed, or -1 if error
    */
   ssize_t read(void* buff, size_t len) {
 
@@ -212,8 +212,7 @@ class pipe : private impl::named_resource_base {
     if ( !success ) {
       DWORD err = GetLastError();
       if (err == ERROR_BROKEN_PIPE) {
-        close();
-        return -1;
+        return 0;
       } else if ( err != ERROR_MORE_DATA ) {
         cpen333::perror("Pipe read(...) failed");
         return -1;

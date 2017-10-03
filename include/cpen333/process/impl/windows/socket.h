@@ -8,7 +8,7 @@
 #define CPEN333_PROCESS_WINDOWS_SOCKET_H
 
 // allow inet_ntop in mingw
-#undef __WIN32_WINNT
+#undef _WIN32_WINNT
 #define _WIN32_WINNT 0x600
 #include <string>
 #include <cstdint>
@@ -294,8 +294,8 @@ class socket {
    * @param str string to send
    * @return true if send successful, false otherwise
    */
-  bool send(const std::string& str) {
-    return send(str.c_str(), str.length()+1);
+  bool write(const std::string& str) {
+    return write(str.c_str(), str.length()+1);
   }
 
   /**
@@ -305,7 +305,7 @@ class socket {
    * @param len number of bytes to send
    * @return true if send successful, false otherwise
    */
-  bool send(const void* buff, size_t len) {
+  bool write(const void* buff, size_t len) {
 
     if (!connected_) {
       return false;
@@ -324,16 +324,16 @@ class socket {
    * @brief Receives bytes of data from a socket
    * @param buff pointer to data buffer to populate
    * @param len size of buffer
-   * @return number of bytes read, or -1 if error
+   * @return number of bytes read, 0 if closed, or -1 if error
    */
-  int receive(void* buff, size_t len) {
+  ssize_t read(void* buff, size_t len) {
 
     if (!open_) {
       return -1;
     }
 
     int result = recv(socket_, (char*)buff, len, 0);
-    if (result < 0) {
+    if (result == -1) {
       cpen333::perror(std::string("recv(...) failed with error: ")
                          + std::to_string(WSAGetLastError()));
     }
@@ -352,14 +352,6 @@ class socket {
     if (connected_) {
       disconnect();
     }
-
-    // Receive and discard until the peer closes the connection
-    static const int recvbuflen = 1024;
-    char recvbuf[recvbuflen];
-    int result = 0;
-    do {
-      result = recv(socket_, recvbuf, recvbuflen, 0);
-    } while( result > 0 );
 
     // cleanup
     closesocket(socket_);

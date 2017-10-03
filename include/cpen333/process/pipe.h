@@ -21,7 +21,6 @@
  * depending on your platform.
  */
 
-
 /**
  * @class cpen333::process::pipe_server
  * @brief A pipe server implementation for inter-process communication
@@ -30,5 +29,7 @@
  * cpen333::process::posix::pipe_server or cpen333::process::windows::pipe_server
  * depending on your platform.
  */
+
+#include "impl/basic_pipe.h"
 
 #endif //CPEN333_PROCESS_PIPE_H

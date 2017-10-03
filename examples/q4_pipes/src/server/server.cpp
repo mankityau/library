@@ -13,7 +13,7 @@ void service(cpen333::process::pipe&& pipe, int i) {
   int nread = 0;
 
   std::cout << "pipe " << i << " started" << std::endl;
-  while ( (nread = pipe.read(buff, buffsize)) >= 0 ) {
+  while ( (nread = pipe.read(buff, buffsize)) > 0 ) {
     buff[nread] = 0; // terminating zero
     if (nread > 0) {
       std::cout << "pipe " << i << ": " << buff << std::endl;

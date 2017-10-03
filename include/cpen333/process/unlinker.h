@@ -5,22 +5,55 @@
 #ifndef CPEN333_PROCESS_UNLINKER_H
 #define CPEN333_PROCESS_UNLINKER_H
 
-#include "../os.h" // identify OS
-
-#ifdef WINDOWS
-#include "impl/windows/unlinker.h"
-#else
-#include "impl/posix/unlinker.h"
-#endif
-
 /**
- * @class cpen333::process::unlinker
  * @brief A named-resource wrapper that provides a convenient RAII-style unlinking of the resource name
  *
- * Used to ensure that a resource's name is unlinked when the unlinker object drops out of scope.  On POSIX systems,
- * this can help guarantee that the lifetime of a resource will not persist beyond the lifetime of the controlling process.
- * This is an alias to either cpen333::process::posix::unlinker or cpen333::process::windows::unlinker
- * depending on your platform.
+ * Used to ensure that a resource's name is unlinked when the unlinker object drops out of scope.  This should
+ * prevent resource leaking in case of exceptions.
+ *
+ * @tparam T named-resource type, must extend cpen333::process::named_resource and support `bool unlink()` and
+ *         `static bool unlink(std::string&)`
  */
+template<typename T>
+class unlinker {
+ public:
+  /**
+   * @brief named_resource type
+   */
+  using type = T;
+
+  /**
+   * @brief Constructs the object, wrapping the provided resource
+   *
+   * @param resource resource to unlink when unlinker drops out of scope
+   */
+  unlinker(T &resource) : resource_{resource} {}
+
+ private:
+  unlinker(const unlinker &) DELETE_METHOD;
+  unlinker(unlinker &&) DELETE_METHOD;
+  unlinker &operator=(const unlinker &) DELETE_METHOD;
+  unlinker &operator=(unlinker &&) DELETE_METHOD;
+
+ public:
+  /**
+   * @brief Destructor, calls the `unlink()` function of the wrapped resource
+   */
+  ~unlinker() {
+    resource_.unlink();
+  }
+
+  /**
+   * @brief Statically calls the `unlink(name)` function for the underlying type
+   * @param name name of resource to unlink
+   * @return always `false`, since unlinking is not supported on Windows
+   */
+  static bool unlink(const std::string &name) {
+    return type::unlink(name);
+  }
+
+ private:
+  T &resource_;
+};
 
 #endif //CPEN333_PROCESS_UNLINKER_H

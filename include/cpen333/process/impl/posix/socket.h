@@ -196,16 +196,16 @@ class socket {
   }
 
   /**
-   * @copydoc cpen333::process::windows::socket::send(const std::string&)
+   * @copydoc cpen333::process::windows::socket::write(const std::string&)
    */
-  bool send(const std::string& str) {
-    return send(str.c_str(), str.length()+1);
+  bool write(const std::string& str) {
+    return write(str.c_str(), str.length()+1);
   }
 
   /**
-   * @copydoc cpen333::process::windows::socket::send(const char*, size_t)
+   * @copydoc cpen333::process::windows::socket::write(const char*, size_t)
    */
-  bool send(const char* buff, size_t len) {
+  bool write(const char* buff, size_t len) {
 
     if (!connected_) {
       return false;
@@ -214,7 +214,7 @@ class socket {
     // write all contents
     ssize_t nwrite = 0;
     do {
-      ssize_t lwrite = write(socket_, &buff[nwrite], len-nwrite);
+      ssize_t lwrite = ::write(socket_, &buff[nwrite], len-nwrite);
       if (lwrite == -1) {
         cpen333::perror(std::string("write(...) to socket failed"));
         return false;
@@ -226,15 +226,15 @@ class socket {
   }
 
   /**
-   * @copydoc cpen333::process::windows::socket::receive(char*,int)
+   * @copydoc cpen333::process::windows::socket::read(char*,int)
    */
-  int receive(char* buff, size_t len) {
+  ssize_t read(char* buff, size_t len) {
 
     if (!open_) {
       return -1;
     }
 
-    ssize_t nread = read(socket_, buff, len);
+    ssize_t nread = ::read(socket_, buff, len);
     if (nread == -1) {
       cpen333::perror("write(...) to socket failed");
     }
@@ -252,17 +252,6 @@ class socket {
     if (connected_) {
       disconnect();
     }
-
-    // Receive and discard until the peer closes the connection
-    static const int recvbuflen = 1024;
-    char recvbuf[recvbuflen];
-    ssize_t nread = 0;
-    do {
-      nread = read(socket_, recvbuf, recvbuflen);
-      if (nread < 0) {
-        cpen333::perror("socket read(...) failed");
-      }
-    } while( nread > 0 );
 
     // cleanup
     ::close(socket_);

@@ -10,7 +10,7 @@ set(MY_OUTPUT_DIR examples)
 #add_subdirectory("q3_shared_memory")
 add_subdirectory("q4_pipes")
 #add_subdirectory("q5_message_queues")
-#add_subdirectory("q6_sockets")
+add_subdirectory("q6_sockets")
 #
 ## Synchronization
 #add_subdirectory("q7_mutex")

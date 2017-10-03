@@ -20,11 +20,11 @@ void service(cpen333::process::socket&& socket) {
   std::string name = "";
 
   int read;
-  while ((read  = socket.receive(buff, buffsize)) > 0) {
+  while ((read  = socket.read(buff, buffsize)) > 0) {
 
     // command
     if (buff[0] == chat::CMD_HELLO) {
-      read = socket.receive(buff, buffsize);
+      read = socket.read(buff, buffsize);
       if (read > 0) {
         // get name
         buff[read] = 0;
@@ -35,7 +35,7 @@ void service(cpen333::process::socket&& socket) {
         mutex.unlock();
       }
     } else if (buff[0] == chat::CMD_MSG) {
-      read = socket.receive(buff, buffsize);
+      read = socket.read(buff, buffsize);
       if (read > 0) {
         // get message
         buff[read] = 0;

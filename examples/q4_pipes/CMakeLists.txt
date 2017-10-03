@@ -14,25 +14,25 @@ include(../../config/Macros.cmake)          # add_process_executable and add_thr
 # directories to search for header files
 include_directories(../../include)
 
-##==============  Single Pipe ===============================
-#
-#add_process_executable(${PROJECT}_single_child child single src/single/child.cpp)
-#add_process_executable(${PROJECT}_single_parent parent single src/single/parent.cpp)
-#add_dependencies(${PROJECT}_single_parent ${PROJECT}_single_child)    # parent depends on child
-#install(TARGETS ${PROJECT}_single_parent ${PROJECT}_single_child
-#        DESTINATION bin/${MY_OUTPUT_DIR}/single)
-#
-##===============  Multiple Pipes ============================
-#
-#add_process_executable(${PROJECT}_multiple_child child multiple src/multiple/child.cpp)
-#add_process_executable(${PROJECT}_multiple_parent_poll parent_poll multiple src/multiple/parent_poll.cpp)
-#add_process_executable(${PROJECT}_multiple_parent_threads parent_threads multiple src/multiple/parent_threads.cpp)
-#
-#add_dependencies(${PROJECT}_multiple_parent_poll ${PROJECT}_multiple_child)    # parent depends on child
-#add_dependencies(${PROJECT}_multiple_parent_threads ${PROJECT}_multiple_child)    # parent depends on child
-#
-#install(TARGETS ${PROJECT}_multiple_parent_poll ${PROJECT}_multiple_parent_threads ${PROJECT}_multiple_child
-#        DESTINATION bin/${MY_OUTPUT_DIR}/multiple)
+#==============  Single Pipe ===============================
+
+add_process_executable(${PROJECT}_single_child child single src/single/child.cpp)
+add_process_executable(${PROJECT}_single_parent parent single src/single/parent.cpp)
+add_dependencies(${PROJECT}_single_parent ${PROJECT}_single_child)    # parent depends on child
+install(TARGETS ${PROJECT}_single_parent ${PROJECT}_single_child
+        DESTINATION bin/${MY_OUTPUT_DIR}/single)
+
+#===============  Multiple Pipes ============================
+
+add_process_executable(${PROJECT}_multiple_child child multiple src/multiple/child.cpp)
+add_process_executable(${PROJECT}_multiple_parent_poll parent_poll multiple src/multiple/parent_poll.cpp)
+add_process_executable(${PROJECT}_multiple_parent_threads parent_threads multiple src/multiple/parent_threads.cpp)
+
+add_dependencies(${PROJECT}_multiple_parent_poll ${PROJECT}_multiple_child)    # parent depends on child
+add_dependencies(${PROJECT}_multiple_parent_threads ${PROJECT}_multiple_child)    # parent depends on child
+
+install(TARGETS ${PROJECT}_multiple_parent_poll ${PROJECT}_multiple_parent_threads ${PROJECT}_multiple_child
+        DESTINATION bin/${MY_OUTPUT_DIR}/multiple)
 
 #===============  Pipe Server ============================
 

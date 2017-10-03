@@ -4,8 +4,7 @@
 int main() {
 
   std::cout << "Child process opening pipe....." << std::endl;
-  cpen333::process::pipe pipe(PIPE_NAME,
-    cpen333::process::pipe::READ, 1024);   // create or connect to pipe
+  cpen333::process::basic_pipe pipe(PIPE_NAME, 1024);   // create or connect to pipe
 
   // read an integer from the pipe
   int x;
@@ -25,7 +24,7 @@ int main() {
   // read a string until we get a terminating zero
   std::string name;
   char c;
-  while ((c = pipe.read()) != 0) {
+  while (pipe.read(&c) && c != 0) {
     name.push_back(c);
   }
   std::cout << "Child Process read string = \"" << name << "\" from pipe....." << std::endl;

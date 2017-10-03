@@ -26,8 +26,8 @@ int main() {
     // say hello to server
     std::cout << "Enter your name: ";
     std::getline(std::cin, msg);
-    client.send(&chat::CMD_HELLO, 1);
-    client.send(msg);
+    client.write(&chat::CMD_HELLO, 1);
+    client.write(msg);
 
     std::cout << std::endl << "Enter \"quit\" to exit" << std::endl << std::endl;
 
@@ -36,11 +36,11 @@ int main() {
       std::cout << "Enter message: ";
       std::getline(std::cin, msg);
       if (msg == "quit") {
-        client.send(&chat::CMD_GOODBYE, 1);
+        client.write(&chat::CMD_GOODBYE, 1);
         break;
       }
-      client.send(&chat::CMD_MSG, 1);
-      client.send(msg);
+      client.write(&chat::CMD_MSG, 1);
+      client.write(msg);
     } while (true);
 
     client.close();
