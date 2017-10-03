@@ -22,6 +22,10 @@
 #include "../../../util.h"
 #include "../named_resource_base.h"
 
+#ifdef APPLE
+#include "../osx/sem_timedwait.h" // missing sem_timedwait functionality
+#endif
+
 namespace cpen333 {
 namespace process {
 namespace posix {

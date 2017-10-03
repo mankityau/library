@@ -10,9 +10,6 @@
 #ifdef WINDOWS
 #include "impl/windows/semaphore.h"
 #else
-#ifdef APPLE
-#include "impl/osx/sem_timedwait.h" // missing sem_timedwait functionality
-#endif
 #include "impl/posix/semaphore.h"
 #endif
 
