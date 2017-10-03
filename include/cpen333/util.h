@@ -42,10 +42,20 @@
 #define DELETE_METHOD
 #endif
 
+/**
+ * @brief Macro for avoiding unused variable warnings
+ */
+#define UNUSED(X) (void)(X)
+
 namespace cpen333 {
 
 #if !defined(WINDOWS)
 namespace detail {
+
+/**
+ * @brief Keyboard hit function for POSIX
+ * @return 0 if no keyboard input, >0 if data on stdin exists
+ */
 inline int _kbhit() {
   pollfd fds;
   fds.fd = STDIN_FILENO;

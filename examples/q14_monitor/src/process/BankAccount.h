@@ -1,9 +1,9 @@
 #ifndef BANKACCOUNT_H
 #define BANKACCOUNT_H
 
-#include "cpen333/process/shared_memory.h"
-#include "cpen333/process/mutex.h"
-#include "cpen333/process/condition_variable.h"
+#include <cpen333/process/shared_memory.h>
+#include <cpen333/process/mutex.h>
+#include <cpen333/process/condition_variable.h>
 
 // Random number for checking if our bank account has been initialized
 #define BANK_ACCOUNT_INITIALIZED 0x89812312

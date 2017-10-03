@@ -6,11 +6,7 @@
 #define CPEN333_PROCESS_NAMED_RESOURCE_H
 
 #include <string>
-
-/**
- * @brief Macro for avoiding unused variable warnings
- */
-#define UNUSED(X) (void)(X)
+#include "../util.h"
 
 namespace cpen333 {
 namespace process {
@@ -39,12 +35,6 @@ class named_resource {
    * @brief Virtual destructor
    */
   virtual ~named_resource() {};
-
-  /**
-   * @brief The underlying resource's name
-   * @return name of resource
-   */
-  virtual std::string name () = 0;
 
   /**
  * @brief Detaches the name from the named resource

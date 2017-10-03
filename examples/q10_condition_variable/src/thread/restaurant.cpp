@@ -4,7 +4,7 @@
 #include <mutex>
 #include <condition_variable>
 
-#include "cpen333/util.h"
+#include <cpen333/util.h>
 
 //
 // Condition variables allow you to wait for a certain condition, as defined by predicate, to hold true.  It is more

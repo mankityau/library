@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdlib>   // atoi
 #include <thread>
-#include "cpen333/process/semaphore.h"
+#include <cpen333/process/semaphore.h>
 
 int main(int argc, char* argv[]) {
 

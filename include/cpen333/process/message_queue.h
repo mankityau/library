@@ -289,4 +289,7 @@ class message_queue : public virtual named_resource {
 } // process
 } // namespace
 
+// undefine local macros
+#undef MESSAGE_QUEUE_SUFFIX
+
 #endif //CPEN333_PROCESS_MESSAGE_QUEUE_H

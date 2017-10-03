@@ -1,8 +1,8 @@
 #include <iostream>
 #include <thread>
 #include "BarberShop.h"
-#include "cpen333/process/condition.h"
-#include "cpen333/process/unlinker.h"
+#include <cpen333/process/condition.h>
+#include <cpen333/process/unlinker.h>
 
 int main() {
 

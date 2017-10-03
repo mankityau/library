@@ -4,8 +4,8 @@
 #include <string>
 #include <vector>
 
-#include "cpen333/console.h"
-#include "cpen333/util.h"
+#include <cpen333/console.h>
+#include <cpen333/util.h>
 
 //  To help creating console-based GUIs, we provide a simple "console" class in
 //      cpen333/console.h

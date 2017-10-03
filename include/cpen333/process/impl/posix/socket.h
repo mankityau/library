@@ -105,12 +105,25 @@ class socket {
       server_(server), port_(port),
       socket_(INVALID_SOCKET), open_(false), connected_(false) {}
 
+ private:
   socket(const socket &) DELETE_METHOD;
   socket &operator=(const socket &) DELETE_METHOD;
 
+ public:
+
+  /**
+   * @brief Move-constructor
+   * @param other socket to move to *this
+   */
   socket(socket&& other) {
     *this = std::move(other);
   }
+
+  /**
+   * @brief Move-assignment
+   * @param other socket to move
+   * @return reference to myself
+   */
   socket &operator=(socket&& other) {
     __initialize(other.server_, other.port_, other.socket_, other.open_, other.connected_);
     other.server_ = "";
@@ -203,41 +216,44 @@ class socket {
   }
 
   /**
-   * @copydoc cpen333::process::windows::socket::write(const char*, size_t)
+   * @copydoc cpen333::process::windows::socket::write(const void*, size_t)
    */
-  bool write(const char* buff, size_t len) {
+  bool write(const void* buff, size_t size) {
 
     if (!connected_) {
       return false;
     }
 
     // write all contents
-    ssize_t nwrite = 0;
-    do {
-      ssize_t lwrite = ::write(socket_, &buff[nwrite], len-nwrite);
+    size_t nwrite = 0;
+    const char* cbuff = (const char*)buff;
+
+    while (nwrite < size) {
+      ssize_t lwrite = ::write(socket_, &cbuff[nwrite], size-nwrite);
       if (lwrite == -1) {
         cpen333::perror(std::string("write(...) to socket failed"));
         return false;
       }
       nwrite += lwrite;
-    } while ((size_t)nwrite != len);
+    }
 
     return true;
   }
 
   /**
-   * @copydoc cpen333::process::windows::socket::read(char*,int)
+   * @copydoc cpen333::process::windows::socket::read(void*,size_t)
    */
-  ssize_t read(char* buff, size_t len) {
+  ssize_t read(void* buff, size_t size) {
 
     if (!open_) {
       return -1;
     }
 
-    ssize_t nread = ::read(socket_, buff, len);
+    ssize_t nread = ::read(socket_, buff, size);
     if (nread == -1) {
       cpen333::perror("write(...) to socket failed");
     }
+
     return nread;
   }
 
@@ -288,12 +304,13 @@ class socket_server {
   socket_server(int port) : port_(port), socket_(INVALID_SOCKET),
                             open_(false) {}
 
-
+ private:
   socket_server(const socket_server &) DELETE_METHOD;
   socket_server(socket_server &&) DELETE_METHOD;
   socket_server &operator=(const socket_server &) DELETE_METHOD;
   socket_server &operator=(socket_server &&) DELETE_METHOD;
 
+ public:
   /**
    * @copydoc cpen333::process::windows::socket_server::~socket_server()
    */
@@ -472,5 +489,9 @@ typedef posix::socket_server socket_server;
 
 } // process
 } // cpen333
+
+// undef local macros
+#undef INVALID_SOCKET
+#undef SOCKET_ERROR
 
 #endif

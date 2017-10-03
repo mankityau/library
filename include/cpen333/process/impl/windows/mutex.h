@@ -16,6 +16,9 @@
 #include <chrono>
 // prevent windows max macro
 #undef NOMINMAX
+/**
+ * @brief Prevent windows from defining min(), max() macros
+ */
 #define NOMINMAX 1
 #include <windows.h>
 
@@ -46,7 +49,7 @@ class mutex : public impl::named_resource_base {
    */
   mutex(const std::string& name) :
     impl::named_resource_base(name + std::string(MUTEX_NAME_SUFFIX)) {
-    handle_  = CreateMutex(NULL, false, name_ptr()) ;
+    handle_  = CreateMutex(NULL, false, id_ptr()) ;
     if (handle_ == INVALID_HANDLE_VALUE) {
       cpen333::perror(std::string("Cannot create mutex ")+this->name());
     }
@@ -171,5 +174,8 @@ typedef windows::mutex timed_mutex;
 
 } // process
 } // cpen333
+
+// undef local macros
+#undef MUTEX_NAME_SUFFIX
 
 #endif //CPEN333_PROCESS_MUTEX_WINDOWS_H

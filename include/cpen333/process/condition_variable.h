@@ -211,4 +211,7 @@ class condition_variable : public condition_base, public virtual named_resource 
 } // process
 } // cpen333
 
+// undefine local macros
+#undef CONDITION_VARIABLE_NAME_SUFFIX
+
 #endif //CPEN333_PROCESS_CONDITION_VARIABLE_H

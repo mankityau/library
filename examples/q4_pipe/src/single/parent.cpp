@@ -2,10 +2,10 @@
 #include <thread>
 
 #include "common.h"  // include common information (pipe name, data type)
-#include "cpen333/util.h"
-#include "cpen333/process/pipe.h"
-#include "cpen333/process/unlinker.h"
-#include "cpen333/process/subprocess.h"
+#include <cpen333/util.h>
+#include <cpen333/process/pipe.h>
+#include <cpen333/process/unlinker.h>
+#include <cpen333/process/subprocess.h>
 
 //
 //  Basic pipes allow for one-way communication between two processes in the form of a stream of data bytes.  They often

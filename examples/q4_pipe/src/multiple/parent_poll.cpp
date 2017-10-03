@@ -3,9 +3,9 @@
 #include <string>
 
 #include "common.h"
-#include "cpen333/process/pipe.h"
-#include "cpen333/process/subprocess.h"
-#include "cpen333/util.h" // to test stdin
+#include <cpen333/process/pipe.h>
+#include <cpen333/process/subprocess.h>
+#include <cpen333/util.h> // to test stdin
 
 //
 //  When we are communicating with multiple child processes using pipes, we have two options:

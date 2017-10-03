@@ -1,8 +1,8 @@
 #include <iostream>
 #include <thread>
 
-#include "cpen333/util.h"
-#include "cpen333/thread/condition.h"
+#include <cpen333/util.h>
+#include <cpen333/thread/condition.h>
 
 //
 // Conditions allow threads to wait until it is notified to let them pass.  Once notified, the condition will continue

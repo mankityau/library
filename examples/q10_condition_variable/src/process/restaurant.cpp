@@ -1,12 +1,12 @@
 #include <iostream>
 #include <thread>
 
-#include "cpen333/util.h"
-#include "cpen333/process/subprocess.h"
-#include "cpen333/process/condition_variable.h"
-#include "cpen333/process/mutex.h"
-#include "cpen333/process/shared_memory.h"
-#include "cpen333/process/unlinker.h"
+#include <cpen333/util.h>
+#include <cpen333/process/subprocess.h>
+#include <cpen333/process/condition_variable.h>
+#include <cpen333/process/mutex.h>
+#include <cpen333/process/shared_memory.h>
+#include <cpen333/process/unlinker.h>
 #include "restaurant.h"
 
 

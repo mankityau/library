@@ -11,6 +11,9 @@
 #include <mutex>
 // prevent windows max macro
 #undef NOMINMAX
+/**
+ * @brief Prevent windows from defining min(), max() macros
+ */
 #define NOMINMAX 1
 #include <windows.h>
 
@@ -298,5 +301,8 @@ typedef windows::subprocess subprocess;
 
 } // process
 } // cpen333
+
+// undef local macros
+#undef SUBPROCESS_TERMINATED
 
 #endif //CPEN333_PROCESS_WINDOWS_SUBPROCESS_H

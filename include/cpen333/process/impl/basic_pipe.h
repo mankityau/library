@@ -290,4 +290,12 @@ class basic_pipe : public virtual named_resource {
 } // process
 } // cpen333
 
+// undef local macros
+#undef BASIC_PIPE_NAME_SUFFIX
+#undef BASIC_PIPE_WRITE_SUFFIX
+#undef BASIC_PIPE_READ_SUFFIX
+#undef BASIC_PIPE_INFO_SUFFIX
+#undef BASIC_PIPE_OPEN_SUFFIX
+#undef BASIC_PIPE_INITIALIZED
+
 #endif //CPEN333_PROCESS_BASIC_PIPE_H

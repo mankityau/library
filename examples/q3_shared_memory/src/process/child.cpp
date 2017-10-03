@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "cpen333/process/shared_memory.h"
+#include <cpen333/process/shared_memory.h>
 
 //
 //	It's important that all processes accessing the same shared memory object use exactly the same memory layout.

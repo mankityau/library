@@ -16,6 +16,9 @@
 #include <cstdint>
 // prevent windows max macro
 #undef NOMINMAX
+/**
+ * @brief Prevent windows from defining min(), max() macros
+ */
 #define NOMINMAX 1
 #include <windows.h>
 
@@ -59,7 +62,7 @@ class shared_memory : public impl::named_resource_base {
                                 PAGE_READWRITE,        // always read-write so we can initialize if we need to
                                 0,
                                 (DWORD)size,
-                                name_ptr() );
+                                id_ptr() );
     if (handle_ == INVALID_HANDLE_VALUE) {
       cpen333::perror(std::string("Cannot create shared memory ") + this->name());
       return;
@@ -168,5 +171,8 @@ typedef windows::shared_memory shared_memory;
 
 } // process
 } // cpen333
+
+// undef local macros
+#undef SHARED_MEMORY_NAME_SUFFIX
 
 #endif //CPEN333_PROCESS_WINDOWS_SHARED_MEMORY_H

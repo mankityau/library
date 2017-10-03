@@ -359,4 +359,11 @@ class condition_base : public virtual named_resource {
 } // process
 } // cpen333
 
+// undef local macros
+#undef CONDITION_BASE_STORAGE_SUFFIX
+#undef CONDITION_BASE_BLOCK_LOCK_SUFFIX
+#undef CONDITION_BASE_BLOCK_QUEUE_SUFFIX
+#undef CONDITION_BASE_UNBLOCK_LOCK_SUFFIX
+#undef CONDITION_BASE_INITIALIZED
+
 #endif //CPEN333_PROCESS_CONDITION_BASE_H

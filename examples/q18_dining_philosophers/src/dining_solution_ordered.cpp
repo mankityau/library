@@ -4,7 +4,7 @@
 #include <thread>
 #include <vector>
 
-#include "cpen333/thread/rendezvous.h"  // rendezvous to all start at the same time
+#include <cpen333/thread/rendezvous.h>  // rendezvous to all start at the same time
 
 typedef cpen333::thread::rendezvous rendezvous;
 volatile bool quit = false;        // marker for telling philosophers to leave table

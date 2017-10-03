@@ -350,4 +350,9 @@ typedef impl::shared_mutex_exclusive shared_timed_mutex_exclusive;
 } // process
 } // cpen333
 
+// undef local macros
+#undef SHARED_MUTEX_EXCLUSIVE_NAME_SUFFIX
+#undef SHARED_MUTEX_EXCLUSIVE_MUTEX_SUFFIX
+#undef SHARED_MUTEX_EXCLUSIVE_INITIALIZED
+
 #endif //CPEN333_PROCESS_SHARED_MUTEX_EXCLUSIVE_H

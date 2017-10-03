@@ -1,5 +1,5 @@
 #include "common.h"
-#include "cpen333/process/pipe.h"
+#include <cpen333/process/pipe.h>
 
 #include <iostream>
 #include <cstdlib>

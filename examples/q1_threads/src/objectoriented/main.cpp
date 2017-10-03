@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
-#include "cpen333/util.h"
-#include "cpen333/thread/thread_object.h"  // custom thread-based objects
+#include <cpen333/util.h>
+#include <cpen333/thread/thread_object.h>  // custom thread-based objects
 
 //
 //  You can create custom classes that are descendents of std::thread.  I have made two such classes for you:

@@ -67,11 +67,11 @@ class shared_memory : public impl::named_resource_base {
       cpen333::process::mutex mutex(name + std::string(SHARED_MEMORY_NAME_SUFFIX));
       std::lock_guard<cpen333::process::mutex> lock(mutex);
 
-      fid_ = shm_open(name_ptr(), O_RDWR | O_CREAT | O_EXCL, mode);
+      fid_ = shm_open(id_ptr(), O_RDWR | O_CREAT | O_EXCL, mode);
       if (fid_ < 0 && errno == EEXIST) {
         // create for open
         initialize = false;
-        fid_ = shm_open(name_ptr(), readonly ? O_RDONLY : O_RDWR, mode);
+        fid_ = shm_open(id_ptr(), readonly ? O_RDONLY : O_RDWR, mode);
       }
 
       if (fid_ < 0) {
@@ -159,7 +159,7 @@ class shared_memory : public impl::named_resource_base {
 
   bool unlink() {
     errno = 0;
-    int status = shm_unlink(name_ptr());
+    int status = shm_unlink(id_ptr());
     if (status != 0) {
       cpen333::perror(std::string("Failed to unlink shared memory with id ") + name());
     }
@@ -170,8 +170,8 @@ class shared_memory : public impl::named_resource_base {
    * @copydoc cpen333::process::named_resource::unlink(const std::string&)
    */
   static bool unlink(const std::string& name) {
-    char nm[MAX_RESOURCE_NAME];
-    impl::named_resource_base::make_resource_name(name+std::string(SHARED_MEMORY_NAME_SUFFIX), nm);
+    char nm[MAX_RESOURCE_ID_SIZE];
+    impl::named_resource_base::make_resource_id(name+std::string(SHARED_MEMORY_NAME_SUFFIX), nm);
     int status = shm_unlink(&nm[0]);
     if (status != 0) {
       cpen333::perror(std::string("Failed to unlink shared memory with id ") + std::string(nm));
@@ -206,5 +206,8 @@ using shared_memory = posix::shared_memory;
 
 } // process
 } // cpen333
+
+// undef local macros
+#undef SHARED_MEMORY_NAME_SUFFIX
 
 #endif //CPEN333_PROCESS_POSIX_SHARED_MEMORY_H

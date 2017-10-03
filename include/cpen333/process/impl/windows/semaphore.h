@@ -12,6 +12,9 @@
 #include <chrono>
 // prevent windows max macro
 #undef NOMINMAX
+/**
+ * @brief Prevent windows from defining min(), max() macros
+ */
 #define NOMINMAX 1
 #include <windows.h>
 
@@ -62,7 +65,7 @@ class semaphore : public impl::named_resource_base {
       impl::named_resource_base(name+std::string(SEMAPHORE_NAME_SUFFIX)), handle_(NULL) {
 
     // create named semaphore
-    handle_ = CreateSemaphore(NULL, (LONG)value, (LONG)MAX_SEMAPHORE_SIZE, name_ptr());
+    handle_ = CreateSemaphore(NULL, (LONG)value, (LONG)MAX_SEMAPHORE_SIZE, id_ptr());
     if (handle_ == INVALID_HANDLE_VALUE) {
        cpen333::perror(std::string("Cannot create semaphore ")+this->name());
     }
@@ -197,5 +200,9 @@ typedef windows::semaphore semaphore;
 
 } // process
 } // cpen333
+
+// undef local macros
+#undef MAX_SEMAPHORE_SIZE
+#undef SEMAPHORE_NAME_SUFFIX
 
 #endif //CPEN333_PROCESS_WINDOWS_SEMAPHORE_H

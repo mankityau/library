@@ -454,4 +454,10 @@ class fifo : public virtual named_resource {
 } // process
 } // cpen333
 
+// undef local macros
+#undef FIFO_SUFFIX
+#undef FIFO_PRODUCER_SUFFIX
+#undef FIFO_CONSUMER_SUFFIX
+#undef FIFO_INITIALIZED
+
 #endif //CPEN333_PROCESS_FIFO_H

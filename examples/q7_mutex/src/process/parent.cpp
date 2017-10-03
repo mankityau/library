@@ -2,11 +2,11 @@
 #include <string>
 
 #include "common.h"
-#include "cpen333/util.h"
-#include "cpen333/process/shared_memory.h"
-#include "cpen333/process/mutex.h"
-#include "cpen333/process/unlinker.h"
-#include "cpen333/process/subprocess.h"
+#include <cpen333/util.h>
+#include <cpen333/process/shared_memory.h>
+#include <cpen333/process/mutex.h>
+#include <cpen333/process/unlinker.h>
+#include <cpen333/process/subprocess.h>
 
 //
 // Mutexes (Mut_ual Ex_clusions) are used to provide exclusive access to a shared resource.  A basic mutex has two

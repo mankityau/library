@@ -2,8 +2,8 @@
 #include <vector>
 #include <thread>
 
-#include "cpen333/util.h"
-#include "cpen333/thread/semaphore.h"
+#include <cpen333/util.h>
+#include <cpen333/thread/semaphore.h>
 
 //
 //  Semaphores are counting objects that represent a certain number of "resources", and allow threads to wait until

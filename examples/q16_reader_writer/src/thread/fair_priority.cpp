@@ -1,8 +1,8 @@
 #include <iostream>
 #include <thread>
 #include <vector>
-#include "cpen333/util.h"
-#include "cpen333/thread/shared_mutex.h"
+#include <cpen333/util.h>
+#include <cpen333/thread/shared_mutex.h>
 
 //
 //  Data that is unchanging does not need to be protected using a mutex.  But what if data only changes "occasionally"?

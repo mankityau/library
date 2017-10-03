@@ -3,8 +3,8 @@
 #include <iostream>
 #include <thread>
 #include <string>
-#include "cpen333/util.h"
-#include "cpen333/thread/timer.h"
+#include <cpen333/util.h>
+#include <cpen333/thread/timer.h>
 
 //
 //  Most operating systems have timers that you can leverage to perform certain tasks.  These timers are generally

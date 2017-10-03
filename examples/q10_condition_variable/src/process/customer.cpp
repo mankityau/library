@@ -1,9 +1,9 @@
 #include <iostream>
 #include <cstdlib>   // atoi
 #include <thread>
-#include "cpen333/process/condition_variable.h"
-#include "cpen333/process/mutex.h"
-#include "cpen333/process/shared_memory.h"
+#include <cpen333/process/condition_variable.h>
+#include <cpen333/process/mutex.h>
+#include <cpen333/process/shared_memory.h>
 #include "restaurant.h"
 
 int main(int argc, char* argv[]) {

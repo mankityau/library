@@ -24,12 +24,12 @@
 /**
  * @brief Size required for resource unique identifier
  */
-#define MAX_RESOURCE_NAME 250
+#define MAX_RESOURCE_ID_SIZE 250
 #else
 /**
  * @brief Size required for resource unique identifier
  */
-#define MAX_RESOURCE_NAME 30
+#define MAX_RESOURCE_ID_SIZE 30
 #endif
 
 namespace cpen333 {
@@ -45,7 +45,7 @@ namespace impl {
  */
 class named_resource_base : public virtual named_resource {
  private:
-  char id_[MAX_RESOURCE_NAME];
+  char id_[MAX_RESOURCE_ID_SIZE];
   std::string name_;
 
  protected:
@@ -82,6 +82,10 @@ class named_resource_base : public virtual named_resource {
     // clean-up
   }
 
+  /**
+   * @brief Underlying name of resource
+   * @return resource name
+   */
   std::string name() {
     return name_;
   }
@@ -141,7 +145,7 @@ class named_resource_base : public virtual named_resource {
     sha1 hash = sha1(name.c_str()).finalize();
     hash.print_base64(&out[1], true); // print starting at offset 1, with terminating zero
     // replace '/', '+', and '=' with _ for safer path name
-    for (int i=1; i<MAX_RESOURCE_NAME; ++i) {
+    for (int i=1; i<MAX_RESOURCE_ID_SIZE; ++i) {
       if (out[i] == '/') {
         out[i] = '_';
       }

@@ -26,19 +26,37 @@
  * @brief Name suffix for pipe from server to client
  */
 #define PIPE_SC_NAME_SUFFIX "_scpipe"
+
 /**
  * @brief Name suffix for pipe client to server
  */
 #define PIPE_CS_NAME_SUFFIX "_cspipe"
 
+/**
+ * @brief Name suffix for client mutex 
+ */
 #define PIPE_CLIENT_MUTEX_NAME_SUFFIX "_cm"
 
+/**
+ * @brief Name suffix for server mutex 
+ */
 #define PIPE_SERVER_MUTEX_NAME_SUFFIX "_sm"
 
+/**
+ * @brief Default name for uninitialized pipes
+ */
 #define DEFAULT_PIPE_NAME "uninitialized_pipe"
 
+/**
+ * @brief Invalid pipe handle
+ */
 #define INVALID_PIPE -1
+
+/**
+ * @brief Default timeout for trying connections 
+ */
 #define PIPE_TIMEOUT 10000
+
 namespace cpen333 {
 namespace process {
 
@@ -68,8 +86,8 @@ class pipe : private impl::named_resource_base {
    * @param pipe_out pipe output file id
    * @param open whether the pipe is open
    */
-  void __initialize(const char* name_ptr, int pipe_in, int pipe_out, bool open) {
-    set_name_raw(name_ptr);
+  void __initialize(std::string name, int pipe_in, int pipe_out, bool open) {
+    set_name(name);
     pipe_in_ = pipe_in;
     pipe_out_ = pipe_out;
     open_ = open;
@@ -79,8 +97,8 @@ class pipe : private impl::named_resource_base {
   /**
    * @brief Default constructor, for use with a server
    */
-  pipe() : impl::named_resource_base(DEFAULT_PIPE_NAME), mutex_(DEFAULT_PIPE_NAME), pipe_in_(INVALID_PIPE),
-           pipe_out_(INVALID_PIPE), open_(false) {}
+  pipe() : impl::named_resource_base(DEFAULT_PIPE_NAME), mutex_(DEFAULT_PIPE_NAME), 
+           pipe_in_(INVALID_PIPE), pipe_out_(INVALID_PIPE), open_(false) {}
 
   /**
    * @brief Main constructor, creates a named pipe
@@ -90,16 +108,29 @@ class pipe : private impl::named_resource_base {
       mutex_(name + std::string(PIPE_CLIENT_MUTEX_NAME_SUFFIX)),
       pipe_in_(INVALID_PIPE), pipe_out_(INVALID_PIPE), open_(false) {}
 
+ private:
   pipe(const pipe &) DELETE_METHOD;
   pipe &operator=(const pipe &) DELETE_METHOD;
 
+ public:
+
+  /**
+   * @brief Move-constructor
+   * @param other pipe to move
+   */
   pipe(pipe&& other) : impl::named_resource_base(DEFAULT_PIPE_NAME), mutex_(DEFAULT_PIPE_NAME),
                        pipe_in_(INVALID_PIPE), pipe_out_(INVALID_PIPE), open_(false) {
     *this = std::move(other);
   }
+
+  /**
+   * @brief Move-assignment
+   * @param other pipe to copy
+   * @return reference to myself
+   */
   pipe &operator=(pipe&& other) {
-    __initialize(other.name_ptr(), other.pipe_in_, other.pipe_out_, other.open_);
-    other.set_name_raw(DEFAULT_PIPE_NAME);
+    __initialize(other.name(), other.pipe_in_, other.pipe_out_, other.open_);
+    other.set_name(DEFAULT_PIPE_NAME);
     other.pipe_in_ = INVALID_PIPE;
     other.pipe_out_ = INVALID_PIPE;
     other.open_ = false;
@@ -128,12 +159,12 @@ class pipe : private impl::named_resource_base {
 
     // server to client
     std::string name_sc = PIPE_NAME_PREFIX;
-    name_sc.append(name_ptr());
+    name_sc.append(id_ptr());
     name_sc.append(PIPE_SC_NAME_SUFFIX);
 
     // client to server
     std::string name_cs = PIPE_NAME_PREFIX;
-    name_cs.append(name_ptr());
+    name_cs.append(id_ptr());
     name_cs.append(PIPE_CS_NAME_SUFFIX);
 
     // protect opening of connection
@@ -205,9 +236,12 @@ class pipe : private impl::named_resource_base {
       return false;
     }
 
+    // write all contents
     size_t nwrite = 0;
+    const char* cbuff = (const char*)buff;
+
     while (nwrite < size) {
-      ssize_t lwrite = ::write(pipe_out_, buff, size);
+      ssize_t lwrite = ::write(pipe_out_, &cbuff[nwrite], size-nwrite);
       if (lwrite < 0) {
         cpen333::perror("Pipe write(...) failed");
         return false;
@@ -221,16 +255,16 @@ class pipe : private impl::named_resource_base {
   /**
    * @brief Reads bytes of data from a pipe
    * @param buff pointer to data buffer to populate
-   * @param len size of buffer
+   * @param size size of buffer
    * @return number of bytes read, 0 if pipe is closed, or -1 if error
    */
-  ssize_t read(void* buff, size_t len) {
+  ssize_t read(void* buff, size_t size) {
 
     if (!open_) {
       return -1;
     }
 
-    ssize_t nread = ::read(pipe_in_, buff, len);
+    ssize_t nread = ::read(pipe_in_, buff, size);
     if ( nread < 0 ) {
       cpen333::perror("Pipe read(...) failed");
       return -1;
@@ -265,9 +299,12 @@ class pipe : private impl::named_resource_base {
     return (success_in == 0) && (success_out == 0);
   }
 
+  /**
+   * @copydoc impl::named_resource_base::unlink()
+   */
   bool unlink() {
     std::string name_cs = PIPE_NAME_PREFIX;
-    name_cs.append(name_ptr());
+    name_cs.append(id_ptr());
     name_cs.append(PIPE_CS_NAME_SUFFIX);
     int success_cs = ::unlink(name_cs.c_str());
     if (success_cs != 0) {
@@ -275,7 +312,7 @@ class pipe : private impl::named_resource_base {
     }
 
     std::string name_sc = PIPE_NAME_PREFIX;
-    name_sc.append(name_ptr());
+    name_sc.append(id_ptr());
     name_sc.append(PIPE_SC_NAME_SUFFIX);
     int success_sc = ::unlink(name_sc.c_str());
     if (success_sc != 0) {
@@ -287,9 +324,12 @@ class pipe : private impl::named_resource_base {
     return success && (success_cs == 0) && (success_sc == 0);
   }
 
+  /**
+   * @copydoc impl::named_resource_base::unlink(const std::string&)
+   */
   static bool unlink(const std::string& name) {
-    char nm[MAX_RESOURCE_NAME];
-    impl::named_resource_base::make_resource_name(name, nm);
+    char nm[MAX_RESOURCE_ID_SIZE];
+    impl::named_resource_base::make_resource_id(name, nm);
 
     std::string name_cs = PIPE_NAME_PREFIX;
     name_cs.append(nm);
@@ -333,11 +373,13 @@ class pipe_server : private impl::named_resource_base {
   pipe_server(const std::string& name) : impl::named_resource_base(name),
       mutex_(name + std::string(PIPE_SERVER_MUTEX_NAME_SUFFIX)), open_(false) { }
 
+ private:
   pipe_server(const pipe_server &) DELETE_METHOD;
   pipe_server(pipe_server &&) DELETE_METHOD;
   pipe_server &operator=(const pipe_server &) DELETE_METHOD;
   pipe_server &operator=(pipe_server &&) DELETE_METHOD;
 
+ public:
   /**
    * @brief Destructor, closes the pipe server
    */
@@ -377,7 +419,7 @@ class pipe_server : private impl::named_resource_base {
     }
 
     std::string name_sc = PIPE_NAME_PREFIX;
-    name_sc.append(name_ptr());
+    name_sc.append(id_ptr());
     name_sc.append(PIPE_SC_NAME_SUFFIX);
 
     std::lock_guard<decltype(mutex_)> lock(mutex_);
@@ -399,7 +441,7 @@ class pipe_server : private impl::named_resource_base {
     }
 
     std::string name_cs = PIPE_NAME_PREFIX;
-    name_cs.append(name_ptr());
+    name_cs.append(id_ptr());
     name_cs.append(PIPE_CS_NAME_SUFFIX);
 
     int pipe_cs = open(name_cs.c_str(), O_RDONLY);
@@ -412,7 +454,7 @@ class pipe_server : private impl::named_resource_base {
     ::unlink(name_sc.c_str());
 
     client.close();
-    client.__initialize(name_ptr(), pipe_cs, pipe_sc, true);
+    client.__initialize(id_ptr(), pipe_cs, pipe_sc, true);
 
     return true;
   }
@@ -431,7 +473,7 @@ class pipe_server : private impl::named_resource_base {
 
   bool unlink() {
     std::string name_cs = PIPE_NAME_PREFIX;
-    name_cs.append(name_ptr());
+    name_cs.append(id_ptr());
     name_cs.append(PIPE_CS_NAME_SUFFIX);
     int success_cs = ::unlink(name_cs.c_str());
     if (success_cs != 0) {
@@ -439,7 +481,7 @@ class pipe_server : private impl::named_resource_base {
     }
 
     std::string name_sc = PIPE_NAME_PREFIX;
-    name_sc.append(name_ptr());
+    name_sc.append(id_ptr());
     name_sc.append(PIPE_SC_NAME_SUFFIX);
     int success_sc = ::unlink(name_sc.c_str());
     if (success_sc != 0) {
@@ -451,9 +493,12 @@ class pipe_server : private impl::named_resource_base {
     return success && (success_cs == 0) && (success_sc == 0);
   }
 
+  /**
+   * @copydoc impl::named_resource_base::unlink(const std::string&)
+   */
   static bool unlink(const std::string& name) {
-    char nm[MAX_RESOURCE_NAME];
-    impl::named_resource_base::make_resource_name(name, nm);
+    char nm[MAX_RESOURCE_ID_SIZE];
+    impl::named_resource_base::make_resource_id(name, nm);
 
     std::string name_cs;
     name_cs.append(nm) = PIPE_NAME_PREFIX;
@@ -492,5 +537,15 @@ typedef posix::pipe_server pipe_server;
 
 } // process
 } // cpen333
+
+// undef local macros
+#undef PIPE_NAME_PREFIX
+#undef PIPE_SC_NAME_SUFFIX
+#undef PIPE_CS_NAME_SUFFIX
+#undef PIPE_CLIENT_MUTEX_NAME_SUFFIX
+#undef PIPE_SERVER_MUTEX_NAME_SUFFIX
+#undef DEFAULT_PIPE_NAME
+#undef INVALID_PIPE
+#undef PIPE_TIMEOUT
 
 #endif

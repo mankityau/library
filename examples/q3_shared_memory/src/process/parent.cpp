@@ -1,7 +1,7 @@
 #include <iostream>
-#include "cpen333/util.h"
-#include "cpen333/process/shared_memory.h"
-#include "cpen333/process/subprocess.h"
+#include <cpen333/util.h>
+#include <cpen333/process/shared_memory.h>
+#include <cpen333/process/subprocess.h>
 
 //
 //  Interprocess Shared Memory (a.k.a Shared Memory, Datapools, or Mapped Memory) are simply blocks of shared memory

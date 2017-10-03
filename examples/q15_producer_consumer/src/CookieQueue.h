@@ -3,9 +3,9 @@
 
 #include <string>
 
-#include "cpen333/process/semaphore.h"
-#include "cpen333/process/shared_memory.h"
-#include "cpen333/process/mutex.h"
+#include <cpen333/process/semaphore.h>
+#include <cpen333/process/shared_memory.h>
+#include <cpen333/process/mutex.h>
 
 // common name for shared access
 #define COOKIE_QUEUE_NAME "_i_love_cookies_"

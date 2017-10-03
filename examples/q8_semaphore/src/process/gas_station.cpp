@@ -1,9 +1,9 @@
 #include <iostream>
 #include <vector>
-#include "cpen333/util.h"
-#include "cpen333/process/subprocess.h"
-#include "cpen333/process/semaphore.h"
-#include "cpen333/process/unlinker.h"
+#include <cpen333/util.h>
+#include <cpen333/process/subprocess.h>
+#include <cpen333/process/semaphore.h>
+#include <cpen333/process/unlinker.h>
 
 //
 //  Semaphores are counting objects that represent a certain number of "resources", and allow processes to wait until

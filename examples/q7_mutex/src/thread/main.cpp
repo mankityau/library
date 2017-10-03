@@ -2,7 +2,7 @@
 #include <thread>
 #include <mutex>
 
-#include "cpen333/util.h"
+#include <cpen333/util.h>
 
 // shared global variable
 size_t a = 0;

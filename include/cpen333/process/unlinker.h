@@ -5,6 +5,9 @@
 #ifndef CPEN333_PROCESS_UNLINKER_H
 #define CPEN333_PROCESS_UNLINKER_H
 
+namespace cpen333 {
+namespace process {
+
 /**
  * @brief A named-resource wrapper that provides a convenient RAII-style unlinking of the resource name
  *
@@ -55,5 +58,8 @@ class unlinker {
  private:
   T &resource_;
 };
+
+} // process
+} // cpen333
 
 #endif //CPEN333_PROCESS_UNLINKER_H

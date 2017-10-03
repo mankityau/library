@@ -9,13 +9,18 @@
 
 // allow inet_ntop in mingw
 #undef _WIN32_WINNT
+/**
+ * @brief Allow sockets in MinGW
+ */
 #define _WIN32_WINNT 0x600
 #include <string>
 #include <cstdint>
 #include <winsock2.h>
 #include <ws2tcpip.h>
-// prevent windows max macro
 #undef NOMINMAX
+/**
+ * @brief Prevent windows from defining min(), max() macros
+ */
 #define NOMINMAX 1
 #include <windows.h>
 #include <mutex>
@@ -195,12 +200,24 @@ class socket {
     wsa_.acquire();
   }
 
+ private:
   socket(const socket &) DELETE_METHOD;
   socket &operator=(const socket &) DELETE_METHOD;
 
+ public:
+  /**
+   * @brief Move-constructor
+   * @param other socket to move to this
+   */
   socket(socket&& other) : wsa_(detail::WSASingleton::instance()){
     *this = std::move(other);
   }
+
+  /**
+   * @brief Move-assignment
+   * @param other socket to move to this
+   * @return reference to this
+   */
   socket &operator=(socket&& other) {
     __initialize(other.server_, other.port_, other.socket_, other.open_, other.connected_);
     other.server_ = "";
@@ -291,6 +308,10 @@ class socket {
 
   /**
    * @brief Sends string through the socket, including the terminating zero
+   *
+   * This is potentially a blocking operation: if the socket buffer is full, this
+   * method will wait until there is room to write the entire contents of the string.
+   *
    * @param str string to send
    * @return true if send successful, false otherwise
    */
@@ -301,17 +322,20 @@ class socket {
   /**
    * @brief Sends bytes through the socket
    *
+   * This is potentially a blocking operation: if the socket buffer is full, this
+   * method will wait until there is room to write the entire contents.
+   *
    * @param buff pointer to data buffer to send
-   * @param len number of bytes to send
+   * @param size number of bytes to send
    * @return true if send successful, false otherwise
    */
-  bool write(const void* buff, size_t len) {
+  bool write(const void* buff, size_t size) {
 
     if (!connected_) {
       return false;
     }
 
-    int status = ::send( socket_, (char*)buff, len, 0 );
+    int status = ::send( socket_, (char*)buff, size, 0 );
     if (status == SOCKET_ERROR) {
       cpen333::perror(std::string("send(...) failed with error: ")
                          + std::to_string(WSAGetLastError()));
@@ -322,17 +346,21 @@ class socket {
 
   /**
    * @brief Receives bytes of data from a socket
+   *
+   * This is a blocking operation: if there is no data, this
+   * method will wait until some becomes available or until the socket is closed.
+   *
    * @param buff pointer to data buffer to populate
-   * @param len size of buffer
+   * @param size size of buffer
    * @return number of bytes read, 0 if closed, or -1 if error
    */
-  ssize_t read(void* buff, size_t len) {
+  ssize_t read(void* buff, size_t size) {
 
     if (!open_) {
       return -1;
     }
 
-    int result = recv(socket_, (char*)buff, len, 0);
+    int result = recv(socket_, (char*)buff, size, 0);
     if (result == -1) {
       cpen333::perror(std::string("recv(...) failed with error: ")
                          + std::to_string(WSAGetLastError()));
@@ -386,10 +414,13 @@ class socket_server {
     wsa_.acquire();
   }
 
+ private:
   socket_server(const socket_server &) DELETE_METHOD;
   socket_server(socket_server &&) DELETE_METHOD;
   socket_server &operator=(const socket_server &) DELETE_METHOD;
   socket_server &operator=(socket_server &&) DELETE_METHOD;
+
+ public:
 
   /**
    * @brief Constructor, creates a server that listens on the provided port

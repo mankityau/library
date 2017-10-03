@@ -2,9 +2,9 @@
 #include <vector>
 #include <thread>
 
-#include "cpen333/util.h"
-#include "cpen333/thread/event.h"
-#include "cpen333/thread/timer.h"
+#include <cpen333/util.h>
+#include <cpen333/thread/event.h>
+#include <cpen333/thread/timer.h>
 
 // thread function, dripping faucet
 void faucet(cpen333::thread::event &tic, int id, int drips) {
