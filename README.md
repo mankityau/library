@@ -15,7 +15,7 @@ Usage:
 
 ## Documentation
 
-The main library is heavily documented in-code using Doxygen (http://www.stack.nl/~dimitri/doxygen/download.html).  A compiled version can be viewed here:
+The main library is heavily documented in-code using [Doxygen](http://www.stack.nl/~dimitri/doxygen/download.html).  A compiled version can be viewed here:
 - https://cpen333.github.io/library/
 
 ## Building the Examples
