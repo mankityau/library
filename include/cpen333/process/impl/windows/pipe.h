@@ -204,7 +204,7 @@ class pipe : private impl::named_resource_base {
       return false;
     }
 
-    size_t nwrite;
+    size_t nwrite = 0;
     while (nwrite < size) {
       DWORD lwrite;
       int success = WriteFile(
