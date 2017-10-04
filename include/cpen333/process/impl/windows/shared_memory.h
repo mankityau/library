@@ -57,7 +57,7 @@ class shared_memory : public impl::named_resource_base {
 
     // Clear thread error, create mapping, then check if already exists
     SetLastError(0);
-    handle_ = CreateFileMapping(INVALID_HANDLE_VALUE,  // create in paging file
+    handle_ = CreateFileMappingA(INVALID_HANDLE_VALUE,  // create in paging file
                                 NULL,
                                 PAGE_READWRITE,        // always read-write so we can initialize if we need to
                                 0,

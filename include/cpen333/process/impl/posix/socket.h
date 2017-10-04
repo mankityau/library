@@ -218,18 +218,18 @@ class socket {
   /**
    * @copydoc cpen333::process::windows::socket::write(const void*, size_t)
    */
-  bool write(const void* buff, size_t size) {
+  bool write(const void* buff, int size) {
 
     if (!connected_) {
       return false;
     }
 
     // write all contents
-    size_t nwrite = 0;
+    int nwrite = 0;
     const char* cbuff = (const char*)buff;
 
     while (nwrite < size) {
-      ssize_t lwrite = ::write(socket_, &cbuff[nwrite], size-nwrite);
+      int lwrite = (int)(::write(socket_, &cbuff[nwrite], size-nwrite));
       if (lwrite == -1) {
         cpen333::perror(std::string("write(...) to socket failed"));
         return false;
@@ -243,13 +243,13 @@ class socket {
   /**
    * @copydoc cpen333::process::windows::socket::read(void*,size_t)
    */
-  ssize_t read(void* buff, size_t size) {
+  int read(void* buff, int size) {
 
     if (!open_) {
       return -1;
     }
 
-    ssize_t nread = ::read(socket_, buff, size);
+    int nread = (int)(::read(socket_, buff, size));
     if (nread == -1) {
       cpen333::perror("write(...) to socket failed");
     }

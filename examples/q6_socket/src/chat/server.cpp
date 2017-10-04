@@ -49,7 +49,7 @@ void service(cpen333::process::socket&& socket) {
   std::string name = "";
 
   // continue reading until the socket disconnects
-  int read;
+  int read = 0;
 
   // read a single byte, corresponding to the command
   while ((read  = socket.read(buff, 1)) > 0) {

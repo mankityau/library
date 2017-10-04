@@ -216,11 +216,11 @@ class pipe : private impl::named_resource_base {
 
   /**
    * @brief Writes a string to the pipe, including the terminating zero
-   * @param str string to send
+   * @param str string to send, length+1 must fit into a signed integer
    * @return true if send successful, false otherwise
    */
   bool write(const std::string& str) {
-    return write(str.c_str(), str.length()+1);
+    return write(str.c_str(), (int)(str.length()+1));
   }
 
   /**
@@ -230,18 +230,18 @@ class pipe : private impl::named_resource_base {
    * @param size number of bytes to send
    * @return true if send successful, false otherwise
    */
-  bool write(const void* buff, size_t size) {
+  bool write(const void* buff, int size) {
 
     if (!open_) {
       return false;
     }
 
     // write all contents
-    size_t nwrite = 0;
+    int nwrite = 0;
     const char* cbuff = (const char*)buff;
 
     while (nwrite < size) {
-      ssize_t lwrite = ::write(pipe_out_, &cbuff[nwrite], size-nwrite);
+      int lwrite = (int)(::write(pipe_out_, &cbuff[nwrite], size-nwrite));
       if (lwrite < 0) {
         cpen333::perror("Pipe write(...) failed");
         return false;
@@ -258,13 +258,13 @@ class pipe : private impl::named_resource_base {
    * @param size size of buffer
    * @return number of bytes read, 0 if pipe is closed, or -1 if error
    */
-  ssize_t read(void* buff, size_t size) {
+  int read(void* buff, int size) {
 
     if (!open_) {
       return -1;
     }
 
-    ssize_t nread = ::read(pipe_in_, buff, size);
+    int nread = (int)(::read(pipe_in_, buff, size));
     if ( nread < 0 ) {
       cpen333::perror("Pipe read(...) failed");
       return -1;

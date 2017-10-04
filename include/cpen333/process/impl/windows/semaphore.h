@@ -65,7 +65,7 @@ class semaphore : public impl::named_resource_base {
       impl::named_resource_base(name+std::string(SEMAPHORE_NAME_SUFFIX)), handle_(NULL) {
 
     // create named semaphore
-    handle_ = CreateSemaphore(NULL, (LONG)value, (LONG)MAX_SEMAPHORE_SIZE, id_ptr());
+    handle_ = CreateSemaphoreA(NULL, (LONG)value, (LONG)MAX_SEMAPHORE_SIZE, id_ptr());
     if (handle_ == INVALID_HANDLE_VALUE) {
        cpen333::perror(std::string("Cannot create semaphore ")+this->name());
     }

@@ -106,7 +106,7 @@ inline void perror(const std::string& msg) {
 #ifdef WINDOWS
   UINT LastError = GetLastError();
   char buff[512];
-  FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, NULL, LastError,
+  FormatMessageA(FORMAT_MESSAGE_FROM_SYSTEM, NULL, LastError,
                 MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), buff, 1024, NULL);
   std::cerr << msg << ": " << buff << std::endl;
 #else

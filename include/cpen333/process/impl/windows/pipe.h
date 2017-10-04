@@ -12,6 +12,7 @@
  */
 #define NOMINMAX 1
 #include <windows.h>
+#include <cstdint>
 #include <mutex>
 #include <thread>
 #include <chrono>
@@ -133,7 +134,7 @@ class pipe : private impl::named_resource_base {
     auto started = std::chrono::system_clock::now();
     while(true) {
       // Wait for pending pipe connection
-      if (WaitNamedPipe(pipename.c_str(), NMPWAIT_USE_DEFAULT_WAIT) == 0) {
+      if (WaitNamedPipeA(pipename.c_str(), NMPWAIT_USE_DEFAULT_WAIT) == 0) {
         DWORD err = GetLastError();
         if (err == ERROR_SEM_TIMEOUT) {
           cpen333::perror("Pipe failed to wait for server");
@@ -150,9 +151,7 @@ class pipe : private impl::named_resource_base {
       }
 
       SetLastError(0);
-      std::string pipename = WINDOWS_PIPE_PREFIX;
-      pipename.append(name());
-      pipe_ = CreateFile(
+      pipe_ = CreateFileA(
           pipename.c_str(), GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL
       );
 
@@ -181,11 +180,11 @@ class pipe : private impl::named_resource_base {
    * This is potentially a blocking operation: if the pipe is full, this method will wait until
    * the remaining bytes can be written.
    *
-   * @param str string to send
+   * @param str string to send, length+1 must fit into a signed integer
    * @return true if send successful, false otherwise
    */
   bool write(const std::string& str) {
-    return write(str.c_str(), str.length()+1);
+    return write(str.c_str(), (int)(str.length()+1));
   }
 
   /**
@@ -198,27 +197,28 @@ class pipe : private impl::named_resource_base {
    * @param size number of bytes to send
    * @return true if send successful, false otherwise
    */
-  bool write(const void* buff, size_t size) {
+  bool write(const void* buff, int size) {
 
     if (!open_) {
       return false;
     }
 
-    size_t nwrite = 0;
+    int nwrite = 0;
     while (nwrite < size) {
       DWORD lwrite;
       int success = WriteFile(
           pipe_,
           buff,
-          size,
+          (DWORD)size,
           &lwrite,
           NULL
       );
+
       if (!success) {
         cpen333::perror("Failed to write to pipe");
         return false;
       }
-      nwrite += lwrite;
+      nwrite += (size_t)lwrite;
     }
 
     return true;
@@ -234,7 +234,7 @@ class pipe : private impl::named_resource_base {
    * @param size size of buffer
    * @return number of bytes read, 0 if pipe is closed, or -1 if error
    */
-  ssize_t read(void* buff, size_t size) {
+  int read(void* buff, int size) {
 
     if (!open_) {
       return -1;
@@ -244,7 +244,7 @@ class pipe : private impl::named_resource_base {
     int success = ReadFile(
         pipe_,    // pipe handle
         buff,     // buffer to receive reply
-        size,      // size of buffer
+        (DWORD)size,    // size of buffer
         &nread,   // number of bytes read
         NULL);    // not overlapped
 
@@ -258,7 +258,7 @@ class pipe : private impl::named_resource_base {
       }
     }
 
-    return (ssize_t)nread;
+    return (int)nread;
   }
 
   /**
@@ -363,7 +363,7 @@ class pipe_server : private impl::named_resource_base {
     std::string pipename = WINDOWS_PIPE_PREFIX;
     pipename.append(name());
 
-    HANDLE pipe = CreateNamedPipe( pipename.c_str(), PIPE_ACCESS_DUPLEX,
+    HANDLE pipe = CreateNamedPipeA( pipename.c_str(), PIPE_ACCESS_DUPLEX,
                                    PIPE_TYPE_BYTE | PIPE_READMODE_BYTE | PIPE_WAIT,
                                    PIPE_UNLIMITED_INSTANCES,
                                    PIPE_BUFF_SIZE, PIPE_BUFF_SIZE,

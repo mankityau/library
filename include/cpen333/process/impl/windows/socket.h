@@ -13,15 +13,16 @@
  * @brief Allow sockets in MinGW
  */
 #define _WIN32_WINNT 0x600
+#undef NOMINMAX
+ /**
+ * @brief Prevent windows from defining min(), max() macros
+ */
+#define NOMINMAX 1
+
 #include <string>
 #include <cstdint>
 #include <winsock2.h>
 #include <ws2tcpip.h>
-#undef NOMINMAX
-/**
- * @brief Prevent windows from defining min(), max() macros
- */
-#define NOMINMAX 1
 #include <windows.h>
 #include <mutex>
 
@@ -312,11 +313,11 @@ class socket {
    * This is potentially a blocking operation: if the socket buffer is full, this
    * method will wait until there is room to write the entire contents of the string.
    *
-   * @param str string to send
+   * @param str string to send, length+1 must fit into a signed integer
    * @return true if send successful, false otherwise
    */
   bool write(const std::string& str) {
-    return write(str.c_str(), str.length()+1);
+    return write(str.c_str(), (int)(str.length()+1));
   }
 
   /**
@@ -329,13 +330,13 @@ class socket {
    * @param size number of bytes to send
    * @return true if send successful, false otherwise
    */
-  bool write(const void* buff, size_t size) {
+  bool write(const void* buff, int size) {
 
     if (!connected_) {
       return false;
     }
 
-    int status = ::send( socket_, (char*)buff, size, 0 );
+    int status = ::send( socket_, (char*)buff, (int)size, 0 );
     if (status == SOCKET_ERROR) {
       cpen333::perror(std::string("send(...) failed with error: ")
                          + std::to_string(WSAGetLastError()));
@@ -354,7 +355,7 @@ class socket {
    * @param size size of buffer
    * @return number of bytes read, 0 if closed, or -1 if error
    */
-  ssize_t read(void* buff, size_t size) {
+  int read(void* buff, int size) {
 
     if (!open_) {
       return -1;
