@@ -11,9 +11,9 @@ int main() {
   pipe.read(&x); // read in to address of x, uses template to deduce type and size
   std::cout << "Child process read integer = " << x << " from pipe....." << std::endl;
 
-  // read an array from the pipe
+  // read all of an array from the pipe
   int array[10];
-  pipe.read(&array[0], sizeof(array)) ;
+  pipe.read_all(&array[0], sizeof(array)) ;
 
   std::cout << "Child process read array = ";
   for(size_t i = 0; i < sizeof(array)/sizeof(array[0]); ++i) {

@@ -9,6 +9,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <cstdint>
 #include <mutex>
 #include <thread>
 #include <chrono>
@@ -230,18 +231,18 @@ class pipe : private impl::named_resource_base {
    * @param size number of bytes to send
    * @return true if send successful, false otherwise
    */
-  bool write(const void* buff, int size) {
+  bool write(const void* buff, size_t size) {
 
     if (!open_) {
       return false;
     }
 
     // write all contents
-    int nwrite = 0;
+    size_t nwrite = 0;
     const char* cbuff = (const char*)buff;
 
     while (nwrite < size) {
-      int lwrite = (int)(::write(pipe_out_, &cbuff[nwrite], size-nwrite));
+      auto lwrite = ::write(pipe_out_, &cbuff[nwrite], size-nwrite);
       if (lwrite < 0) {
         cpen333::perror("Pipe write(...) failed");
         return false;
@@ -256,21 +257,43 @@ class pipe : private impl::named_resource_base {
    * @brief Reads bytes of data from a pipe
    * @param buff pointer to data buffer to populate
    * @param size size of buffer
-   * @return number of bytes read, 0 if pipe is closed, or -1 if error
+   * @return number of bytes read, 0 if pipe is closed or error
    */
-  int read(void* buff, int size) {
+  size_t read(void* buff, size_t size) {
 
     if (!open_) {
       return -1;
     }
 
-    int nread = (int)(::read(pipe_in_, buff, size));
+    auto nread = ::read(pipe_in_, buff, size);
     if ( nread < 0 ) {
       cpen333::perror("Pipe read(...) failed");
-      return -1;
+      return 0;
     }
 
-    return nread;
+    return (size_t)nread;
+  }
+
+  /**
+   * @brief Reads all data up to the specified size from the pipe
+   *
+   * Read bytes from the head of the pipe, blocking if necessary until all bytes are read.
+   *
+   * @param buff memory address to fill with pipe contents
+   * @param size number of bytes to read
+   * @return true if read is successful, false if read is interrupted
+   */
+  bool read_all(void* buff, size_t size) {
+    char* cbuff = (char*)buff;
+    size_t nread = read(cbuff, size);
+    while (nread < size) {
+      auto lread = read(&cbuff[nread], size-nread);
+      if (lread <= 0) {
+        return false;
+      }
+      nread += lread;
+    }
+    return true;
   }
 
   /**
@@ -360,7 +383,7 @@ class pipe : private impl::named_resource_base {
  *
  * Implementation of a named pipe server that listens
  * for connections.  The server is NOT started automatically.
- * To start listening for connections, call the start() function.
+ * To start listening for connections, call the open() function.
  */
 class pipe_server : private impl::named_resource_base {
   cpen333::process::mutex mutex_;
@@ -391,7 +414,7 @@ class pipe_server : private impl::named_resource_base {
    * @brief Starts listening for connections.
    * @return true if successful, false otherwise.
    */
-  bool start() {
+  bool open() {
 
     if (open_){
       return false;
@@ -433,7 +456,7 @@ class pipe_server : private impl::named_resource_base {
     }
 
     // connect pipe
-    int pipe_sc = open(name_sc.c_str(), O_WRONLY);
+    int pipe_sc = ::open(name_sc.c_str(), O_WRONLY);
     if (pipe_sc < 0) {
       ::unlink(name_sc.c_str());  // unlink outgoing
       cpen333::perror(std::string("Failed to open server-to-client pipe ") + name_sc);
@@ -444,7 +467,7 @@ class pipe_server : private impl::named_resource_base {
     name_cs.append(id_ptr());
     name_cs.append(PIPE_CS_NAME_SUFFIX);
 
-    int pipe_cs = open(name_cs.c_str(), O_RDONLY);
+    int pipe_cs = ::open(name_cs.c_str(), O_RDONLY);
     if (pipe_cs < 0) {
       ::unlink(name_sc.c_str());  // unlink outgoing
       ::close(pipe_sc);

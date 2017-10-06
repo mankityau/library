@@ -37,6 +37,7 @@ int main() {
 
   // create a shared pipe of size 1024 bytes
   cpen333::process::basic_pipe pipe(PIPE_NAME, 1024);
+  pipe.open();  // open pipe
 
   // Rather than unlink at the end of this process, we will use RAII principles and create a special
   // object that will unlink the name from the named resource for us.
@@ -71,6 +72,8 @@ int main() {
   std::cout << "Press ENTER to write the structure [" << ex.x << ", " << ex.y << "] to the pipe....." << std::endl;
   std::cin.get();
   pipe.write(ex); // uses template-based function to deduce the type/size of data to write
+  pipe.close();
+
   std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
   // wait for process to terminate

@@ -29,6 +29,7 @@ int main() {
   for (int i=0; i<NUM_PIPES; ++i) {
     std::string pipe_name = std::string(PIPES_MULTIPLE_PREFIX) + std::to_string(i+1);
     pipes[i] = new cpen333::process::basic_pipe(pipe_name);
+    pipes[i]->open();
     
     std::vector<std::string> args;
     args.push_back("./child");
@@ -67,6 +68,7 @@ int main() {
   // close all pipes
   for (int i=0; i<NUM_PIPES; ++i) {
     std::cout << "Closing pipe " << (i+1) << std::endl;
+    pipes[i]->close();
     pipes[i]->unlink();
     delete pipes[i];
   }

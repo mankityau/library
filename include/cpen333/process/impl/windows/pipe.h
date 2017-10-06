@@ -184,7 +184,7 @@ class pipe : private impl::named_resource_base {
    * @return true if send successful, false otherwise
    */
   bool write(const std::string& str) {
-    return write(str.c_str(), (int)(str.length()+1));
+    return write(str.c_str(), str.length()+1);
   }
 
   /**
@@ -197,13 +197,13 @@ class pipe : private impl::named_resource_base {
    * @param size number of bytes to send
    * @return true if send successful, false otherwise
    */
-  bool write(const void* buff, int size) {
+  bool write(const void* buff, size_t size) {
 
     if (!open_) {
       return false;
     }
 
-    int nwrite = 0;
+    size_t nwrite = 0;
     while (nwrite < size) {
       DWORD lwrite;
       int success = WriteFile(
@@ -218,7 +218,7 @@ class pipe : private impl::named_resource_base {
         cpen333::perror("Failed to write to pipe");
         return false;
       }
-      nwrite += (size_t)lwrite;
+      nwrite += lwrite;
     }
 
     return true;
@@ -232,12 +232,12 @@ class pipe : private impl::named_resource_base {
    *
    * @param buff pointer to data buffer to populate
    * @param size size of buffer
-   * @return number of bytes read, 0 if pipe is closed, or -1 if error
+   * @return number of bytes read, 0 if pipe is closed or error
    */
-  int read(void* buff, int size) {
+  size_t read(void* buff, size_t size) {
 
     if (!open_) {
-      return -1;
+      return 0;
     }
 
     DWORD nread = 0;
@@ -254,11 +254,33 @@ class pipe : private impl::named_resource_base {
         return 0;
       } else if ( err != ERROR_MORE_DATA ) {
         cpen333::perror("Pipe read(...) failed");
-        return -1;
+        return 0;
       }
     }
 
-    return (int)nread;
+    return (size_t)nread;
+  }
+
+  /**
+   * @brief Reads all data up to the specified size from the pipe
+   *
+   * Read bytes from the head of the pipe, blocking if necessary until all bytes are read.
+   *
+   * @param buff memory address to fill with pipe contents
+   * @param size number of bytes to read
+   * @return true if read is successful, false if read is interrupted
+   */
+  bool read_all(void* buff, size_t size) {
+    char* cbuff = (char*)buff;
+    size_t nread = read(cbuff, size);
+    while (nread < size) {
+      auto lread = read(&cbuff[nread], size-nread);
+      if (lread <= 0) {
+        return false;
+      }
+      nread += lread;
+    }
+    return true;
   }
 
   /**
@@ -304,16 +326,10 @@ class pipe : private impl::named_resource_base {
  *
  * Implementation of a named pipe server that listens
  * for connections.  The server is NOT started automatically.
- * To start listening for connections, call the start() function.
+ * To start listening for connections, call the open() function.
  */
 class pipe_server : private impl::named_resource_base {
   bool open_;
-
- public:
-  /**
-   * @brief Default constructor, creates a pipe server that listens for new connections
-   */
-  pipe_server(const std::string& name) : impl::named_resource_base(name), open_(false) { }
 
  private:
   pipe_server(const pipe_server &) DELETE_METHOD;
@@ -322,6 +338,12 @@ class pipe_server : private impl::named_resource_base {
   pipe_server &operator=(pipe_server &&) DELETE_METHOD;
 
  public:
+
+  /**
+   * @brief Default constructor, creates a pipe server that listens for new connections
+   */
+  pipe_server(const std::string& name) : impl::named_resource_base(name), open_(false) { }
+
   /**
    * @brief Destructor, closes the pipe server
    */
@@ -333,7 +355,7 @@ class pipe_server : private impl::named_resource_base {
    * @brief Starts listening for connections.
    * @return true if successful, false otherwise.
    */
-  bool start() {
+  bool open() {
 
     if (open_){
       return false;

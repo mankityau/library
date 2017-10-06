@@ -20,11 +20,13 @@ volatile bool done = false;
 
 void thread_consumer(int id, cpen333::process::basic_pipe& pipe) {
   // processes should eventually see when done flag is set
+  pipe.open();
   while (!done) {
     int data;
     pipe.read(&data);
     std::cout << "Parent thread " << id << ": Read " << data << " from pipe " << id << std::endl;
   }
+  pipe.close();  // close pipe
 }
 
 int main() {

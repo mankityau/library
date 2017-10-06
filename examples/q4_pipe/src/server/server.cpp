@@ -48,7 +48,7 @@ void service(cpen333::process::pipe&& pipe, int i) {
   buff[buffsize] = 0;
 
   // keep reading until we get zero bytes back (signalling the pipe is closed)
-  int nread = 0;
+  size_t nread = 0;
 
   std::cout << "pipe " << i << " started" << std::endl;
 
@@ -71,7 +71,7 @@ int main() {
 
   // create a pipe server and start it
   cpen333::process::pipe_server server("q4_pipes_server");
-  server.start();
+  server.open();
 
   // connect to 10 remote processes
   for (int i=0; i<10; ++i) {

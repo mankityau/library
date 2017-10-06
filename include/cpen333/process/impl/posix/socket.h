@@ -218,18 +218,18 @@ class socket {
   /**
    * @copydoc cpen333::process::windows::socket::write(const void*, size_t)
    */
-  bool write(const void* buff, int size) {
+  bool write(const void* buff, size_t size) {
 
     if (!connected_) {
       return false;
     }
 
     // write all contents
-    int nwrite = 0;
+    size_t nwrite = 0;
     const char* cbuff = (const char*)buff;
 
     while (nwrite < size) {
-      int lwrite = (int)(::write(socket_, &cbuff[nwrite], size-nwrite));
+      auto lwrite = ::write(socket_, &cbuff[nwrite], size-nwrite);
       if (lwrite == -1) {
         cpen333::perror(std::string("write(...) to socket failed"));
         return false;
@@ -243,18 +243,41 @@ class socket {
   /**
    * @copydoc cpen333::process::windows::socket::read(void*,size_t)
    */
-  int read(void* buff, int size) {
+  size_t read(void* buff, size_t size) {
 
     if (!open_) {
-      return -1;
+      return 0;
     }
 
-    int nread = (int)(::read(socket_, buff, size));
+    auto nread = ::read(socket_, buff, size);
     if (nread == -1) {
       cpen333::perror("write(...) to socket failed");
+      return 0;
     }
 
-    return nread;
+    return (size_t)nread;
+  }
+
+  /**
+   * @brief Reads all data up to the specified size from the pipe
+   *
+   * Read bytes from the head of the pipe, blocking if necessary until all bytes are read.
+   *
+   * @param buff memory address to fill with pipe contents
+   * @param size number of bytes to read
+   * @return true if read is successful, false if read is interrupted
+   */
+  bool read_all(void* buff, size_t size) {
+    char* cbuff = (char*)buff;
+    size_t nread = read(cbuff, size);
+    while (nread < size) {
+      auto lread = read(&cbuff[nread], size-nread);
+      if (lread <= 0) {
+        return false;
+      }
+      nread += lread;
+    }
+    return true;
   }
 
   /**
@@ -283,7 +306,7 @@ class socket {
  *
  * POSIX/BSD implementation of a socket server that listens
  * for connections.  The server is NOT started automatically.
- * To start listening for connections, call the start() function.
+ * To start listening for connections, call the open() function.
  */
 class socket_server {
   int port_;
@@ -293,16 +316,10 @@ class socket_server {
  public:
 
   /**
-   * @copydoc cpen333::process::windows::socket_server::socket_server()
-   */
-  socket_server() : port_(CPEN333_SOCKET_DEFAULT_PORT),
-                    socket_(INVALID_SOCKET), open_(false) {}
-
-  /**
    * @copydoc cpen333::process::windows::socket_server::socket_server(int)
    */
-  socket_server(int port) : port_(port), socket_(INVALID_SOCKET),
-                            open_(false) {}
+  socket_server(int port = CPEN333_SOCKET_DEFAULT_PORT) :
+      port_(port), socket_(INVALID_SOCKET), open_(false) {}
 
  private:
   socket_server(const socket_server &) DELETE_METHOD;
@@ -319,9 +336,9 @@ class socket_server {
   }
 
   /**
-   * @copydoc cpen333::process::windows::socket_server::start()
+   * @copydoc cpen333::process::windows::socket_server::open()
    */
-  bool start() {
+  bool open() {
 
     if (open_){
       return false;

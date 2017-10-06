@@ -49,7 +49,7 @@ void service(cpen333::process::socket&& socket) {
   std::string name = "";
 
   // continue reading until the socket disconnects
-  int read = 0;
+  size_t read = 0;
 
   // read a single byte, corresponding to the command
   while ((read  = socket.read(buff, 1)) > 0) {
@@ -92,7 +92,7 @@ int main() {
 
   // start the server, choose a free port
   cpen333::process::socket_server server(0);
-  server.start();
+  server.open();
 
   // obtain the port number and print the address path for our
   // local machine, trying to find an IP address the client

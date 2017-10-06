@@ -19,7 +19,7 @@ void server(int& port) {
 
   // start server and determine port number
   cpen333::process::socket_server server(port);
-  server.start();
+  server.open();
   port = server.port();
   std::cout << "server opened port " << port << std::endl;
 
@@ -55,7 +55,7 @@ void client(const std::string& server, int& port) {
   // read messages from server
   const int buffsize = 512;
   char buff[buffsize];
-  int len = 0;
+  size_t len = 0;
   do {
     len = client.read(buff, buffsize);
     std::string msg(buff, 0, len);

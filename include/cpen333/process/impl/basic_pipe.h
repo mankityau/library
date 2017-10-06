@@ -22,10 +22,6 @@
  */
 #define BASIC_PIPE_INFO_SUFFIX "_ppi"
 /**
- * @brief Suffix to add to the pipe's "open" mutex for ensuring valid pipe connections
- */
-#define BASIC_PIPE_OPEN_SUFFIX "_ppo"
-/**
  * @brief Magic number for ensuring pipe has been initialized
  */
 #define BASIC_PIPE_INITIALIZED 0x18763023
@@ -56,20 +52,20 @@ class basic_pipe : public virtual named_resource {
   basic_pipe(const std::string& name, size_t size = 1024) :
       wmutex_(name + std::string(BASIC_PIPE_WRITE_SUFFIX)),
       rmutex_(name + std::string(BASIC_PIPE_READ_SUFFIX)),
-      omutex_(name + std::string(BASIC_PIPE_OPEN_SUFFIX)),
       info_(name + std::string(BASIC_PIPE_INFO_SUFFIX)),
       pipe_(name + std::string(BASIC_PIPE_NAME_SUFFIX), size),
       producer_(name + std::string(BASIC_PIPE_WRITE_SUFFIX), 0),
       consumer_(name + std::string(BASIC_PIPE_READ_SUFFIX), size) {
 
     // potentially initialize info
-    std::lock_guard<decltype(wmutex_)> lock(omutex_);
+    std::lock_guard<decltype(wmutex_)> lock(wmutex_);
     if (info_->initialized != BASIC_PIPE_INITIALIZED) {
       info_->size = size;
       info_->read = 0;
       info_->write = 0;
       info_->reof = 0;            // marks 1 past the final written index
       info_->weof = 0;            // marks 1 past the final read index
+      info_->closed = false;
       info_->initialized = BASIC_PIPE_INITIALIZED; // mark as initialized
     }
   }
@@ -160,21 +156,51 @@ class basic_pipe : public virtual named_resource {
   }
 
   /**
-   * @brief Reads data from the pipe
+   * @brief Reads all data up to the specified size from the pipe
    *
-   * Reads the specified number of bytes from the head of the pipe.  This method will block until the desired number of
-   * bytes are read.
+   * Read bytes from the head of the pipe, blocking if necessary until all bytes are read.
    *
    * @param data memory address to fill with pipe contents
-   * @param size number of bytes
-   * @return true if successful, false otherwise
+   * @param size number of bytes to read
+   * @return true if read is successful, false if read is interrupted
    */
-  bool read(void* data, size_t size) {
-    uint8_t *ptr = (uint8_t *) data;
+  bool read_all(void* data, size_t size) {
+    char* cbuff = (char*)data;
+    size_t nread = read(cbuff, size);
+    while (nread < size) {
+      size_t lread = read(&cbuff[nread], size-nread);
+      if (lread == 0) {
+        return false;
+      }
+      nread += lread;
+    }
+    return true;
+  }
+
+  /**
+   * @brief Reads data from the pipe
+   *
+   * Read bytes from the head of the pipe.  This method will block if the pipe is empty.  If not empty, it will read
+   * up to whatever data is available, returning the number of bytes read.
+   *
+   * @param buff memory address to fill with pipe contents
+   * @param size size of the data buffer
+   * @return number of bytes read, 0 if pipe is closed
+   */
+  size_t read(void* buff, size_t size) {
+    uint8_t *ptr = (uint8_t *)buff;
 
     std::unique_lock<decltype(rmutex_)> lock(rmutex_, std::defer_lock);
     for (size_t i = 0; i < size; ++i) {
-      producer_.wait();  // wait until there is data in the pipe
+
+      if (i == 0) {
+        producer_.wait();  // wait until there is data in the pipe
+      } else {
+        // if not first byte, try to wait for data, otherwise return number of bytes read
+        if (!producer_.try_wait()) {
+          return i;
+        }
+      }
 
       // read next byte and advance read index
       lock.lock();
@@ -185,7 +211,7 @@ class basic_pipe : public virtual named_resource {
         if ( ((pos == 0) && (info_->reof == info_->size))
             || (pos == info_->reof)) {
           producer_.notify();  // notify any other reader threads
-          return false;
+          return 0;
         }
       }
 
@@ -202,7 +228,7 @@ class basic_pipe : public virtual named_resource {
       consumer_.notify();  // byte available for writing
     }
 
-    return true;
+    return size;
   }
 
   /**
@@ -217,7 +243,7 @@ class basic_pipe : public virtual named_resource {
    */
   template<typename T>
   bool read(T* data) {
-    return read((void*)data, sizeof(T));
+    return read_all(data, sizeof(T));
   }
 
   /**
@@ -240,15 +266,52 @@ class basic_pipe : public virtual named_resource {
     return w-r;
   }
 
+  /**
+   * @brief Returns whether or not pipe is opened
+   *
+   * @return true if not closed
+   */
+  bool open() {
+    std::lock_guard<decltype(rmutex_)> rlock(rmutex_);
+    return !(info_->closed);
+  }
+
+  /**
+   * @brief Prevent further writes to the pipe.
+   *
+   * The buffer can still be read until there are no bytes left.
+   *
+   * @return true if closed successfully, false if already closed
+   */
+  bool close() {
+
+    std::lock_guard<decltype(rmutex_)> rlock(rmutex_);
+    std::lock_guard<decltype(wmutex_)> wlock(wmutex_);
+    // already closed
+    if (info_->closed) {
+      return false;
+    }
+
+    // don't allow further writes, allow reads
+    auto w = info_->write;
+    info_->weof = w;  // don't allow further writes
+    info_->reof = w;  // EOF - past last written
+    info_->closed = true;  // mark as closed
+    // wake everyone up
+    producer_.notify();
+    consumer_.notify();
+
+    return true;
+  }
+
   bool unlink() {
     bool b1 = wmutex_.unlink();
     bool b2 = rmutex_.unlink();
-    bool b3 = omutex_.unlink();
-    bool b4 = info_.unlink();
-    bool b5 = pipe_.unlink();
-    bool b6 = producer_.unlink();
-    bool b7 = consumer_.unlink();
-    return b1 && b2 && b3 && b4 && b5 && b6 && b7;
+    bool b3 = info_.unlink();
+    bool b4 = pipe_.unlink();
+    bool b5 = producer_.unlink();
+    bool b6 = consumer_.unlink();
+    return b1 && b2 && b3 && b4 && b5 && b6;
   }
 
   /**
@@ -258,13 +321,12 @@ class basic_pipe : public virtual named_resource {
 
     bool b1 = cpen333::process::mutex::unlink(name + std::string(BASIC_PIPE_WRITE_SUFFIX));
     bool b2 = cpen333::process::mutex::unlink(name + std::string(BASIC_PIPE_READ_SUFFIX));
-    bool b3 = cpen333::process::mutex::unlink(name + std::string(BASIC_PIPE_OPEN_SUFFIX));
-    bool b4 = cpen333::process::shared_object<pipe_info>::unlink(name + std::string(BASIC_PIPE_INFO_SUFFIX));
-    bool b5 = cpen333::process::shared_memory::unlink(name + std::string(BASIC_PIPE_NAME_SUFFIX));
-    bool b6 = cpen333::process::semaphore::unlink(name + std::string(BASIC_PIPE_WRITE_SUFFIX));
-    bool b7 = cpen333::process::semaphore::unlink(name + std::string(BASIC_PIPE_READ_SUFFIX));
+    bool b3 = cpen333::process::shared_object<pipe_info>::unlink(name + std::string(BASIC_PIPE_INFO_SUFFIX));
+    bool b4 = cpen333::process::shared_memory::unlink(name + std::string(BASIC_PIPE_NAME_SUFFIX));
+    bool b5 = cpen333::process::semaphore::unlink(name + std::string(BASIC_PIPE_WRITE_SUFFIX));
+    bool b6 = cpen333::process::semaphore::unlink(name + std::string(BASIC_PIPE_READ_SUFFIX));
 
-    return b1 && b2 && b3 && b4 && b5 && b6 && b7;
+    return b1 && b2 && b3 && b4 && b5 && b6;
   }
 
  private:
@@ -275,11 +337,11 @@ class basic_pipe : public virtual named_resource {
     size_t size;
     size_t reof;
     size_t weof;
+    bool closed;
   };
 
   cpen333::process::mutex wmutex_;
   cpen333::process::mutex rmutex_;
-  cpen333::process::mutex omutex_;  // for checking if pipe is open
   cpen333::process::shared_object<pipe_info> info_;
   cpen333::process::shared_memory pipe_;
   cpen333::process::semaphore producer_;
