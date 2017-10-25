@@ -1,7 +1,7 @@
 #include <cstdlib>
 
 #include "common.h"
-#include "cpen333/process/shared_memory.h"
+#include <cpen333/process/shared_memory.h>
 
 int main(int argc, char* argv[]) {
 

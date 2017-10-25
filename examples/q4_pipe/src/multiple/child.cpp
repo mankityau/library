@@ -1,5 +1,5 @@
 #include "common.h"
-#include "cpen333/process/pipe.h"
+#include <cpen333/process/pipe.h>
 
 #include <iostream>
 #include <cstdlib>
@@ -16,7 +16,8 @@ int main(int argc, char* argv[]) {
   std::string pipe_name = std::string(PIPES_MULTIPLE_PREFIX) + std::to_string(id);
 
   std::cout << "Child " << id << " process opening the pipe \"" << pipe_name << "\"..." << std::endl;
-  cpen333::process::pipe pipe(pipe_name, cpen333::process::pipe::WRITE);
+  cpen333::process::basic_pipe pipe(pipe_name);
+  pipe.open();
 
   int start = id*10000;
   for (int i=start; i<start+20; ++i) {
@@ -27,6 +28,8 @@ int main(int argc, char* argv[]) {
     }
     std::this_thread::sleep_for(std::chrono::seconds(2));
   }
+
+  pipe.close();
 
   return 0;
 }

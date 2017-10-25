@@ -220,5 +220,8 @@ typedef impl::shared_mutex_shared shared_timed_mutex_shared;
 } // process
 } // cpen333
 
+// undef local macros
+#undef SHARED_MUTEX_SHARED_NAME_SUFFIX
+#undef SHARED_MUTEX_SHARED_INITIALIZED
 
 #endif //CPEN333_PROCESS_SHARED_MUTEX_SHARED_H

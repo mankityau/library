@@ -10,7 +10,7 @@
 #define CPEN333_UTIL_H
 
 #include "os.h"
-#ifdef WINDOWS
+#if defined(WINDOWS) && !defined(__CYGWIN__)
 // prevent windows max macro
 #undef NOMINMAX
 #define NOMINMAX 1
@@ -18,11 +18,9 @@
 #include <conio.h>
 #else
 // for _khbit()
-#include <stdio.h>
-#include <sys/select.h>
-#include <sys/ioctl.h>
-#include <termios.h>
-// #include <stropts.h>
+#include <poll.h>
+#include <unistd.h>
+// #include <cstdio>
 #endif
 #include <cstdio>
 #include <iostream>
@@ -44,34 +42,33 @@
 #define DELETE_METHOD
 #endif
 
+/**
+ * @brief Macro for avoiding unused variable warnings
+ */
+#define UNUSED(X) (void)(X)
+
 namespace cpen333 {
 
-#ifndef WINDOWS
+#if !defined(WINDOWS)
 namespace detail {
-template<typename Dummy>
+
 /**
- Linux (POSIX) implementation of _kbhit().
- Morgan McGuire, morgan@cs.brown.edu
+ * @brief Keyboard hit function for POSIX
+ * @return 0 if no keyboard input, >0 if data on stdin exists
  */
-int _kbhit() {
-  static const int STDIN = 0;
-  static bool initialized = false;
+inline int _kbhit() {
+  pollfd fds;
+  fds.fd = STDIN_FILENO;
+  fds.events = POLLIN | POLLHUP | POLLERR;
+  fds.revents = 0;
 
-  if (!initialized) {
-    // Use termios to turn off line buffering
-    termios term;
-    tcgetattr(STDIN, &term);
-    term.c_lflag &= ~ICANON;
-    tcsetattr(STDIN, TCSANOW, &term);
-    setbuf(stdin, NULL);
-    initialized = true;
+  int status = ::poll(&fds, 1, 0);
+  if (status > 0 && (fds.revents & 0x01) > 0) {
+    return 1;
   }
-
-  int bytesWaiting;
-  ioctl(STDIN, FIONREAD, &bytesWaiting);
-  return bytesWaiting;
+  return 0;
 }
-}
+} // detail
 #endif
 
 /**
@@ -83,10 +80,10 @@ int _kbhit() {
  * @return non-zero value if there is content
  */
 inline int test_stdin() {
-#ifdef WINDOWS
+#if defined(WINDOWS)
   return _kbhit();
 #else
-  return detail::_kbhit<void>();
+  return detail::_kbhit();
 #endif
 }
 
@@ -109,7 +106,7 @@ inline void perror(const std::string& msg) {
 #ifdef WINDOWS
   UINT LastError = GetLastError();
   char buff[512];
-  FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, NULL, LastError,
+  FormatMessageA(FORMAT_MESSAGE_FROM_SYSTEM, NULL, LastError,
                 MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), buff, 1024, NULL);
   std::cerr << msg << ": " << buff << std::endl;
 #else

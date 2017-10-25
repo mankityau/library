@@ -105,12 +105,25 @@ class socket {
       server_(server), port_(port),
       socket_(INVALID_SOCKET), open_(false), connected_(false) {}
 
+ private:
   socket(const socket &) DELETE_METHOD;
   socket &operator=(const socket &) DELETE_METHOD;
 
+ public:
+
+  /**
+   * @brief Move-constructor
+   * @param other socket to move to *this
+   */
   socket(socket&& other) {
     *this = std::move(other);
   }
+
+  /**
+   * @brief Move-assignment
+   * @param other socket to move
+   * @return reference to myself
+   */
   socket &operator=(socket&& other) {
     __initialize(other.server_, other.port_, other.socket_, other.open_, other.connected_);
     other.server_ = "";
@@ -196,49 +209,75 @@ class socket {
   }
 
   /**
-   * @copydoc cpen333::process::windows::socket::send(const std::string&)
+   * @copydoc cpen333::process::windows::socket::write(const std::string&)
    */
-  bool send(const std::string& str) {
-    return send(str.c_str(), str.length()+1);
+  bool write(const std::string& str) {
+    return write(str.c_str(), str.length()+1);
   }
 
   /**
-   * @copydoc cpen333::process::windows::socket::send(const char*, size_t)
+   * @copydoc cpen333::process::windows::socket::write(const void*, size_t)
    */
-  bool send(const char* buff, size_t len) {
+  bool write(const void* buff, size_t size) {
 
     if (!connected_) {
       return false;
     }
 
     // write all contents
-    ssize_t nwrite = 0;
-    do {
-      ssize_t lwrite = write(socket_, &buff[nwrite], len-nwrite);
+    size_t nwrite = 0;
+    const char* cbuff = (const char*)buff;
+
+    while (nwrite < size) {
+      auto lwrite = ::write(socket_, &cbuff[nwrite], size-nwrite);
       if (lwrite == -1) {
         cpen333::perror(std::string("write(...) to socket failed"));
         return false;
       }
       nwrite += lwrite;
-    } while ((size_t)nwrite != len);
+    }
 
     return true;
   }
 
   /**
-   * @copydoc cpen333::process::windows::socket::receive(char*,int)
+   * @copydoc cpen333::process::windows::socket::read(void*,size_t)
    */
-  int receive(char* buff, size_t len) {
+  size_t read(void* buff, size_t size) {
 
     if (!open_) {
-      return -1;
+      return 0;
     }
 
-    ssize_t nread = read(socket_, buff, len);
+    auto nread = ::read(socket_, buff, size);
     if (nread == -1) {
       cpen333::perror("write(...) to socket failed");
+      return 0;
     }
-    return nread;
+
+    return (size_t)nread;
+  }
+
+  /**
+   * @brief Reads all data up to the specified size from the pipe
+   *
+   * Read bytes from the head of the pipe, blocking if necessary until all bytes are read.
+   *
+   * @param buff memory address to fill with pipe contents
+   * @param size number of bytes to read
+   * @return true if read is successful, false if read is interrupted
+   */
+  bool read_all(void* buff, size_t size) {
+    char* cbuff = (char*)buff;
+    size_t nread = read(cbuff, size);
+    while (nread < size) {
+      auto lread = read(&cbuff[nread], size-nread);
+      if (lread <= 0) {
+        return false;
+      }
+      nread += lread;
+    }
+    return true;
   }
 
   /**
@@ -252,17 +291,6 @@ class socket {
     if (connected_) {
       disconnect();
     }
-
-    // Receive and discard until the peer closes the connection
-    static const int recvbuflen = 1024;
-    char recvbuf[recvbuflen];
-    ssize_t nread = 0;
-    do {
-      nread = read(socket_, recvbuf, recvbuflen);
-      if (nread < 0) {
-        cpen333::perror("socket read(...) failed");
-      }
-    } while( nread > 0 );
 
     // cleanup
     ::close(socket_);
@@ -278,7 +306,7 @@ class socket {
  *
  * POSIX/BSD implementation of a socket server that listens
  * for connections.  The server is NOT started automatically.
- * To start listening for connections, call the start() function.
+ * To start listening for connections, call the open() function.
  */
 class socket_server {
   int port_;
@@ -288,23 +316,18 @@ class socket_server {
  public:
 
   /**
-   * @copydoc cpen333::process::windows::socket_server::socket_server()
-   */
-  socket_server() : port_(CPEN333_SOCKET_DEFAULT_PORT),
-                    socket_(INVALID_SOCKET), open_(false) {}
-
-  /**
    * @copydoc cpen333::process::windows::socket_server::socket_server(int)
    */
-  socket_server(int port) : port_(port), socket_(INVALID_SOCKET),
-                            open_(false) {}
+  socket_server(int port = CPEN333_SOCKET_DEFAULT_PORT) :
+      port_(port), socket_(INVALID_SOCKET), open_(false) {}
 
-
+ private:
   socket_server(const socket_server &) DELETE_METHOD;
   socket_server(socket_server &&) DELETE_METHOD;
   socket_server &operator=(const socket_server &) DELETE_METHOD;
   socket_server &operator=(socket_server &&) DELETE_METHOD;
 
+ public:
   /**
    * @copydoc cpen333::process::windows::socket_server::~socket_server()
    */
@@ -313,9 +336,9 @@ class socket_server {
   }
 
   /**
-   * @copydoc cpen333::process::windows::socket_server::start()
+   * @copydoc cpen333::process::windows::socket_server::open()
    */
-  bool start() {
+  bool open() {
 
     if (open_){
       return false;
@@ -483,5 +506,9 @@ typedef posix::socket_server socket_server;
 
 } // process
 } // cpen333
+
+// undef local macros
+#undef INVALID_SOCKET
+#undef SOCKET_ERROR
 
 #endif

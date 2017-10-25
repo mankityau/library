@@ -6,9 +6,9 @@
 
 #include <string>
 
-#include "cpen333/process/semaphore.h"
-#include "cpen333/process/mutex.h"
-#include "cpen333/process/shared_memory.h"
+#include <cpen333/process/semaphore.h>
+#include <cpen333/process/mutex.h>
+#include <cpen333/process/shared_memory.h>
 
 class BarberShop {
  private:

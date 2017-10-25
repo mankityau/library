@@ -24,12 +24,12 @@
 /**
  * @brief Size required for resource unique identifier
  */
-#define MAX_RESOURCE_NAME 250
+#define MAX_RESOURCE_ID_SIZE 250
 #else
 /**
  * @brief Size required for resource unique identifier
  */
-#define MAX_RESOURCE_NAME 30
+#define MAX_RESOURCE_ID_SIZE 30
 #endif
 
 namespace cpen333 {
@@ -45,7 +45,8 @@ namespace impl {
  */
 class named_resource_base : public virtual named_resource {
  private:
-  char name_[MAX_RESOURCE_NAME];
+  char id_[MAX_RESOURCE_ID_SIZE];
+  std::string name_;
 
  protected:
   /**
@@ -53,16 +54,8 @@ class named_resource_base : public virtual named_resource {
    * @param name
    */
   void set_name(const std::string &name) {
-    make_resource_name(name, name_);
-  }
-
-  void set_name_raw(const char *name) {
-    for (int i=0; i<MAX_RESOURCE_NAME; ++i) {
-      name_[i] = name[i];
-      if (name_[i] == 0) {
-        break;
-      }
-    }
+    name_ = name;
+    make_resource_id(name, id_);
   }
 
  public:
@@ -89,6 +82,22 @@ class named_resource_base : public virtual named_resource {
     // clean-up
   }
 
+  /**
+   * @brief Underlying name of resource
+   * @return resource name
+   */
+  std::string name() {
+    return name_;
+  }
+
+  /**
+   *  @brief Internal-use system name
+   *  @return underlying unique identifier name
+   */
+  std::string id() const {
+    return id_;
+  }
+
   virtual bool unlink() = 0;  // abstract, force unlink to be defined
 
   /**
@@ -102,19 +111,11 @@ class named_resource_base : public virtual named_resource {
  protected:
 
   /**
-   *  @brief Internal-use system name
-   *  @return underlying unique identifier name
-   */
-  std::string name() const {
-    return name_;
-  }
-
-  /**
    * @brief Internal-use system name as char pointer
    * @return pointer to underlying unique identifier name
    */
-  const char *name_ptr() const {
-    return &name_[0];
+  const char *id_ptr() const {
+    return &id_[0];
   }
 
   /**
@@ -126,7 +127,7 @@ class named_resource_base : public virtual named_resource {
    * @param name original resource name
    * @param out platform-safe resource name
    */
-  static void make_resource_name(const std::string &name, char out[]) {
+  static void make_resource_id(const std::string &name, char *out) {
 
     // leading slash for pathname
     out[0] = '/';
@@ -144,7 +145,7 @@ class named_resource_base : public virtual named_resource {
     sha1 hash = sha1(name.c_str()).finalize();
     hash.print_base64(&out[1], true); // print starting at offset 1, with terminating zero
     // replace '/', '+', and '=' with _ for safer path name
-    for (int i=1; i<MAX_RESOURCE_NAME; ++i) {
+    for (int i=1; i<MAX_RESOURCE_ID_SIZE; ++i) {
       if (out[i] == '/') {
         out[i] = '_';
       }

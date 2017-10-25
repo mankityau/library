@@ -9,8 +9,8 @@
 //
 
 // custom subprocess library
-#include "cpen333/process/subprocess.h"
-#include "cpen333/util.h"
+#include <cpen333/process/subprocess.h>
+#include <cpen333/util.h>
 
 int main() {
 

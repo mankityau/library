@@ -2,8 +2,8 @@
 #include <thread>
 
 #include "CookieQueue.h"
-#include "cpen333/util.h"
-#include "cpen333/process/subprocess.h"
+#include <cpen333/util.h>
+#include <cpen333/process/subprocess.h>
 
 //
 //  The Producer-Consumer problem deals with having to simultaneously produce "things" or "widgets" into a queue

@@ -1,5 +1,5 @@
 #include <iostream> // for cout
-#include "cpen333/util.h"
+#include <cpen333/util.h>
 #include "foo.h"    // foo's stuff
 #include "bar.h"    // bar's stuff
 

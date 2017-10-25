@@ -2,7 +2,7 @@
 #include <chrono>
 #include <thread>
 
-#include "cpen333/util.h"
+#include <cpen333/util.h>
 
 int main(int argc, char* argv[]) {
 

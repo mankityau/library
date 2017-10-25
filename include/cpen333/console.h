@@ -820,5 +820,4 @@ class console {
 
 } // cpen333
 
-
 #endif //CPEN333_CONSOLE_H

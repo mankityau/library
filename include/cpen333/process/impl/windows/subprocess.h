@@ -11,6 +11,9 @@
 #include <mutex>
 // prevent windows max macro
 #undef NOMINMAX
+/**
+ * @brief Prevent windows from defining min(), max() macros
+ */
 #define NOMINMAX 1
 #include <windows.h>
 
@@ -99,8 +102,8 @@ class subprocess {
       flags |= CREATE_NEW_CONSOLE; //DETACHED_PROCESS;
     }
 
-    STARTUPINFO	startup_info = {
-        sizeof(STARTUPINFO) ,
+    STARTUPINFOA	startup_info = {
+        sizeof(STARTUPINFOA) ,
         NULL ,			// reserved
         NULL ,			// ignored in console applications
         (char *)(cmd_.c_str()) ,	// displayed in title bar for console applications
@@ -119,7 +122,7 @@ class subprocess {
     };
 
     // try to create a process
-    BOOL success = CreateProcess( NULL,	// application name
+    BOOL success = CreateProcessA( NULL,	// application name
                                   (char*)cmd_.c_str(),
                                   NULL,			// process attributes
                                   NULL,			// thread attributes
@@ -298,5 +301,8 @@ typedef windows::subprocess subprocess;
 
 } // process
 } // cpen333
+
+// undef local macros
+#undef SUBPROCESS_TERMINATED
 
 #endif //CPEN333_PROCESS_WINDOWS_SUBPROCESS_H

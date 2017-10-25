@@ -178,4 +178,8 @@ class condition : private condition_base, public virtual named_resource {
 } // process
 } // cpen333
 
+// undefine local macros
+#undef CONDITION_NAME_SUFFIX
+#undef CONDITION_INITIALIZED
+
 #endif //CPEN333_PROCESS_CONDITION_H

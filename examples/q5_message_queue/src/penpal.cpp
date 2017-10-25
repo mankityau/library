@@ -1,5 +1,5 @@
 #include "common.h"
-#include "cpen333/process/message_queue.h"
+#include <cpen333/process/message_queue.h>
 
 #include <iostream>
 #include <string>

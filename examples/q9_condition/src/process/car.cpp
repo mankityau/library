@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdlib>   // atoi
 #include <thread>
-#include "cpen333/process/condition.h"
+#include <cpen333/process/condition.h>
 
 int main(int argc, char* argv[]) {
 

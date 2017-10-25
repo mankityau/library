@@ -1,5 +1,5 @@
 #include <iostream>
-#include "cpen333/util.h"
+#include <cpen333/util.h>
 
 //
 // "Resource acquisition is initialization" (RAII) is an important design pattern we will make heavy use of.

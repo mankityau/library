@@ -4,11 +4,11 @@
 #include <thread>
 
 #include "common.h"
-#include "cpen333/util.h"
-#include "cpen333/process/subprocess.h"
-#include "cpen333/process/message_queue.h"
-#include "cpen333/process/unlinker.h"
-#include "cpen333/thread/timer.h"  // timer
+#include <cpen333/util.h>
+#include <cpen333/process/subprocess.h>
+#include <cpen333/process/message_queue.h>
+#include <cpen333/process/unlinker.h>
+#include <cpen333/thread/timer.h>  // timer
 
 //
 // Message queues are very similar to pipes, but allow for multiple processes to write to them.  They are usually used

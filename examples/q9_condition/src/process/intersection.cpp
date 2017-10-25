@@ -1,9 +1,9 @@
 #include <iostream>
 #include <thread>
-#include "cpen333/util.h"
-#include "cpen333/process/subprocess.h"
-#include "cpen333/process/condition.h"
-#include "cpen333/process/unlinker.h"
+#include <cpen333/util.h>
+#include <cpen333/process/subprocess.h>
+#include <cpen333/process/condition.h>
+#include <cpen333/process/unlinker.h>
 
 //
 // Conditions allow threads/processes to wait until it is notified to let them pass.  Once notified, the condition will

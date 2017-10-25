@@ -1,6 +1,6 @@
 #include <string>
 #include <iostream>
-#include "cpen333/process/event.h"
+#include <cpen333/process/event.h>
 
 int main(int argc, char* argv[]) {
 

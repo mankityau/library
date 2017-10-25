@@ -18,8 +18,8 @@
 #include <thread>
 
 #include "../../../util.h"
-#include "../../semaphore.h"
-#include "../../named_resource.h"
+#include "semaphore.h"
+#include "../named_resource_base.h"
 
 namespace cpen333 {
 namespace process {
@@ -37,7 +37,7 @@ namespace posix {
  * This mutex has KERNEL PERSISTENCE, meaning if not unlink()-ed, will continue to exist in its current state
  * until the system is shut down (persisting beyond the life of the initiating program)
  */
-class mutex : public virtual named_resource {
+class mutex : public impl::named_resource_base {
  public:
   /**
    * @brief Alias to the underlying native mutex handle
@@ -49,6 +49,7 @@ class mutex : public virtual named_resource {
    * @param name  identifier for creating or connecting to an existing inter-process mutex
    */
   mutex(const std::string& name) :
+    impl::named_resource_base{name + std::string(MUTEX_NAME_SUFFIX)},
     semaphore_{name + std::string(MUTEX_NAME_SUFFIX), 1}
     // thread_{}
   {}
@@ -173,5 +174,8 @@ using timed_mutex = posix::mutex;
 
 } // process
 } // cpen333
+
+// undef local macros
+#undef MUTEX_NAME_SUFFIX
 
 #endif //CPEN333_PROCESS_MUTEX_POSIX_H

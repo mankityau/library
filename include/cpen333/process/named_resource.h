@@ -6,11 +6,7 @@
 #define CPEN333_PROCESS_NAMED_RESOURCE_H
 
 #include <string>
-
-/**
- * @brief Macro for avoiding unused variable warnings
- */
-#define UNUSED(X) (void)(X)
+#include "../util.h"
 
 namespace cpen333 {
 namespace process {

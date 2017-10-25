@@ -1,7 +1,7 @@
 #include <iostream>
 #include <thread>
 #include "BankAccount.h"
-#include "cpen333/util.h"
+#include <cpen333/util.h>
 
 //
 // A "Monitor" is an object that ensures safe concurrent access, providing mutual exclusion internally when needed.

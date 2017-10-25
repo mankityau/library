@@ -1,7 +1,7 @@
 #include <iostream> // input/output
 #include <thread>   // standard template library (STL) threads package
 #include <chrono>   // STL chrono (time) package
-#include "cpen333/util.h"
+#include <cpen333/util.h>
 
 //
 //  Threads represent things that can run independently, and in parallel, but can share resources within a program

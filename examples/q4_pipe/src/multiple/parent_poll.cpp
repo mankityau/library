@@ -3,9 +3,9 @@
 #include <string>
 
 #include "common.h"
-#include "cpen333/process/pipe.h"
-#include "cpen333/process/subprocess.h"
-#include "cpen333/util.h" // to test stdin
+#include <cpen333/process/pipe.h>
+#include <cpen333/process/subprocess.h>
+#include <cpen333/util.h> // to test stdin
 
 //
 //  When we are communicating with multiple child processes using pipes, we have two options:
@@ -22,13 +22,14 @@ int main() {
   std::cout << "Type 'Q' to exit main thread" << std::endl;
   std::this_thread::sleep_for(std::chrono::seconds(2));
 
-  cpen333::process::pipe* pipes[NUM_PIPES];
+  cpen333::process::basic_pipe* pipes[NUM_PIPES];
   cpen333::process::subprocess* processes[NUM_PIPES];
 
   // create pipes and processes
   for (int i=0; i<NUM_PIPES; ++i) {
     std::string pipe_name = std::string(PIPES_MULTIPLE_PREFIX) + std::to_string(i+1);
-    pipes[i] = new cpen333::process::pipe(pipe_name, cpen333::process::pipe::READ);
+    pipes[i] = new cpen333::process::basic_pipe(pipe_name);
+    pipes[i]->open();
     
     std::vector<std::string> args;
     args.push_back("./child");
@@ -69,7 +70,6 @@ int main() {
     std::cout << "Closing pipe " << (i+1) << std::endl;
     pipes[i]->close();
     pipes[i]->unlink();
-
     delete pipes[i];
   }
 

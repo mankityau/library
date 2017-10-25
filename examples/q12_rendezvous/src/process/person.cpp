@@ -1,6 +1,6 @@
 #include <iostream>
 #include <thread>
-#include "cpen333/process/rendezvous.h"
+#include <cpen333/process/rendezvous.h>
 
 int main(int argc, char* argv[]) {
 

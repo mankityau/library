@@ -1,8 +1,8 @@
 #include <iostream>
 #include <thread>
 
-#include "cpen333/thread/event.h"
-#include "cpen333/thread/thread_object.h"
+#include <cpen333/thread/event.h>
+#include <cpen333/thread/thread_object.h>
 
 //
 //   An event is just like a "condition", except that it auto-resets once other threads/processes pass through.  It also

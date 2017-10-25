@@ -114,4 +114,8 @@ class rendezvous : public virtual named_resource {
 } // process
 } // cpen333
 
+// undef local macros
+#undef RENDEZVOUS_NAME_SUFFIX
+#undef RENDEZVOUS_INITIALIZED
+
 #endif //CPEN333_PROCESS_RENDEZVOUS_H

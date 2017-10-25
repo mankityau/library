@@ -3,8 +3,8 @@
 #include <vector>
 #include <string>
 
-#include "cpen333/util.h"
-#include "cpen333/thread/rendezvous.h"
+#include <cpen333/util.h>
+#include <cpen333/thread/rendezvous.h>
 
 //
 //  A Rendezvous is a place for threads to gather until a certain number arrive, then all are released at once,

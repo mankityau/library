@@ -2,7 +2,7 @@
 #include <thread>    // for "sleep" function
 
 #include "factory.h"
-#include "cpen333/process/event.h"
+#include <cpen333/process/event.h>
 
 int main() {
 

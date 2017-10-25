@@ -130,4 +130,7 @@ class event : private condition_base, public virtual named_resource {
 } // process
 } // cpen333
 
+// undef local macros
+#undef EVENT_NAME_SUFFIX
+
 #endif //CPEN333_PROCESS_EVENT_H

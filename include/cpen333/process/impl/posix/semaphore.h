@@ -22,6 +22,10 @@
 #include "../../../util.h"
 #include "../named_resource_base.h"
 
+#ifdef APPLE
+#include "../osx/sem_timedwait.h" // missing sem_timedwait functionality
+#endif
+
 namespace cpen333 {
 namespace process {
 namespace posix {
@@ -60,7 +64,7 @@ class semaphore : public impl::named_resource_base {
     // create named semaphore
     errno = 0;
     // has O_CREAT | O_RDWR, but latter not documented for OSX
-    handle_ = sem_open(name_ptr(), O_CREAT, S_IRWXU | S_IRWXG, value);
+    handle_ = sem_open(id_ptr(), O_CREAT, S_IRWXU | S_IRWXG, value);
     if (handle_ == SEM_FAILED) {
       cpen333::perror(std::string("Cannot create semaphore ")+ name
                           + ", system name: " + this->name());
@@ -201,7 +205,7 @@ class semaphore : public impl::named_resource_base {
   }
 
   bool unlink() {
-    int status = sem_unlink(name_ptr());
+    int status = sem_unlink(id_ptr());
     if (status != 0) {
       cpen333::perror(std::string("Failed to unlink semaphore with id ")+name());
     }
@@ -212,8 +216,8 @@ class semaphore : public impl::named_resource_base {
    * @copydoc cpen333::process::named_resource::unlink(const std::string&)
    */
   static bool unlink(const std::string& name) {
-    char nm[MAX_RESOURCE_NAME];
-    impl::named_resource_base::make_resource_name(name+std::string(SEMAPHORE_NAME_SUFFIX), nm);
+    char nm[MAX_RESOURCE_ID_SIZE];
+    impl::named_resource_base::make_resource_id(name+std::string(SEMAPHORE_NAME_SUFFIX), nm);
     int status = sem_unlink(&nm[0]);
     if (status != 0) {
       cpen333::perror(std::string("Failed to unlink semaphore with id ")+std::string(nm));
@@ -236,5 +240,7 @@ using semaphore = posix::semaphore;
 } // process
 } // cpen333
 
+// undef local macros
+#undef SEMAPHORE_NAME_SUFFIX
 
 #endif //CPEN333_PROCESS_POSIX_SEMAPHORE_H

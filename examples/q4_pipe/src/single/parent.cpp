@@ -2,13 +2,13 @@
 #include <thread>
 
 #include "common.h"  // include common information (pipe name, data type)
-#include "cpen333/util.h"
-#include "cpen333/process/pipe.h"
-#include "cpen333/process/unlinker.h"
-#include "cpen333/process/subprocess.h"
+#include <cpen333/util.h>
+#include <cpen333/process/pipe.h>
+#include <cpen333/process/unlinker.h>
+#include <cpen333/process/subprocess.h>
 
 //
-//  Pipes allow for one-way communication between two processes in the form of a stream of data bytes.  They often
+//  Basic pipes allow for one-way communication between two processes in the form of a stream of data bytes.  They often
 //  have a fixed memory size.  Reading from a pipe usually "blocks" (or "waits") until the requested number of bytes
 //  is available.  Writing to a pipe usually blocks when there is not enough room in the pipe to write the data.  Once
 //  a process reads data from the pipe, that data is removed, which leaves more room in the pipe to write more data.
@@ -27,15 +27,17 @@
 //
 //  Note that "true" pipes often block (or wait) until there is a connection on both the read-end and the write-end of
 //  the pipe.  For portability and ease-of-use, we have created a pseudo-pipe in the file
-//      cpen333/process/pipe.h
-//  which is created using a circular buffer and a shared memory block.  This version does not block.
+//      cpen333/process/basic_pipe.h
+//  which is created using a circular buffer in shared memory.  This version does not block, nor does it guarantee
+//  that only two processes are accessing the pipe.
 
 int main() {
 
   std::cout << "Parent process creating the pipe....." << std::endl;
 
-  // create a shared pipe of size 1024 bytes, in "write" mode
-  cpen333::process::pipe pipe(PIPE_NAME, cpen333::process::pipe::WRITE, 1024);
+  // create a shared pipe of size 1024 bytes
+  cpen333::process::basic_pipe pipe(PIPE_NAME, 1024);
+  pipe.open();  // open pipe
 
   // Rather than unlink at the end of this process, we will use RAII principles and create a special
   // object that will unlink the name from the named resource for us.
@@ -70,6 +72,8 @@ int main() {
   std::cout << "Press ENTER to write the structure [" << ex.x << ", " << ex.y << "] to the pipe....." << std::endl;
   std::cin.get();
   pipe.write(ex); // uses template-based function to deduce the type/size of data to write
+  pipe.close();
+
   std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
   // wait for process to terminate

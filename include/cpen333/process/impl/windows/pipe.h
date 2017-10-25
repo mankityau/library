@@ -7,16 +7,34 @@
 
 // prevent windows max macro
 #undef NOMINMAX
+/**
+ * @brief Prevent windows from defining min(), max() macros
+ */
 #define NOMINMAX 1
 #include <windows.h>
+#include <cstdint>
 #include <mutex>
+#include <thread>
+#include <chrono>
 
 #include "mutex.h"
 #include "../named_resource_base.h"
 #include "../../../util.h"
 
+/**
+ * @brief Default pipe buffer size
+ */
 #define PIPE_BUFF_SIZE 1024
+
+/**
+ * @brief Pipe prefix on Windows
+ */
 #define WINDOWS_PIPE_PREFIX "\\\\.\\pipe\\"
+
+/**
+ * @brief Default name for uninitialized pipe
+ */
+#define DEFAULT_PIPE_NAME "uninitialized_pipe"
 
 namespace cpen333 {
 namespace process {
@@ -44,8 +62,8 @@ class pipe : private impl::named_resource_base {
    * @param pipe_ pipe handle
    * @param open whether the pipe is open
    */
-  void __initialize(const char* name_ptr, HANDLE pipeh, bool open) {
-    set_name_raw(name_ptr);
+  void __initialize(std::string name, HANDLE pipeh, bool open) {
+    set_name(name);
     pipe_ = pipeh;
     open_ = open;
   }
@@ -54,23 +72,36 @@ class pipe : private impl::named_resource_base {
   /**
    * @brief Default constructor, for use with a server
    */
-  pipe() : impl::named_resource_base(""), pipe_(INVALID_HANDLE_VALUE), open_(false) {}
+  pipe() : impl::named_resource_base(DEFAULT_PIPE_NAME), pipe_(INVALID_HANDLE_VALUE), open_(false) {}
 
   /**
    * @brief Main constructor, creates a named pipe
    * @param name identifier for connecting to an existing inter-process pipe
    */
-  pipe(const std::string& name) : impl::named_resource_base(name), pipe_(INVALID_HANDLE_VALUE), open_(false) {}
+  pipe(const std::string& name) : impl::named_resource_base(name), pipe_(INVALID_HANDLE_VALUE),
+                                  open_(false) {}
 
+ private:
   pipe(const pipe &) DELETE_METHOD;
   pipe &operator=(const pipe &) DELETE_METHOD;
 
-  pipe(pipe&& other) : impl::named_resource_base(""), pipe_(INVALID_HANDLE_VALUE), open_(false) {
+ public:
+  /**
+   * @brief Move-constructor
+   * @param other pipe to move to this
+   */
+  pipe(pipe&& other) : impl::named_resource_base(DEFAULT_PIPE_NAME), pipe_(INVALID_HANDLE_VALUE), open_(false) {
     *this = std::move(other);
   }
+
+  /**
+   * @brief Move-assignment
+   * @param other  pipe to move to this
+   * @return reference to this
+   */
   pipe &operator=(pipe&& other) {
-    __initialize(other.name_ptr(), other.pipe_, other.open_);
-    other.set_name_raw("");
+    __initialize(other.name(), other.pipe_, other.open_);
+    other.set_name(DEFAULT_PIPE_NAME);
     other.pipe_ = INVALID_HANDLE_VALUE;
     other.open_ = false;
     return *this;
@@ -99,18 +130,28 @@ class pipe : private impl::named_resource_base {
     // try to create a pipe
     std::string pipename = WINDOWS_PIPE_PREFIX;
     pipename.append(name());
+
+    auto started = std::chrono::system_clock::now();
     while(true) {
       // Wait for pending pipe connection
-      //if (WaitNamedPipe(pipename.c_str(), NMPWAIT_USE_DEFAULT_WAIT) == 0) {
-      if (WaitNamedPipe(pipename.c_str(), 10000) == 0) {
-        cpen333::perror("Pipe failed to wait for server");
-        return false;
+      if (WaitNamedPipeA(pipename.c_str(), NMPWAIT_USE_DEFAULT_WAIT) == 0) {
+        DWORD err = GetLastError();
+        if (err == ERROR_SEM_TIMEOUT) {
+          cpen333::perror("Pipe failed to wait for server");
+          return false;
+        }
+        auto now = std::chrono::system_clock::now();
+        auto tdiff = std::chrono::duration_cast<std::chrono::milliseconds>(now-started);
+        if (tdiff.count() > 10000) {
+          cpen333::perror("Pipe failed to wait for server");
+          return false;
+        }
+        std::this_thread::yield();
+        continue;
       }
 
       SetLastError(0);
-      std::string pipename = WINDOWS_PIPE_PREFIX;
-      pipename.append(name());
-      pipe_ = CreateFile(
+      pipe_ = CreateFileA(
           pipename.c_str(), GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL
       );
 
@@ -135,7 +176,11 @@ class pipe : private impl::named_resource_base {
 
   /**
    * @brief Writes a string to the pipe, including the terminating zero
-   * @param str string to send
+   *
+   * This is potentially a blocking operation: if the pipe is full, this method will wait until
+   * the remaining bytes can be written.
+   *
+   * @param str string to send, length+1 must fit into a signed integer
    * @return true if send successful, false otherwise
    */
   bool write(const std::string& str) {
@@ -145,26 +190,30 @@ class pipe : private impl::named_resource_base {
   /**
    * @brief Writes bytes to the pipe
    *
+   * This is potentially a blocking operation: if the pipe is full, this method will wait until
+   * the remaining bytes can be written.
+   *
    * @param buff pointer to data buffer to send
-   * @param len number of bytes to send
+   * @param size number of bytes to send
    * @return true if send successful, false otherwise
    */
-  bool write(const void* buff, size_t len) {
+  bool write(const void* buff, size_t size) {
 
     if (!open_) {
       return false;
     }
 
-    size_t nwrite;
-    while (nwrite < len) {
+    size_t nwrite = 0;
+    while (nwrite < size) {
       DWORD lwrite;
       int success = WriteFile(
           pipe_,
           buff,
-          len,
+          (DWORD)size,
           &lwrite,
           NULL
       );
+
       if (!success) {
         cpen333::perror("Failed to write to pipe");
         return false;
@@ -177,30 +226,61 @@ class pipe : private impl::named_resource_base {
 
   /**
    * @brief Reads bytes of data from a pipe
+   *
+   * This is a potentially blocking operation: the pipe will wait here until data is available or
+   * until the pipe is closed.
+   *
    * @param buff pointer to data buffer to populate
-   * @param len size of buffer
-   * @return number of bytes read, or -1 if error
+   * @param size size of buffer
+   * @return number of bytes read, 0 if pipe is closed or error
    */
-  int read(void* buff, size_t len) {
+  size_t read(void* buff, size_t size) {
 
     if (!open_) {
-      return -1;
+      return 0;
     }
 
     DWORD nread = 0;
     int success = ReadFile(
         pipe_,    // pipe handle
         buff,     // buffer to receive reply
-        len,      // size of buffer
+        (DWORD)size,    // size of buffer
         &nread,   // number of bytes read
         NULL);    // not overlapped
 
-    if ( !success && GetLastError() != ERROR_MORE_DATA ) {
-      cpen333::perror("Pipe read(...) failed");
-      return -1;
+    if ( !success ) {
+      DWORD err = GetLastError();
+      if (err == ERROR_BROKEN_PIPE) {
+        return 0;
+      } else if ( err != ERROR_MORE_DATA ) {
+        cpen333::perror("Pipe read(...) failed");
+        return 0;
+      }
     }
 
-    return (int)nread;
+    return (size_t)nread;
+  }
+
+  /**
+   * @brief Reads all data up to the specified size from the pipe
+   *
+   * Read bytes from the head of the pipe, blocking if necessary until all bytes are read.
+   *
+   * @param buff memory address to fill with pipe contents
+   * @param size number of bytes to read
+   * @return true if read is successful, false if read is interrupted
+   */
+  bool read_all(void* buff, size_t size) {
+    char* cbuff = (char*)buff;
+    size_t nread = read(cbuff, size);
+    while (nread < size) {
+      auto lread = read(&cbuff[nread], size-nread);
+      if (lread <= 0) {
+        return false;
+      }
+      nread += lread;
+    }
+    return true;
   }
 
   /**
@@ -215,7 +295,7 @@ class pipe : private impl::named_resource_base {
 
     // cleanup
     int success = CloseHandle(pipe_);
-    if (success != 0) {
+    if (success == 0) {
       cpen333::perror("Failed to close pipe");
     }
     pipe_ = INVALID_HANDLE_VALUE;
@@ -224,10 +304,16 @@ class pipe : private impl::named_resource_base {
     return (success != 0);
   }
 
+  /**
+   * @copydoc impl::named_resource_base::unlink()
+   */
   bool unlink() {
     return false;
   }
 
+  /**
+   * @copydoc impl::named_resource_base::unlink(const std::string&)
+   */
   static bool unlink(const std::string& name) {
     UNUSED(name);
     return false;
@@ -240,21 +326,23 @@ class pipe : private impl::named_resource_base {
  *
  * Implementation of a named pipe server that listens
  * for connections.  The server is NOT started automatically.
- * To start listening for connections, call the start() function.
+ * To start listening for connections, call the open() function.
  */
 class pipe_server : private impl::named_resource_base {
   bool open_;
 
- public:
-  /**
-   * @brief Default constructor, creates a pipe server that listens for new connections
-   */
-  pipe_server(const std::string& name) : impl::named_resource_base(name), open_(false) { }
-
+ private:
   pipe_server(const pipe_server &) DELETE_METHOD;
   pipe_server(pipe_server &&) DELETE_METHOD;
   pipe_server &operator=(const pipe_server &) DELETE_METHOD;
   pipe_server &operator=(pipe_server &&) DELETE_METHOD;
+
+ public:
+
+  /**
+   * @brief Default constructor, creates a pipe server that listens for new connections
+   */
+  pipe_server(const std::string& name) : impl::named_resource_base(name), open_(false) { }
 
   /**
    * @brief Destructor, closes the pipe server
@@ -267,7 +355,7 @@ class pipe_server : private impl::named_resource_base {
    * @brief Starts listening for connections.
    * @return true if successful, false otherwise.
    */
-  bool start() {
+  bool open() {
 
     if (open_){
       return false;
@@ -297,7 +385,7 @@ class pipe_server : private impl::named_resource_base {
     std::string pipename = WINDOWS_PIPE_PREFIX;
     pipename.append(name());
 
-    HANDLE pipe = CreateNamedPipe( pipename.c_str(), PIPE_ACCESS_DUPLEX,
+    HANDLE pipe = CreateNamedPipeA( pipename.c_str(), PIPE_ACCESS_DUPLEX,
                                    PIPE_TYPE_BYTE | PIPE_READMODE_BYTE | PIPE_WAIT,
                                    PIPE_UNLIMITED_INSTANCES,
                                    PIPE_BUFF_SIZE, PIPE_BUFF_SIZE,
@@ -319,7 +407,7 @@ class pipe_server : private impl::named_resource_base {
     }
 
     client.close();
-    client.__initialize(name_ptr(),pipe,true);
+    client.__initialize(id_ptr(),pipe,true);
 
     return true;
   }
@@ -336,10 +424,16 @@ class pipe_server : private impl::named_resource_base {
     return true;
   }
 
+  /**
+   * @copydoc impl::named_resource_base::unlink()
+   */
   bool unlink() {
     return false;
   }
 
+  /**
+   * @copydoc impl::named_resource_base::unlink(const std::string&)
+   */
   static bool unlink(const std::string& name) {
     UNUSED(name);
     return false;
@@ -360,5 +454,10 @@ typedef windows::pipe_server pipe_server;
 
 } // process
 } // cpen333
+
+// undef local macros
+#undef PIPE_BUFF_SIZE
+#undef WINDOWS_PIPE_PREFIX
+#undef DEFAULT_PIPE_NAME
 
 #endif

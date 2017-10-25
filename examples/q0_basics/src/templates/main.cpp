@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "cpen333/util.h"
+#include <cpen333/util.h>
 
 //
 // Templates allow us to write code more generically, independent of any particular type.
